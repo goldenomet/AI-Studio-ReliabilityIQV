@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, LayoutGroup } from 'motion/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll, LayoutGroup } from 'motion/react';
 import { 
   Menu, X, Cpu, Globe, Zap, FileText, Map as MapIcon, 
   PenTool, ArrowRight, Linkedin, Twitter, Github, 
@@ -190,7 +190,7 @@ const Footer = () => (
             </span>
           </div>
           <p className="text-brand-bg/60 font-mono text-sm leading-relaxed mb-8 max-w-xs">
-            Engineering resilient digital infrastructures for enterprises that demand perfection.
+            Optimizing digital infrastructure from Lagos to the world. We build resilient systems for the modern global enterprise.
           </p>
           <div className="flex gap-4">
             <SocialLink href="#" icon={Linkedin} label="LinkedIn" />
@@ -512,13 +512,13 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 rounded-full text-brand-accent font-mono text-xs mb-6">
           <span className="w-1.5 h-1.5 bg-brand-accent rounded-full"></span>
-          Innovating the Future of IT
+          Lagos to London — IT Infrastructure for Global Scale
         </div>
         <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold text-brand-dark leading-[0.9] mb-8">
-          Building <br /> Reliable <br /> Ventures.
+          Optimizing <br /> African <br /> Tech Giants.
         </h1>
         <p className="text-lg md:text-xl text-brand-dark/70 mb-10 max-w-md leading-relaxed font-mono">
-          We deliver enterprise-grade web operations, advanced AI automations, and strategic GIS mapping to scale your technological infrastructure.
+          ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond.
         </p>
         <div className="flex flex-wrap gap-4 font-mono">
           <button 
@@ -590,7 +590,7 @@ const MissionSection = () => (
         <span className="text-6xl font-mono opacity-20">“</span>
       </div>
       <h2 className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight">
-        Our mission is to engineer flawless digital ecosystems that empower ambitious companies to scale without friction.
+        ReliabilityIQ bridges Nigerian technical ingenuity with international execution standards to engineer flawless digital ecosystems for the world's next industry leaders.
       </h2>
       
       <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
@@ -611,149 +611,162 @@ const MissionSection = () => (
   </section>
 );
 
-const ServiceCard = ({ 
-  icon: Icon, 
-  title, 
-  description, 
-  onAction,
-  hasImage = false 
-}: { 
-  icon: any, 
-  title: string, 
-  description: string, 
-  onAction: () => void,
-  hasImage?: boolean
-}) => (
-  <div className="bg-white rounded-[40px] p-10 shadow-sm border border-brand-dark/5 flex flex-col items-start h-full group hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-    <div className="p-4 bg-brand-accent/10 rounded-2xl text-brand-accent mb-8 group-hover:bg-brand-accent group-hover:text-white transition-colors duration-500">
-      <Icon size={24} />
-    </div>
-    <h3 className="text-2xl font-bold mb-6 font-mono tracking-tight">{title}</h3>
-    <p className="text-brand-dark/60 font-mono text-sm leading-relaxed mb-8">
-      {description}
-    </p>
-    
-    {hasImage && (
-      <div className="mt-auto w-full aspect-video rounded-3xl overflow-hidden mb-8">
-         <img 
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop" 
-            alt={title} 
-            className="w-full h-full object-cover filter grayscale opacity-50 contrast-125"
-            referrerPolicy="no-referrer"
-         />
-      </div>
-    )}
+interface StackCardProps {
+  i: number;
+  title: string;
+  description: string;
+  icon: any;
+  progress: any;
+  range: number[];
+  onAction: () => void;
+}
 
-    <button 
-      onClick={onAction}
-      className="mt-auto flex items-center gap-2 text-brand-accent font-mono text-sm font-bold group-hover:gap-4 transition-all"
-    >
-      Explore Service <ArrowRight size={16} />
-    </button>
-  </div>
-);
+const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction }) => {
+  const scale = useTransform(progress, range, [1, 0.9 + (i * 0.02)]);
+  const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
+  
+  return (
+    <div className="h-screen sticky top-0 flex items-center justify-center pt-24">
+       <motion.div 
+         style={{ 
+           scale, 
+           opacity,
+           top: `calc(10% + ${i * 40}px)` 
+         }}
+         className="bg-white rounded-[40px] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col lg:flex-row gap-12 w-full max-w-5xl h-[500px] relative overflow-hidden group"
+       >
+         <div className="lg:w-1/2 flex flex-col justify-center h-full z-10">
+            <div className="p-4 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
+              <Icon size={32} />
+            </div>
+            <h3 className="text-4xl md:text-6xl font-bold mb-6 font-mono tracking-tighter text-brand-dark leading-none">{title}</h3>
+            <p className="text-brand-dark/60 font-mono text-sm leading-relaxed mb-10 max-w-sm">
+              {description}
+            </p>
+            <button 
+              onClick={onAction}
+              className="group/btn flex items-center gap-2 text-brand-accent font-mono text-sm font-bold w-fit bg-brand-bg px-6 py-3 rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
+            >
+              Explore Deep Dive <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
+            </button>
+         </div>
+         
+         <div className="lg:w-1/2 relative hidden lg:block overflow-hidden rounded-3xl">
+            <div className="absolute inset-0 bg-brand-bg">
+               <img 
+                 src={`https://images.unsplash.com/photo-${['1504384308090-c894fdcc538d', '1518770660439-4636190af475', '1451187580459-43490279c0fa', '1554224155-8d0447a858ef', '1561070791-2526d30994b5'][i]}?q=80&w=2070&auto=format&fit=crop`}
+                 className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
+                 alt={title}
+                 referrerPolicy="no-referrer"
+               />
+               <div className="absolute inset-0 bg-brand-accent/10 mix-blend-overlay group-hover:opacity-0 transition-opacity"></div>
+            </div>
+            <div className="absolute bottom-8 right-8">
+               <div className="h-12 w-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                  <span className="font-mono text-xs font-bold">0{i + 1}</span>
+               </div>
+            </div>
+         </div>
+
+         {/* Fluid mesh background decorative element */}
+         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-brand-accent/10 transition-colors"></div>
+       </motion.div>
+    </div>
+  )
+}
 
 const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end']
+  });
 
   const servicesData: ServiceDetail[] = [
     {
       id: "web-ops",
       title: "Web Operations",
       icon: Globe,
-      description: "Robust server management, cloud infrastructure deployment, and high-availability architecture to keep your platforms running 24/7.",
-      longDescription: "Our Web Operations service is designed for enterprise-level resilience. We manage the delicate balance between performance and stability, ensuring that your digital storefront or internal platform never experiences a single second of unexpected downtime.",
-      useCases: ["E-commerce Scaling", "High-Traffic Content Delivery", "Secure Fintech Hosting", "Global Database Syncing"],
+      description: "Enterprise-grade server management and multi-region cloud deployments bridging Nigerian markets to global infrastructures.",
+      longDescription: "Our Web Operations service is engineered for global resilience. We specialize in deploying high-availability architectures that serve Nigerian users with local-edge latency while maintaining seamless connectivity with international cloud clusters (AWS, Azure, GCP). We ensure your digital presence is bulletproof against both regional infrastructural challenges and global traffic surges.",
+      useCases: ["Cross-Border E-commerce", "Lagos-London Cloud Syncing", "Secure Fintech Hosting", "High-Availability Media Portals"],
       caseStudy: {
-        title: "Global Logistics Hub",
-        result: "Reduced latency by 45% and achieved 99.999% uptime during a 400% traffic surge."
+        title: "Pan-African Fintech Hub",
+        result: "Optimized multi-region database replication, reducing transaction latency by 60% across West African and European nodes."
       }
     },
     {
       id: "ai-auto",
       title: "AI Automations",
       icon: Cpu,
-      description: "Custom machine learning models and workflow automations that eliminate manual tasks and accelerate decision-making processes.",
-      longDescription: "We don't just build scripts; we build intelligent systems. Our AI automations integrate deeply with your existing tech stack to handle complex data processing, document classification, and predictive analytics, freeing your team for higher-level creative work.",
-      useCases: ["Automated CRM Updates", "Predictive Inventory Management", "Smart Customer Support Bots", "Large-Scale Data Cleansing"],
+      description: "Intelligent workflow automations and ML models designed to optimize Nigerian supply chains and international business processes.",
+      longDescription: "We build intelligent systems that bridge the gap between human effort and machine precision. Our AI solutions are tailored to solve specific regional bottlenecks—such as supply chain optimization in emerging markets—while applying international standards of data processing and predictive analytics to drive global competitiveness.",
+      useCases: ["Supply Chain Route Optimization", "Automated Compliance Auditing", "Smart Customer Retention Bots", "Predictive Inventory for Retailers"],
       caseStudy: {
-        title: "FinTech Compliance Firm",
-        result: "Automated 80% of document review processes, saving 25,000 man-hours annually."
+        title: "Nigerian Distribution Giant",
+        result: "Deployed an AI-driven route optimization engine that cut fuel costs by 25% and improved delivery accuracy by 40%."
       }
     },
     {
       id: "gis",
       title: "GIS Mapping",
       icon: MapIcon,
-      description: "Advanced spatial data analysis and interactive map development for logistics, urban planning, and resource management.",
-      longDescription: "Location is everything. Our GIS team transforms raw geographic data into actionable visual insights. From tracking delivery fleets in real-time to visualizing demographic shifts for new market entries, we make the map a strategic asset.",
-      useCases: ["Fleet Tracking Systems", "Urban Infrastructure Planning", "Epidemiological Heatmaps", "Real Estate Market Analysis"],
+      description: "Advanced spatial intelligence for African logistics, urban planning, and international resource management.",
+      longDescription: "Geospatial data is the backbone of modern logistics. Our GIS team provides deep insights into the African landscape, from mapping informal urban sectors to planning large-scale agricultural expansions. We combine global satellite imagery with local ground-truth data to provide a comprehensive view for international investors and regional planners alike.",
+      useCases: ["Logistics Fleet Tracking", "Agricultural Land Use Analysis", "Real Estate Demand Heatmaps", "Infrastructure Pipeline Planning"],
       caseStudy: {
-        title: "Municipal Transit Authority",
-        result: "Optimized 12 bus routes using spatial demand analysis, increasing rider efficiency by 20%."
+        title: "Federal Infrastructure Project",
+        result: "Mapped 500km of proposed utility corridors using LiDAR data, identifying optimal routes and saving $1.2M in potential land disputes."
       }
     },
     {
       id: "tech-reports",
       title: "Technical Reports",
       icon: FileText,
-      description: "In-depth research, data synthesis, and professional technical documentation tailored for stakeholders and regulatory compliance.",
-      longDescription: "Clarity is power. We take complex technical architectures and data sets and distill them into professional, investor-ready reports. Whether it's for SOC2 compliance, internal audits, or high-stakes funding rounds, our reports speak the language of precision.",
-      useCases: ["Compliance Documentation", "System Architecture Audits", "Investment Pitch Decks", "Technical Feasibility Studies"],
+      description: "Professional technical documentation meeting international ISO standards and local regulatory requirements.",
+      longDescription: "Precision in documentation is non-negotiable for international growth. We produce investor-ready technical reports, SOC2/ISO audit preparations, and feasibility studies that bridge the gap between Nigerian technical operations and international boardrooms. Our reports provide the clarity required for high-stakes funding and complex regulatory approvals.",
+      useCases: ["ISO/SOC2 Audit Readiness", "Venture Capital Due Diligence", "System Architecture Audits", "Environmental Impact Studies"],
       caseStudy: {
-        title: "Cybersecurity Startup",
-        result: "Successfully secured Series B funding following a comprehensive technical audit and report pack."
+        title: "Tech Unicorn Series C Round",
+        result: "Authored comprehensive technical architecture documentation that passed a Tier-1 international VC due diligence with zero findings."
       }
     },
     {
       id: "design-studio",
-      title: "Content & Design Studio",
+      title: "Content Studio",
       icon: PenTool,
-      description: "Full-stack creative services combining AI-driven animation, UX/UI design, and compelling copywriting to elevate your brand.",
-      longDescription: "Where engineering meets aesthetics. Our design studio approach is rooted in conversion-driven design principles. We use advanced UI/UX frameworks and AI-assisted content tools to create experiences that are as beautiful as they are functional.",
-      useCases: ["Brand Strategy & Identity", "Interactive Web Experiences", "AI-Generated Video Assets", "Conversion-Focused UI Audits"],
+      description: "Global brand storytelling and UX/UI design that resonates with Nigerian audiences and international consumers.",
+      longDescription: "We blend engineering precision with creative flair. Our Content Studio creates digital experiences that honor Nigerian cultural nuances while adhering to the highest global standards of UI/UX design. We use AI-assisted tools to scale content production, ensuring your brand story is consistent and compelling across every global touchpoint.",
+      useCases: ["International Brand Identity", "Conversion-Optimized UI/UX", "Multi-Language Content Strategy", "AI-Generated Digital Marketing"],
       caseStudy: {
-        title: "Premium SaaS Platform",
-        result: "Complete UX overhaul resulted in a 35% increase in user retention over 3 months."
+        title: "Premium West African Lifestyle Brand",
+        result: "Complete digital rebranding and UX overhaul resulting in a 50% increase in international orders within the first quarter."
       }
     }
   ];
 
   return (
-    <section className="py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-          <div className="max-w-2xl">
-            <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Core Competencies</div>
-            <h2 className="text-5xl md:text-7xl font-bold text-brand-dark leading-[0.9]">
-              Engineered for <br /> maximum impact.
-            </h2>
-          </div>
-          <p className="max-w-sm font-mono text-sm text-brand-dark/60 leading-relaxed">
-            Comprehensive IT solutions designed to automate, visualize, and scale your operations with military-grade reliability.
-          </p>
-        </div>
+    <section ref={containerRef} className="relative mt-20">
+      <div className="max-w-7xl mx-auto px-6 mb-20 pointer-events-none">
+         <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Regional & International Expertise</div>
+         <h2 className="text-5xl md:text-8xl lg:text-9xl font-bold text-brand-dark leading-[0.8] tracking-tighter mix-blend-multiply">African Engineering.<br />Global Standards.</h2>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.slice(0, 4).map((service) => (
-            <ServiceCard 
-              key={service.id}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              onAction={() => setSelectedService(service)}
-            />
-          ))}
-          <div className="md:col-span-2 lg:col-span-2">
-             <ServiceCard 
-              icon={servicesData[4].icon}
-              title={servicesData[4].title}
-              description={servicesData[4].description}
-              onAction={() => setSelectedService(servicesData[4])}
-              hasImage
-            />
-          </div>
-        </div>
+      <div className="px-6">
+        {servicesData.map((service, i) => (
+          <StackCard 
+            key={service.id} 
+            i={i} 
+            title={service.title}
+            description={service.description}
+            icon={service.icon}
+            progress={scrollYProgress} 
+            range={[i * 0.2, 1]} 
+            onAction={() => setSelectedService(service)}
+          />
+        ))}
       </div>
 
       <ServiceDetailModal 
@@ -804,9 +817,9 @@ const NarrativeSection = () => (
 
         <div className="space-y-12">
           {[
-            { num: '01', title: 'The Genesis', text: 'We recognized a critical gap in how enterprises approached IT—too much theory, not enough robust execution. ReliabilityIQ was born to build systems that simply don\'t fail.' },
-            { num: '02', title: 'The AI Pivot', text: 'As technology evolved, so did we. Integrating advanced AI automations allowed us to transition our clients from reactive maintenance to proactive scaling.' },
-            { num: '03', title: 'Global Reach', text: 'Today, we manage web operations and spatial data for Fortune 500s, maintaining the same obsessive attention to detail we had on day one.' }
+            { num: '01', title: 'The Genesis', text: 'Born in Nigeria to address a local gap in enterprise IT, we evolved quickly by prioritizing robust execution over theory. ReliabilityIQ was established to prove that African tech could match and exceed global standards.' },
+            { num: '02', title: 'The AI Pivot', text: 'As technology shifted, we integrated advanced AI to move our clients from reactive maintenance to proactive scaling, serving both growing Nigerian firms and established international entities.' },
+            { num: '03', title: 'Global Operations', text: 'Today, we manage web operations and spatial data from Lagos to London and beyond, maintaining an obsessive attention to detail for a diverse portfolio of global partners.' }
           ].map((step) => (
             <div key={step.num} className="flex gap-8 group">
               <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-brand-accent/20 flex items-center justify-center font-mono text-sm font-bold text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
@@ -1011,9 +1024,9 @@ const TrendingProducts = () => (
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
         <div className="max-w-2xl">
-          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Market Favorites</div>
+          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Domestic & Global Solutions</div>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-dark leading-[0.9]">
-            Trending <br /> Infrastructures.
+            Market-Leading <br /> Infrastructures.
           </h2>
         </div>
         <div className="flex flex-wrap gap-3 font-mono">
@@ -1024,12 +1037,12 @@ const TrendingProducts = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[
-          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing cluster with sub-10ms latency for real-time AI processing.", price: "$2,400/mo", img: "https://images.unsplash.com/photo-1558494949-ef0109dec8d8?q=80&w=2012&auto=format&fit=crop" },
-          { title: "Sentinel AI Firewall", tag: "New", desc: "Behavioral-based network security layer that predics attacks before they manifest.", price: "$1,850/mo", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Real-time logistics visualization engine with integrated weather and traffic data.", price: "$900/mo", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Server resources that fluctuate with your traffic without any downtime or manual config.", price: "Custom", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop" },
-          { title: "DataCleanse API", tag: "AI", desc: "Sanitize and structure messy enterprise data at the scale of terabytes per hour.", price: "$0.05/req", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with integrated image compression and intelligent caching.", price: "$120/mo", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" },
+          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: "https://images.unsplash.com/photo-1558494949-ef0109dec8d8?q=80&w=2012&auto=format&fit=crop" },
+          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
+          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" },
+          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop" },
+          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" },
+          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" },
         ].map((prod, i) => (
           <motion.div 
             key={i}
