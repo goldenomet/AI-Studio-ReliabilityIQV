@@ -8,7 +8,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useSc
 import { 
   Menu, X, Cpu, Globe, Zap, FileText, Map as MapIcon, 
   PenTool, ArrowRight, Linkedin, Twitter, Github, 
-  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
+  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home, Quote
 } from 'lucide-react';
 
 // --- Shared Components ---
@@ -266,6 +266,11 @@ interface ServiceDetail {
     title: string;
     result: string;
   };
+  testimonial: {
+    quote: string;
+    author: string;
+    role: string;
+  };
 }
 
 const ServiceDetailModal = ({ 
@@ -461,8 +466,8 @@ const TextScroll = ({ text, className }: { text: string, className?: string }) =
   });
 
   const scrollYProgress = useSpring(rawScrollYProgress, {
-    stiffness: 300, 
-    damping: 60,
+    stiffness: 120, 
+    damping: 40,
     restDelta: 0.001
   });
 
@@ -698,7 +703,8 @@ const RealTimeCursors = () => {
         targetX: isHeroSticky ? 75 : targets[Math.floor(Math.random() * targets.length)].x,
         targetY: isHeroSticky ? 50 : targets[Math.floor(Math.random() * targets.length)].y,
         speed: 0.02 + Math.random() * 0.05,
-        isHeroSticky
+        isHeroSticky,
+        pulseCounter: 0
       };
     });
     
@@ -714,8 +720,10 @@ const RealTimeCursors = () => {
         let ny = cursor.y;
         let tx = cursor.targetX;
         let ty = cursor.targetY;
+        let pulse = cursor.pulseCounter;
 
         if (dist < 2) {
+          pulse++;
           // Choose a new logical target
           if (cursor.isHeroSticky) {
             // Stay specifically around the hero image area (Target 3)
@@ -732,7 +740,7 @@ const RealTimeCursors = () => {
           ny += dy * cursor.speed;
         }
 
-        return { ...cursor, x: nx, y: ny, targetX: tx, targetY: ty };
+        return { ...cursor, x: nx, y: ny, targetX: tx, targetY: ty, pulseCounter: pulse };
       }));
     }, 50);
 
@@ -744,36 +752,44 @@ const RealTimeCursors = () => {
       {others.map((cursor) => (
         <motion.div
           key={cursor.id}
-          className="absolute flex items-center gap-1"
+          className="absolute"
           animate={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
           transition={{ type: "spring", damping: 30, stiffness: 80 }}
           style={{ x: '-50%', y: '-50%' }}
         >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="drop-shadow-lg"
+          <motion.div
+            key={cursor.pulseCounter}
+            initial={{ scale: 0.8, opacity: 0.5 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="flex items-center gap-1"
           >
-            <path
-              d="M3 3L11.5 21L14.5 14L21.5 11L3 3Z"
-              fill={cursor.color}
-              stroke="rgba(0, 0, 0, 0.4)"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <div 
-            className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-black shadow-xl backdrop-blur-md border border-black/10"
-            style={{ 
-              backgroundColor: cursor.color.replace('0.6', '0.15'), 
-              boxShadow: `0 0 15px ${cursor.color}` 
-            }}
-          >
-            {cursor.name}
-          </div>
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="drop-shadow-lg"
+            >
+              <path
+                d="M3 3L11.5 21L14.5 14L21.5 11L3 3Z"
+                fill={cursor.color}
+                stroke="rgba(0, 0, 0, 0.4)"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <div 
+              className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-black shadow-xl backdrop-blur-md border border-black/10"
+              style={{ 
+                backgroundColor: cursor.color.replace('0.6', '0.15'), 
+                boxShadow: `0 0 15px ${cursor.color}` 
+              }}
+            >
+              {cursor.name}
+            </div>
+          </motion.div>
         </motion.div>
       ))}
     </div>
@@ -988,21 +1004,33 @@ interface StackCardProps {
   progress: any;
   range: number[];
   onAction: () => void;
+  testimonial: {
+    quote: string;
+    author: string;
+    role: string;
+  };
 }
 
-const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction }) => {
+const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction, testimonial }) => {
   const scale = useTransform(progress, range, [1, 0.9 + (i * 0.02)]);
   const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
   
   return (
     <div className="h-screen sticky top-0 flex items-center justify-center pt-24">
        <motion.div 
+         whileHover={{ 
+           scale: 1.025,
+           boxShadow: "0 60px 120px -30px rgba(13, 131, 142, 0.25), 0 0 50px rgba(13, 131, 142, 0.2)",
+           borderColor: "rgba(13, 131, 142, 0.5)",
+           y: -8
+         }}
+         transition={{ type: "spring", stiffness: 400, damping: 25 }}
          style={{ 
            scale, 
            opacity,
            top: `calc(10% + ${i * 40}px)` 
          }}
-         className="bg-white rounded-[40px] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col lg:flex-row gap-12 w-full max-w-5xl h-[500px] relative overflow-hidden group"
+         className="bg-white rounded-[40px] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col lg:flex-row gap-12 w-full max-w-5xl h-[500px] relative overflow-hidden group transition-all duration-500"
        >
          <div className="lg:w-1/2 flex flex-col justify-center h-full z-10">
             <div className="p-4 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
@@ -1018,6 +1046,23 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             >
               Explore Deep Dive <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
             </button>
+
+            {/* Testimonial Section */}
+            <div className="mt-8 pt-8 border-t border-brand-dark/5 flex flex-col gap-4 animate-in fade-in duration-1000">
+              <div className="flex items-start gap-3">
+                <Quote size={16} className="text-brand-accent shrink-0 mt-1" />
+                <p className="text-sm font-medium text-brand-dark italic leading-relaxed">
+                  "{testimonial.quote}"
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-0.5 w-6 bg-brand-accent/20" />
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold font-mono uppercase tracking-widest text-brand-dark">{testimonial.author}</span>
+                  <span className="text-[9px] font-mono text-brand-dark/40">{testimonial.role}</span>
+                </div>
+              </div>
+            </div>
          </div>
          
          <div className="lg:w-1/2 relative hidden lg:block overflow-hidden rounded-3xl">
@@ -1064,6 +1109,11 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Pan-African Fintech Hub",
         result: "Optimized multi-region database replication, reducing transaction latency by 60% across West African and European nodes."
+      },
+      testimonial: {
+        quote: "ReliabilityIQ managed our transition from a local server farm to a global AWS cluster without a single second of downtime. They are the SRE standard in Nigeria.",
+        author: "Chima Okereke",
+        role: "CTO, Flutterwave Partners"
       }
     },
     {
@@ -1076,6 +1126,11 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Nigerian Distribution Giant",
         result: "Deployed an AI-driven route optimization engine that cut fuel costs by 25% and improved delivery accuracy by 40%."
+      },
+      testimonial: {
+        quote: "The custom automation ReliabilityIQ built for our logistics arm has completely redefined how we handle last-mile delivery in Lagos.",
+        author: "Folake Adeyemi",
+        role: "Ops Director, GIG Logistics"
       }
     },
     {
@@ -1088,6 +1143,11 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Federal Infrastructure Project",
         result: "Mapped 500km of proposed utility corridors using LiDAR data, identifying optimal routes and saving $1.2M in potential land disputes."
+      },
+      testimonial: {
+        quote: "Their GIS data was instrumental in our feasibility study for the new trans-state utility corridor. Precision you can trust.",
+        author: "Engr. Tunde Williams",
+        role: "Lead Planner, Ministry of Works"
       }
     },
     {
@@ -1100,6 +1160,11 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Tech Unicorn Series C Round",
         result: "Authored comprehensive technical architecture documentation that passed a Tier-1 international VC due diligence with zero findings."
+      },
+      testimonial: {
+        quote: "The technical audit ReliabilityIQ performed saved our Series C round. Their reports are as thorough as anything I've seen in the Valley.",
+        author: "Sarah Henderson",
+        role: "Partner, Index Ventures"
       }
     },
     {
@@ -1112,6 +1177,11 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Premium West African Lifestyle Brand",
         result: "Complete digital rebranding and UX overhaul resulting in a 50% increase in international orders within the first quarter."
+      },
+      testimonial: {
+        quote: "They didn't just build a website; they captured the soul of our brand and presented it to a global audience with incredible polish.",
+        author: "Amaka Ndukwe",
+        role: "Founder, Ziva Lagos"
       }
     }
   ];
@@ -1134,6 +1204,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
             progress={scrollYProgress} 
             range={[i * 0.2, 1]} 
             onAction={() => setSelectedService(service)}
+            testimonial={service.testimonial}
           />
         ))}
       </div>
@@ -1482,6 +1553,24 @@ const ScrollToTopButton = () => {
   );
 };
 
+const SectionWrapper = ({ children, id }: { children: React.ReactNode; id?: string }) => {
+  return (
+    <motion.div
+      id={id}
+      initial={{ opacity: 0.01 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.01 }}
+      transition={{ 
+        duration: 0.5, 
+        ease: "easeOut",
+        delay: 0.05
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
@@ -1495,19 +1584,27 @@ export default function App() {
       case 'home':
         return (
           <motion.div
-            initial={{ opacity: 0 }}
+            key="home"
+            initial={{ opacity: 0.99 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="min-h-screen flex flex-col"
           >
             <HeroSection onNavigate={setCurrentPage} />
-            <MissionSection />
-            <CompetenciesSection onContact={() => setCurrentPage('contact')} />
-            <NarrativeSection />
+            <SectionWrapper>
+              <MissionSection />
+            </SectionWrapper>
+            <SectionWrapper id="competencies">
+              <CompetenciesSection onContact={() => setCurrentPage('contact')} />
+            </SectionWrapper>
+            <SectionWrapper id="narrative">
+              <NarrativeSection />
+            </SectionWrapper>
           </motion.div>
         );
       case 'about':
         return (
           <motion.div
+            key="about"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1520,6 +1617,7 @@ export default function App() {
       case 'services':
         return (
           <motion.div
+            key="services"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1543,6 +1641,7 @@ export default function App() {
       case 'trending':
         return (
           <motion.div
+            key="trending"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1553,6 +1652,7 @@ export default function App() {
       case 'contact':
         return (
           <motion.div
+            key="contact"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1571,13 +1671,15 @@ export default function App() {
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       <main className="flex-grow relative">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {renderPage()}
         </AnimatePresence>
 
         {/* Contact Section added before footer on all pages except explicit contact page */}
         {currentPage !== 'contact' && (
-          <ContactSection />
+          <SectionWrapper id="contact">
+            <ContactSection />
+          </SectionWrapper>
         )}
       </main>
 
