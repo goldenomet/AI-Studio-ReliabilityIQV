@@ -497,28 +497,107 @@ const ScrollWord = ({ children, progress, range }: { children: string, progress:
   );
 };
 
-const OnHoverReveal = ({ text, className }: { text: string, className?: string }) => {
+const SmartTypewriter = ({ texts, className }: { texts: string[], className?: string }) => {
+  const [currentText, setCurrentText] = useState("");
+  const [textIndex, setTextIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullText = texts[textIndex];
+    
+    const handleTyping = () => {
+      if (!isDeleting) {
+        if (charIndex < fullText.length) {
+          setCurrentText(fullText.substring(0, charIndex + 1));
+          setCharIndex(prev => prev + 1);
+        } else {
+          // Pause at the end before deleting
+          setTimeout(() => setIsDeleting(true), 2000);
+          return;
+        }
+      } else {
+        if (charIndex > 0) {
+          setCurrentText(fullText.substring(0, charIndex - 1));
+          setCharIndex(prev => prev - 1);
+        } else {
+          setIsDeleting(false);
+          setTextIndex(prev => (prev + 1) % texts.length);
+        }
+      }
+    };
+
+    const typingSpeed = isDeleting ? 15 : 30;
+    const timeout = setTimeout(handleTyping, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, textIndex, texts]);
+
   return (
-    <div className={`${className} flex flex-wrap gap-x-[0.3em] gap-y-0 relative z-10`}>
-      {text.split(" ").map((word, i) => (
+    <div className={className}>
+      <span className="relative">
+        {currentText}
         <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.3, 
-            delay: 0.3 + (i * 0.015),
-            ease: "easeOut"
-          }}
-          className="inline-block cursor-default"
-          whileHover={{ 
-            color: "#0D838E",
-            scale: 1.05,
-          }}
-        >
-          {word}
-        </motion.span>
-      ))}
+          animate={{ opacity: [1, 0, 1] }}
+          transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+          className="inline-block w-[2px] h-[1.1em] bg-brand-accent ml-1 align-middle"
+        />
+      </span>
+    </div>
+  );
+};
+
+const ScramblyText = ({ texts, className }: { texts: string[], className?: string }) => {
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState(texts[0]);
+  const chars = "!<>-_\\/[]{}—=+*^?#________";
+  const frameRef = useRef<number>(0);
+
+  useEffect(() => {
+    const triggerScramble = () => {
+      const nextIndex = (index + 1) % texts.length;
+      const targetText = texts[nextIndex];
+      let step = 0;
+      const totalSteps = 40;
+
+      const animate = () => {
+        if (step <= totalSteps) {
+          const progress = step / totalSteps;
+          const decodedCount = Math.floor(progress * targetText.length);
+          
+          const scrambled = targetText
+            .split("")
+            .map((char, i) => {
+              if (i < decodedCount) return char;
+              if (char === " ") return " ";
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+          
+          setDisplayText(scrambled);
+          step++;
+          frameRef.current = requestAnimationFrame(animate);
+        } else {
+          setDisplayText(targetText);
+          setIndex(nextIndex);
+        }
+      };
+
+      frameRef.current = requestAnimationFrame(animate);
+    };
+
+    const timeout = setTimeout(triggerScramble, 4000);
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(frameRef.current);
+    };
+  }, [index, texts]);
+
+  return (
+    <div className="h-[200px] md:h-[160px] lg:h-[280px] mb-8 flex items-center overflow-hidden">
+      <h1 className={`${className} font-mono tracking-tighter uppercase leading-[0.9]`}>
+        {displayText}
+      </h1>
     </div>
   );
 };
@@ -793,12 +872,21 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
           <span className="w-1.5 h-1.5 bg-brand-accent rounded-full"></span>
           Lagos to London — IT Infrastructure for Global Scale
         </div>
-        <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold text-brand-dark leading-[0.9] mb-8">
-          Optimizing <br /> African <br /> Tech Giants.
-        </h1>
-        <OnHoverReveal 
-          text="ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond."
-          className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono"
+        <ScramblyText 
+          texts={[
+            "Optimizing African Tech Giants.",
+            "Scaling Global Digital Infrastructure.",
+            "Powering Next-Gen Web Operations."
+          ]}
+          className="text-5xl md:text-6xl lg:text-8xl font-bold text-brand-dark leading-[0.9]"
+        />
+        <SmartTypewriter 
+          texts={[
+            "ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond.",
+            "Building resilient systems for the modern global enterprise, from Lagos-edge networks to London cloud infrastructures.",
+            "Specialized engineering that bridges Nigerian technical ingenuity with international execution standards since 2014."
+          ]}
+          className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono min-h-[140px] md:min-h-[120px]"
         />
         <div className="flex flex-wrap gap-4 font-mono">
           <button 
