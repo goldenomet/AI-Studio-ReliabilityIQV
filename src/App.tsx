@@ -14,8 +14,8 @@ import {
 // --- Shared Components ---
 
 const Logo = () => (
-  <div className="flex items-center gap-1.5 lg:gap-2">
-    <img src="/regenerated_image_1777542768361.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
+  <div className="flex items-center gap-2">
+    <img src="/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
     <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
       ReliabilityIQ Ventures
     </span>
@@ -183,9 +183,9 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
-          <div className="flex items-center gap-2 mb-6">
-            <img src="/regenerated_image_1777542768361.png" alt="ReliabilityIQ Logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
-            <span className="font-mono text-xl font-bold tracking-tight">
+          <div className="flex items-center gap-2 mb-6 text-white font-mono">
+            <img src="/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
+            <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>
           </div>
