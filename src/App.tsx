@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll, LayoutGroup } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll, useInView, LayoutGroup } from 'motion/react';
 import { 
   Menu, X, Cpu, Globe, Zap, FileText, Map as MapIcon, 
   PenTool, ArrowRight, Linkedin, Twitter, Github, 
@@ -423,6 +423,36 @@ const ServiceDetailModal = ({
   );
 };
 
+const TextEngine = ({ text, className }: { text: string, className?: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const words = text.split(" ");
+  
+  return (
+    <h3 ref={ref} className={className} style={{ perspective: "1000px" }}>
+      {words.map((word, i) => (
+        <span key={i} className="inline-block whitespace-nowrap overflow-hidden py-4 -my-4 mr-[0.2em] last:mr-0">
+          {word.split("").map((char, j) => (
+            <motion.span
+              key={j}
+              initial={{ y: "110%", opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: (i * 0.1) + (j * 0.02),
+                ease: [0.33, 1, 0.68, 1]
+              }}
+              style={{ display: "inline-block" }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
+      ))}
+    </h3>
+  );
+};
+
 const FlipCard = ({ frontContent, backContent, className }: { frontContent: React.ReactNode, backContent: React.ReactNode, className?: string }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -639,7 +669,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             <div className="p-4 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
               <Icon size={32} />
             </div>
-            <h3 className="text-4xl md:text-6xl font-bold mb-6 font-mono tracking-tighter text-brand-dark leading-none">{title}</h3>
+            <TextEngine text={title} className="text-4xl md:text-6xl font-bold mb-6 font-mono tracking-tighter text-brand-dark leading-none" />
             <p className="text-brand-dark/60 font-mono text-sm leading-relaxed mb-10 max-w-sm">
               {description}
             </p>
@@ -1200,7 +1230,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col font-sans">
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
-      <main className="flex-grow">
+      <main className="flex-grow relative">
         <AnimatePresence mode="wait">
           {renderPage()}
         </AnimatePresence>
