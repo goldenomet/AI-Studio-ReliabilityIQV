@@ -8,14 +8,14 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useSc
 import { 
   Menu, X, Cpu, Globe, Zap, FileText, Map as MapIcon, 
   PenTool, ArrowRight, Linkedin, Twitter, Github, 
-  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home, Quote
+  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
 // --- Shared Components ---
 
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <img src="/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
+    <img src="/public/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
     <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
       ReliabilityIQ Ventures
     </span>
@@ -243,7 +243,7 @@ const Footer = () => (
       </div>
 
       <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-bg/40 font-mono text-[10px] uppercase tracking-widest">
-        <p>© 2024 ReliabilityIQ Ventures. All rights reserved.</p>
+        <p>© 2026 ReliabilityIQ Ventures. All rights reserved.</p>
         <div className="flex gap-8">
           <a href="#" className="hover:text-white">Privacy Policy</a>
           <a href="#" className="hover:text-white">Terms of Service</a>
@@ -265,11 +265,6 @@ interface ServiceDetail {
   caseStudy: {
     title: string;
     result: string;
-  };
-  testimonial: {
-    quote: string;
-    author: string;
-    role: string;
   };
 }
 
@@ -466,8 +461,8 @@ const TextScroll = ({ text, className }: { text: string, className?: string }) =
   });
 
   const scrollYProgress = useSpring(rawScrollYProgress, {
-    stiffness: 120, 
-    damping: 40,
+    stiffness: 300, 
+    damping: 60,
     restDelta: 0.001
   });
 
@@ -599,8 +594,8 @@ const ScramblyText = ({ texts, className }: { texts: string[], className?: strin
   }, [index, texts]);
 
   return (
-    <div className="h-[200px] md:h-[160px] lg:h-[280px] mb-8 flex items-center overflow-hidden">
-      <h1 className={`${className} font-mono tracking-tighter uppercase leading-[0.9]`}>
+    <div className="min-h-[160px] md:min-h-[200px] lg:min-h-[300px] mb-4 md:mb-8 flex items-center">
+      <h1 className={`${className} font-mono tracking-tighter uppercase leading-[1.05] md:leading-[0.95]`}>
         {displayText}
       </h1>
     </div>
@@ -894,7 +889,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
             "Scaling Global Digital Infrastructure.",
             "Powering Next-Gen Web Operations."
           ]}
-          className="text-5xl md:text-6xl lg:text-8xl font-bold text-brand-dark leading-[0.9]"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-dark"
         />
         <SmartTypewriter 
           texts={[
@@ -1004,14 +999,9 @@ interface StackCardProps {
   progress: any;
   range: number[];
   onAction: () => void;
-  testimonial: {
-    quote: string;
-    author: string;
-    role: string;
-  };
 }
 
-const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction, testimonial }) => {
+const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction }) => {
   const scale = useTransform(progress, range, [1, 0.9 + (i * 0.02)]);
   const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
   
@@ -1046,23 +1036,6 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             >
               Explore Deep Dive <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
             </button>
-
-            {/* Testimonial Section */}
-            <div className="mt-8 pt-8 border-t border-brand-dark/5 flex flex-col gap-4 animate-in fade-in duration-1000">
-              <div className="flex items-start gap-3">
-                <Quote size={16} className="text-brand-accent shrink-0 mt-1" />
-                <p className="text-sm font-medium text-brand-dark italic leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="h-0.5 w-6 bg-brand-accent/20" />
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold font-mono uppercase tracking-widest text-brand-dark">{testimonial.author}</span>
-                  <span className="text-[9px] font-mono text-brand-dark/40">{testimonial.role}</span>
-                </div>
-              </div>
-            </div>
          </div>
          
          <div className="lg:w-1/2 relative hidden lg:block overflow-hidden rounded-3xl">
@@ -1109,11 +1082,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Pan-African Fintech Hub",
         result: "Optimized multi-region database replication, reducing transaction latency by 60% across West African and European nodes."
-      },
-      testimonial: {
-        quote: "ReliabilityIQ managed our transition from a local server farm to a global AWS cluster without a single second of downtime. They are the SRE standard in Nigeria.",
-        author: "Chima Okereke",
-        role: "CTO, Flutterwave Partners"
       }
     },
     {
@@ -1126,11 +1094,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Nigerian Distribution Giant",
         result: "Deployed an AI-driven route optimization engine that cut fuel costs by 25% and improved delivery accuracy by 40%."
-      },
-      testimonial: {
-        quote: "The custom automation ReliabilityIQ built for our logistics arm has completely redefined how we handle last-mile delivery in Lagos.",
-        author: "Folake Adeyemi",
-        role: "Ops Director, GIG Logistics"
       }
     },
     {
@@ -1143,11 +1106,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Federal Infrastructure Project",
         result: "Mapped 500km of proposed utility corridors using LiDAR data, identifying optimal routes and saving $1.2M in potential land disputes."
-      },
-      testimonial: {
-        quote: "Their GIS data was instrumental in our feasibility study for the new trans-state utility corridor. Precision you can trust.",
-        author: "Engr. Tunde Williams",
-        role: "Lead Planner, Ministry of Works"
       }
     },
     {
@@ -1160,11 +1118,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Tech Unicorn Series C Round",
         result: "Authored comprehensive technical architecture documentation that passed a Tier-1 international VC due diligence with zero findings."
-      },
-      testimonial: {
-        quote: "The technical audit ReliabilityIQ performed saved our Series C round. Their reports are as thorough as anything I've seen in the Valley.",
-        author: "Sarah Henderson",
-        role: "Partner, Index Ventures"
       }
     },
     {
@@ -1177,11 +1130,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       caseStudy: {
         title: "Premium West African Lifestyle Brand",
         result: "Complete digital rebranding and UX overhaul resulting in a 50% increase in international orders within the first quarter."
-      },
-      testimonial: {
-        quote: "They didn't just build a website; they captured the soul of our brand and presented it to a global audience with incredible polish.",
-        author: "Amaka Ndukwe",
-        role: "Founder, Ziva Lagos"
       }
     }
   ];
@@ -1204,7 +1152,6 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
             progress={scrollYProgress} 
             range={[i * 0.2, 1]} 
             onAction={() => setSelectedService(service)}
-            testimonial={service.testimonial}
           />
         ))}
       </div>
@@ -1553,24 +1500,6 @@ const ScrollToTopButton = () => {
   );
 };
 
-const SectionWrapper = ({ children, id }: { children: React.ReactNode; id?: string }) => {
-  return (
-    <motion.div
-      id={id}
-      initial={{ opacity: 0.01 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.01 }}
-      transition={{ 
-        duration: 0.5, 
-        ease: "easeOut",
-        delay: 0.05
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
@@ -1584,27 +1513,19 @@ export default function App() {
       case 'home':
         return (
           <motion.div
-            key="home"
-            initial={{ opacity: 0.99 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="min-h-screen flex flex-col"
+            exit={{ opacity: 0 }}
           >
             <HeroSection onNavigate={setCurrentPage} />
-            <SectionWrapper>
-              <MissionSection />
-            </SectionWrapper>
-            <SectionWrapper id="competencies">
-              <CompetenciesSection onContact={() => setCurrentPage('contact')} />
-            </SectionWrapper>
-            <SectionWrapper id="narrative">
-              <NarrativeSection />
-            </SectionWrapper>
+            <MissionSection />
+            <CompetenciesSection onContact={() => setCurrentPage('contact')} />
+            <NarrativeSection />
           </motion.div>
         );
       case 'about':
         return (
           <motion.div
-            key="about"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1617,7 +1538,6 @@ export default function App() {
       case 'services':
         return (
           <motion.div
-            key="services"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1641,7 +1561,6 @@ export default function App() {
       case 'trending':
         return (
           <motion.div
-            key="trending"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1652,7 +1571,6 @@ export default function App() {
       case 'contact':
         return (
           <motion.div
-            key="contact"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -1671,15 +1589,13 @@ export default function App() {
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       <main className="flex-grow relative">
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {renderPage()}
         </AnimatePresence>
 
         {/* Contact Section added before footer on all pages except explicit contact page */}
         {currentPage !== 'contact' && (
-          <SectionWrapper id="contact">
-            <ContactSection />
-          </SectionWrapper>
+          <ContactSection />
         )}
       </main>
 
