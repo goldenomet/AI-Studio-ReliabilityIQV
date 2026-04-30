@@ -453,6 +453,254 @@ const TextEngine = ({ text, className }: { text: string, className?: string }) =
   );
 };
 
+const TextScroll = ({ text, className }: { text: string, className?: string }) => {
+  const ref = useRef(null);
+  const { scrollYProgress: rawScrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const scrollYProgress = useSpring(rawScrollYProgress, {
+    stiffness: 300, 
+    damping: 60,
+    restDelta: 0.001
+  });
+
+  const words = text.split(" ");
+  
+  return (
+    <h2 ref={ref} className={className}>
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = start + (1 / words.length);
+        
+        return (
+          <ScrollWord key={i} progress={scrollYProgress} range={[start, end]}>
+            {word}
+          </ScrollWord>
+        );
+      })}
+    </h2>
+  );
+};
+
+const ScrollWord = ({ children, progress, range }: { children: string, progress: any, range: [number, number], key?: any }) => {
+  const opacity = useTransform(progress, range, [0.2, 1]);
+  const y = useTransform(progress, range, [10, 0]);
+  
+  return (
+    <span className="inline-block mr-[0.25em] last:mr-0 relative">
+      <motion.span style={{ opacity, y }} className="inline-block">
+        {children}
+      </motion.span>
+    </span>
+  );
+};
+
+const OnHoverReveal = ({ text, className }: { text: string, className?: string }) => {
+  return (
+    <div className={`${className} flex flex-wrap gap-x-[0.3em] gap-y-0 relative z-10`}>
+      {text.split(" ").map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.3, 
+            delay: 0.3 + (i * 0.015),
+            ease: "easeOut"
+          }}
+          className="inline-block cursor-default"
+          whileHover={{ 
+            color: "#0D838E",
+            scale: 1.05,
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </div>
+  );
+};
+
+const PixelSnow = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let particles: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initParticles();
+    };
+
+    const initParticles = () => {
+      const particleCount = Math.floor((canvas.width * canvas.height) / 5000); // More particles
+      particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.floor(Math.random() * 3) + 1, // Slightly larger
+        speed: Math.random() * 0.8 + 0.3,
+        opacity: Math.random() * 0.6 + 0.2,
+      }));
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0D838E'; // Use brand-accent color for better visibility
+
+      particles.forEach((p) => {
+        ctx.globalAlpha = p.opacity;
+        // Draw squares instead of blurred points for 'pixel' look
+        ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
+        
+        p.y += p.speed;
+        if (p.y > canvas.height) {
+          p.y = -p.size;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-80 z-0" />;
+};
+
+const RealTimeCursors = () => {
+  const [others, setOthers] = useState<any[]>([]);
+
+  useEffect(() => {
+    const cursorNames = ['SRE_Lead', 'DevOps_Pro', 'Sys_Architect', 'Operations_AI', 'Infrastructure_Lead'];
+    // Brand colors with lower alpha for blending
+    const colors = [
+      'rgba(13, 131, 142, 0.6)', 
+      'rgba(245, 158, 11, 0.6)', 
+      'rgba(16, 185, 129, 0.6)', 
+      'rgba(99, 102, 241, 0.6)',
+      'rgba(236, 72, 153, 0.6)'
+    ];
+    
+    // Key target zones in the hero section (percentage based)
+    const targets = [
+      { x: 15, y: 15 }, // Menu area
+      { x: 25, y: 30 }, // Title text
+      { x: 20, y: 70 }, // Buttons area
+      { x: 75, y: 50 }, // Main image/card
+      { x: 80, y: 20 }, // Top right
+    ];
+
+    const initialOthers = Array.from({ length: 5 }, (_, i) => {
+      const isHeroSticky = i === 4; // Fifth cursor is sticky
+      return {
+        id: i,
+        name: cursorNames[i],
+        color: colors[i],
+        x: isHeroSticky ? 75 : Math.random() * 100,
+        y: isHeroSticky ? 50 : Math.random() * 100,
+        targetX: isHeroSticky ? 75 : targets[Math.floor(Math.random() * targets.length)].x,
+        targetY: isHeroSticky ? 50 : targets[Math.floor(Math.random() * targets.length)].y,
+        speed: 0.02 + Math.random() * 0.05,
+        isHeroSticky
+      };
+    });
+    
+    setOthers(initialOthers);
+
+    const interval = setInterval(() => {
+      setOthers(prev => prev.map(cursor => {
+        const dx = cursor.targetX - cursor.x;
+        const dy = cursor.targetY - cursor.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        let nx = cursor.x;
+        let ny = cursor.y;
+        let tx = cursor.targetX;
+        let ty = cursor.targetY;
+
+        if (dist < 2) {
+          // Choose a new logical target
+          if (cursor.isHeroSticky) {
+            // Stay specifically around the hero image area (Target 3)
+            const heroTarget = targets[3];
+            tx = heroTarget.x + (Math.random() * 15 - 7.5);
+            ty = heroTarget.y + (Math.random() * 15 - 7.5);
+          } else {
+            const nextTarget = targets[Math.floor(Math.random() * targets.length)];
+            tx = nextTarget.x + (Math.random() * 10 - 5);
+            ty = nextTarget.y + (Math.random() * 10 - 5);
+          }
+        } else {
+          nx += dx * cursor.speed;
+          ny += dy * cursor.speed;
+        }
+
+        return { ...cursor, x: nx, y: ny, targetX: tx, targetY: ty };
+      }));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+      {others.map((cursor) => (
+        <motion.div
+          key={cursor.id}
+          className="absolute flex items-center gap-1"
+          animate={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
+          transition={{ type: "spring", damping: 30, stiffness: 80 }}
+          style={{ x: '-50%', y: '-50%' }}
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="drop-shadow-lg"
+          >
+            <path
+              d="M3 3L11.5 21L14.5 14L21.5 11L3 3Z"
+              fill={cursor.color}
+              stroke="rgba(0, 0, 0, 0.4)"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <div 
+            className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-black shadow-xl backdrop-blur-md border border-black/10"
+            style={{ 
+              backgroundColor: cursor.color.replace('0.6', '0.15'), 
+              boxShadow: `0 0 15px ${cursor.color}` 
+            }}
+          >
+            {cursor.name}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 const FlipCard = ({ frontContent, backContent, className }: { frontContent: React.ReactNode, backContent: React.ReactNode, className?: string }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -533,8 +781,9 @@ const TiltCard = ({ children, style }: { children: React.ReactNode; style?: Reac
 
 const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (
-  <section className="pt-16 pb-20 md:pt-24 md:pb-32 px-6">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-10 items-center">
+  <section className="pt-16 pb-20 md:pt-24 md:pb-32 px-6 relative overflow-hidden">
+    <RealTimeCursors />
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-10 items-center relative z-10">
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -547,9 +796,10 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
         <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold text-brand-dark leading-[0.9] mb-8">
           Optimizing <br /> African <br /> Tech Giants.
         </h1>
-        <p className="text-lg md:text-xl text-brand-dark/70 mb-10 max-w-md leading-relaxed font-mono">
-          ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond.
-        </p>
+        <OnHoverReveal 
+          text="ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond."
+          className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono"
+        />
         <div className="flex flex-wrap gap-4 font-mono">
           <button 
             onClick={() => onNavigate('services')}
@@ -619,9 +869,10 @@ const MissionSection = () => (
       <div className="flex justify-center mb-8">
         <span className="text-6xl font-mono opacity-20">“</span>
       </div>
-      <h2 className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight">
-        ReliabilityIQ bridges Nigerian technical ingenuity with international execution standards to engineer flawless digital ecosystems for the world's next industry leaders.
-      </h2>
+      <TextScroll 
+        text="ReliabilityIQ bridges Nigerian technical ingenuity with international execution standards to engineer flawless digital ecosystems for the world's next industry leaders."
+        className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight text-center"
+      />
       
       <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
         <div className="text-center group">
@@ -810,8 +1061,9 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
 };
 
 const NarrativeSection = () => (
-  <section className="py-32 px-6">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-12 items-center">
+  <section className="py-32 px-6 relative overflow-hidden">
+    <PixelSnow />
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-12 items-center relative z-10">
       <div className="relative rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] group">
         <FlipCard
           className="w-full h-full absolute inset-0"
