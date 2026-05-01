@@ -11,6 +11,8 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
+import logo from '../assets/logo.png';
+
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
 import { ServiceDetail } from './components/ServiceDetail';
@@ -132,7 +134,7 @@ const CircleCursor = () => {
 
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <img src="/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
+    <img src={logo} alt="logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
     <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
       ReliabilityIQ Ventures
     </span>
@@ -301,7 +303,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
           <div className="flex items-center gap-2 mb-6 text-white font-mono">
-            <img src="/logo.png" alt="ReliabilityIQ Logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
+            <img src={logo} alt="logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>
