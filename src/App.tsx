@@ -132,7 +132,7 @@ const CircleCursor = () => {
 
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <img src="/public/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
+    <img src="/assets/logo.png" alt="ReliabilityIQ Logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
     <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
       ReliabilityIQ Ventures
     </span>
