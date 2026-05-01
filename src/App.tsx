@@ -11,6 +11,74 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
+import { ServicesList } from './components/ServicesList';
+import { FeatureFlipper } from './components/FeatureFlipper';
+import { ServiceDetail } from './components/ServiceDetail';
+
+const MagneticGlowButton: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+}> = ({ children, className = '', onClick, type = 'button', disabled = false }) => {
+  const boundingRef = useRef<HTMLButtonElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!boundingRef.current || !glowRef.current || disabled) return;
+    const { left, top, width, height } = boundingRef.current.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    
+    // Magnetic pull calculation
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const maxPull = 15;
+    
+    const pullX = ((x - centerX) / centerX) * maxPull;
+    const pullY = ((y - centerY) / centerY) * maxPull;
+
+    setPosition({ x: pullX, y: pullY });
+    setOpacity(1);
+    
+    // Glow effect
+    glowRef.current.style.setProperty('--x', `${x}px`);
+    glowRef.current.style.setProperty('--y', `${y}px`);
+  };
+
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+    setOpacity(0);
+  };
+
+  return (
+    <motion.button
+      ref={boundingRef}
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      className={`relative overflow-hidden group ${className}`}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      <div 
+        ref={glowRef}
+        className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[inherit]"
+        style={{
+          background: `radial-gradient(120px circle at var(--x) var(--y), rgba(255,255,255,0.4), transparent 40%)`
+        }}
+      />
+      <span className="relative z-10 flex items-center justify-center pointer-events-none">{children}</span>
+    </motion.button>
+  );
+};
+
 // --- Core Components ---
 const CircleCursor = () => {
   const cursorX = useMotionValue(-100);
@@ -161,7 +229,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
               onClick={() => setCurrentPage('contact')}
               className="bg-brand-dark text-white px-4 lg:px-6 py-1 lg:py-2 rounded-full font-mono text-xs lg:text-sm hover:bg-black transition-all shadow-md active:scale-95 h-8 lg:h-10"
             >
-              Get Started
+              Learn More
             </button>
           </div>
         </div>
@@ -215,7 +283,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
                     }}
                     className="mt-4 bg-brand-accent text-white px-6 py-3 rounded-full font-mono text-center w-full shadow-md"
                   >
-                    Get Started
+                    Learn More
                   </button>
                 </motion.div>
               </motion.div>
@@ -462,7 +530,7 @@ const ServiceDetailModal = ({
                 }}
                 className="bg-brand-dark text-white px-8 py-4 rounded-full font-mono text-sm font-bold hover:bg-brand-accent transition-all shadow-xl w-full sm:w-auto"
               >
-                Let's Discuss Your Project
+                Learn More
               </button>
             </div>
           </motion.div>
@@ -944,7 +1012,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
           texts={[
             "ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond.",
             "Building resilient systems for the modern global enterprise, from Lagos-edge networks to London cloud infrastructures.",
-            "Specialized engineering that bridges Nigerian technical ingenuity with international execution standards since 2014."
+            "Specialized engineering that bridges Nigerian technical ingenuity with international execution standards since 2026."
           ]}
           className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono min-h-[140px] md:min-h-[120px]"
         />
@@ -953,7 +1021,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
             onClick={() => onNavigate('services')}
             className="bg-brand-accent text-white px-8 py-3 rounded-full hover:bg-brand-accent-light transition-all shadow-lg hover:shadow-brand-accent/20"
           >
-            Explore Services
+            Learn More
           </button>
           <button 
             onClick={() => onNavigate('about')}
@@ -1083,7 +1151,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
               onClick={onAction}
               className="group/btn flex items-center gap-2 text-brand-accent font-mono text-xs md:text-sm font-bold w-fit bg-brand-bg px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
             >
-              Explore Deep Dive <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
+              Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
             </button>
          </div>
          
@@ -1091,6 +1159,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             <div className="absolute inset-0 bg-brand-bg">
                <img 
                  src={
+                   i === 0 ? "/regenerated_image_1777650472492.png" :
                    i === 2 ? "/regenerated_image_1777637304636.png" : 
                    i === 3 ? "/regenerated_image_1777637300875.png" : 
                    `https://images.unsplash.com/photo-${['1504384308090-c894fdcc538d', '1518770660439-4636190af475', '1451187580459-43490279c0fa', '1554224155-8d0447a858ef', '1561070791-2526d30994b5'][i]}?q=80&w=2070&auto=format&fit=crop`
@@ -1129,12 +1198,12 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "web-ops",
       title: "Web Operations",
       icon: Globe,
-      description: "Enterprise-grade server management and multi-region cloud deployments bridging Nigerian markets to global infrastructures.",
-      longDescription: "Our Web Operations service is engineered for global resilience. We specialize in deploying high-availability architectures that serve Nigerian users with local-edge latency while maintaining seamless connectivity with international cloud clusters (AWS, Azure, GCP). We ensure your digital presence is bulletproof against both regional infrastructural challenges and global traffic surges.",
-      useCases: ["Cross-Border E-commerce", "Lagos-London Cloud Syncing", "Secure Fintech Hosting", "High-Availability Media Portals"],
+      description: "Website development, CMS, detect bugs, and cloud services.",
+      longDescription: "Our performance-driven web operations unit specializes in end-to-end website development, seamless CMS integration, proactive bug detection, and enterprise-grade cloud services architecture. We ensure your digital systems are always optimized, secure, and ready to scale.",
+      useCases: ["Website Development", "CMS Implementation", "Proactive Bug Detection", "Cloud Services Orchestration"],
       caseStudy: {
-        title: "Pan-African Fintech Hub",
-        result: "Optimized multi-region database replication, reducing transaction latency by 60% across West African and European nodes."
+        title: "Global E-commerce Expansion",
+        result: "Implemented a unified CMS and cloud strategy that reduced deployment times by 70% and eliminated critical runtime bugs."
       }
     },
     {
@@ -1252,9 +1321,10 @@ const NarrativeSection = () => (
 
       <div>
         <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-6">The Narrative</div>
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark mb-10 tracking-tight leading-tight">
-          Driven by logic, defined by results.
-        </h2>
+        <TextScroll 
+          text="Driven by logic, defined by results."
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark mb-10 tracking-tight leading-tight flex flex-wrap"
+        />
 
         <div className="space-y-12">
           {[
@@ -1306,8 +1376,22 @@ const ContactSection = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Construct the email body
+    const subject = encodeURIComponent(`New Contact Form Submission from ${formData.firstName} ${formData.lastName}`);
+    const body = encodeURIComponent(`You have a new inquiry from your website.
+
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Service Required: ${formData.service}
+
+Message/Details:
+${formData.details}
+`);
+
+    // Open user's default mail client to send the email
+    window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
+
     setIsSubmitting(false);
     setIsSuccess(true);
     setFormData({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
@@ -1407,13 +1491,13 @@ const ContactSection = () => {
                 {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
               </div>
 
-              <button 
+              <MagneticGlowButton 
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${isSuccess ? 'bg-green-500' : 'bg-brand-accent'} text-white py-5 rounded-2xl text-lg font-bold hover:opacity-90 transition-all shadow-xl active:scale-95 disabled:opacity-50`}
+                className={`w-full ${isSuccess ? 'bg-green-500' : 'bg-brand-accent'} text-white py-5 rounded-2xl text-lg font-bold hover:opacity-90 transition-all shadow-xl active:scale-95 disabled:opacity-50 border border-transparent hover:border-white/20`}
               >
                 {isSubmitting ? 'Processing...' : isSuccess ? 'Request Sent!' : 'Submit Request'}
-              </button>
+              </MagneticGlowButton>
             </form>
           </div>
 
@@ -1441,16 +1525,16 @@ const ContactSection = () => {
               />
             </div>
 
-            <div className="relative z-10 bg-transparent border border-brand-dark/10 p-6 lg:p-8 rounded-[24px] md:mt-0 flex flex-col sm:flex-row gap-6 lg:gap-8 justify-between">
+            <div className="relative z-10 bg-transparent border border-brand-dark/10 p-6 lg:p-8 rounded-[24px] md:mt-0 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between flex-wrap items-start sm:items-center">
               <div>
                 <div className="text-[10px] uppercase tracking-widest text-brand-dark/50 mb-2 font-bold">Direct Line</div>
-                <div className="font-mono text-xs md:text-sm text-brand-dark tracking-tighter leading-relaxed font-medium">
-                  +234 9075934287<br className="sm:hidden" /> +234 906539605
+                <div className="font-mono text-[13px] md:text-sm text-brand-dark tracking-tighter leading-relaxed font-medium whitespace-nowrap">
+                  +234 9075934287 <br className="sm:hidden" /> <span className="hidden sm:inline">&bull;</span> +234 906539605
                 </div>
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-widest text-brand-dark/50 mb-2 font-bold">Support Email</div>
-                <div className="font-mono text-xs md:text-sm text-brand-dark tracking-tighter leading-normal font-medium break-all sm:break-normal">reliabilityiqventures@gmail.com</div>
+                <div className="text-[10px] uppercase tracking-widest text-brand-dark/50 mb-2 font-bold sm:text-right">Support Email</div>
+                <div className="font-mono text-[13px] md:text-[14px] text-brand-dark tracking-tighter leading-normal font-medium break-all sm:break-normal truncate sm:text-right">reliabilityiqventures@gmail.com</div>
               </div>
             </div>
           </div>
@@ -1594,21 +1678,36 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="pt-24"
           >
-            <CompetenciesSection onContact={() => setCurrentPage('contact')} />
-            {/* Additional detailed services content could go here */}
-            <div className="bg-brand-dark text-white py-32 px-6">
-               <div className="max-w-4xl mx-auto text-center">
-                  <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
-                  <p className="text-brand-bg/60 font-mono mb-12 text-lg">Our engineering team specializes in scaling legacy infrastructures and integrating greenfield AI solutions.</p>
-                  <button 
-                  onClick={() => setCurrentPage('contact')}
-                  className="bg-brand-accent text-white px-12 py-5 rounded-full text-xl font-bold font-mono hover:bg-brand-accent-light transition-all"
-                  >
-                    Request a Custom Quote
-                  </button>
-               </div>
+            <FeatureFlipper onNavigate={setCurrentPage} />
+            <div className="bg-brand-dark text-white py-32 px-6 text-center">
+              <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
+              <button 
+                onClick={() => setCurrentPage('contact')}
+                className="bg-brand-accent text-white px-12 py-5 rounded-full text-xl font-bold font-mono hover:bg-brand-accent-light transition-all"
+              >
+                Learn More
+              </button>
             </div>
+          </motion.div>
+        );
+      case 'service-branding':
+      case 'service-development':
+      case 'service-automation':
+      case 'service-documentation':
+        return (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="pt-24"
+          >
+            <ServiceDetail 
+              id={currentPage} 
+              onBack={() => setCurrentPage('services')}
+              onContact={() => setCurrentPage('contact')}
+            />
           </motion.div>
         );
       case 'trending':
