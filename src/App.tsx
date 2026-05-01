@@ -11,7 +11,56 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-// --- Shared Components ---
+// --- Core Components ---
+const CircleCursor = () => {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  
+  const springConfig = { damping: 25, stiffness: 700, mass: 0.1 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], input, textarea, select')) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    window.addEventListener("mousemove", updateMousePosition);
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, [cursorX, cursorY]);
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 rounded-full border border-brand-accent pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: "-50%",
+        translateY: "-50%",
+      }}
+      animate={{
+        width: isHovering ? 48 : 32,
+        height: isHovering ? 48 : 32,
+        backgroundColor: isHovering ? "white" : "transparent"
+      }}
+      transition={{
+        width: { type: "spring", stiffness: 300, damping: 20 },
+        height: { type: "spring", stiffness: 300, damping: 20 },
+        backgroundColor: { duration: 0.2 }
+      }}
+    />
+  );
+};
 
 const Logo = () => (
   <div className="flex items-center gap-2">
@@ -594,7 +643,7 @@ const ScramblyText = ({ texts, className }: { texts: string[], className?: strin
   }, [index, texts]);
 
   return (
-    <div className="min-h-[160px] md:min-h-[200px] lg:min-h-[300px] mb-4 md:mb-8 flex items-center">
+    <div className="min-h-[120px] md:min-h-[160px] lg:min-h-[220px] mb-4 md:mb-6 flex items-center">
       <h1 className={`${className} font-mono tracking-tighter uppercase leading-[1.05] md:leading-[0.95]`}>
         {displayText}
       </h1>
@@ -889,7 +938,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
             "Scaling Global Digital Infrastructure.",
             "Powering Next-Gen Web Operations."
           ]}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-dark"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark"
         />
         <SmartTypewriter 
           texts={[
@@ -1006,7 +1055,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
   const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
   
   return (
-    <div className="h-screen sticky top-0 flex items-center justify-center pt-24">
+    <div className="h-screen sticky top-0 flex items-center justify-center py-16">
        <motion.div 
          whileHover={{ 
            scale: 1.025,
@@ -1018,30 +1067,34 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
          style={{ 
            scale, 
            opacity,
-           top: `calc(10% + ${i * 40}px)` 
+           transformOrigin: "center center"
          }}
-         className="bg-white rounded-[40px] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col lg:flex-row gap-12 w-full max-w-5xl h-[500px] relative overflow-hidden group transition-all duration-500"
+         className="bg-white rounded-[30px] md:rounded-[40px] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col md:flex-row gap-6 w-full max-w-4xl h-auto min-h-[280px] md:h-[350px] relative overflow-hidden group transition-all duration-500"
        >
-         <div className="lg:w-1/2 flex flex-col justify-center h-full z-10">
-            <div className="p-4 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
-              <Icon size={32} />
+         <div className="md:w-1/2 flex flex-col justify-center h-full z-10 w-full">
+            <div className="p-3 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-4 md:mb-6 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
+              <Icon size={24} className="md:w-6 md:h-6" />
             </div>
-            <TextEngine text={title} className="text-4xl md:text-6xl font-bold mb-6 font-mono tracking-tighter text-brand-dark leading-none" />
-            <p className="text-brand-dark/60 font-mono text-sm leading-relaxed mb-10 max-w-sm">
+            <TextEngine text={title} className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 font-mono tracking-tighter text-brand-dark leading-none" />
+            <p className="text-brand-dark/60 font-mono text-xs leading-relaxed mb-6 md:mb-8 max-w-sm">
               {description}
             </p>
             <button 
               onClick={onAction}
-              className="group/btn flex items-center gap-2 text-brand-accent font-mono text-sm font-bold w-fit bg-brand-bg px-6 py-3 rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
+              className="group/btn flex items-center gap-2 text-brand-accent font-mono text-xs md:text-sm font-bold w-fit bg-brand-bg px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
             >
               Explore Deep Dive <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
             </button>
          </div>
          
-         <div className="lg:w-1/2 relative hidden lg:block overflow-hidden rounded-3xl">
+         <div className="md:w-1/2 relative hidden md:block overflow-hidden rounded-3xl">
             <div className="absolute inset-0 bg-brand-bg">
                <img 
-                 src={`https://images.unsplash.com/photo-${['1504384308090-c894fdcc538d', '1518770660439-4636190af475', '1451187580459-43490279c0fa', '1554224155-8d0447a858ef', '1561070791-2526d30994b5'][i]}?q=80&w=2070&auto=format&fit=crop`}
+                 src={
+                   i === 2 ? "/regenerated_image_1777637304636.png" : 
+                   i === 3 ? "/regenerated_image_1777637300875.png" : 
+                   `https://images.unsplash.com/photo-${['1504384308090-c894fdcc538d', '1518770660439-4636190af475', '1451187580459-43490279c0fa', '1554224155-8d0447a858ef', '1561070791-2526d30994b5'][i]}?q=80&w=2070&auto=format&fit=crop`
+                 }
                  className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
                  alt={title}
                  referrerPolicy="no-referrer"
@@ -1136,9 +1189,9 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
 
   return (
     <section ref={containerRef} className="relative mt-20">
-      <div className="max-w-7xl mx-auto px-6 mb-20 pointer-events-none">
+      <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center">
          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Regional & International Expertise</div>
-         <h2 className="text-5xl md:text-8xl lg:text-9xl font-bold text-brand-dark leading-[0.8] tracking-tighter mix-blend-multiply">African Engineering.<br />Global Standards.</h2>
+         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter mix-blend-multiply">African Engineering.<br />Global Standards.</h2>
       </div>
 
       <div className="px-6">
@@ -1167,7 +1220,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
 };
 
 const NarrativeSection = () => (
-  <section className="py-32 px-6 relative overflow-hidden">
+  <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-brand-bg z-20">
     <PixelSnow />
     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-12 items-center relative z-10">
       <div className="relative rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] group">
@@ -1199,7 +1252,7 @@ const NarrativeSection = () => (
 
       <div>
         <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-6">The Narrative</div>
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-dark mb-12 tracking-tight leading-[0.9]">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark mb-10 tracking-tight leading-tight">
           Driven by logic, defined by results.
         </h2>
 
@@ -1586,6 +1639,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
+      <CircleCursor />
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       <main className="flex-grow relative">
