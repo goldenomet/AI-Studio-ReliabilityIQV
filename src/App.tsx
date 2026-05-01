@@ -11,7 +11,7 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-import logo from '../assets/logo.png';
+import logo from './assets/logo.png';
 
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
