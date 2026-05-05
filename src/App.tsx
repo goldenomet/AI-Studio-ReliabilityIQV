@@ -11,8 +11,6 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-import logo from './assets/logo.ico';
-
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
 import { ServiceDetail } from './components/ServiceDetail';
@@ -134,7 +132,7 @@ const CircleCursor = () => {
 
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <img src={logo} alt="logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
+    <img src="/logo.png" alt="logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
     <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
       ReliabilityIQ Ventures
     </span>
@@ -231,7 +229,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
               onClick={() => setCurrentPage('home')}
               className="bg-white px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-gray-100 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center"
             >
-              <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
+              <img src="/logo.png" alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
             </button>
           </div>
         </div>
@@ -285,7 +283,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
                     }}
                     className="mt-4 bg-brand-accent text-white px-6 py-3 rounded-full flex justify-center w-full shadow-md"
                   >
-                    <img src={logo} alt="logo" className="h-6 w-6 object-contain" />
+                    <img src="/logo.png" alt="logo" className="h-6 w-6 object-contain" />
                   </button>
                 </motion.div>
               </motion.div>
@@ -303,7 +301,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
           <div className="flex items-center gap-2 mb-6 text-white font-mono">
-            <img src={logo} alt="logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
+            <img src="/logo.png" alt="logo" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>
