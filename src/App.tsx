@@ -362,7 +362,7 @@ const Footer = () => (
               ReliabilityIQ
             </span>
           </div>
-          <p className="text-brand-bg/60 font-mono text-sm leading-relaxed mb-8 max-w-xs">
+          <p className="text-white/60 font-mono text-sm leading-relaxed mb-8 max-w-xs">
             Optimizing digital infrastructure from Lagos to the world. We build resilient systems for the modern global enterprise.
           </p>
           <div className="flex gap-4">
@@ -373,8 +373,8 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent-light mb-6">Services</h4>
-          <ul className="flex flex-col gap-4 font-mono text-sm text-brand-bg/70">
+          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">Services</h4>
+          <ul className="flex flex-col gap-4 font-mono text-sm text-white/70">
             <li><a href="#" className="hover:text-white transition-colors">Web Operations</a></li>
             <li><a href="#" className="hover:text-white transition-colors">AI Automations</a></li>
             <li><a href="#" className="hover:text-white transition-colors">GIS Mapping</a></li>
@@ -384,8 +384,8 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent-light mb-6">Company</h4>
-          <ul className="flex flex-col gap-4 font-mono text-sm text-brand-bg/70">
+          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">Company</h4>
+          <ul className="flex flex-col gap-4 font-mono text-sm text-white/70">
             <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Leadership Team</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
@@ -395,7 +395,7 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent-light mb-6">System Status</h4>
+          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">System Status</h4>
           <div className="bg-white/5 border border-white/10 rounded-lg p-4 font-mono text-xs">
             <div className="flex items-center justify-between mb-3">
               <span>Global API</span>
@@ -415,7 +415,7 @@ const Footer = () => (
         </div>
       </div>
 
-      <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-bg/40 font-mono text-[10px] uppercase tracking-widest">
+      <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 font-mono text-[10px] uppercase tracking-widest">
         <p>© 2026 ReliabilityIQ Ventures. All rights reserved.</p>
         <div className="flex gap-8">
           <a href="#" className="hover:text-white">Privacy Policy</a>
@@ -1157,15 +1157,15 @@ const MissionSection = () => (
       <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
         <div className="text-center group">
           <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">10+</div>
-          <div className="text-xs font-mono tracking-widest text-brand-bg/40 uppercase">Years Exp</div>
+          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Years Exp</div>
         </div>
         <div className="text-center group">
           <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">250+</div>
-          <div className="text-xs font-mono tracking-widest text-brand-bg/40 uppercase">Projects</div>
+          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Projects</div>
         </div>
         <div className="text-center group">
           <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">50m</div>
-          <div className="text-xs font-mono tracking-widest text-brand-bg/40 uppercase">Data Points</div>
+          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Data Points</div>
         </div>
       </div>
     </div>
@@ -1324,7 +1324,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
     <section ref={containerRef} className="relative mt-20">
       <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center">
          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Regional & International Expertise</div>
-         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter mix-blend-multiply">African Engineering.<br />Global Standards.</h2>
+         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter">African Engineering.<br />Global Standards.</h2>
       </div>
 
       <div className="px-6">
