@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
 import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon } from 'lucide-react';
-import logo from '@/src/assets/images/automation.png';
+import logo from '../../assets/images/logo.png';
 
 export const Navbar = ({ 
   currentPage, 
@@ -85,7 +85,7 @@ export const Navbar = ({
                 onClick={() => setCurrentPage('home')}
                 className="bg-brand-card px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
               >
-                <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
+                <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
               </button>
               <button
                  onClick={toggleTheme}
@@ -186,7 +186,7 @@ export const Navbar = ({
                     }}
                     className="mt-4 bg-brand-accent text-white px-6 py-3 rounded-full flex justify-center w-full shadow-md"
                   >
-                    <img src={logo} alt="logo" className="h-6 w-6 object-contain" />
+                    <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-6 w-6 object-contain" />
                   </button>
                 </motion.div>
                 <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: -20 } }} transition={{ duration: 0.2 }}>

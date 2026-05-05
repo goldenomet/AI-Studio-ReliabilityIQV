@@ -43,7 +43,7 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
       id: "ai-auto",
       title: "AI Automations",
       icon: Cpu,
-      image: fallbackLogo,
+      image: newImage1778001962382,
       description: "Intelligent workflow automations and ML models designed to optimize Nigerian supply chains and international business processes.",
       longDescription: "We build intelligent systems that bridge the gap between human effort and machine precision. Our AI solutions are tailored to solve specific regional bottlenecks—such as supply chain optimization in emerging markets—while applying international standards of data processing and predictive analytics to drive global competitiveness.",
       useCases: ["Supply Chain Route Optimization", "Automated Compliance Auditing", "Smart Customer Retention Bots", "Predictive Inventory for Retailers"],
@@ -137,6 +137,7 @@ export const NarrativeSection = () => (
             <img 
               src={newImage1778003945349} 
               alt="Office work" 
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover filter grayscale contrast-125"
             />
           }
@@ -344,7 +345,8 @@ ${formData.details}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
                 src={fallbackLogo} 
-                className="w-full h-full object-cover grayscale opacity-20" 
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover grayscale opacity-40" 
                 alt="map"
               />
             </div>
@@ -399,12 +401,12 @@ export const TrendingProducts = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[
-          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: fallbackLogo },
-          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: fallbackLogo },
-          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: fallbackLogo },
-          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: fallbackLogo },
-          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: fallbackLogo },
-          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: fallbackLogo },
+          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: newImage1778001962382 },
+          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: newImage1778002234657 },
+          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: newImage1778002658766 },
+          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: newImage1778003940043 },
+          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: newImage1778003942890 },
+          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: newImage1778003945349 },
         ].map((prod, i) => (
           <motion.div 
             key={i}
@@ -417,6 +419,7 @@ export const TrendingProducts = () => (
                <img 
                 src={prod.img} 
                 alt={prod.title} 
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover filter grayscale brightness-75 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700" 
               />
                <div className="absolute top-4 right-4 bg-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
