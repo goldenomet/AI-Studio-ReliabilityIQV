@@ -11,7 +11,7 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-import logo from './assets/logo.png';
+import logo from './assets/images/regenerated_image_1777998030572.x-icon';
 
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
@@ -228,10 +228,10 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
           </LayoutGroup>
           <div className="ml-2 lg:ml-4 mr-1">
             <button 
-              onClick={() => setCurrentPage('contact')}
-              className="bg-brand-dark text-white px-4 lg:px-6 py-1 lg:py-2 rounded-full font-mono text-xs lg:text-sm hover:bg-black transition-all shadow-md active:scale-95 h-8 lg:h-10"
+              onClick={() => setCurrentPage('home')}
+              className="bg-white px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-gray-100 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center"
             >
-              Learn More
+              <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
             </button>
           </div>
         </div>
@@ -280,12 +280,12 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
                 <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: -20 } }} transition={{ duration: 0.2 }}>
                   <button 
                     onClick={() => {
-                      setCurrentPage('contact');
+                      setCurrentPage('home');
                       setMobileMenuOpen(false);
                     }}
-                    className="mt-4 bg-brand-accent text-white px-6 py-3 rounded-full font-mono text-center w-full shadow-md"
+                    className="mt-4 bg-brand-accent text-white px-6 py-3 rounded-full flex justify-center w-full shadow-md"
                   >
-                    Learn More
+                    <img src={logo} alt="logo" className="h-6 w-6 object-contain" />
                   </button>
                 </motion.div>
               </motion.div>
