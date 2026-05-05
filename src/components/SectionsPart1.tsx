@@ -74,6 +74,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
             <img 
               src={newImage1778001962382} 
               alt="Team working" 
+              loading="lazy"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover filter grayscale brightness-75 rounded-3xl"
             />

@@ -26,7 +26,7 @@ export const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
           <div className="flex items-center gap-2 mb-6 text-white font-mono">
-            <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
+            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>

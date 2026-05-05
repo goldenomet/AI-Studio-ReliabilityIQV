@@ -133,6 +133,7 @@ export const StackCard: React.FC<StackCardProps> = ({ i, title, description, ico
             <div className="absolute inset-0 bg-brand-bg">
                <img 
                  src={image}
+                 loading="lazy"
                  referrerPolicy="no-referrer"
                  className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
                  alt={title}

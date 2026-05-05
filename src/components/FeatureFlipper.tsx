@@ -102,6 +102,7 @@ export const FeatureFlipper = ({ onNavigate }: { onNavigate: (page: string) => v
               <img
                 src={hoveredIndex !== null ? features[hoveredIndex].image : "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop"}
                 alt="Feature"
+                loading="lazy"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />

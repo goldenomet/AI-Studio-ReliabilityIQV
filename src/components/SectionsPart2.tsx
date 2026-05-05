@@ -137,6 +137,7 @@ export const NarrativeSection = () => (
             <img 
               src={newImage1778003945349} 
               alt="Office work" 
+              loading="lazy"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover filter grayscale contrast-125"
             />
@@ -345,6 +346,7 @@ ${formData.details}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
                 src={fallbackLogo} 
+                loading="lazy"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale opacity-40" 
                 alt="map"
@@ -419,6 +421,7 @@ export const TrendingProducts = () => (
                <img 
                 src={prod.img} 
                 alt={prod.title} 
+                loading="lazy"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover filter grayscale brightness-75 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700" 
               />
