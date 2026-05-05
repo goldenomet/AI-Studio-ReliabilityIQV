@@ -11,15 +11,15 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-import logo from './assets/images/automation.png';
+import logo from '@/src/assets/images/automation.png';
 
-import newImage1778001962382 from './assets/images/regenerated_image_1778001962382.jpg';
-import newImage1778002234657 from './assets/images/regenerated_image_1778002234657.jpg';
-import newImage1778002658766 from './assets/images/regenerated_image_1778002658766.jpg';
-import newImage1778003940043 from './assets/images/regenerated_image_1778003940043.jpg';
-import newImage1778003942890 from './assets/images/regenerated_image_1778003942890.jpg';
-import newImage1778003945349 from './assets/images/regenerated_image_1778003945349.jpg';
-import fallbackLogo from './assets/images/logo.png';
+import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
+import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
+import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
+import newImage1778003940043 from '@/src/assets/images/regenerated_image_1778003940043.jpg';
+import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003942890.jpg';
+import newImage1778003945349 from '@/src/assets/images/regenerated_image_1778003945349.jpg';
+import fallbackLogo from '@/src/assets/images/logo.png';
 
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
@@ -387,6 +387,7 @@ interface ServiceDetail {
   title: string;
   description: string;
   icon: any;
+  image: any;
   longDescription: string;
   useCases: string[];
   caseStudy: {
@@ -1054,7 +1055,6 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
               src={newImage1778001962382} 
               alt="Team working" 
               className="w-full h-full object-cover rounded-3xl"
-              referrerPolicy="no-referrer"
             />
           </TiltCard>
           {/* Glass Overlays */}
@@ -1123,12 +1123,13 @@ interface StackCardProps {
   title: string;
   description: string;
   icon: any;
+  image: any;
   progress: any;
   range: number[];
   onAction: () => void;
 }
 
-const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, progress, range, onAction }) => {
+const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, image, progress, range, onAction }) => {
   const scale = useTransform(progress, range, [1, 0.9 + (i * 0.02)]);
   const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
   
@@ -1165,13 +1166,12 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             </button>
          </div>
          
-         <div className="md:w-1/2 relative hidden md:block overflow-hidden rounded-3xl">
+         <div className="md:w-1/2 relative overflow-hidden rounded-3xl h-64 md:h-auto">
             <div className="absolute inset-0 bg-brand-bg">
                <img 
-                 src={i === 0 ? newImage1778002234657 : i === 2 ? newImage1778002658766 : i === 3 ? newImage1778003940043 : i === 4 ? newImage1778003942890 : fallbackLogo}
+                 src={image}
                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                  alt={title}
-                 referrerPolicy="no-referrer"
                />
                <div className="absolute inset-0 bg-brand-accent/10 mix-blend-overlay group-hover:opacity-0 transition-opacity"></div>
             </div>
@@ -1203,6 +1203,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "web-ops",
       title: "Web Operations",
       icon: Globe,
+      image: newImage1778002234657,
       description: "Website development, CMS, detect bugs, and cloud services.",
       longDescription: "Our performance-driven web operations unit specializes in end-to-end website development, seamless CMS integration, proactive bug detection, and enterprise-grade cloud services architecture. We ensure your digital systems are always optimized, secure, and ready to scale.",
       useCases: ["Website Development", "CMS Implementation", "Proactive Bug Detection", "Cloud Services Orchestration"],
@@ -1215,6 +1216,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "ai-auto",
       title: "AI Automations",
       icon: Cpu,
+      image: fallbackLogo,
       description: "Intelligent workflow automations and ML models designed to optimize Nigerian supply chains and international business processes.",
       longDescription: "We build intelligent systems that bridge the gap between human effort and machine precision. Our AI solutions are tailored to solve specific regional bottlenecks—such as supply chain optimization in emerging markets—while applying international standards of data processing and predictive analytics to drive global competitiveness.",
       useCases: ["Supply Chain Route Optimization", "Automated Compliance Auditing", "Smart Customer Retention Bots", "Predictive Inventory for Retailers"],
@@ -1227,6 +1229,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "gis",
       title: "GIS Mapping",
       icon: MapIcon,
+      image: newImage1778002658766,
       description: "Advanced spatial intelligence for African logistics, urban planning, and international resource management.",
       longDescription: "Geospatial data is the backbone of modern logistics. Our GIS team provides deep insights into the African landscape, from mapping informal urban sectors to planning large-scale agricultural expansions. We combine global satellite imagery with local ground-truth data to provide a comprehensive view for international investors and regional planners alike.",
       useCases: ["Logistics Fleet Tracking", "Agricultural Land Use Analysis", "Real Estate Demand Heatmaps", "Infrastructure Pipeline Planning"],
@@ -1239,6 +1242,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "tech-reports",
       title: "Technical Reports",
       icon: FileText,
+      image: newImage1778003940043,
       description: "Professional technical documentation meeting international ISO standards and local regulatory requirements.",
       longDescription: "Precision in documentation is non-negotiable for international growth. We produce investor-ready technical reports, SOC2/ISO audit preparations, and feasibility studies that bridge the gap between Nigerian technical operations and international boardrooms. Our reports provide the clarity required for high-stakes funding and complex regulatory approvals.",
       useCases: ["ISO/SOC2 Audit Readiness", "Venture Capital Due Diligence", "System Architecture Audits", "Environmental Impact Studies"],
@@ -1251,6 +1255,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
       id: "design-studio",
       title: "Content Studio",
       icon: PenTool,
+      image: newImage1778003942890,
       description: "Global brand storytelling and UX/UI design that resonates with Nigerian audiences and international consumers.",
       longDescription: "We blend engineering precision with creative flair. Our Content Studio creates digital experiences that honor Nigerian cultural nuances while adhering to the highest global standards of UI/UX design. We use AI-assisted tools to scale content production, ensuring your brand story is consistent and compelling across every global touchpoint.",
       useCases: ["International Brand Identity", "Conversion-Optimized UI/UX", "Multi-Language Content Strategy", "AI-Generated Digital Marketing"],
@@ -1276,6 +1281,7 @@ const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
             title={service.title}
             description={service.description}
             icon={service.icon}
+            image={service.image}
             progress={scrollYProgress} 
             range={[i * 0.2, 1]} 
             onAction={() => setSelectedService(service)}
@@ -1305,7 +1311,6 @@ const NarrativeSection = () => (
               src={newImage1778003945349} 
               alt="Office work" 
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
             />
           }
           backContent={
@@ -1512,7 +1517,7 @@ ${formData.details}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
                 src={fallbackLogo} 
-                className="w-full h-full object-cover opacity-20" 
+                className="w-full h-full object-cover" 
                 alt="map"
               />
             </div>
@@ -1586,7 +1591,6 @@ const TrendingProducts = () => (
                 src={prod.img} 
                 alt={prod.title} 
                 className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
-                referrerPolicy="no-referrer"
               />
                <div className="absolute top-4 right-4 bg-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
             </div>
