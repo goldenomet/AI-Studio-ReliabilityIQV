@@ -11,7 +11,15 @@ import {
   Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
 } from 'lucide-react';
 
-import logo from './assets/logo.png';
+import logo from './assets/images/automation.png';
+
+import newImage1778001962382 from './assets/images/regenerated_image_1778001962382.jpg';
+import newImage1778002234657 from './assets/images/regenerated_image_1778002234657.jpg';
+import newImage1778002658766 from './assets/images/regenerated_image_1778002658766.jpg';
+import newImage1778003940043 from './assets/images/regenerated_image_1778003940043.jpg';
+import newImage1778003942890 from './assets/images/regenerated_image_1778003942890.jpg';
+import newImage1778003945349 from './assets/images/regenerated_image_1778003945349.jpg';
+import fallbackLogo from './assets/images/logo.png';
 
 import { ServicesList } from './components/ServicesList';
 import { FeatureFlipper } from './components/FeatureFlipper';
@@ -1043,7 +1051,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
         <div className="rounded-3xl overflow-hidden shadow-2xl relative aspect-square md:aspect-auto md:h-[600px]">
           <TiltCard style={{ width: '100%', height: '100%' }}>
             <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" 
+              src={newImage1778001962382} 
               alt="Team working" 
               className="w-full h-full object-cover filter grayscale brightness-75 rounded-3xl"
               referrerPolicy="no-referrer"
@@ -1160,12 +1168,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
          <div className="md:w-1/2 relative hidden md:block overflow-hidden rounded-3xl">
             <div className="absolute inset-0 bg-brand-bg">
                <img 
-                 src={
-                   i === 0 ? "/regenerated_image_1777650472492.png" :
-                   i === 2 ? "/regenerated_image_1777637304636.png" : 
-                   i === 3 ? "/regenerated_image_1777637300875.png" : 
-                   `https://images.unsplash.com/photo-${['1504384308090-c894fdcc538d', '1518770660439-4636190af475', '1451187580459-43490279c0fa', '1554224155-8d0447a858ef', '1561070791-2526d30994b5'][i]}?q=80&w=2070&auto=format&fit=crop`
-                 }
+                 src={i === 0 ? newImage1778002234657 : i === 2 ? newImage1778002658766 : i === 3 ? newImage1778003940043 : i === 4 ? newImage1778003942890 : fallbackLogo}
                  className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
                  alt={title}
                  referrerPolicy="no-referrer"
@@ -1299,7 +1302,7 @@ const NarrativeSection = () => (
           className="w-full h-full absolute inset-0"
           frontContent={
             <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
+              src={newImage1778003945349} 
               alt="Office work" 
               className="w-full h-full object-cover filter grayscale contrast-125"
               referrerPolicy="no-referrer"
@@ -1508,7 +1511,7 @@ ${formData.details}
             {/* Map Placeholder */}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
-                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&w=2066&auto=format&fit=crop" 
+                src={fallbackLogo} 
                 className="w-full h-full object-cover grayscale" 
                 alt="map"
               />
@@ -1564,12 +1567,12 @@ const TrendingProducts = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[
-          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: "https://images.unsplash.com/photo-1558494949-ef0109dec8d8?q=80&w=2012&auto=format&fit=crop" },
-          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop" },
-          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" },
-          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" },
+          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: fallbackLogo },
+          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: fallbackLogo },
+          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: fallbackLogo },
+          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: fallbackLogo },
+          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: fallbackLogo },
+          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: fallbackLogo },
         ].map((prod, i) => (
           <motion.div 
             key={i}
