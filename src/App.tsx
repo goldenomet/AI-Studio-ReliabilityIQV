@@ -98,7 +98,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="relative min-h-screen flex flex-col font-sans">
       <CircleCursor />
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
       

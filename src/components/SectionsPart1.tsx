@@ -5,9 +5,9 @@ import { ArrowRight, Zap, Globe, Cpu } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { FlipCard, TiltCard } from './Cards';
 import { ScramblyText, TextEngine, RealTimeCursors, PixelSnow, SmartTypewriter, TextScroll } from './Effects';
-import fallbackLogo from '../assets/images/logo.png';
-import newImage1778002658766 from '../assets/images/regenerated_image_1778002658766.jpg';
-import newImage1778001962382 from '../assets/images/regenerated_image_1778001962382.jpg';
+import fallbackLogo from '@/src/assets/images/logo.png';
+import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
+import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
 
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (

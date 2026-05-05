@@ -8,13 +8,13 @@ import { SmartTypewriter, TextEngine, PixelSnow, TextScroll } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
 import { ServiceDetail } from './ServiceDetail';
 
-import fallbackLogo from '../assets/images/logo.png';
-import newImage1778002658766 from '../assets/images/regenerated_image_1778002658766.jpg';
-import newImage1778003940043 from '../assets/images/regenerated_image_1778003940043.jpg';
-import newImage1778003942890 from '../assets/images/regenerated_image_1778003942890.jpg';
-import newImage1778003945349 from '../assets/images/regenerated_image_1778003945349.jpg';
-import newImage1778001962382 from '../assets/images/regenerated_image_1778001962382.jpg';
-import newImage1778002234657 from '../assets/images/regenerated_image_1778002234657.jpg';
+import fallbackLogo from '@/src/assets/images/logo.png';
+import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
+import newImage1778003940043 from '@/src/assets/images/regenerated_image_1778003940043.jpg';
+import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003942890.jpg';
+import newImage1778003945349 from '@/src/assets/images/regenerated_image_1778003945349.jpg';
+import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
+import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
 
 export const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
   const [selectedService, setSelectedService] = useState<IServiceDetail | null>(null);
