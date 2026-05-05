@@ -1,14 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+:root {
+  --brand-bg: #E0EDEA;
+  --brand-dark: #084C55;
+  --brand-accent: #0D838E;
+  --brand-accent-light: #129AA6;
+  --brand-card: #FFFFFF;
+  --brand-footer: #084C55;
+}
+
+.dark {
+  --brand-bg: #0A1618;
+  --brand-dark: #E2EFF1;
+  --brand-accent: #14B8C6;
+  --brand-accent-light: #0D838E;
+  --brand-card: #0F2528;
+  --brand-footer: #050E10;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-brand-bg: #E0EDEA;
-  --color-brand-dark: #084C55;
-  --color-brand-accent: #0D838E;
-  --color-brand-accent-light: #129AA6;
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-light: var(--brand-accent-light);
+  --color-brand-card: var(--brand-card);
+  --color-brand-footer: var(--brand-footer);
 }
 
 @layer base {

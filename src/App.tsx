@@ -8,7 +8,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useSc
 import { 
   Menu, X, Cpu, Globe, Zap, FileText, Map as MapIcon, 
   PenTool, ArrowRight, Linkedin, Twitter, Github, 
-  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home
+  Mail, Phone, MapPin, Search, Filter, Star, Info, ArrowUp, Home, Sun, Moon
 } from 'lucide-react';
 
 import logo from '@/src/assets/images/automation.png';
@@ -166,7 +166,7 @@ const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, labe
   </div>
 );
 
-const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurrentPage: (p: string) => void }) => {
+const Navbar = ({ currentPage, setCurrentPage, theme, toggleTheme }: { currentPage: string, setCurrentPage: (p: string) => void, theme: string, toggleTheme: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
@@ -237,9 +237,18 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
           <div className="ml-2 lg:ml-4 mr-1">
             <button 
               onClick={() => setCurrentPage('home')}
-              className="bg-white px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-gray-100 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center"
+              className="bg-brand-card px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
             >
               <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
+            </button>
+          </div>
+          <div className="ml-1">
+            <button
+               onClick={toggleTheme}
+               className="bg-brand-dark/10 hover:bg-brand-dark/20 p-2 rounded-full text-brand-dark transition-all active:scale-90"
+               aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
           </div>
         </div>
@@ -296,6 +305,15 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
                     <img src={logo} alt="logo" className="h-6 w-6 object-contain" />
                   </button>
                 </motion.div>
+                <motion.div variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: -20 } }} transition={{ duration: 0.2 }}>
+                  <button
+                    onClick={toggleTheme}
+                    className="flex items-center justify-between w-full p-4 rounded-2xl bg-brand-dark/5 text-brand-dark font-mono"
+                  >
+                    <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                    {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                  </button>
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>
@@ -306,7 +324,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
 };
 
 const Footer = () => (
-  <footer className="bg-brand-dark text-white pt-20 pb-10">
+  <footer className="bg-brand-footer text-white pt-20 pb-10 transition-colors duration-500">
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
@@ -432,7 +450,7 @@ const ServiceDetailModal = ({
           />
           <motion.div
             layoutId={`service-card-${service.id}`}
-            className="bg-white w-full max-w-4xl h-full max-h-[800px] rounded-[40px] overflow-hidden relative z-10 flex flex-col shadow-2xl"
+            className="bg-brand-card w-full max-w-4xl h-full max-h-[800px] rounded-[40px] overflow-hidden relative z-10 flex flex-col shadow-2xl border border-brand-dark/5"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -1087,7 +1105,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
 };
 
 const MissionSection = () => (
-  <section className="bg-brand-dark text-white py-32 px-6 relative overflow-hidden">
+  <section className="bg-brand-footer text-white py-32 px-6 relative overflow-hidden transition-colors duration-500">
     {/* Grid Pattern */}
     <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
     
@@ -1148,7 +1166,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
            opacity,
            transformOrigin: "center center"
          }}
-         className="bg-white rounded-[30px] md:rounded-[40px] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col md:flex-row gap-6 w-full max-w-4xl h-auto min-h-[280px] md:h-[350px] relative overflow-hidden group transition-all duration-500"
+         className="bg-brand-card rounded-[30px] md:rounded-[40px] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col md:flex-row gap-6 w-full max-w-4xl h-auto min-h-[280px] md:h-[350px] relative overflow-hidden group transition-all duration-500"
        >
          <div className="md:w-1/2 flex flex-col justify-center h-full z-10 w-full">
             <div className="p-3 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-4 md:mb-6 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
@@ -1314,7 +1332,7 @@ const NarrativeSection = () => (
             />
           }
           backContent={
-             <div className="w-full h-full bg-brand-dark flex flex-col items-center justify-center p-8 text-center text-white">
+             <div className="w-full h-full bg-brand-footer flex flex-col items-center justify-center p-8 text-center text-white transition-colors duration-500">
                 <Star size={32} className="text-brand-accent mb-4" />
                 <h3 className="text-xl font-mono font-bold mb-3">Our Core Philosophy</h3>
                 <p className="text-white/80 font-mono text-xs leading-relaxed max-w-[200px] mb-16">Building systems that simply perform, without compromise.</p>
@@ -1423,7 +1441,7 @@ ${formData.details}
   return (
     <section id="contact-section" className="pb-32 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-white rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-brand-dark/10">
+        <div className="bg-brand-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-brand-dark/10">
           {/* Form */}
           <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-brand-dark/10">
             <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Start a Conversation</div>
@@ -1441,7 +1459,7 @@ ${formData.details}
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="John" 
-                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-white transition-all text-brand-dark placeholder:text-brand-dark/40`}
+                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
                   />
                   {errors.firstName && <p className="text-red-500 text-[10px] mt-1">{errors.firstName}</p>}
                 </div>
@@ -1453,7 +1471,7 @@ ${formData.details}
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Doe" 
-                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-white transition-all text-brand-dark placeholder:text-brand-dark/40`}
+                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
                   />
                   {errors.lastName && <p className="text-red-500 text-[10px] mt-1">{errors.lastName}</p>}
                 </div>
@@ -1467,7 +1485,7 @@ ${formData.details}
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@company.com" 
-                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-white transition-all text-brand-dark placeholder:text-brand-dark/40`}
+                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
                 />
                 {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
               </div>
@@ -1478,7 +1496,7 @@ ${formData.details}
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full bg-brand-bg p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-transparent focus:border-brand-accent/20 focus:bg-white transition-all text-brand-dark"
+                  className="w-full bg-brand-bg p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-transparent focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark"
                 >
                   <option>Web Operations</option>
                   <option>AI Automations</option>
@@ -1496,7 +1514,7 @@ ${formData.details}
                   onChange={handleChange}
                   rows={4} 
                   placeholder="Tell us about your technical challenges..." 
-                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-white transition-all resize-none text-brand-dark placeholder:text-brand-dark/40`}
+                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all resize-none text-brand-dark placeholder:text-brand-dark/40`}
                 ></textarea>
                 {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
               </div>
@@ -1584,7 +1602,7 @@ const TrendingProducts = () => (
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-white rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500"
+            className="bg-brand-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-brand-dark/5"
           >
             <div className="aspect-video relative overflow-hidden">
                <img 
@@ -1648,6 +1666,25 @@ const ScrollToTopButton = () => {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   // Scroll to top on page change
   useEffect(() => {
@@ -1690,7 +1727,7 @@ export default function App() {
             className="pt-24"
           >
             <FeatureFlipper onNavigate={setCurrentPage} />
-            <div className="bg-brand-dark text-white py-32 px-6 text-center">
+            <div className="bg-brand-footer text-white py-32 px-6 text-center transition-colors duration-500">
               <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
               <button 
                 onClick={() => setCurrentPage('contact')}
@@ -1748,7 +1785,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <CircleCursor />
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
       
       <main className="flex-grow relative">
         <AnimatePresence mode="wait">
