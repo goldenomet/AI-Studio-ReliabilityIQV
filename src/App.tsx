@@ -140,15 +140,6 @@ const CircleCursor = () => {
   );
 };
 
-const Logo = () => (
-  <div className="flex items-center gap-2">
-    <img src={logo} alt="logo" className="h-[36px] w-[36px] lg:h-[50px] lg:w-[50px] object-contain" />
-    <span className="font-mono text-base md:text-sm lg:text-xl font-bold tracking-tight text-brand-dark hidden sm:block">
-      ReliabilityIQ Ventures
-    </span>
-  </div>
-);
-
 const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
   <div className="relative group">
     <a href={href} className="hover:text-brand-accent transition-colors block">
@@ -186,16 +177,70 @@ const Navbar = ({ currentPage, setCurrentPage, theme, toggleTheme }: { currentPa
   ];
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-md ${isScrolled ? 'bg-black/10 py-3 shadow-sm border-b border-brand-dark/5' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10">
-        <button onClick={() => setCurrentPage('home')} className="cursor-pointer">
-          <Logo />
-        </button>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10 h-10 lg:h-12">
+        <div /> {/* Spacer for centering when logo is gone */}
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-1 lg:gap-2 bg-brand-dark/5 p-1 lg:p-1.5 rounded-full relative">
+        <div className="hidden lg:flex items-center gap-1.5 lg:gap-3 p-1.5 rounded-full absolute left-1/2 -translate-x-1/2 bg-black/20 backdrop-blur-md border border-white/10 shadow-lg transition-all duration-500">
           <LayoutGroup>
-            {navItems.map((item) => {
+            {navItems.slice(0, 3).map((item) => {
+              const isActive = currentPage === item.id;
+              const isHovered = hoveredNav === item.id;
+              const showText = isActive || isHovered;
+              
+              return (
+                <button
+                  key={item.id}
+                  onMouseEnter={() => setHoveredNav(item.id)}
+                  onMouseLeave={() => setHoveredNav(null)}
+                  onClick={() => setCurrentPage(item.id)}
+                  className={`relative flex items-center justify-center font-mono text-xs lg:text-sm tracking-wide transition-all z-10 rounded-full h-8 lg:h-10 ${isActive ? 'text-white' : 'text-brand-dark/70 hover:text-brand-dark'}`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="liquid-nav-pill"
+                      className="absolute inset-0 bg-brand-accent rounded-full -z-10"
+                      transition={{ type: "spring", stiffness: 450, damping: 30, mass: 1 }}
+                    />
+                  )}
+                  <motion.div layout className="flex items-center h-full px-2 lg:px-4" transition={{ type: "spring", stiffness: 450, damping: 30, mass: 1 }}>
+                    <item.icon className="shrink-0 w-4 h-4 lg:w-[18px] lg:h-[18px]" />
+                    <motion.div
+                      animate={{ 
+                        width: showText ? "auto" : 0, 
+                        opacity: showText ? 1 : 0,
+                        marginLeft: showText ? 8 : 0
+                      }}
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 450, damping: 30, mass: 1 }}
+                      className="overflow-hidden whitespace-nowrap"
+                    >
+                      {item.name}
+                    </motion.div>
+                  </motion.div>
+                </button>
+              );
+            })}
+
+            {/* Utilities in the middle */}
+            <div className="flex items-center gap-1.5 lg:gap-3 mx-3 lg:mx-4">
+              <button 
+                onClick={() => setCurrentPage('home')}
+                className="bg-brand-card px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
+              >
+                <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
+              </button>
+              <button
+                 onClick={toggleTheme}
+                 className="ml-[25px] bg-brand-dark/10 hover:bg-brand-dark/20 p-2 rounded-full text-brand-dark transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center"
+                 aria-label="Toggle theme"
+              >
+                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
+            </div>
+
+            {navItems.slice(3).map((item) => {
               const isActive = currentPage === item.id;
               const isHovered = hoveredNav === item.id;
               const showText = isActive || isHovered;
@@ -234,23 +279,6 @@ const Navbar = ({ currentPage, setCurrentPage, theme, toggleTheme }: { currentPa
               );
             })}
           </LayoutGroup>
-          <div className="ml-2 lg:ml-4 mr-1">
-            <button 
-              onClick={() => setCurrentPage('home')}
-              className="bg-brand-card px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
-            >
-              <img src={logo} alt="logo" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
-            </button>
-          </div>
-          <div className="ml-1">
-            <button
-               onClick={toggleTheme}
-               className="bg-brand-dark/10 hover:bg-brand-dark/20 p-2 rounded-full text-brand-dark transition-all active:scale-90"
-               aria-label="Toggle theme"
-            >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-          </div>
         </div>
 
         {/* Mobile Toggle */}
@@ -1025,8 +1053,16 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 rounded-full text-brand-accent font-mono text-xs mb-6">
-          <span className="w-1.5 h-1.5 bg-brand-accent rounded-full"></span>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-mono text-sm font-bold text-brand-accent mb-3 uppercase tracking-[0.2em]"
+        >
+          ReliabilityIQ Ventures
+        </motion.div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 rounded-full text-brand-dark/80 font-mono text-xs mb-6 border border-brand-accent/10">
+          <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse"></span>
           Lagos to London — IT Infrastructure for Global Scale
         </div>
         <ScramblyText 
