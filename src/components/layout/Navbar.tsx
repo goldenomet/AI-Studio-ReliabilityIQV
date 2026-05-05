@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
 import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon } from 'lucide-react';
-import logo from '../../assets/images/logo.png';
+import logo from '@/src/assets/images/logo.png';
 
 export const Navbar = ({ 
   currentPage, 

@@ -40,7 +40,7 @@ export const CircleCursor = () => {
       animate={{
         width: isHovering ? 48 : 32,
         height: isHovering ? 48 : 32,
-        backgroundColor: isHovering ? "white" : "transparent"
+        backgroundColor: isHovering ? "white" : "rgba(255, 255, 255, 0)"
       }}
       transition={{
         width: { type: "spring", stiffness: 300, damping: 20 },

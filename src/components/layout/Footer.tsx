@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Linkedin, Twitter, Github } from 'lucide-react';
-import logo from '../../assets/images/logo.png';
+import logo from '@/src/assets/images/logo.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
   <div className="relative group">
