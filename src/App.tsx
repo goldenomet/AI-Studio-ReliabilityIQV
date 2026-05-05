@@ -1053,7 +1053,7 @@ const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
             <img 
               src={newImage1778001962382} 
               alt="Team working" 
-              className="w-full h-full object-cover filter grayscale brightness-75 rounded-3xl"
+              className="w-full h-full object-cover rounded-3xl"
               referrerPolicy="no-referrer"
             />
           </TiltCard>
@@ -1169,7 +1169,7 @@ const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon
             <div className="absolute inset-0 bg-brand-bg">
                <img 
                  src={i === 0 ? newImage1778002234657 : i === 2 ? newImage1778002658766 : i === 3 ? newImage1778003940043 : i === 4 ? newImage1778003942890 : fallbackLogo}
-                 className="w-full h-full object-cover filter grayscale contrast-125 brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
+                 className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                  alt={title}
                  referrerPolicy="no-referrer"
                />
@@ -1304,7 +1304,7 @@ const NarrativeSection = () => (
             <img 
               src={newImage1778003945349} 
               alt="Office work" 
-              className="w-full h-full object-cover filter grayscale contrast-125"
+              className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
           }
@@ -1512,7 +1512,7 @@ ${formData.details}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
                 src={fallbackLogo} 
-                className="w-full h-full object-cover grayscale" 
+                className="w-full h-full object-cover opacity-20" 
                 alt="map"
               />
             </div>
@@ -1585,7 +1585,7 @@ const TrendingProducts = () => (
                <img 
                 src={prod.img} 
                 alt={prod.title} 
-                className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
                 referrerPolicy="no-referrer"
               />
                <div className="absolute top-4 right-4 bg-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
