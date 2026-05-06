@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { CircleCursor } from './components/CircleCursor';
@@ -113,6 +114,7 @@ export default function App() {
 
       <Footer />
       <ScrollToTopButton />
+      <Analytics />
     </div>
   );
 }
