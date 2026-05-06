@@ -94,7 +94,7 @@ export const TiltCard = ({ children, style }: { children: React.ReactNode; style
 
 export const StackCard: React.FC<StackCardProps> = ({ i, title, description, icon: Icon, image, progress, range, onAction }) => {
   const scale = useTransform(progress, range, [1, 0.9 + (i * 0.02)]);
-  const opacity = useTransform(progress, range, [1, 0.3 + (i * 0.1)]);
+  // Keep opacity at 1 so cards are solidly colored and not transparent when stacking
   
   return (
     <div className="h-screen sticky top-0 flex items-center justify-center py-16">
@@ -108,10 +108,9 @@ export const StackCard: React.FC<StackCardProps> = ({ i, title, description, ico
          transition={{ type: "spring", stiffness: 400, damping: 25 }}
          style={{ 
            scale, 
-           opacity,
-           transformOrigin: "center center"
+           transformOrigin: "center top"
          }}
-         className="bg-brand-card rounded-[30px] md:rounded-[40px] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col md:flex-row gap-6 w-full max-w-4xl h-auto min-h-[280px] md:h-[350px] relative overflow-hidden group transition-all duration-500"
+         className="bg-brand-card p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-brand-dark/5 flex flex-col md:flex-row gap-6 w-full max-w-4xl h-auto min-h-[280px] md:h-[350px] relative overflow-hidden group transition-colors duration-500 rounded-[30px] md:rounded-[40px] isolate"
        >
          <div className="md:w-1/2 flex flex-col justify-center h-full z-10 w-full">
             <div className="p-3 bg-brand-accent/10 rounded-2xl text-brand-accent w-fit mb-4 md:mb-6 group-hover:bg-brand-accent group-hover:text-white transition-all duration-500">
