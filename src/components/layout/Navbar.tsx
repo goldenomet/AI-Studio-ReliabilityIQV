@@ -98,7 +98,7 @@ export const Navbar = ({
             <div className="flex items-center gap-1.5 lg:gap-3 mx-3 lg:mx-4">
               <button 
                 onClick={() => setCurrentPage('home')}
-                className="bg-brand-card px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
+                className="bg-[#e0edea] px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-brand-accent/10 transition-all shadow-md active:scale-95 h-8 lg:h-10 flex items-center justify-center border border-brand-dark/5"
               >
                 <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
               </button>

@@ -7,15 +7,146 @@ import { FeatureFlipper } from './components/FeatureFlipper';
 import { ServiceDetail } from './components/ServiceDetail';
 import { HeroSection, MissionSection } from './components/SectionsPart1';
 import { CompetenciesSection, NarrativeSection, ContactSection, TrendingProducts, ScrollToTopButton } from './components/SectionsPart2';
+import { Preloader } from './components/Preloader';
+import { OmniReveal } from './components/OmniReveal';
+
+import rufusImg from './assets/images/Rufus portfolio.jpg';
+import theophilusImg from './assets/images/Theo portfolio.jpg';
+import kikaImg from './assets/images/Kika portfolio.jpg';
+
+const FOUNDERS = [
+  {
+    name: "Rufus",
+    image: rufusImg
+  },
+  {
+    name: "Theophilus",
+    image: theophilusImg
+  },
+  {
+    name: "Kika",
+    image: kikaImg
+  }
+];
+
+const FounderToggle = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleStackClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % FOUNDERS.length);
+  };
+
+  // Modern background colors for non-front cards
+  const bgColors = ['bg-[#4c1d95]', 'bg-[#1e1b4b]', 'bg-[#7f1d1d]'];
+  const currentFounder = FOUNDERS[currentIndex];
+
+  return (
+    <span 
+      className="inline-block relative z-20 align-middle w-[150px] h-[100px] md:w-[220px] md:h-[145px] ml-1 pt-[103px] pb-[23px] px-0 cursor-pointer group transition-transform duration-300 ease-out hover:scale-[1.03]"
+      onClick={handleStackClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      title="Click to see more of us"
+    >
+      {/* Floating Name Pill - Positioned outside and above the stack with sufficient gap */}
+      <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[calc(100%+20px)] md:-translate-y-[calc(100%+32px)] z-50 pointer-events-none">
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentFounder.name}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="bg-white/98 dark:bg-brand-dark/98 backdrop-blur-sm px-3 py-1 rounded-[8px] shadow-sm border border-brand-accent/20 whitespace-nowrap ring-1 ring-white/10"
+          >
+            <span className="text-brand-dark dark:text-brand-bg text-[12px] md:text-xs font-medium tracking-tight leading-none">
+              {currentFounder.name}
+            </span>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Soft Background Pattern behind the stack */}
+      <div className="absolute -inset-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(var(--color-brand-accent)_0.8px,transparent_0.8px)] [background-size:12px_12px] opacity-20" />
+      </div>
+
+      {FOUNDERS.map((founder, index) => {
+        const relativeIndex = (index - currentIndex + FOUNDERS.length) % FOUNDERS.length;
+        
+        let zIndex = 30 - relativeIndex;
+        let yOffset = relativeIndex * -8;
+        let xOffset = 0;
+        let rotate = 0;
+        let scale = 1;
+
+        if (relativeIndex === 1) {
+          xOffset = 18;
+          rotate = 5;
+          scale = 0.94;
+        } else if (relativeIndex === 2) {
+          xOffset = -18;
+          rotate = -5;
+          scale = 0.94;
+        }
+
+        const isFront = relativeIndex === 0;
+
+        return (
+          <motion.div
+            key={founder.name}
+            animate={{ 
+              y: yOffset, 
+              x: xOffset, 
+              rotate: rotate, 
+              scale: scale, 
+              zIndex: zIndex 
+            }}
+            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            className={`absolute inset-0 rounded-2xl ring-2 transition-shadow duration-300 ${
+              isFront 
+                ? "bg-white dark:bg-brand-dark ring-white dark:ring-white/20 shadow-2xl shadow-black/20 group-hover:shadow-black/30" 
+                : `${bgColors[index % bgColors.length]} ring-white/30 dark:ring-white/10 shadow-lg`
+            } origin-bottom pointer-events-none overflow-hidden`}
+          >
+            <img 
+              src={founder.image} 
+              className={`w-full h-full object-cover transition-all duration-500 ${
+                !isFront ? "opacity-30 grayscale blur-[1px]" : "opacity-100"
+              }`} 
+              alt={founder.name} 
+            />
+            
+            {/* Glossy overlay for front card */}
+            {isFront && (
+              <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent pointer-events-none" />
+            )}
+          </motion.div>
+        );
+      })}
+    </span>
+  );
+};
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'light';
     }
     return 'light';
   });
+
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [loading]);
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -47,7 +178,47 @@ export default function App() {
         );
       case 'about':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
+            <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-brand-bg/80 dark:bg-brand-dark/80 overflow-hidden flex flex-col justify-end pb-8">
+              <div className="absolute inset-0 z-0 flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:mix-blend-overlay mix-blend-multiply opacity-50 grayscale" />
+              </div>
+              
+              <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2 mt-auto">
+                   <h1 className="text-6xl md:text-[100px] lg:text-[130px] leading-[0.9] font-medium text-brand-dark dark:text-brand-bg tracking-tight">About Us</h1>
+                   <p className="text-lg md:text-xl text-brand-dark/80 dark:text-brand-bg/80 max-w-[360px] pb-2 md:pb-6 leading-relaxed">
+                     ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.
+                   </p>
+                </div>
+                
+                <div className="flex flex-col items-center justify-center pt-8 pb-4">
+                  <div className="text-center text-sm md:text-base text-brand-dark/60 dark:text-brand-bg/60 font-medium animate-pulse">
+                    Scroll down <span className="ml-2">↓</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section className="w-full py-24 md:py-48 px-6 bg-brand-bg relative z-10 flex flex-col items-center">
+               <div className="max-w-5xl mx-auto">
+                 <OmniReveal 
+                   ContainerTag="h2"
+                   className="text-2xl md:text-4xl lg:text-[40px] font-medium text-brand-dark leading-[1.4] tracking-tight"
+                   text="We provide innovative [] services that combine technology, research, and operational intelligence. Founded by [] in 2026, our focus is on delivering accurate insights, structured data solutions, and digital systems that support smarter decision-making. As a growing company, we are committed to helping businesses and organizations transform information into actionable [] through modern tools, analysis, and efficient workflows. Now onboarding a limited number of early clients. Only 2/6 July spots left — []"
+                   components={[
+                     <span key="1" className="bg-brand-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
+                     <FounderToggle key="2" />,
+                     <span key="3" className="border-2 border-brand-accent text-brand-accent px-3 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
+                     <button key="4" className="bg-brand-dark text-brand-bg px-4 py-1 mt-2 rounded-full text-xl md:text-3xl inline-flex font-mono translate-y-[0.1em] cursor-pointer hover:bg-brand-accent transition-colors hover:scale-105 active:scale-95 shadow-md">Claim Your Spot.</button>
+                   ]}
+                   scrollHeight={400}
+                   initialOpacity={0.05}
+                   initialBlur={12}
+                 />
+               </div>
+            </section>
+
             <NarrativeSection />
             <MissionSection />
           </motion.div>
@@ -98,21 +269,27 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans">
-      <CircleCursor />
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
-      
-      <main className="flex-grow relative">
-        <AnimatePresence mode="wait">
-          {renderPage()}
-        </AnimatePresence>
-        {currentPage !== 'contact' && (
-          <ContactSection />
-        )}
-      </main>
+    <>
+      <AnimatePresence mode="wait">
+        {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
 
-      <Footer />
-      <ScrollToTopButton />
-    </div>
+      <div className={`relative min-h-screen flex flex-col font-sans transition-opacity duration-1000 ${loading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
+        <CircleCursor />
+        <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
+        
+        <main className="flex-grow relative">
+          <AnimatePresence mode="wait">
+            {renderPage()}
+          </AnimatePresence>
+          {currentPage !== 'contact' && (
+            <ContactSection />
+          )}
+        </main>
+
+        <Footer />
+        <ScrollToTopButton />
+      </div>
+    </>
   );
 }
