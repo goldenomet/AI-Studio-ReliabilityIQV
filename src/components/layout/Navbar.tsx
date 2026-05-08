@@ -68,7 +68,7 @@ export const Navbar = ({
                   onMouseEnter={() => setHoveredNav(item.id)}
                   onMouseLeave={() => setHoveredNav(null)}
                   onClick={() => setCurrentPage(item.id)}
-                  className={`relative flex items-center justify-center font-mono text-xs lg:text-sm tracking-wide transition-all z-10 rounded-full h-8 lg:h-10 ${isActive ? (theme === 'dark' ? 'text-white text-glow font-bold' : 'text-brand-dark font-bold') : (theme === 'dark' ? 'text-white/60 hover:text-white' : 'text-brand-dark/60 hover:text-brand-dark')}`}
+                  className={`relative flex items-center justify-center font-mono text-xs lg:text-sm tracking-wide transition-all z-10 rounded-full h-8 lg:h-10 ${isActive ? (theme === 'dark' ? 'text-white text-glow font-bold' : 'text-brand-dark font-bold') : (theme === 'dark' ? 'text-white/80 hover:text-white' : 'text-brand-dark/80 hover:text-brand-dark')}`}
                 >
                   {isActive && (
                     <motion.div
@@ -124,7 +124,7 @@ export const Navbar = ({
                   onMouseEnter={() => setHoveredNav(item.id)}
                   onMouseLeave={() => setHoveredNav(null)}
                   onClick={() => setCurrentPage(item.id)}
-                  className={`relative flex items-center justify-center font-mono text-xs lg:text-sm tracking-wide transition-all z-10 rounded-full h-8 lg:h-10 ${isActive ? (theme === 'dark' ? 'text-white text-glow font-bold' : 'text-brand-dark font-bold') : (theme === 'dark' ? 'text-white/60 hover:text-white' : 'text-brand-dark/60 hover:text-brand-dark')}`}
+                  className={`relative flex items-center justify-center font-mono text-xs lg:text-sm tracking-wide transition-all z-10 rounded-full h-8 lg:h-10 ${isActive ? (theme === 'dark' ? 'text-white text-glow font-bold' : 'text-brand-dark font-bold') : (theme === 'dark' ? 'text-white/80 hover:text-white' : 'text-brand-dark/80 hover:text-brand-dark')}`}
                 >
                   {isActive && (
                     <motion.div
@@ -156,7 +156,7 @@ export const Navbar = ({
 
         {/* Mobile Toggle Pill */}
         <div className={`lg:hidden flex items-center crystal-glass rounded-full p-1.5 gap-1.5 transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-           <button className={`flex items-center gap-2 pl-3 pr-4 py-2 rounded-full hover:bg-white/10 transition-colors ${theme === 'dark' ? 'text-white' : 'text-brand-dark'}`} onClick={() => setMobileMenuOpen(true)}>
+                   <button className={`flex items-center gap-2 pl-3 pr-4 py-2 rounded-full hover:bg-white/10 transition-colors ${theme === 'dark' ? 'text-white' : 'text-brand-dark font-semibold'}`} onClick={() => setMobileMenuOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 9h16M4 15h16" /></svg>
               <span className="text-base font-medium">Menu</span>
            </button>
@@ -210,7 +210,7 @@ export const Navbar = ({
 
                 {/* Links Content */}
                 <div className="flex-1 overflow-y-auto w-full max-w-full custom-scrollbar pb-10">
-                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/50' : 'text-brand-dark/50'}`}>Menu</div>
+                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/70' : 'text-brand-dark/70'}`}>Menu</div>
                    <div className="flex flex-col gap-5 mb-8">
                        {navItems.map(item => (
                            <button 
@@ -225,14 +225,14 @@ export const Navbar = ({
 
                    <hr className={theme === 'dark' ? 'border-white/10 my-8' : 'border-brand-dark/10 my-8'} />
 
-                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/50' : 'text-brand-dark/50'}`}>Other</div>
+                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/70' : 'text-brand-dark/70'}`}>Other</div>
                    <div className="flex flex-col gap-4 mb-8">
                        <button className={`text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 ${theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-brand-dark/70 hover:text-brand-dark'}`}>Privacy Policy</button>
                        <button className={`text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 ${theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-brand-dark/70 hover:text-brand-dark'}`}>Terms of Service</button>
                        <button className={`text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 ${theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-brand-dark/70 hover:text-brand-dark'}`}>Cookie Policy</button>
                    </div>
 
-                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/50' : 'text-brand-dark/50'}`}>Social media</div>
+                   <div className={`text-[12px] mb-4 font-medium uppercase tracking-wider ${theme === 'dark' ? 'text-white/70' : 'text-brand-dark/70'}`}>Social media</div>
                    <div className="flex flex-col gap-4 mb-4">
                        <button className={`text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 ${theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-brand-dark/70 hover:text-brand-dark'}`}>Instagram</button>
                    </div>
@@ -240,7 +240,7 @@ export const Navbar = ({
 
                 {/* Footer Buttons */}
                 <div className="mt-auto pt-6 pb-6 flex gap-2">
-                    <MagneticGlowButton className="flex-1 !py-3.5 text-sm shadow-xl" onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}>
+                    <MagneticGlowButton className="flex-1 !py-3.5 text-sm shadow-xl !bg-[#418596]" onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}>
                         Get started
                     </MagneticGlowButton>
                 </div>

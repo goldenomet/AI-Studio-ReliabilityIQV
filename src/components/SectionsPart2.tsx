@@ -470,7 +470,7 @@ export const ScrollToTopButton = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-4 crystal-button text-white shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer"
+          className="fixed bottom-6 right-6 z-50 p-4 crystal-button text-white shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer !bg-[#338f82]"
         >
           <ArrowUp size={24} />
         </motion.button>
