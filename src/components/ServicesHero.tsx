@@ -112,8 +112,8 @@ export const ServicesHero = () => {
         >
           <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(5px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }} className="inline-block mr-[0.2em]">Services</motion.span>
           <br className="hidden md:block" />
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(5px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }} className="inline-block mr-[0.2em] text-brand-dark/50">that</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(5px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }} className="inline-block text-brand-dark/50">work.</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(5px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }} className="inline-block mr-[0.2em] text-brand-accent">that</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(5px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }} className="inline-block text-brand-accent">work.</motion.span>
         </motion.h1>
         
         <motion.p 

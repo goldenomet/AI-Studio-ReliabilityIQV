@@ -48,14 +48,14 @@ export const MagneticGlowButton: React.FC<{
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`relative overflow-hidden group crystal-button px-8 py-3 text-white font-mono text-sm uppercase tracking-wide border border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),0_20_40px_rgba(0,0,0,0.35)] ${className}`}
+      className={`relative overflow-hidden group crystal-button px-8 py-3 text-white font-mono text-sm uppercase tracking-wide border border-white/20 shadow-xl ${className}`}
       style={{ transformStyle: "preserve-3d" }}
     >
       <div 
         ref={glowRef}
         className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[inherit]"
         style={{
-          background: `radial-gradient(120px circle at var(--x) var(--y), rgba(255,255,255,0.4), transparent 40%)`
+          background: `radial-gradient(120px circle at var(--x) var(--y), ${document.documentElement.classList.contains('dark') ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.1)'}, transparent 40%)`
         }}
       />
       <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-white/20 to-transparent pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity" />

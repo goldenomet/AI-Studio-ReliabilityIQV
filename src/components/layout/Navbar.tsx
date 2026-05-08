@@ -100,7 +100,7 @@ export const Navbar = ({
             <div className="flex items-center gap-1.5 lg:gap-3 mx-3 lg:mx-4">
               <button 
                 onClick={() => setCurrentPage('home')}
-                className={`bg-white/10 backdrop-blur-md px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-white/20 transition-all active:scale-95 h-8 lg:h-10 flex items-center justify-center border ${theme === 'dark' ? 'border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]' : 'border-brand-dark/10 shadow-sm'}`}
+                className={`bg-white/10 backdrop-blur-[40px] px-2 py-1 lg:py-2 rounded-full font-mono hover:bg-white/20 transition-all active:scale-95 h-8 lg:h-10 flex items-center justify-center border ${theme === 'dark' ? 'border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]' : 'border-brand-dark/10 shadow-sm'}`}
               >
                 <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
               </button>
@@ -190,7 +190,7 @@ export const Navbar = ({
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`relative w-[220px] max-w-[85vw] h-[calc(100vh-2rem)] my-4 mr-4 backdrop-blur-[24px] border rounded-[32px] overflow-hidden flex flex-col shadow-2xl text-[25px] font-[Arial] font-bold leading-[22px] ${theme === 'dark' ? 'bg-white/5 border-white/20' : 'bg-white/80 border-brand-dark/10'}`}
+              className={`relative w-[220px] max-w-[85vw] h-[calc(100vh-2rem)] my-4 mr-4 backdrop-blur-[40px] border rounded-[32px] overflow-hidden flex flex-col shadow-2xl text-[25px] font-[Arial] font-bold leading-[22px] ${theme === 'dark' ? 'bg-white/5 border-white/20' : 'bg-white/80 border-brand-dark/10'}`}
             >
               <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
               <div className="p-4 flex flex-col h-full relative z-10">

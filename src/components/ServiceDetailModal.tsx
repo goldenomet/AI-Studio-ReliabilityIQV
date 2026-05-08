@@ -61,7 +61,7 @@ export const ServiceDetailModal = ({
           >
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-8 md:right-8 z-20 p-4 crystal-button text-white shadow-xl"
+              className="absolute top-4 right-4 md:top-8 md:right-8 z-20 p-4 crystal-button text-brand-dark dark:text-white shadow-xl"
             >
               <X size={24} />
             </button>

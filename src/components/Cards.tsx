@@ -129,7 +129,7 @@ export const StackCard: React.FC<StackCardProps> = ({ i, title, description, ico
          </div>
          
          <div className="md:w-1/2 relative overflow-hidden rounded-3xl h-64 md:h-auto">
-            <div className="absolute inset-0 bg-brand-bg">
+            <div className="absolute inset-0 bg-black">
                <img 
                  src={image}
                  loading="lazy"
