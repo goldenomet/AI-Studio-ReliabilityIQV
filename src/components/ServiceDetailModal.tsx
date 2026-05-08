@@ -61,7 +61,7 @@ export const ServiceDetailModal = ({
           >
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-8 md:right-8 z-20 p-3 md:p-4 bg-brand-bg rounded-full hover:bg-brand-accent hover:text-white transition-all shadow-lg"
+              className="absolute top-4 right-4 md:top-8 md:right-8 z-20 p-4 crystal-button text-white shadow-xl"
             >
               <X size={24} />
             </button>
@@ -156,15 +156,15 @@ export const ServiceDetailModal = ({
 
             <div className="p-6 md:p-8 bg-brand-bg border-t border-brand-dark/5 flex flex-col sm:flex-row justify-between items-center gap-4">
               <span className="text-[10px] font-mono text-brand-dark/40 uppercase tracking-widest text-center sm:text-left">ReliabilityIQ Ventures – Specialized Services</span>
-              <button 
+              <MagneticGlowButton 
                 onClick={() => {
                   onClose();
                   onContact();
                 }}
-                className="bg-brand-dark text-white px-8 py-4 rounded-full font-mono text-sm font-bold hover:bg-brand-accent transition-all shadow-xl w-full sm:w-auto"
+                className="!py-4 w-full sm:w-auto"
               >
                 Learn More
-              </button>
+              </MagneticGlowButton>
             </div>
           </motion.div>
         </div>

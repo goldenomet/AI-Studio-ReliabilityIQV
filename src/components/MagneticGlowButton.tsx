@@ -48,7 +48,7 @@ export const MagneticGlowButton: React.FC<{
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`relative overflow-hidden group ${className}`}
+      className={`relative overflow-hidden group crystal-button px-8 py-3 text-white font-mono text-sm uppercase tracking-wide border border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),0_20_40px_rgba(0,0,0,0.35)] ${className}`}
       style={{ transformStyle: "preserve-3d" }}
     >
       <div 
@@ -58,7 +58,8 @@ export const MagneticGlowButton: React.FC<{
           background: `radial-gradient(120px circle at var(--x) var(--y), rgba(255,255,255,0.4), transparent 40%)`
         }}
       />
-      <span className="relative z-10 flex items-center justify-center pointer-events-none">{children}</span>
+      <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-white/20 to-transparent pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity" />
+      <span className="relative z-10 flex items-center justify-center pointer-events-none text-glow">{children}</span>
     </motion.button>
   );
 };

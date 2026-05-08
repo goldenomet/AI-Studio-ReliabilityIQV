@@ -4,11 +4,13 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { CircleCursor } from './components/CircleCursor';
 import { FeatureFlipper } from './components/FeatureFlipper';
+import { ServicesHero } from './components/ServicesHero';
 import { ServiceDetail } from './components/ServiceDetail';
 import { HeroSection, MissionSection } from './components/SectionsPart1';
 import { CompetenciesSection, NarrativeSection, ContactSection, TrendingProducts, ScrollToTopButton } from './components/SectionsPart2';
 import { Preloader } from './components/Preloader';
 import { OmniReveal } from './components/OmniReveal';
+import { MagneticGlowButton } from './components/MagneticGlowButton';
 
 import rufusImg from './assets/images/Rufus portfolio.jpg';
 import theophilusImg from './assets/images/Theo portfolio.jpg';
@@ -210,7 +212,7 @@ export default function App() {
                      <span key="1" className="bg-brand-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
                      <FounderToggle key="2" />,
                      <span key="3" className="border-2 border-brand-accent text-brand-accent px-3 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
-                     <button key="4" className="bg-brand-dark text-brand-bg px-4 py-1 mt-2 rounded-full text-xl md:text-3xl inline-flex font-mono translate-y-[0.1em] cursor-pointer hover:bg-brand-accent transition-colors hover:scale-105 active:scale-95 shadow-md">Claim Your Spot.</button>
+                     <MagneticGlowButton key="4" onClick={() => setCurrentPage('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
                    ]}
                    scrollHeight={400}
                    initialOpacity={0.05}
@@ -225,16 +227,18 @@ export default function App() {
         );
       case 'services':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
+            <ServicesHero />
             <FeatureFlipper onNavigate={setCurrentPage} />
-            <div className="bg-brand-footer text-white py-32 px-6 text-center transition-colors duration-500">
+            <div className="bg-brand-footer text-white py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-white/10" />
               <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
-              <button 
+              <MagneticGlowButton 
                 onClick={() => setCurrentPage('contact')}
-                className="bg-brand-accent text-white px-12 py-5 rounded-full text-xl font-bold font-mono hover:bg-brand-accent-light transition-all"
+                className="text-xl !px-16 !py-6"
               >
                 Learn More
-              </button>
+              </MagneticGlowButton>
             </div>
           </motion.div>
         );

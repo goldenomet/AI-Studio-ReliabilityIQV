@@ -33,7 +33,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
         </div>
         <ScramblyText 
           texts={[
-            "Optimizing African Tech Giants.",
+            "We optimize digital platforms.",
             "Scaling Global Digital Infrastructure.",
             "Powering Next-Gen Web Operations."
           ]}
@@ -48,18 +48,17 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono min-h-[140px] md:min-h-[120px]"
         />
         <div className="flex flex-wrap gap-4 font-mono">
-          <button 
+          <MagneticGlowButton 
             onClick={() => onNavigate('services')}
-            className="bg-brand-accent text-white px-8 py-3 rounded-full hover:bg-brand-accent-light transition-all shadow-lg hover:shadow-brand-accent/20"
           >
             Learn More
-          </button>
-          <button 
+          </MagneticGlowButton>
+          <MagneticGlowButton 
             onClick={() => onNavigate('about')}
-            className="border-2 border-brand-accent/20 px-8 py-3 rounded-full hover:bg-brand-accent/5 transition-all text-brand-dark"
+            className="bg-white/5 border-white/20 text-white"
           >
             Our Story
-          </button>
+          </MagneticGlowButton>
         </div>
       </motion.div>
 
@@ -85,7 +84,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                 <Cpu size={16} />
                 <span className="font-mono text-[10px] uppercase tracking-tighter">AI Automations</span>
              </div>
-             <div className="text-3xl font-bold font-mono">500+</div>
+             <div className="text-3xl font-bold font-mono">20+</div>
              <div className="text-[10px] text-white/60 font-mono">Deployed globally</div>
           </div>
 
@@ -118,21 +117,21 @@ export const MissionSection = () => (
         <span className="text-6xl font-mono opacity-20">“</span>
       </div>
       <TextScroll 
-        text="ReliabilityIQ bridges Nigerian technical ingenuity with international execution standards to engineer flawless digital ecosystems for the world's next industry leaders."
+        text="ReliabilityIQ design scalable digital infrastructure for modern organizations — from intelligent automation and AI media systems to geospatial platforms and growth architecture."
         className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight text-center"
       />
       
       <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
         <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">10+</div>
+          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
           <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Years Exp</div>
         </div>
         <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">250+</div>
+          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
           <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Projects</div>
         </div>
         <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">50m</div>
+          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
           <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Data Points</div>
         </div>
       </div>

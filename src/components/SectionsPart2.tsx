@@ -97,7 +97,7 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
     <section ref={containerRef} className="relative mt-20">
       <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center">
          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Regional & International Expertise</div>
-         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter">African Engineering.<br />Global Standards.</h2>
+         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter">What We Deliver.</h2>
       </div>
 
       <div className="px-6">
@@ -151,7 +151,7 @@ export const NarrativeSection = () => (
           }
         />
         <div className="absolute bottom-10 left-10 p-10 glass rounded-3xl max-w-xs pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-          <h4 className="text-brand-accent font-mono text-2xl font-bold mb-2">Founded in 2014</h4>
+          <h4 className="text-brand-accent font-mono text-2xl font-bold mb-2">Founded in 2026</h4>
           <p className="text-white/70 font-mono text-xs leading-relaxed">
             From a small room of 3 engineers to a global powerhouse of 50+ experts.
           </p>
@@ -333,7 +333,7 @@ ${formData.details}
               <MagneticGlowButton 
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${isSuccess ? 'bg-green-500' : 'bg-brand-accent'} text-white py-5 rounded-2xl text-lg font-bold hover:opacity-90 transition-all shadow-xl active:scale-95 disabled:opacity-50 border border-transparent hover:border-white/20`}
+                className={`w-full ${isSuccess ? '!bg-green-500' : ''} py-5 text-lg font-bold disabled:opacity-50 !rounded-2xl`}
               >
                 {isSubmitting ? 'Processing...' : isSuccess ? 'Request Sent!' : 'Submit Request'}
               </MagneticGlowButton>
@@ -396,8 +396,8 @@ export const TrendingProducts = () => (
           </h2>
         </div>
         <div className="flex flex-wrap gap-3 font-mono">
-          <button className="p-3 bg-brand-dark text-white rounded-xl shadow-md"><Search size={18} /></button>
-          <button className="flex items-center gap-2 p-3 border-2 border-brand-dark/5 rounded-xl text-brand-dark/60 text-xs sm:text-sm"><Filter size={18} /> Sort by popularity</button>
+          <MagneticGlowButton className="p-3 !px-4"><Search size={18} /></MagneticGlowButton>
+          <MagneticGlowButton className="flex items-center gap-2 p-3 !px-4 border-white/20 text-xs sm:text-sm"><Filter size={18} /> Sort by popularity</MagneticGlowButton>
         </div>
       </div>
 
@@ -435,7 +435,7 @@ export const TrendingProducts = () => (
                <p className="text-brand-dark/50 font-mono text-[11px] leading-relaxed mb-6">{prod.desc}</p>
                <div className="flex justify-between items-center border-t border-brand-dark/5 pt-6">
                  <div className="font-mono font-bold text-brand-dark">{prod.price}</div>
-                 <button className="bg-brand-dark text-white p-3 rounded-xl hover:bg-brand-accent transition-colors"><Info size={16} /></button>
+                 <MagneticGlowButton className="p-3 !px-3"><Info size={16} /></MagneticGlowButton>
                </div>
             </div>
           </motion.div>
@@ -470,7 +470,7 @@ export const ScrollToTopButton = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-3 bg-brand-accent text-white rounded-full shadow-xl hover:bg-opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-brand-accent/50 cursor-pointer"
+          className="fixed bottom-6 right-6 z-50 p-4 crystal-button text-white shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer"
         >
           <ArrowUp size={24} />
         </motion.button>
