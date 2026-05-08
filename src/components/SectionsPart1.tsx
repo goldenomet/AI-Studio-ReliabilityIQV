@@ -79,7 +79,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
             />
           </TiltCard>
           {/* Glass Overlays */}
-          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:top-12 md:right-12 h-fit glass p-6 rounded-2xl w-[80%] max-w-[240px] md:w-48 md:max-w-none md:animate-bounce-slow mobile-swipe-1">
+          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:top-8 md:right-12 h-fit glass p-6 rounded-2xl w-[80%] max-w-[240px] md:w-48 md:max-w-none md:animate-bounce-slow mobile-swipe-1">
              <div className="flex items-center gap-2 text-brand-accent mb-2">
                 <Cpu size={16} />
                 <span className="font-mono text-[10px] uppercase tracking-tighter">AI Automations</span>
@@ -88,7 +88,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
              <div className="text-[10px] text-white/60 font-mono">Deployed globally</div>
           </div>
 
-          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:bottom-12 md:left-12 h-fit glass p-8 rounded-2xl w-[85%] max-w-[280px] md:w-64 md:max-w-none lg:animate-none mobile-swipe-2">
+          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:bottom-20 md:left-12 h-fit glass p-8 rounded-2xl w-[85%] max-w-[280px] md:w-64 md:max-w-none lg:animate-none mobile-swipe-2">
              <div className="flex items-center gap-2 text-brand-accent mb-4">
                 <Zap size={18} />
                 <span className="font-mono text-xs uppercase tracking-tighter">System Uptime</span>

@@ -54,7 +54,7 @@ export const Navbar = ({
         <div className="hidden lg:block w-10" />
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-1.5 lg:gap-3 p-1.5 rounded-full absolute left-1/2 -translate-x-1/2 transition-all duration-500 crystal-glass overflow-hidden">
+        <div className={`hidden lg:flex items-center gap-1.5 lg:gap-3 p-1.5 rounded-full absolute left-1/2 -translate-x-1/2 transition-all duration-500 overflow-hidden ${theme === 'light' ? 'bg-white/10 backdrop-blur-md border border-white/20 shadow-lg' : 'crystal-glass'}`}>
           <div className="absolute top-0 left-0 right-0 h-[10px] bg-white/5 pointer-events-none" />
           <LayoutGroup>
             {navItems.slice(0, 3).map((item) => {
