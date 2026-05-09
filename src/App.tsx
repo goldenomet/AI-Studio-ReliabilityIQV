@@ -183,11 +183,11 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-brand-bg/80 dark:bg-brand-dark/80 overflow-hidden flex flex-col justify-end pb-8">
               <div className="absolute inset-0 z-0 flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:mix-blend-overlay mix-blend-multiply opacity-50 grayscale" />
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:mix-blend-overlay mix-blend-multiply opacity-50" />
               </div>
               
-              <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2 mt-auto">
+              <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow" style={{ minHeight: '806px' }}>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2 max-sm:mb-[15px] max-sm:pt-0 max-sm:pb-0 mt-auto">
                    <h1 className="text-6xl md:text-[100px] lg:text-[130px] leading-[0.9] font-medium text-brand-dark dark:text-brand-bg tracking-tight">About Us</h1>
                    <p className="text-lg md:text-xl text-brand-dark/80 dark:text-brand-bg/80 max-w-[360px] pb-2 md:pb-6 leading-relaxed">
                      ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.

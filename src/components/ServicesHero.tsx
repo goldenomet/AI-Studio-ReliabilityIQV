@@ -15,7 +15,7 @@ export const ServicesHero = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-[#201c18] pt-[110px]">
+    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-brand-bg pt-[110px] transition-colors duration-500">
       
       {/* Background Image Container */}
       <motion.div 
@@ -31,28 +31,28 @@ export const ServicesHero = () => {
           <img 
             src={servicehero}
             alt="Modern Architecture" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover dark:opacity-80 dark:brightness-75 transition-all duration-500"
             referrerPolicy="no-referrer"
           />
         </motion.div>
         
-        {/* Dark Gradient Overlay at the bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2a1a14] via-transparent to-black/10 pointer-events-none" />
+        {/* Theme-aware Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-brand-bg/10 pointer-events-none" />
       </motion.div>
 
       {/* Hero Content - Bottom Aligned */}
       <motion.div 
-        style={{ opacity: textOpacity }}
-        className="absolute bottom-0 left-0 w-full z-10 px-8 md:px-16 pb-12 md:pb-20"
+        style={{ opacity: textOpacity, height: '806.467px' }}
+        className="absolute bottom-0 left-0 w-full z-10 px-8 md:px-16 pb-12 md:pb-20 flex flex-col justify-end"
       >
-        <div className="max-w-[1400px] mx-auto w-full">
+        <div className="max-w-[1400px] mx-auto w-full max-sm:pt-0 max-sm:pb-0 max-sm:mb-[15px]">
           
           {/* Main Heading */}
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-serif text-white tracking-normal leading-tight mb-4 text-3xl sm:text-4xl md:text-[38px]"
+            className="font-serif text-brand-dark tracking-normal leading-tight mb-4 text-3xl sm:text-4xl md:text-[38px] transition-colors duration-500"
             style={{ 
               maxWidth: '600px',
               minHeight: '50px',
@@ -68,7 +68,7 @@ export const ServicesHero = () => {
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.2, ease: "circOut" }}
-            className="w-full h-[1px] bg-white/30 origin-left mb-8"
+            className="w-full h-[1px] bg-brand-dark/20 dark:bg-white/30 origin-left mb-8 transition-colors duration-500"
           />
 
           {/* Bottom Row: Section Label + Description */}
@@ -81,8 +81,8 @@ export const ServicesHero = () => {
               transition={{ delay: 1 }}
               className="flex items-center gap-3 shrink-0"
             >
-              <div className="w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-              <span className="text-white text-xs md:text-sm font-medium tracking-[0.05em]">Services</span>
+              <div className="w-2.5 h-2.5 bg-brand-accent rounded-full shadow-[0_0_8px_var(--color-brand-accent)]" />
+              <span className="text-brand-dark text-xs md:text-sm font-medium tracking-[0.05em] transition-colors duration-500">Services</span>
             </motion.div>
 
             {/* Description */}
@@ -90,7 +90,7 @@ export const ServicesHero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="text-white/80 text-sm md:text-base max-w-xl leading-relaxed font-light"
+              className="text-brand-dark/70 dark:text-brand-dark/80 text-sm md:text-base max-w-xl leading-relaxed font-light transition-colors duration-500"
             >
               Experience features that simplify your tech life with flair and functionality.
             </motion.p>
