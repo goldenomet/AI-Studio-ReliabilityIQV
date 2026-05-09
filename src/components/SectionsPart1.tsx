@@ -11,7 +11,7 @@ import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001
 
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (
-  <section className="pt-16 pb-20 md:pt-24 md:pb-32 px-6 relative overflow-hidden">
+  <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden">
     <RealTimeCursors />
     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-10 items-center relative z-10">
       <motion.div
@@ -47,7 +47,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           ]}
           className="text-lg md:text-xl text-brand-dark mb-10 max-w-md leading-relaxed font-mono min-h-[140px] md:min-h-[120px]"
         />
-        <div className="flex flex-wrap gap-4 font-mono">
+        <div className="flex flex-nowrap items-center gap-3 md:gap-4 font-mono">
           <MagneticGlowButton 
             onClick={() => onNavigate('services')}
           >

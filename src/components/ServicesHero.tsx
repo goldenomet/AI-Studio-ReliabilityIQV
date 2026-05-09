@@ -13,7 +13,7 @@ export const ServicesHero = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-[#201c18]">
+    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-[#201c18] pt-[110px]">
       
       {/* Background Image Container */}
       <motion.div 
