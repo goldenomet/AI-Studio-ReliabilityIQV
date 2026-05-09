@@ -239,7 +239,7 @@ export const Navbar = ({
                 </div>
 
                 {/* Footer Buttons */}
-                <div className="mt-auto pt-6 pb-6 flex gap-2">
+                <div className="mt-auto pt-6 pb-6 flex gap-2 mb-[15px]">
                     <MagneticGlowButton className="flex-1 !py-3.5 text-sm shadow-xl !bg-[#418596]" onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}>
                         Get started
                     </MagneticGlowButton>
