@@ -1,130 +1,157 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, Cpu, Globe, Zap, Shield } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Code, BrainCircuit, Video, Map, Megaphone, FileText, Clock, Zap, TrendingUp, Users, ArrowLeft } from 'lucide-react';
 
-interface FeatureItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  icon: React.ReactNode;
-  image: string;
-  color: string;
-}
-
-const features: FeatureItem[] = [
-  {
-    id: 'branding',
-    title: 'DESIGN',
-    subtitle: 'Engineer the Experience',
-    description: 'We architect intuitive, high-fidelity digital experiences. Our design methodology focuses on human-centric engineering to drive conversion and global usability.',
-    icon: <Globe className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
-    color: '#0D838E'
-  },
-  {
-    id: 'development',
-    title: 'DEVELOPMENT',
-    subtitle: 'Engineered for Performance',
-    description: 'High-performance web applications built with cutting-edge technology. We prioritize extreme scalability, speed, and clean code architecture.',
-    icon: <Cpu className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop',
-    color: '#084C55'
-  },
-  {
-    id: 'automation',
-    title: 'AI AUTOMATION',
-    subtitle: 'Scale with Intelligence',
-    description: 'Bespoke AI-driven workflows and autonomous agents designed to eliminate operational friction and engineer extreme efficiency at every level of your stack.',
-    icon: <Zap className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop',
-    color: '#0D838E'
-  },
-  {
-    id: 'documentation',
-    title: 'DOCUMENTATION',
-    subtitle: 'Knowledge as Infrastructure',
-    description: 'We engineer living documentation systems that serve as the single source of truth for your entire stack, ensuring long-term maintainability and rapid onboarding.',
-    icon: <Shield className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=2000&auto=format&fit=crop',
-    color: '#084C55'
-  }
-];
-
-export const FeatureFlipper = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
+  const serviceList = [
+    {
+      id: "01",
+      icon: <Code size={24} />,
+      title: "Digital Platforms",
+      desc: "Websites, Android Apps & Digital Platforms built for performance, scale and exceptional UX.",
+      target: "service-branding"
+    },
+    {
+      id: "02",
+      icon: <BrainCircuit size={24} />,
+      title: "Intelligent Automation",
+      desc: "AI agents, workflow automation & orchestration systems that eliminate manual work.",
+      target: "service-automation"
+    },
+    {
+      id: "03",
+      icon: <Video size={24} />,
+      title: "AI Animation",
+      desc: "AI-powered animation, visual storytelling & cinematic content creation.",
+      target: "service-animation"
+    },
+    {
+      id: "04",
+      icon: <Map size={24} />,
+      title: "GIS Mapping",
+      desc: "Geospatial intelligence, mapping solutions & location-based analytics.",
+      target: "service-gis"
+    },
+    {
+      id: "05",
+      icon: <Megaphone size={24} />,
+      title: "Social Media Advertising",
+      desc: "Performance campaigns on TikTok, X (Twitter), Instagram & more.",
+      target: "service-social"
+    },
+    {
+      id: "06",
+      icon: <FileText size={24} />,
+      title: "Technical Documentation",
+      desc: "Clear, structured & developer-friendly documentation that drives adoption.",
+      target: "service-documentation"
+    }
+  ];
 
   return (
-    <section className="py-24 bg-brand-bg px-6 min-h-[600px] flex items-center">
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Left: Interactive List */}
-        <div className="space-y-4">
-          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-8 opacity-60">Engineered Services</div>
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.id}
-              className="relative group cursor-pointer py-6 border-b border-brand-dark/10"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              onClick={() => onNavigate(`service-${feature.id}`)}
-              initial={false}
+    <section className="bg-[#e8f1ee] py-20 px-6 font-mono text-[#0a3a40]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16 mb-20">
+          {/* Left Column */}
+          <div className="lg:w-[40%]">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#15464a] mb-6">Our Engineered Services</div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
+              Systems. Engineered <br /> for Impact.
+            </h2>
+            
+            <p className="text-sm leading-relaxed opacity-70 mb-12 max-w-sm">
+              We deliver end-to-end digital solutions across multiple disciplines. Each service is designed as a modular system—built to integrate, scale, and drive measurable outcomes.
+            </p>
+            
+            <button 
+              className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-bold group"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <span className="font-mono text-sm opacity-40 group-hover:opacity-100 transition-opacity">0{index + 1}</span>
-                  <h3 className="text-4xl md:text-6xl font-bold tracking-tighter group-hover:text-brand-accent transition-colors duration-500">
-                    {feature.title}
-                  </h3>
-                </div>
-                <motion.div
-                  animate={{ x: hoveredIndex === index ? 0 : -20, opacity: hoveredIndex === index ? 1 : 0 }}
-                  className="bg-brand-accent p-3 rounded-full text-white"
-                >
-                  <ArrowRight size={20} />
-                </motion.div>
+              Explore Our Capabilities
+              <div className="flex">
+                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-20 group-hover:opacity-100 transition-all"></span>
+                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-40 group-hover:opacity-100 transition-all"></span>
+                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-100"></span>
               </div>
-            </motion.div>
-          ))}
+            </button>
+
+            {/* Illustration Placeholder (Wireframe boxes) */}
+            <div className="mt-20 opacity-20 hidden md:block">
+               {/* Simplified Isometric Grid Illustration */}
+               <div className="relative w-full h-48">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <svg width="300" height="200" viewBox="0 0 300 200" fill="none">
+                      <path d="M150 20L280 90L150 160L20 90L150 20Z" stroke="currentColor" strokeWidth="0.5" />
+                      <rect x="130" y="70" width="40" height="60" stroke="currentColor" strokeWidth="1" />
+                      <rect x="80" y="100" width="30" height="30" stroke="currentColor" strokeWidth="1" />
+                      <rect x="190" y="110" width="20" height="20" stroke="currentColor" strokeWidth="1" />
+                      <circle cx="240" cy="80" r="10" stroke="currentColor" strokeWidth="1" />
+                      <path d="M150 130L150 160" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                      <path d="M130 100L80 115" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                      <text x="50" y="150" fill="currentColor" fontSize="8" className="tracking-widest uppercase">Build</text>
+                      <text x="250" y="60" fill="currentColor" fontSize="8" className="tracking-widest uppercase">Analyze</text>
+                    </svg>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="lg:w-[60%] space-y-4">
+            {serviceList.map((service) => (
+              <div 
+                key={service.id} 
+                onClick={() => onNavigate(service.target)}
+                className="group p-6 bg-white/[0.3] backdrop-blur-sm rounded-2xl border border-white/40 flex items-center gap-6 hover:bg-white/60 transition-all cursor-pointer"
+              >
+                <div className="text-xs font-bold opacity-30 group-hover:opacity-60 transition-opacity shrink-0">{service.id}</div>
+                <div className="w-12 h-12 rounded-xl border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                  {service.icon}
+                </div>
+                <div className="flex-grow">
+                  <h4 className="text-lg font-bold mb-1">{service.title}</h4>
+                  <p className="text-[10px] opacity-60 leading-relaxed max-w-md">{service.desc}</p>
+                </div>
+                <div className="w-10 h-10 rounded-full border border-[#0a3a40]/10 bg-white/50 flex justify-center items-center opacity-50 group-hover:opacity-100 group-hover:bg-[#0a3a40] group-hover:text-white transition-colors">
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Right: Visual Flip/Display */}
-        <div className="relative h-[500px] hidden lg:block rounded-[48px] overflow-hidden shadow-2xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={hoveredIndex ?? 'default'}
-              initial={{ opacity: 0, scale: 1.1, rotateY: 10 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.9, rotateY: -10 }}
-              transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className="absolute inset-0"
-            >
-              <div className="absolute inset-0 bg-brand-dark/20 z-10" />
-              <img
-                src={hoveredIndex !== null ? features[hoveredIndex].image : "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop"}
-                alt="Feature"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              
-              <div className="absolute inset-x-0 bottom-0 p-12 z-20 bg-gradient-to-t from-brand-dark/80 to-transparent text-white">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-2">
-                    {hoveredIndex !== null ? features[hoveredIndex].subtitle : "Select a service"}
-                  </h4>
-                  <p className="text-lg font-mono opacity-80 leading-relaxed max-w-md">
-                    {hoveredIndex !== null ? features[hoveredIndex].description : "Hover over a service to explore our engineering methodologies."}
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+        {/* Footer Banner */}
+        <div className="bg-[#0a3a40] rounded-[32px] p-8 md:p-12 text-white flex flex-col md:flex-row items-center gap-12">
+          <div className="md:w-1/2">
+            <div className="text-[10px] uppercase tracking-widest opacity-40 font-bold mb-4">Built for Complexity</div>
+            <h3 className="text-2xl md:text-3xl font-bold leading-tight">
+              From concept to scale — we engineer systems that power your business forward.
+            </h3>
+          </div>
+          <div className="md:w-1/2 grid grid-cols-2 md:grid-cols-4 gap-8 w-full border-l border-white/10 pl-0 md:pl-12">
+            <div className="space-y-1">
+              <Clock size={20} className="text-[#a7d0c3] mb-2" />
+              <div className="text-xl font-bold">99.9%</div>
+              <div className="text-[8px] uppercase tracking-widest opacity-40">System Reliability</div>
+            </div>
+            <div className="space-y-1">
+              <Zap size={20} className="text-[#a7d0c3] mb-2" />
+              <div className="text-xl font-bold">4.5x</div>
+              <div className="text-[8px] uppercase tracking-widest opacity-40">Process Velocity</div>
+            </div>
+            <div className="space-y-1">
+              <TrendingUp size={20} className="text-[#a7d0c3] mb-2" />
+              <div className="text-xl font-bold">300+</div>
+              <div className="text-[8px] uppercase tracking-widest opacity-40">Projects Delivered</div>
+            </div>
+            <div className="space-y-1">
+              <Users size={20} className="text-[#a7d0c3] mb-2" />
+              <div className="text-xl font-bold">50+</div>
+              <div className="text-[8px] uppercase tracking-widest opacity-40">Happy Clients</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+

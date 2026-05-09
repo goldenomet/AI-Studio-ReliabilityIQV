@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { CircleCursor } from './components/CircleCursor';
-import { FeatureFlipper } from './components/FeatureFlipper';
+import { EngineeredServicesSection } from './components/FeatureFlipper';
 import { ServicesHero } from './components/ServicesHero';
 import { ServiceDetail } from './components/ServiceDetail';
 import { HeroSection, MissionSection } from './components/SectionsPart1';
@@ -173,7 +173,7 @@ export default function App() {
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <HeroSection onNavigate={setCurrentPage} />
-            <MissionSection />
+            <MissionSection onBack={() => setCurrentPage('services')} onExplore={() => setCurrentPage('services')} />
             <CompetenciesSection onContact={() => setCurrentPage('contact')} />
             <NarrativeSection />
           </motion.div>
@@ -222,14 +222,14 @@ export default function App() {
             </section>
 
             <NarrativeSection />
-            <MissionSection />
+            <MissionSection onBack={() => setCurrentPage('services')} onExplore={() => setCurrentPage('services')} />
           </motion.div>
         );
       case 'services':
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <ServicesHero />
-            <FeatureFlipper onNavigate={setCurrentPage} />
+            <EngineeredServicesSection onNavigate={setCurrentPage} />
             <div className="bg-brand-footer text-white py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-white/10" />
               <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
@@ -245,6 +245,9 @@ export default function App() {
       case 'service-branding':
       case 'service-development':
       case 'service-automation':
+      case 'service-animation':
+      case 'service-gis':
+      case 'service-social':
       case 'service-documentation':
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">

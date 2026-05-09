@@ -189,6 +189,36 @@ export const NarrativeSection = () => (
   </section>
 );
 
+const ModernGradient = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <motion.div 
+      animate={{
+        scale: [1, 1.2, 1],
+        x: [0, 50, 0],
+        y: [0, 30, 0],
+      }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      className="absolute -top-1/4 -left-1/4 w-full h-full bg-brand-accent/20 rounded-full blur-[120px]" 
+    />
+    <motion.div 
+      animate={{
+        scale: [1.2, 1, 1.2],
+        x: [0, -40, 0],
+        y: [0, -50, 0],
+      }}
+      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      className="absolute -bottom-1/4 -right-1/4 w-full h-full bg-blue-500/10 rounded-full blur-[120px]" 
+    />
+    <motion.div 
+      animate={{
+        opacity: [0.3, 0.6, 0.3],
+      }}
+      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 via-transparent to-blue-400/5" 
+    />
+  </div>
+);
+
 export const ContactSection = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -254,90 +284,93 @@ ${formData.details}
       <div className="max-w-7xl mx-auto">
         <div className="bg-brand-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-brand-dark/10">
           {/* Form */}
-          <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-brand-dark/10">
-            <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Start a Conversation</div>
-            <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-brand-dark">
-              Ready to upgrade your infrastructure?
-            </h2>
+          <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-brand-dark/10 relative overflow-hidden group">
+            <ModernGradient />
+            <div className="relative z-10">
+              <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Start a Conversation</div>
+              <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-brand-dark">
+                Ready to upgrade your infrastructure?
+              </h2>
 
-            <form className="space-y-8 font-mono text-sm" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form className="space-y-8 font-mono text-sm" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">First Name</label>
+                    <input 
+                      type="text" 
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      placeholder="John" 
+                      className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                    />
+                    {errors.firstName && <p className="text-red-500 text-[10px] mt-1">{errors.firstName}</p>}
+                  </div>
+                  <div>
+                     <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Last Name</label>
+                     <input 
+                      type="text" 
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Doe" 
+                      className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                    />
+                    {errors.lastName && <p className="text-red-500 text-[10px] mt-1">{errors.lastName}</p>}
+                  </div>
+                </div>
+
                 <div>
-                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">First Name</label>
+                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Work Email</label>
                   <input 
-                    type="text" 
-                    name="firstName"
-                    value={formData.firstName}
+                    type="email" 
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    placeholder="John" 
-                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
+                    placeholder="john@company.com" 
+                    className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
                   />
-                  {errors.firstName && <p className="text-red-500 text-[10px] mt-1">{errors.firstName}</p>}
+                  {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
                 </div>
+
                 <div>
-                   <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Last Name</label>
-                   <input 
-                    type="text" 
-                    name="lastName"
-                    value={formData.lastName}
+                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Service Interest</label>
+                  <select 
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
-                    placeholder="Doe" 
-                    className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
-                  />
-                  {errors.lastName && <p className="text-red-500 text-[10px] mt-1">{errors.lastName}</p>}
+                    className="w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-black/5 focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark shadow-sm"
+                  >
+                    <option>Web Operations</option>
+                    <option>AI Automations</option>
+                    <option>GIS Mapping</option>
+                    <option>Technical Reports</option>
+                    <option>Content & Design</option>
+                  </select>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Work Email</label>
-                <input 
-                  type="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="john@company.com" 
-                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark placeholder:text-brand-dark/40`}
-                />
-                {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
-              </div>
+                <div>
+                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Project Details</label>
+                  <textarea 
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
+                    rows={4} 
+                    placeholder="Tell us about your technical challenges..." 
+                    className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all resize-none text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                  ></textarea>
+                  {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
+                </div>
 
-              <div>
-                <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Service Interest</label>
-                <select 
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="w-full bg-brand-bg p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-transparent focus:border-brand-accent/20 focus:bg-brand-card transition-all text-brand-dark"
+                <MagneticGlowButton 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full ${isSuccess ? '!bg-green-500' : ''} py-5 text-lg font-bold disabled:opacity-50 !rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300`}
                 >
-                  <option>Web Operations</option>
-                  <option>AI Automations</option>
-                  <option>GIS Mapping</option>
-                  <option>Technical Reports</option>
-                  <option>Content & Design</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Project Details</label>
-                <textarea 
-                  name="details"
-                  value={formData.details}
-                  onChange={handleChange}
-                  rows={4} 
-                  placeholder="Tell us about your technical challenges..." 
-                  className={`w-full bg-brand-bg p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-transparent'} focus:border-brand-accent/20 focus:bg-brand-card transition-all resize-none text-brand-dark placeholder:text-brand-dark/40`}
-                ></textarea>
-                {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
-              </div>
-
-              <MagneticGlowButton 
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full ${isSuccess ? '!bg-green-500' : ''} py-5 text-lg font-bold disabled:opacity-50 !rounded-2xl`}
-              >
-                {isSubmitting ? 'Processing...' : isSuccess ? 'Request Sent!' : 'Submit Request'}
-              </MagneticGlowButton>
-            </form>
+                  {isSubmitting ? 'Processing...' : isSuccess ? 'Request Sent!' : 'Submit Request'}
+                </MagneticGlowButton>
+              </form>
+            </div>
           </div>
 
           {/* Map/Info */}

@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
-import { ArrowRight, Zap, Globe, Cpu } from 'lucide-react';
+import { ArrowRight, Zap, Globe, Cpu, ArrowLeft, Code, BrainCircuit, Video, Map, Megaphone, FileText, ArrowUpRight, Clock, TrendingUp, Users } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { FlipCard, TiltCard } from './Cards';
 import { ScramblyText, TextEngine, RealTimeCursors, PixelSnow, SmartTypewriter, TextScroll } from './Effects';
@@ -107,37 +107,39 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
   );
 };
 
-export const MissionSection = () => (
-  <section className="bg-brand-footer text-white py-32 px-6 relative overflow-hidden transition-colors duration-500">
-    {/* Grid Pattern */}
-    <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-    
-    <div className="max-w-4xl mx-auto text-center relative z-10">
-      <div className="flex justify-center mb-8">
-        <span className="text-6xl font-mono opacity-20">“</span>
-      </div>
-      <TextScroll 
-        text="ReliabilityIQ design scalable digital infrastructure for modern organizations — from intelligent automation and AI media systems to geospatial platforms and growth architecture."
-        className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight text-center"
-      />
+export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onExplore?: () => void }) => {
+  return (
+    <section className="bg-brand-footer text-white py-32 px-6 relative overflow-hidden transition-colors duration-500">
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
       
-      <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
-        <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
-          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Years Exp</div>
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="flex justify-center mb-8">
+          <span className="text-6xl font-mono opacity-20">“</span>
         </div>
-        <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
-          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Projects</div>
-        </div>
-        <div className="text-center group">
-          <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
-          <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Data Points</div>
+        <TextScroll 
+          text="ReliabilityIQ design scalable digital infrastructure for modern organizations — from intelligent automation and AI media systems to geospatial platforms and growth architecture."
+          className="text-3xl md:text-5xl font-bold font-mono leading-tight mb-16 tracking-tight text-center"
+        />
+        
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
+          <div className="text-center group">
+            <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
+            <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Years Exp</div>
+          </div>
+          <div className="text-center group">
+            <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
+            <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Projects</div>
+          </div>
+          <div className="text-center group">
+            <div className="text-brand-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
+            <div className="text-xs font-mono tracking-widest text-white/40 uppercase">Data Points</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 interface StackCardProps {
   i: number;
