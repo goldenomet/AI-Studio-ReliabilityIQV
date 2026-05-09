@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import servicehero from '@/src/assets/images/service hero.png';
+
 
 export const ServicesHero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -27,7 +29,7 @@ export const ServicesHero = () => {
           className="w-full h-[120%] relative"
         >
           <img 
-            src="/src/assets/images/regenerated_image_1778356162911.png" 
+            src={servicehero}
             alt="Modern Architecture" 
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
