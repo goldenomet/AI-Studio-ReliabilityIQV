@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePres
 import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool } from 'lucide-react';
 import { StackCard, TiltCard, FlipCard } from './Cards';
 import { MagneticGlowButton } from './MagneticGlowButton';
-import { SmartTypewriter, TextEngine, PixelSnow, TextScroll } from './Effects';
+import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
 import { ServiceDetail } from './ServiceDetail';
 
@@ -189,36 +189,6 @@ export const NarrativeSection = () => (
   </section>
 );
 
-const ModernGradient = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <motion.div 
-      animate={{
-        scale: [1, 1.2, 1],
-        x: [0, 50, 0],
-        y: [0, 30, 0],
-      }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="absolute -top-1/4 -left-1/4 w-full h-full bg-brand-accent/20 rounded-full blur-[120px]" 
-    />
-    <motion.div 
-      animate={{
-        scale: [1.2, 1, 1.2],
-        x: [0, -40, 0],
-        y: [0, -50, 0],
-      }}
-      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      className="absolute -bottom-1/4 -right-1/4 w-full h-full bg-blue-500/10 rounded-full blur-[120px]" 
-    />
-    <motion.div 
-      animate={{
-        opacity: [0.3, 0.6, 0.3],
-      }}
-      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 via-transparent to-blue-400/5" 
-    />
-  </div>
-);
-
 export const ContactSection = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -285,7 +255,7 @@ ${formData.details}
         <div className="bg-brand-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-brand-dark/10">
           {/* Form */}
           <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-brand-dark/10 relative overflow-hidden group">
-            <ModernGradient />
+            <GrainyGradient />
             <div className="relative z-10">
               <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Start a Conversation</div>
               <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-brand-dark">

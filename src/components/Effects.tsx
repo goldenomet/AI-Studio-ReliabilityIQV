@@ -369,3 +369,53 @@ export const RealTimeCursors = () => {
   );
 };
 
+export const GrainyGradient = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Base Layer */}
+      <div className="absolute inset-0 bg-[#F4F4F1]" />
+      
+      {/* Animated Mesh Gradients */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1.1, 1],
+          x: [-50, 50, -20, -50],
+          y: [-50, 20, 40, -50],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-[20%] -left-[20%] w-[80%] h-[80%] rounded-full bg-[#338f82]/20 blur-[120px]"
+      />
+      <motion.div
+        animate={{
+          scale: [1.1, 0.9, 1.2, 1.1],
+          x: [50, -30, 20, 50],
+          y: [40, -60, -20, 40],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-[20%] -right-[20%] w-[70%] h-[70%] rounded-full bg-[#0a3a40]/10 blur-[100px]"
+      />
+      
+      {/* Middle Accent */}
+      <motion.div
+        animate={{
+          opacity: [0.1, 0.3, 0.1],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-[#338f82]/5 via-white/0 to-[#0a3a40]/5"
+      />
+
+      {/* SVG Grain Overlay - Higher Contrast/Frequency for 'Premium' feel */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.35] contrast-150 brightness-100 mix-blend-overlay">
+        <filter id="premium-grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#premium-grain)" />
+      </svg>
+
+      {/* Finishing Texture Layer */}
+      <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
+    </div>
+  );
+};
+

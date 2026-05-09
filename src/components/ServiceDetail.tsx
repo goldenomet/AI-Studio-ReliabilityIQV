@@ -175,7 +175,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    </div>
 
                    {/* Content */}
-                   <div className="flex-1 bg-white p-8 lg:p-10 overflow-y-auto relative">
+                   <div className="flex-1 bg-white p-5 sm:p-8 lg:p-10 overflow-y-auto relative">
                       
                       <div className="flex items-center gap-2 text-[11px] text-[#0a3a40]/50 font-bold mb-6">
                         <span>Endpoints</span> <span className="text-[#0a3a40]/30">/</span> <span>Users</span> <span className="text-[#0a3a40]/30">/</span> <span className="text-[#338f82]">Get User</span>
@@ -791,17 +791,17 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
 
             {/* Right Graphic area */}
-            <div className="lg:w-[65%] flex flex-col gap-6">
+            <div className="w-full lg:w-[65%] flex flex-col gap-6">
               
               {/* Graphic container */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#161a1d] rounded-[24px] overflow-hidden shadow-2xl border border-[#23282c] text-white relative flex flex-col xl:flex-row min-h-[550px]"
+                className="w-full bg-[#161a1d] rounded-[24px] overflow-hidden shadow-2xl border border-[#23282c] text-white relative flex flex-col xl:flex-row min-h-[400px] md:min-h-[550px]"
               >
                  {/* Left Sidebar */}
-                 <div className="w-14 bg-[#1e2327] border-r border-[#2a3036] flex flex-col items-center py-6 gap-6 shrink-0 z-20 relative">
+                 <div className="w-full h-12 xl:w-14 xl:h-auto bg-[#1e2327] border-b xl:border-b-0 xl:border-r border-[#2a3036] flex flex-row xl:flex-col items-center py-2 xl:py-6 px-4 xl:px-0 gap-6 shrink-0 z-20 relative">
                    <Layers size={18} className="text-[#338f82]" />
                    <BarChart2 size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
                    <Database size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
@@ -881,7 +881,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                  </div>
 
                  {/* Right Sidebar */}
-                 <div className="w-[280px] bg-[#161a1d] border-l border-[#2a3036] flex flex-col shrink-0 z-20">
+                 <div className="w-full xl:w-[280px] bg-[#161a1d] border-t xl:border-t-0 xl:border-l border-[#2a3036] flex flex-col shrink-0 z-20 overflow-hidden">
                     <div className="p-5 flex-1 overflow-y-auto custom-scrollbar">
                       
                       {/* Layers Section */}
@@ -1104,14 +1104,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
 
             {/* Right Graphic area */}
-            <div className="lg:w-[65%] flex flex-col gap-6">
+            <div className="w-full lg:w-[65%] flex flex-col gap-6">
               
               {/* Main Video Player container */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full aspect-video bg-[#0a0a0a] rounded-2xl overflow-hidden shadow-2xl relative"
+                className="w-full aspect-video bg-[#0a0a0a] rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px]"
               >
                 <img 
                   src="https://images.unsplash.com/photo-1541892079-24ecfcab0cda?q=80&w=2670&auto=format&fit=crop"
@@ -1315,14 +1315,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
 
             {/* Right Graphic area */}
-            <div className="lg:w-[60%] flex flex-col gap-6">
+            <div className="w-full lg:w-[60%] flex flex-col gap-6">
               
               {/* Graphic container */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#0d161a] rounded-[24px] overflow-hidden shadow-2xl border border-[#1a2d33] p-8 text-white relative flex flex-col min-h-[500px]"
+                className="w-full bg-[#0d161a] rounded-[24px] overflow-hidden shadow-2xl border border-[#1a2d33] p-6 sm:p-8 text-white relative flex flex-col min-h-[400px] md:min-h-[500px]"
               >
                  <div className="flex justify-between items-start mb-16">
                     <div>
@@ -1490,7 +1490,233 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
     );
   }
 
-  // Fallback to DIGITAL PLATFORMS for other IDs
+  // Engineering Systems & Digital Platforms
+  if (id === 'service-branding' || id === 'service-development') {
+    return (
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
+        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+          
+          {/* Header/Nav */}
+          <button 
+            onClick={onBack}
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+          >
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Services
+          </button>
+
+          {/* Top Section */}
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-16 items-start">
+            
+            {/* Left Text */}
+            <div className="lg:w-[40%] flex flex-col pt-4">
+              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">01</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-[#0a3a40] leading-[1.1] mb-8 font-mono text-balance">
+                ENGINEERING<br />SYSTEMS &<br />PLATFORMS
+              </h1>
+              
+              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+                We architect and build modular, high-performance digital ecosystems. From complex web applications to native Android platforms, we focus on scalability, maintainability, and exceptional user experiences.
+              </p>
+
+              {/* Sub features list */}
+              <div className="flex flex-col gap-6 mb-12">
+                {[
+                  {
+                    icon: <Monitor size={20} className="text-[#0a3a40]" />,
+                    title: "Web Applications",
+                    desc: "Modern, reactive web platforms built with React, Next.js, and high-performance backends."
+                  },
+                  {
+                    icon: <Smartphone size={20} className="text-[#0a3a40]" />,
+                    title: "Mobile Platforms",
+                    desc: "Scalable Android applications engineered for reliability and smooth performance."
+                  },
+                  {
+                    icon: <Database size={20} className="text-[#0a3a40]" />,
+                    title: "Scalable Infrastructure",
+                    desc: "Cloud-native architectures designed to grow with your user base without friction."
+                  },
+                  {
+                    icon: <Palette size={20} className="text-[#0a3a40]" />,
+                    title: "System Thinking",
+                    desc: "Designing cohesive design systems and modular components that ensure long-term agility."
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <button 
+                  onClick={onContact}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                >
+                  Start a Project <ArrowUpRight size={14} />
+                </button>
+                <button 
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                >
+                  Technical Specs <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Graphic area */}
+            <div className="w-full lg:w-[60%] flex flex-col gap-6">
+              
+              {/* Graphic container */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full bg-[#1a1c1e] rounded-[24px] overflow-hidden shadow-2xl border border-white/5 relative flex flex-col min-h-[400px] md:min-h-[500px]"
+              >
+                  {/* Laptop Mockup Header */}
+                  <div className="h-10 bg-[#121416] border-b border-white/5 flex items-center px-4 gap-1.5 shrink-0">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                    <div className="flex-1 flex justify-center">
+                      <div className="bg-white/5 px-4 py-1 rounded text-[9px] text-white/30 font-mono">app.reliabilityiq.systems</div>
+                    </div>
+                  </div>
+
+                  {/* App Interface Layout */}
+                  <div className="flex-1 flex overflow-hidden">
+                    {/* Sidebar */}
+                    <div className="w-16 border-r border-white/5 flex flex-col items-center py-6 gap-6 bg-[#0a0a0a]">
+                      <div className="w-8 h-8 rounded-lg bg-[#338f82]/20 flex items-center justify-center text-[#338f82]">
+                        <Code size={18} />
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer">
+                        <Database size={18} />
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer">
+                        <Activity size={18} />
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer mt-auto">
+                        <Settings size={18} />
+                      </div>
+                    </div>
+
+                    {/* Main Content Pane */}
+                    <div className="flex-1 p-8 overflow-y-auto bg-[#0a0a0a]">
+                      <div className="flex justify-between items-center mb-10 text-white">
+                        <div>
+                          <h3 className="text-xl font-bold mb-1 text-white">Architecture Overview</h3>
+                          <div className="text-[10px] font-mono opacity-40">Status: Operational • Version: 2.4.0</div>
+                        </div>
+                        <div className="flex gap-2">
+                           <div className="bg-[#338f82]/20 text-[#338f82] px-3 py-1 rounded-md text-[10px] font-bold border border-[#338f82]/30">Healthy</div>
+                           <div className="bg-white/5 text-white/60 px-3 py-1 rounded-md text-[10px] font-bold border border-white/10">v2.4.0</div>
+                        </div>
+                      </div>
+
+                      {/* Schematic Grid */}
+                      <div className="grid grid-cols-3 gap-4 mb-8">
+                         {[
+                           { label: "Requests/sec", val: "14.2k", trend: "+12%" },
+                           { label: "Avg Latency", val: "42ms", trend: "-5%" },
+                           { label: "Uptime", val: "99.99%", trend: "Stable" }
+                         ].map((m, idx) => (
+                           <div key={idx} className="bg-white/5 p-4 rounded-xl border border-white/5">
+                             <div className="text-[9px] uppercase tracking-widest text-white/30 font-bold mb-2">{m.label}</div>
+                             <div className="text-xl font-bold text-white mb-1">{m.val}</div>
+                             <div className={`text-[9px] font-bold ${m.trend.startsWith('+') ? 'text-[#338f82]' : m.trend === 'Stable' ? 'text-white/40' : 'text-blue-400'}`}>{m.trend}</div>
+                           </div>
+                         ))}
+                      </div>
+
+                      {/* Visual Architecture Representation */}
+                      <div className="relative border border-white/5 rounded-xl bg-white/[0.02] p-6 min-h-[150px] flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #338f82 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                        <div className="relative flex items-center justify-center gap-12">
+                           <div className="w-12 h-12 rounded-xl border border-[#338f82]/50 bg-[#338f82]/10 flex items-center justify-center"><Monitor size={20} className="text-[#338f82]" /></div>
+                           <div className="flex flex-col gap-4">
+                              <div className="w-32 h-[1px] bg-gradient-to-r from-[#338f82]/50 to-transparent relative">
+                                <motion.div 
+                                  animate={{ x: [0, 128] }}
+                                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#338f82] blur-[2px]"
+                                />
+                              </div>
+                              <div className="w-32 h-[1px] bg-gradient-to-r from-transparent to-[#338f82]/50 relative">
+                                <motion.div 
+                                  animate={{ x: [128, 0] }}
+                                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#338f82] blur-[2px]"
+                                />
+                              </div>
+                           </div>
+                           <div className="w-12 h-12 rounded-xl border border-[#338f82]/50 bg-[#338f82]/10 flex items-center justify-center"><Database size={20} className="text-[#338f82]" /></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </motion.div>
+
+              {/* Stats below graphic */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                 {[
+                   { icon: <Monitor size={18} className="text-[#0a3a40]" />, stat: "Fast", label: "Page Speed", desc: "Built for speed" },
+                   { icon: <Code size={18} className="text-[#0a3a40]" />, stat: "Clean", label: "Code Quality", desc: "Maintainable systems" },
+                   { icon: <ShieldCheck size={18} className="text-[#0a3a40]" />, stat: "Secure", label: "Architecture", desc: "Safety first" },
+                   { icon: <Layers size={18} className="text-[#0a3a40]" />, stat: "Modular", label: "Design", desc: "Ready to scale" }
+                 ].map((s, i) => (
+                   <div key={i} className="bg-white/80 border border-[#0a3a40]/5 rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-white transition-colors">
+                     <div className="w-8 h-8 rounded-full border border-[#0a3a40]/10 flex justify-center items-center mb-4">
+                       {s.icon}
+                     </div>
+                     <h3 className="text-xl font-bold mb-1 text-[#0a3a40]">{s.stat}</h3>
+                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#0a3a40] mb-2">{s.label}</h4>
+                     <p className="text-[9px] text-[#0a3a40]/50 leading-tight">{s.desc}</p>
+                   </div>
+                 ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+
+          {/* Core Offerings */}
+          <div className="flex justify-between items-end mb-8">
+             <h3 className="text-xl font-bold">Engineering Capabilities</h3>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+             {[
+               { icon: <Monitor size={18} strokeWidth={1.5} />, title: "Headless CMS Platforms", desc: "Content-first architecture giving you total control over your digital assets." },
+               { icon: <Smartphone size={18} strokeWidth={1.5} />, title: "Native Android Experiences", desc: "Deeply integrated mobile systems built specifically for Android power." },
+               { icon: <Code size={18} strokeWidth={1.5} />, title: "Custom API Infrastructure", desc: "Robust, well-documented backends that power multi-device ecosystems." },
+               { icon: <Activity size={18} strokeWidth={1.5} />, title: "Performance Engineering", desc: "Rigorous optimization workflows to ensure maximum speed and efficiency." },
+             ].map((caseItem, i) => (
+                <div key={i} className="flex flex-col gap-3">
+                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                     {caseItem.icon}
+                  </div>
+                  <h4 className="text-[11px] font-bold">{caseItem.title}</h4>
+                  <p className="text-[10px] opacity-60 leading-relaxed">{caseItem.desc}</p>
+                </div>
+             ))}
+          </div>
+
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback to DIGITAL CAPABILITIES for other IDs
   return (
     <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
       <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
@@ -1509,15 +1735,15 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
           
           {/* Left Text */}
           <div className="lg:w-[45%] flex flex-col">
-            <div className="text-[10px] font-bold text-[#93ACA7] mb-2">03</div>
+            <div className="text-[10px] font-bold text-[#93ACA7] mb-2">00</div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
-              DIGITAL<br />PLATFORMS
+              DIGITAL<br />CAPABILITIES
             </h1>
             
             <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-12 max-w-md">
-              We design and build high-performance websites, Android applications, and custom platforms tailored to your business goals.
+              We design and build high-performance digital solutions tailored to your unique business goals and technical requirements.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -1526,11 +1752,6 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
               >
                 Start a Project <ArrowUpRight size={14} />
-              </button>
-              <button 
-                className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
-              >
-                View Case Studies <ArrowUpRight size={14} />
               </button>
             </div>
           </div>
@@ -1552,68 +1773,9 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                  />
                  <div className="absolute inset-x-0 bottom-0 h-4 bg-[#1a1c1e]" />
                </div>
-               
-               {/* Mobile Mockup placeholder */}
-               <div className="absolute -bottom-8 -right-4 w-[250px] aspect-[1/2] rounded-[32px] overflow-hidden shadow-2xl border-[6px] border-[#1a1c1e] bg-[#0a0a0a] z-10 hidden sm:block">
-                  <img 
-                   src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
-                   alt="Mobile App Interface" 
-                   className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
-                 />
-               </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Divider */}
-        <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-16" />
-
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold font-mono text-[#0a3a40]">What We Deliver</h2>
-          <p className="text-[10px] text-[#93ACA7] uppercase tracking-widest font-bold">Built for scale. Designed for impact.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-          {[
-            {
-              icon: <Monitor size={24} className="text-[#0a3a40]" strokeWidth={1.5} />,
-              title: "Web Applications",
-              desc: "Modern, responsive websites and web apps built with performance and scalability in mind."
-            },
-            {
-              icon: <Smartphone size={24} className="text-[#0a3a40]" strokeWidth={1.5} />,
-              title: "Android Applications",
-              desc: "Native Android apps engineered for reliability, speed, and seamless user experience."
-            },
-            {
-              icon: <Palette size={24} className="text-[#0a3a40]" strokeWidth={1.5} />,
-              title: "Custom Dashboards",
-              desc: "Interactive dashboards that turn complex data into clear, actionable insights."
-            },
-            {
-              icon: <Shield size={24} className="text-[#0a3a40]" strokeWidth={1.5} />,
-              title: "Secure & Scalable",
-              desc: "Built with best practices for security, performance, and future growth."
-            },
-            {
-              icon: <Share2 size={24} className="text-[#0a3a40]" strokeWidth={1.5} />,
-              title: "API & Integrations",
-              desc: "Seamless integrations with third-party services and custom APIs that extend your capabilities."
-            }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col">
-              <div className="w-12 h-12 mb-6 flex items-center justify-center">
-                {item.icon}
-              </div>
-              <h3 className="text-sm font-bold text-[#0a3a40] mb-3">{item.title}</h3>
-              <p className="text-xs text-[#0a3a40]/60 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
       </div>
     </div>
   );

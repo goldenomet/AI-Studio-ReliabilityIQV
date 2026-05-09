@@ -45,7 +45,7 @@ export const Navbar = ({
   ];
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10 h-10 lg:h-12">
         {/* Mobile Logo */}
         <div className="block lg:hidden">
