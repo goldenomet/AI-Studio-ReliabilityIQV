@@ -250,7 +250,7 @@ export default function App() {
       case 'service-social':
       case 'service-documentation':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0 w-full">
             <ServiceDetail 
               id={currentPage} 
               onBack={() => setCurrentPage('services')}

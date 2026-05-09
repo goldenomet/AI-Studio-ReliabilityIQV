@@ -11,17 +11,22 @@ interface ServiceDetailProps {
 export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => {
   if (id === 'service-documentation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16 items-start">
@@ -76,12 +81,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -360,17 +367,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-social') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section bg-[#EBEBE6]  we can remove white backgrounds, make everything a shade. actually left text is just on the background. Right side is the layout. */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16 items-start">
@@ -425,12 +437,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -711,17 +725,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-gis') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16 items-start">
@@ -776,12 +795,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -1024,17 +1045,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-animation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16 items-start">
@@ -1089,12 +1115,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -1230,17 +1258,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-automation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-16 items-start">
@@ -1300,12 +1333,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -1493,17 +1528,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
   // Engineering Systems & Digital Platforms
   if (id === 'service-branding' || id === 'service-development') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-        <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+        <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
-          <button 
+          <motion.button 
             onClick={onBack}
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Services
-          </button>
+            <span className="relative">
+              Back to Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            </span>
+          </motion.button>
 
           {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-16 items-start">
@@ -1558,12 +1598,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <button 
+                <motion.button 
                   onClick={onContact}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
                 <button 
                   className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
                 >
@@ -1718,17 +1760,22 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   // Fallback to DIGITAL CAPABILITIES for other IDs
   return (
-    <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative">
-      <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-16">
+    <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
         
         {/* Header/Nav */}
-        <button 
+        <motion.button 
           onClick={onBack}
+          whileHover={{ x: -4 }}
+          whileTap={{ scale: 0.96 }}
           className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
         >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-          Back to Services
-        </button>
+          <span className="relative">
+            Back to Services
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+          </span>
+        </motion.button>
 
         {/* Top Section */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-32 items-center">
@@ -1747,12 +1794,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <button 
+              <motion.button 
                 onClick={onContact}
-                className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-colors shadow-lg"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
               >
                 Start a Project <ArrowUpRight size={14} />
-              </button>
+              </motion.button>
             </div>
           </div>
 
