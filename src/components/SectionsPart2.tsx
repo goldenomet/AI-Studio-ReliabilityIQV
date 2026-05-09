@@ -210,15 +210,37 @@ export const ContactSection = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
     
-    // Construct the email body
-    const subject = encodeURIComponent(`New Contact Form Submission from ${formData.firstName} ${formData.lastName}`);
-    const body = encodeURIComponent(`You have a new inquiry from your website.
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ 
+          "form-name": "contact", 
+          ...formData,
+          name: `${formData.firstName} ${formData.lastName}` 
+        }),
+      });
+      
+      setIsSuccess(true);
+      setFormData({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (error) {
+      console.error("Netlify Submission Error:", error);
+      // Fallback to mailto if Netlify fails or we're not on Netlify
+      const subject = encodeURIComponent(`New Contact Form Submission from ${formData.firstName} ${formData.lastName}`);
+      const body = encodeURIComponent(`You have a new inquiry from your website.
 
 Name: ${formData.firstName} ${formData.lastName}
 Email: ${formData.email}
@@ -227,14 +249,12 @@ Service Required: ${formData.service}
 Message/Details:
 ${formData.details}
 `);
-
-    // Open user's default mail client to send the email
-    window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
-
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    setFormData({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
-    setTimeout(() => setIsSuccess(false), 5000);
+      window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
+      
+      setIsSuccess(true); // Still show success as it opened mail client
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -262,7 +282,13 @@ ${formData.details}
                 Ready to upgrade your infrastructure?
               </h2>
 
-              <form className="space-y-8 font-mono text-sm" onSubmit={handleSubmit}>
+              <form 
+                name="contact" 
+                data-netlify="true" 
+                className="space-y-8 font-mono text-sm" 
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">First Name</label>

@@ -8,6 +8,22 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Hidden static form for Netlify Crawler -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <select name="service">
+        <option>Web Operations</option>
+        <option>AI Automations</option>
+        <option>GIS Mapping</option>
+        <option>Technical Reports</option>
+        <option>Content & Design</option>
+      </select>
+      <textarea name="details"></textarea>
+    </form>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
