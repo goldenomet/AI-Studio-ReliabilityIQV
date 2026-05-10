@@ -9,6 +9,7 @@ import { ServiceDetail } from './components/ServiceDetail';
 import { HeroSection, MissionSection } from './components/SectionsPart1';
 import { CompetenciesSection, NarrativeSection, ContactSection, TrendingProducts, ScrollToTopButton } from './components/SectionsPart2';
 import { Preloader } from './components/Preloader';
+import ScrollPath from './components/ScrollPath';
 import { OmniReveal } from './components/OmniReveal';
 import { MagneticGlowButton } from './components/MagneticGlowButton';
 
@@ -220,9 +221,11 @@ export default function App() {
                  />
                </div>
             </section>
-
-            <NarrativeSection />
-            <MissionSection onBack={() => setCurrentPage('services')} onExplore={() => setCurrentPage('services')} />
+            
+            {/* Motion Path Section */}
+            <section className="w-full bg-[#e0edea] relative z-10">
+              <ScrollPath />
+            </section>
           </motion.div>
         );
       case 'services':

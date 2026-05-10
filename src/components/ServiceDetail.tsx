@@ -89,11 +89,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Examples <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -445,11 +447,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -803,11 +807,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -1123,11 +1129,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Showreel <PlaySquare size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -1193,9 +1201,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="mt-4">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="font-bold text-lg">More Animations</h3>
-                  <button className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 hover:opacity-70 transition-opacity">
+                  <motion.button 
+                    whileHover={{ opacity: 0.7, x: 4 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all"
+                  >
                     View All <ArrowRight size={12} />
-                  </button>
+                  </motion.button>
                 </div>
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1341,11 +1353,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -1367,9 +1381,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                       </div>
                       <div className="text-[11px] text-white/50">AI agent orchestrating customer onboarding</div>
                     </div>
-                    <button className="border border-white/20 px-4 py-2 rounded-lg text-xs hover:bg-white/10 transition-colors flex items-center gap-2">
+                    <motion.button 
+                      whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                      whileTap={{ scale: 0.95 }}
+                      className="border border-white/20 px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2"
+                    >
                       <span className="text-white/50">{'>_'}</span> View Logs
-                    </button>
+                    </motion.button>
                  </div>
 
                  {/* Flowchart (simplified representation) */}
@@ -1496,9 +1514,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
           {/* Use Cases Section */}
           <div className="flex justify-between items-end mb-8">
              <h3 className="text-xl font-bold">Automation Use Cases</h3>
-             <button className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 hover:opacity-70 transition-opacity">
+             <motion.button 
+               whileHover={{ opacity: 0.7, x: 4 }}
+               whileTap={{ scale: 0.95 }}
+               className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all"
+             >
                View All Use Cases <ArrowUpRight size={12} />
-             </button>
+             </motion.button>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-6">
@@ -1606,11 +1628,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
-                <button 
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-white/50 transition-colors"
+                <motion.button 
+                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   Technical Specs <ArrowRight size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
