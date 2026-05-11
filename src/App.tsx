@@ -42,7 +42,7 @@ const FounderToggle = () => {
   };
 
   // Modern background colors for non-front cards
-  const bgColors = ['bg-[#4c1d95]', 'bg-[#1e1b4b]', 'bg-[#7f1d1d]'];
+  const bgColors = ['bg-accent/80', 'bg-accent/60', 'bg-accent/40'];
   const currentFounder = FOUNDERS[currentIndex];
 
   return (
@@ -62,9 +62,9 @@ const FounderToggle = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="bg-white/98 dark:bg-brand-dark/98 backdrop-blur-sm px-3 py-1 rounded-[8px] shadow-sm border border-brand-accent/20 whitespace-nowrap ring-1 ring-white/10"
+            className="bg-bg-card/95 backdrop-blur-sm px-3 py-1 rounded-[8px] shadow-sm border border-accent/20 whitespace-nowrap ring-1 ring-white/10"
           >
-            <span className="text-brand-dark dark:text-brand-bg text-[12px] md:text-xs font-medium tracking-tight leading-none">
+            <span className="text-text-primary text-[12px] md:text-xs font-medium tracking-tight leading-none">
               {currentFounder.name}
             </span>
           </motion.div>
@@ -73,7 +73,7 @@ const FounderToggle = () => {
 
       {/* Soft Background Pattern behind the stack */}
       <div className="absolute -inset-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(var(--color-brand-accent)_0.8px,transparent_0.8px)] [background-size:12px_12px] opacity-20" />
+        <div className="absolute inset-0 bg-[radial-gradient(var(--color-accent)_0.8px,transparent_0.8px)] [background-size:12px_12px] opacity-20" />
       </div>
 
       {FOUNDERS.map((founder, index) => {
@@ -110,8 +110,8 @@ const FounderToggle = () => {
             transition={{ type: "spring", stiffness: 400, damping: 28 }}
             className={`absolute inset-0 rounded-2xl ring-2 transition-shadow duration-300 ${
               isFront 
-                ? "bg-white dark:bg-brand-dark ring-white dark:ring-white/20 shadow-2xl shadow-black/20 group-hover:shadow-black/30" 
-                : `${bgColors[index % bgColors.length]} ring-white/30 dark:ring-white/10 shadow-lg`
+                ? "bg-bg-card ring-accent/20 shadow-2xl shadow-black/10 group-hover:shadow-black/20" 
+                : `${bgColors[index % bgColors.length]} ring-white/20 shadow-lg`
             } origin-bottom pointer-events-none overflow-hidden`}
           >
             <img 
@@ -182,37 +182,38 @@ export default function App() {
       case 'about':
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
-            <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-brand-bg/80 dark:bg-brand-dark/80 overflow-hidden flex flex-col justify-end pb-8">
+            <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-bg-primary overflow-hidden flex flex-col justify-end pb-8">
               <div className="absolute inset-0 z-0 flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:mix-blend-overlay mix-blend-multiply opacity-50" />
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:opacity-20 contrast-125" />
+                <div className="absolute inset-0 bg-bg-primary/40 backdrop-blur-[2px]" />
               </div>
               
               <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow" style={{ minHeight: '806px' }}>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2 max-sm:mb-[15px] max-sm:pt-0 max-sm:pb-0 mt-auto">
-                   <h1 className="text-6xl md:text-[100px] lg:text-[130px] leading-[0.9] font-medium text-brand-dark dark:text-brand-bg tracking-tight">About Us</h1>
-                   <p className="text-lg md:text-xl text-brand-dark/80 dark:text-brand-bg/80 max-w-[360px] pb-2 md:pb-6 leading-relaxed">
+                   <h1 className="text-6xl md:text-[100px] lg:text-[130px] leading-[0.9] font-medium text-text-primary tracking-tight">About Us</h1>
+                   <p className="text-lg md:text-xl text-text-secondary max-w-[360px] pb-2 md:pb-6 leading-relaxed">
                      ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.
                    </p>
                 </div>
                 
                 <div className="flex flex-col items-center justify-center pt-8 pb-4">
-                  <div className="text-center text-sm md:text-base text-brand-dark/60 dark:text-brand-bg/60 font-medium animate-pulse">
+                  <div className="text-center text-sm md:text-base text-text-secondary/60 font-medium animate-pulse">
                     Scroll down <span className="ml-2">↓</span>
                   </div>
                 </div>
               </div>
             </section>
             
-            <section className="w-full py-24 md:py-48 px-6 bg-brand-bg relative z-10 flex flex-col items-center">
+            <section className="w-full py-24 md:py-48 px-6 bg-bg-primary relative z-10 flex flex-col items-center transition-colors duration-500">
                <div className="max-w-5xl mx-auto">
                  <OmniReveal 
                    ContainerTag="h2"
-                   className="text-2xl md:text-4xl lg:text-[40px] font-medium text-brand-dark leading-[1.4] tracking-tight"
+                   className="text-2xl md:text-4xl lg:text-[40px] font-medium text-text-primary leading-[1.4] tracking-tight"
                    text="We provide innovative [] services that combine technology, research, and operational intelligence. Founded by [] in 2026, our focus is on delivering accurate insights, structured data solutions, and digital systems that support smarter decision-making. As a growing company, we are committed to helping businesses and organizations transform information into actionable [] through modern tools, analysis, and efficient workflows. Now onboarding a limited number of early clients. Only 2/6 July spots left — []"
                    components={[
-                     <span key="1" className="bg-brand-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
+                     <span key="1" className="bg-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
                      <FounderToggle key="2" />,
-                     <span key="3" className="border-2 border-brand-accent text-brand-accent px-3 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
+                     <span key="3" className="border-2 border-accent text-accent px-3 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
                      <MagneticGlowButton key="4" onClick={() => setCurrentPage('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
                    ]}
                    scrollHeight={400}
@@ -223,8 +224,8 @@ export default function App() {
             </section>
             
             {/* Motion Path Section */}
-            <section className="w-full bg-[#e0edea] relative z-10">
-              <ScrollPath />
+            <section className="w-full bg-bg-primary transition-colors duration-500 relative z-10">
+              <ScrollPath onNavigate={setCurrentPage} />
             </section>
           </motion.div>
         );
@@ -233,8 +234,8 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <ServicesHero />
             <EngineeredServicesSection onNavigate={setCurrentPage} />
-            <div className="bg-brand-footer text-white py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-white/10" />
+            <div className="bg-bg-secondary text-text-primary py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-border-primary" />
               <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
               <MagneticGlowButton 
                 onClick={() => setCurrentPage('contact')}

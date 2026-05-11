@@ -2,21 +2,29 @@
 @import "tailwindcss";
 
 :root {
-  --brand-bg: #E0EDEA;
-  --brand-dark: #084C55;
-  --brand-accent: #0D838E;
-  --brand-accent-light: #129AA6;
-  --brand-card: #FFFFFF;
-  --brand-footer: #084C55;
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-accent: #0D838E;
+  --border-primary: rgba(15, 23, 42, 0.1);
+  --border-subtle: rgba(15, 23, 42, 0.05);
+  --accent: #0D838E;
+  --accent-glow: rgba(13, 131, 142, 0.2);
 }
 
 .dark {
-  --brand-bg: #0A1618;
-  --brand-dark: #E2EFF1;
-  --brand-accent: #14B8C6;
-  --brand-accent-light: #0D838E;
-  --brand-card: #0F2528;
-  --brand-footer: #050E10;
+  --bg-primary: #0A1618;
+  --bg-secondary: #101E20;
+  --bg-card: #142B2E;
+  --text-primary: #E2EFF1;
+  --text-secondary: #94A3B8;
+  --text-accent: #14B8C6;
+  --border-primary: rgba(226, 239, 241, 0.1);
+  --border-subtle: rgba(226, 239, 241, 0.05);
+  --accent: #14B8C6;
+  --accent-glow: rgba(20, 184, 198, 0.3);
 }
 
 @theme {
@@ -24,100 +32,59 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Playfair Display", serif;
 
-  --color-brand-bg: var(--brand-bg);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-accent-light: var(--brand-accent-light);
-  --color-brand-card: var(--brand-card);
-  --color-brand-footer: var(--brand-footer);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-accent: var(--text-accent);
+  --color-border-primary: var(--border-primary);
+  --color-border-subtle: var(--border-subtle);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
 }
 
 @layer base {
   body {
-    @apply bg-brand-bg text-brand-dark font-sans antialiased selection:bg-brand-accent/30;
+    @apply bg-bg-primary text-text-primary font-sans antialiased selection:bg-accent/30 transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-mono tracking-tight;
+    @apply font-mono tracking-tight text-text-primary;
+  }
+
+  p {
+    @apply text-text-secondary;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
   }
   
   .glass-dark {
-    @apply bg-brand-dark/10 backdrop-blur-md border border-brand-dark/10;
+    @apply bg-text-primary/10 backdrop-blur-md border border-text-primary/10 shadow-xl;
   }
 
   .crystal-glass {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.7) 0%,
-      rgba(255, 255, 255, 0.4) 40%,
-      rgba(255, 255, 255, 0.2) 100%
-    );
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
-      inset 0 1px 2px rgba(255, 255, 255, 0.8),
-      0 10px 30px rgba(0, 0, 0, 0.1);
+    @apply bg-bg-card/70 backdrop-blur-[40px] border border-border-primary shadow-xl;
   }
 
   .dark .crystal-glass {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0.10) 40%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      inset 0 1px 2px rgba(255, 255, 255, 0.4),
-      0 20px 40px rgba(0, 0, 0, 0.35);
+    @apply bg-bg-card/40 backdrop-blur-[40px] border border-border-primary shadow-2xl;
   }
 
   .crystal-button {
-    border-radius: 9999px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #000000;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-      0 10px 20px rgba(0, 0, 0, 0.2);
-    color: white;
+    @apply rounded-full transition-all duration-300 bg-text-primary text-bg-primary border border-border-primary shadow-lg hover:scale-105 active:scale-95;
   }
 
   .dark .crystal-button {
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-
-  .crystal-button:hover {
-    transform: scale(1.05);
-    background: #111111;
-    box-shadow: 
-      0 15px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  .dark .crystal-button:hover {
-    background: #111111;
-    box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.6),
-      0 0 15px rgba(255, 255, 255, 0.1);
-  }
-
-  .crystal-button:active {
-    transform: scale(0.95);
+    @apply bg-bg-card text-text-primary border border-border-primary shadow-2xl;
   }
 
   .text-glow {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 12px rgba(34, 211, 238, 0.2);
+    text-shadow: 0 0 8px var(--accent-glow), 0 0 12px var(--accent-glow);
   }
 
   .text-shadow-sm {
@@ -145,11 +112,10 @@
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    @apply bg-text-primary/10 rounded-full;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(var(--brand-accent), 0.3);
+    @apply bg-accent/30;
   }
 
   /* ScrollPath Animations */
@@ -161,13 +127,13 @@
     height: 350vh;
     margin-bottom: 110px;
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px),
-      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      linear-gradient(currentColor 2px, transparent 2px),
+      linear-gradient(90deg, currentColor 2px, transparent 2px),
+      linear-gradient(currentColor 1px, transparent 1px),
+      linear-gradient(90deg, currentColor 1px, transparent 1px);
     background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
     background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-    background-color: #e0edea;
+    @apply bg-bg-primary text-text-primary/5 transition-colors duration-500;
   }
   .sp-container {
     position: absolute;
@@ -175,28 +141,24 @@
     width: 480px;
     height: auto;
     padding: 3rem;
-    border: none;
-    background: #ffffff;
-    border-radius: 32px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 40px rgba(10, 58, 64, 0.08);
+    @apply bg-bg-card rounded-[32px] flex flex-col justify-start items-start text-left border border-border-primary shadow-lg transition-all duration-500;
+  }
+  .dark .sp-container {
+    @apply bg-bg-card/80 backdrop-blur-md shadow-2xl;
   }
   .sp-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(10, 58, 64, 0.15);
+    @apply -translate-y-1 shadow-2xl;
   }
-  .sp-initial { left: 50%; top: 5%; transform: translate(-50%, 0); background: transparent; box-shadow: none; padding: 0; }
-  .sp-initial:hover { transform: translate(-50%, 0); box-shadow: none; }
+  .sp-initial { left: 50%; top: 5%; transform: translate(-50%, 0); background: transparent; shadow: none; padding: 0; backdrop-filter: none; -webkit-backdrop-filter: none; border: none; }
+  .sp-initial:hover { transform: translate(-50%, 0); shadow: none; }
+  .dark .sp-initial { background: transparent; shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; border: none; }
   .sp-second  { left: 10%; top: 22%; }
   .sp-third   { right: 10%; top: 40%; }
   .sp-fourth  { left: 15%; top: 60%; }
   .sp-fifth   { right: 15%; top: 78%; }
-  .sp-sixth   { left: 50%; top: 92%; transform: translate(-50%, 0); background: #ffffff; box-shadow: 0 10px 40px rgba(10, 58, 64, 0.08); }
-  .sp-sixth:hover { transform: translate(-50%, -5px); box-shadow: 0 20px 40px rgba(10, 58, 64, 0.15); }
+  .sp-sixth   { left: 50%; top: 92%; transform: translate(-50%, 0); @apply bg-bg-card shadow-lg border border-border-primary; }
+  .sp-sixth:hover { transform: translate(-50%, -5px); @apply shadow-2xl; }
+  .dark .sp-sixth { @apply bg-bg-card/80 shadow-2xl; }
   
   .sp-marker {
     width: 20px;
@@ -208,7 +170,7 @@
     height: 600px;
     z-index: 1; /* Under the text panels */
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cpath fill='%2370c06a' d='M656.5 259.5c41.5 54.5 59 133 39 203-20 70-77.5 131.5-144.5 160-67 28.5-143.5 24-210.5-8.5-67-32.5-124.5-93-138.5-164.5C188 378 217.5 295.5 277 241c59.5-54.5 149-81 228.5-69 79.5 12 109.5 33 151 87.5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cpath fill='%2370ca6a' fill-opacity='0.1' d='M656.5 259.5c41.5 54.5 59 133 39 203-20 70-77.5 131.5-144.5 160-67 28.5-143.5 24-210.5-8.5-67-32.5-124.5-93-138.5-164.5C188 378 217.5 295.5 277 241c59.5-54.5 149-81 228.5-69 79.5 12 109.5 33 151 87.5z'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

@@ -94,10 +94,10 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
   ];
 
   return (
-    <section ref={containerRef} className="relative mt-20">
+    <section ref={containerRef} className="relative mt-20 bg-bg-primary py-24 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center">
-         <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Regional & International Expertise</div>
-         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-[0.9] tracking-tighter">What We Deliver.</h2>
+         <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Regional & International Expertise</div>
+         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary transition-colors duration-500 leading-[0.9] tracking-tighter">What We Deliver.</h2>
       </div>
 
       <div className="px-6">
@@ -127,10 +127,10 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
 };
 
 export const NarrativeSection = () => (
-  <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-brand-bg z-20">
+  <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500">
     <PixelSnow />
     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-12 items-center relative z-10">
-      <div className="relative rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] group">
+      <div className="relative rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] group border border-border-primary">
         <FlipCard
           className="w-full h-full absolute inset-0"
           frontContent={
@@ -139,30 +139,30 @@ export const NarrativeSection = () => (
               alt="Office work" 
               loading="lazy"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover filter grayscale contrast-125"
+              className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
             />
           }
           backContent={
-             <div className="w-full h-full bg-brand-footer flex flex-col items-center justify-center p-8 text-center text-white transition-colors duration-500">
-                <Star size={32} className="text-brand-accent mb-4" />
+             <div className="w-full h-full bg-bg-secondary flex flex-col items-center justify-center p-8 text-center text-text-primary transition-colors duration-500">
+                <Star size={32} className="text-accent mb-4" />
                 <h3 className="text-xl font-mono font-bold mb-3">Our Core Philosophy</h3>
-                <p className="text-white/80 font-mono text-xs leading-relaxed max-w-[200px] mb-16">Building systems that simply perform, without compromise.</p>
+                <p className="text-text-secondary/80 font-mono text-xs leading-relaxed max-w-[200px] mb-16">Building systems that simply perform, without compromise.</p>
              </div>
           }
         />
-        <div className="absolute bottom-10 left-10 p-10 glass rounded-3xl max-w-xs pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-          <h4 className="text-brand-accent font-mono text-2xl font-bold mb-2">Founded in 2026</h4>
-          <p className="text-white/70 font-mono text-xs leading-relaxed">
+        <div className="absolute bottom-10 left-10 p-10 bg-bg-card/40 backdrop-blur-md border border-border-primary rounded-3xl max-w-xs pointer-events-none transition-opacity duration-300 group-hover:opacity-0 shadow-xl">
+          <h4 className="text-accent font-mono text-2xl font-bold mb-2">Founded in 2026</h4>
+          <p className="text-text-secondary/70 font-mono text-xs leading-relaxed">
             From a small room of 3 engineers to a global powerhouse of 50+ experts.
           </p>
         </div>
       </div>
 
       <div>
-        <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-6">The Narrative</div>
+        <div className="font-mono text-xs uppercase tracking-widest text-accent mb-6 font-bold">The Narrative</div>
         <TextScroll 
           text="Driven by logic, defined by results."
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-dark mb-10 tracking-tight leading-tight flex flex-wrap"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-10 tracking-tight leading-tight flex flex-wrap"
         />
 
         <div className="space-y-12">
@@ -172,12 +172,12 @@ export const NarrativeSection = () => (
             { num: '03', title: 'Global Operations', text: 'Today, we manage web operations and spatial data from Lagos to London and beyond, maintaining an obsessive attention to detail for a diverse portfolio of global partners.' }
           ].map((step) => (
             <div key={step.num} className="flex gap-8 group">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-brand-accent/20 flex items-center justify-center font-mono text-sm font-bold text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-accent/20 flex items-center justify-center font-mono text-sm font-bold text-accent group-hover:bg-accent group-hover:text-bg-primary transition-all">
                 {step.num}
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-3 font-mono">{step.title}</h4>
-                <p className="text-brand-dark/50 font-mono text-sm leading-relaxed">
+                <h4 className="text-xl font-bold mb-3 font-mono text-text-primary">{step.title}</h4>
+                <p className="text-text-secondary font-mono text-sm leading-relaxed">
                   {step.text}
                 </p>
               </div>
@@ -270,15 +270,15 @@ ${formData.details}
   };
 
   return (
-    <section id="contact-section" className="pb-32 px-6">
+    <section id="contact-section" className="pb-32 px-6 bg-bg-primary transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-brand-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-brand-dark/10">
+        <div className="bg-bg-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-border-primary transition-colors duration-500">
           {/* Form */}
-          <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-brand-dark/10 relative overflow-hidden group">
+          <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-border-primary relative overflow-hidden group transition-colors duration-500">
             <GrainyGradient />
             <div className="relative z-10">
-              <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Start a Conversation</div>
-              <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-brand-dark">
+              <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Start a Conversation</div>
+              <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-text-primary dark:text-green-800 transition-colors duration-500">
                 Ready to upgrade your infrastructure?
               </h2>
 
@@ -291,69 +291,69 @@ ${formData.details}
                 <input type="hidden" name="form-name" value="contact" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">First Name</label>
+                    <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">First Name</label>
                     <input 
                       type="text" 
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
                       placeholder="John" 
-                      className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                      className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
                     />
                     {errors.firstName && <p className="text-red-500 text-[10px] mt-1">{errors.firstName}</p>}
                   </div>
                   <div>
-                     <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Last Name</label>
+                     <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Last Name</label>
                      <input 
                       type="text" 
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
                       placeholder="Doe" 
-                      className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                      className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
                     />
                     {errors.lastName && <p className="text-red-500 text-[10px] mt-1">{errors.lastName}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Work Email</label>
+                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Work Email</label>
                   <input 
                     type="email" 
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@company.com" 
-                    className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                    className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
                   />
                   {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Service Interest</label>
+                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Service Interest</label>
                   <select 
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-black/5 focus:border-brand-accent/30 focus:bg-white/60 transition-all text-brand-dark shadow-sm"
+                    className="w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-border-primary focus:border-accent/30 transition-all text-text-primary dark:text-green-800 shadow-sm"
                   >
-                    <option>Web Operations</option>
-                    <option>AI Automations</option>
-                    <option>GIS Mapping</option>
-                    <option>Technical Reports</option>
-                    <option>Content & Design</option>
+                    <option className="dark:bg-bg-card">Web Operations</option>
+                    <option className="dark:bg-bg-card">AI Automations</option>
+                    <option className="dark:bg-bg-card">GIS Mapping</option>
+                    <option className="dark:bg-bg-card">Technical Reports</option>
+                    <option className="dark:bg-bg-card">Content & Design</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase text-brand-dark/50 mb-2 font-bold tracking-tighter">Project Details</label>
+                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Project Details</label>
                   <textarea 
                     name="details"
                     value={formData.details}
                     onChange={handleChange}
                     rows={4} 
                     placeholder="Tell us about your technical challenges..." 
-                    className={`w-full bg-white/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-black/5'} focus:border-brand-accent/30 focus:bg-white/60 transition-all resize-none text-brand-dark placeholder:text-brand-dark/40 shadow-sm`}
+                    className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all resize-none text-text-primary dark:text-green-800 placeholder:text-text-secondary/40 shadow-sm`}
                   ></textarea>
                   {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
                 </div>
@@ -370,19 +370,19 @@ ${formData.details}
           </div>
 
           {/* Map/Info */}
-          <div className="lg:w-1/2 relative bg-brand-bg/50 p-6 md:p-12 lg:p-20 flex flex-col justify-between overflow-hidden">
+          <div className="lg:w-1/2 relative bg-bg-secondary/50 p-6 md:p-12 lg:p-20 flex flex-col justify-between overflow-hidden transition-colors duration-500">
             {/* Map Placeholder */}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                <img 
                 src={fallbackLogo} 
                 loading="lazy"
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale opacity-40" 
+                className="w-full h-full object-cover grayscale opacity-40 dark:opacity-20 transition-opacity duration-500" 
                 alt="map"
               />
             </div>
             
-            <div className="relative z-10 flex-grow w-full rounded-2xl overflow-hidden shadow-lg mb-8 h-64 md:h-auto shrink-0 md:shrink">
+            <div className="relative z-10 flex-grow w-full rounded-2xl overflow-hidden shadow-lg mb-8 h-64 md:h-auto shrink-0 md:shrink border border-border-primary">
                <iframe 
                 src="https://maps.google.com/maps?q=41%20Akeem%20Salami%20St,%20Idimu,%20Lagos%20102213,%20Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%" 
@@ -391,20 +391,20 @@ ${formData.details}
                 allowFullScreen={true}
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0"
+                className="absolute inset-0 dark:brightness-75 dark:contrast-125 dark:invert-[.9] dark:hue-rotate-180 transition-all duration-500"
               />
             </div>
 
-            <div className="relative z-10 bg-transparent border border-brand-dark/10 p-6 lg:p-8 rounded-[24px] md:mt-0 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between flex-wrap items-start sm:items-center">
+            <div className="relative z-10 bg-transparent border border-border-primary p-6 lg:p-8 rounded-[24px] md:mt-0 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between flex-wrap items-start sm:items-center transition-colors duration-500">
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-brand-dark/50 mb-2 font-bold">Direct Line</div>
-                <div className="font-mono text-[13px] md:text-sm text-brand-dark tracking-tighter leading-relaxed font-medium whitespace-nowrap">
+                <div className="text-[10px] uppercase tracking-widest text-text-secondary/50 mb-2 font-bold transition-colors duration-500">Direct Line</div>
+                <div className="font-mono text-[13px] md:text-sm text-text-primary tracking-tighter leading-relaxed font-medium whitespace-nowrap transition-colors duration-500">
                   +234 9075934287 <br className="sm:hidden" /> <span className="hidden sm:inline">&bull;</span> +234 906539605
                 </div>
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-widest text-brand-dark/50 mb-2 font-bold sm:text-right">Support Email</div>
-                <div className="font-mono text-[13px] md:text-[14px] text-brand-dark tracking-tighter leading-normal font-medium break-all sm:break-normal truncate sm:text-right">reliabilityiqventures@gmail.com</div>
+                <div className="text-[10px] uppercase tracking-widest text-text-secondary/50 mb-2 font-bold sm:text-right transition-colors duration-500">Support Email</div>
+                <div className="font-mono text-[13px] md:text-[14px] text-text-primary tracking-tighter leading-normal font-medium break-all sm:break-normal truncate sm:text-right transition-colors duration-500">reliabilityiqventures@gmail.com</div>
               </div>
             </div>
           </div>
@@ -415,18 +415,18 @@ ${formData.details}
 };
 
 export const TrendingProducts = () => (
-  <section className="pt-20 pb-32 px-6">
+  <section className="pt-20 pb-32 px-6 bg-bg-primary transition-colors duration-500">
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
         <div className="max-w-2xl">
-          <div className="font-mono text-xs uppercase tracking-widest text-brand-accent mb-4">Domestic & Global Solutions</div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-dark leading-[0.9]">
+          <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Domestic & Global Solutions</div>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[0.9]">
             Market-Leading <br /> Infrastructures.
           </h2>
         </div>
         <div className="flex flex-wrap gap-3 font-mono">
           <MagneticGlowButton className="p-3 !px-4"><Search size={18} /></MagneticGlowButton>
-          <MagneticGlowButton className="flex items-center gap-2 p-3 !px-4 border-white/20 text-xs sm:text-sm"><Filter size={18} /> Sort by popularity</MagneticGlowButton>
+          <MagneticGlowButton className="flex items-center gap-2 p-3 !px-4 border-border-primary text-text-primary text-xs sm:text-sm"><Filter size={18} /> Sort by popularity</MagneticGlowButton>
         </div>
       </div>
 
@@ -444,7 +444,7 @@ export const TrendingProducts = () => (
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-brand-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-brand-dark/5"
+            className="bg-bg-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-border-primary"
           >
             <div className="aspect-video relative overflow-hidden">
                <img 
@@ -454,16 +454,16 @@ export const TrendingProducts = () => (
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover filter grayscale brightness-75 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700" 
               />
-               <div className="absolute top-4 right-4 bg-brand-accent text-white px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
+               <div className="absolute top-4 right-4 bg-accent text-bg-primary px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
             </div>
             <div className="p-6 lg:p-8">
                <div className="flex justify-between items-start mb-4 gap-2">
-                 <h3 className="text-lg lg:text-xl font-bold font-mono tracking-tight group-hover:text-brand-accent transition-colors">{prod.title}</h3>
+                 <h3 className="text-lg lg:text-xl font-bold font-mono tracking-tight group-hover:text-accent transition-colors text-text-primary">{prod.title}</h3>
                  <div className="flex text-amber-400 shrink-0"><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /></div>
                </div>
-               <p className="text-brand-dark/50 font-mono text-[11px] leading-relaxed mb-6">{prod.desc}</p>
-               <div className="flex justify-between items-center border-t border-brand-dark/5 pt-6">
-                 <div className="font-mono font-bold text-brand-dark">{prod.price}</div>
+               <p className="text-text-secondary/70 font-mono text-[11px] leading-relaxed mb-6">{prod.desc}</p>
+               <div className="flex justify-between items-center border-t border-border-primary pt-6">
+                 <div className="font-mono font-bold text-text-primary">{prod.price}</div>
                  <MagneticGlowButton className="p-3 !px-3"><Info size={16} /></MagneticGlowButton>
                </div>
             </div>
@@ -499,7 +499,7 @@ export const ScrollToTopButton = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-4 crystal-button text-white shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer !bg-[#338f82]"
+          className="fixed bottom-6 right-6 z-50 p-4 rounded-xl backdrop-blur-md border border-accent/20 text-bg-primary shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer !bg-accent"
         >
           <ArrowUp size={24} />
         </motion.button>

@@ -6,7 +6,11 @@ import { Users, Wallet, Settings2, Zap, MessageSquare, ArrowRight } from "lucide
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-export default function ScrollPath() {
+interface ScrollPathProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function ScrollPath({ onNavigate }: ScrollPathProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -85,14 +89,14 @@ export default function ScrollPath() {
   }, []);
 
   return (
-    <div ref={rootRef} className="overflow-hidden font-mono bg-[#e0edea]">
+    <div ref={rootRef} className="overflow-hidden font-mono bg-bg-primary transition-colors duration-500">
       <div className="sp-spacer" />
       <div className="sp-main">
         {/* Intro */}
         <div className="sp-container sp-initial !border-none !bg-transparent text-center !w-auto !h-auto max-w-2xl">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-6xl font-bold text-[#0a3a40] tracking-tighter uppercase italic">Why Choose Us?</h2>
-            <p className="text-[#0a3a40]/70 text-sm md:text-base leading-relaxed">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
+            <h2 className="text-4xl md:text-6xl font-bold text-text-primary tracking-tighter uppercase italic transition-colors duration-500">Why Choose Us?</h2>
+            <p className="text-text-secondary text-sm md:text-base leading-relaxed transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
           <div className="sp-box absolute -bottom-24 left-1/2 -translate-x-1/2" />
         </div>
@@ -100,9 +104,12 @@ export default function ScrollPath() {
         {/* 1. Expert Team */}
         <div className="sp-container sp-second group">
           <div className="space-y-4">
-            <h3 className="text-[#0a3a40] font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none">Expert Team</h3>
-            <p className="text-[#0a3a40]/70 text-base md:text-lg leading-relaxed">Our squad of tech aficionados specializes in transforming your ideas into reality. Yes, we do speak fluent geek.</p>
-            <button className="bg-brand-accent text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2">
+            <h3 className="text-text-primary font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none transition-colors duration-500">Expert Team</h3>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed transition-colors duration-500 font-sans">Our squad of tech aficionados specializes in transforming your ideas into reality. Yes, we do speak fluent geek.</p>
+            <button 
+              onClick={() => onNavigate?.('about')}
+              className="bg-accent text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2"
+            >
               Meet Team <ArrowRight size={14} />
             </button>
           </div>
@@ -111,9 +118,12 @@ export default function ScrollPath() {
         {/* 2. Affordable Prices */}
         <div className="sp-container sp-third group">
           <div className="space-y-4">
-            <h3 className="text-[#0a3a40] font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none">Affordable Prices</h3>
-            <p className="text-[#0a3a40]/70 text-base md:text-lg leading-relaxed">Get premium tech services without shredding your wallet. Enjoy value without compromise.</p>
-            <button className="bg-green-500 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2">
+            <h3 className="text-text-primary font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none transition-colors duration-500">Affordable Prices</h3>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed transition-colors duration-500 font-sans">Get premium tech services without shredding your wallet. Enjoy value without compromise.</p>
+            <button 
+              onClick={() => onNavigate?.('services')}
+              className="bg-accent/80 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2"
+            >
               Pricing <ArrowRight size={14} />
             </button>
           </div>
@@ -122,9 +132,12 @@ export default function ScrollPath() {
         {/* 3. Custom Solutions */}
         <div className="sp-container sp-fourth group">
           <div className="space-y-4">
-            <h3 className="text-[#0a3a40] font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none">Custom Solutions</h3>
-            <p className="text-[#0a3a40]/70 text-base md:text-lg leading-relaxed">No cookie-cutter approaches here. We tailor our services to fit your unique style and needs.</p>
-            <button className="bg-blue-500 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2">
+            <h3 className="text-text-primary font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none transition-colors duration-500">Custom Solutions</h3>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed transition-colors duration-500 font-sans">No cookie-cutter approaches here. We tailor our services to fit your unique style and needs.</p>
+            <button 
+              onClick={() => onNavigate?.('services')}
+              className="bg-accent/60 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2"
+            >
               Solutions <ArrowRight size={14} />
             </button>
           </div>
@@ -133,9 +146,12 @@ export default function ScrollPath() {
         {/* 4. Fast Delivery */}
         <div className="sp-container sp-fifth group">
           <div className="space-y-4">
-            <h3 className="text-[#0a3a40] font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none">Fast Delivery</h3>
-            <p className="text-[#0a3a40]/70 text-base md:text-lg leading-relaxed">When you're ready to launch, we are too. Speedy services with no compromises on quality.</p>
-            <button className="bg-orange-500 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2">
+            <h3 className="text-text-primary font-sans font-bold text-4xl md:text-5xl tracking-tight leading-none transition-colors duration-500">Fast Delivery</h3>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed transition-colors duration-500 font-sans">When you're ready to launch, we are too. Speedy services with no compromises on quality.</p>
+            <button 
+              onClick={() => onNavigate?.('services')}
+              className="bg-accent/40 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity w-fit mt-2 dark:text-text-primary"
+            >
               Our Process <ArrowRight size={14} />
             </button>
           </div>
@@ -145,14 +161,17 @@ export default function ScrollPath() {
         <div className="sp-container sp-sixth group !h-auto">
           <div className="p-2 space-y-8">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-brand-accent uppercase tracking-[0.2em] text-sm font-bold">
+              <div className="flex items-center gap-2 text-accent uppercase tracking-[0.2em] text-sm font-bold">
                 <MessageSquare size={18} />
                 Let's Connect
               </div>
-              <h3 className="text-4xl md:text-6xl font-bold text-[#0a3a40] leading-tight">Contact Us Today</h3>
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed uppercase font-bold tracking-wider">Want to chat? We’re all ears! Get in touch with us for any inquiries or just to talk tech. We’re your partners in navigating the IT galaxy. Reach out and let’s make magic happen.</p>
+              <h3 className="text-4xl md:text-6xl font-bold text-text-primary leading-tight transition-colors duration-500">Contact Us Today</h3>
+              <p className="text-sm md:text-base text-text-secondary leading-relaxed uppercase font-bold tracking-wider transition-colors duration-500">Want to chat? We’re all ears! Get in touch with us for any inquiries or just to talk tech. We’re your partners in navigating the IT galaxy. Reach out and let’s make magic happen.</p>
             </div>
-            <button className="w-full bg-brand-accent text-white py-6 rounded-2xl flex items-center justify-center gap-3 font-bold hover:opacity-90 transition-opacity duration-300 group/btn uppercase tracking-widest text-base md:text-lg">
+            <button 
+              onClick={() => onNavigate?.('contact')}
+              className="w-full bg-accent text-white py-6 rounded-2xl flex items-center justify-center gap-3 font-bold hover:opacity-90 transition-opacity duration-300 group/btn uppercase tracking-widest text-base md:text-lg"
+            >
               Contact us <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
             </button>
           </div>

@@ -15,7 +15,7 @@ export const ServicesHero = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-brand-bg pt-[110px] transition-colors duration-500">
+    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-bg-primary pt-[110px] transition-colors duration-500">
       
       {/* Background Image Container */}
       <motion.div 
@@ -31,13 +31,13 @@ export const ServicesHero = () => {
           <img 
             src={servicehero}
             alt="Modern Architecture" 
-            className="w-full h-full object-cover dark:opacity-80 dark:brightness-75 transition-all duration-500"
+            className="w-full h-full object-cover dark:opacity-60 dark:brightness-50 transition-all duration-500"
             referrerPolicy="no-referrer"
           />
         </motion.div>
         
         {/* Theme-aware Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-brand-bg/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-bg-primary/10 pointer-events-none" />
       </motion.div>
 
       {/* Hero Content - Bottom Aligned */}
@@ -52,7 +52,7 @@ export const ServicesHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-serif text-brand-dark tracking-normal leading-tight mb-4 text-3xl sm:text-4xl md:text-[38px] transition-colors duration-500"
+            className="font-serif text-text-primary tracking-normal leading-tight mb-4 text-3xl sm:text-4xl md:text-[38px] transition-colors duration-500 font-bold"
             style={{ 
               maxWidth: '600px',
               minHeight: '50px',
@@ -68,7 +68,7 @@ export const ServicesHero = () => {
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.2, ease: "circOut" }}
-            className="w-full h-[1px] bg-brand-dark/20 dark:bg-white/30 origin-left mb-8 transition-colors duration-500"
+            className="w-full h-[1px] bg-border-primary origin-left mb-8 transition-colors duration-500"
           />
 
           {/* Bottom Row: Section Label + Description */}
@@ -81,8 +81,8 @@ export const ServicesHero = () => {
               transition={{ delay: 1 }}
               className="flex items-center gap-3 shrink-0"
             >
-              <div className="w-2.5 h-2.5 bg-brand-accent rounded-full shadow-[0_0_8px_var(--color-brand-accent)]" />
-              <span className="text-brand-dark text-xs md:text-sm font-medium tracking-[0.05em] transition-colors duration-500">Services</span>
+              <div className="w-2.5 h-2.5 bg-accent rounded-full shadow-[0_0_12px_var(--accent-glow)]" />
+              <span className="text-text-primary text-xs md:text-sm font-bold uppercase tracking-[0.2em] transition-colors duration-500 font-mono">Services</span>
             </motion.div>
 
             {/* Description */}
@@ -90,7 +90,7 @@ export const ServicesHero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="text-brand-dark/70 dark:text-brand-dark/80 text-sm md:text-base max-w-xl leading-relaxed font-light transition-colors duration-500"
+              className="text-text-secondary dark:text-text-secondary text-sm md:text-base max-w-xl leading-relaxed font-normal transition-colors duration-500"
             >
               Experience features that simplify your tech life with flair and functionality.
             </motion.p>

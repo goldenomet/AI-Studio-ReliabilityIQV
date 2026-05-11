@@ -5,7 +5,7 @@ import logo from '@/src/assets/images/logo.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
   <div className="relative group">
-    <a href={href} className="hover:text-brand-accent transition-colors block">
+    <a href={href} className="hover:text-brand-accent hover:scale-125 hover:-translate-y-1 transition-all duration-300 block">
       <Icon size={20} />
     </a>
     <motion.div
@@ -21,17 +21,17 @@ export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: an
 );
 
 export const Footer = () => (
-  <footer className="bg-brand-footer text-white pt-20 pb-10 transition-colors duration-500">
+  <footer className="bg-bg-secondary text-text-primary pt-20 pb-10 transition-colors duration-500 border-t border-border-primary">
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
-          <div className="flex items-center gap-2 mb-6 text-white font-mono">
-            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain brightness-0 invert" />
+          <div className="flex items-center gap-2 mb-6 text-text-primary font-mono">
+            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain dark:brightness-0 dark:invert" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>
           </div>
-          <p className="text-white/60 font-mono text-sm leading-relaxed mb-8 max-w-xs">
+          <p className="text-text-secondary font-mono text-sm leading-relaxed mb-8 max-w-xs">
             Optimizing digital infrastructure from Lagos to the world. We build resilient systems for the modern global enterprise.
           </p>
           <div className="flex gap-4">
@@ -42,41 +42,39 @@ export const Footer = () => (
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">Services</h4>
-          <ul className="flex flex-col gap-4 font-mono text-sm text-white/70">
-            <li><a href="#" className="hover:text-white transition-colors">Web Operations</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">AI Automations</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">GIS Mapping</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Technical Reports</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Content & Design</a></li>
+          <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">Services</h4>
+          <ul className="flex flex-col gap-4 font-mono text-sm text-text-secondary">
+            <li><a href="#" className="hover:text-text-primary transition-colors">Web Operations</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">AI Automations</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">GIS Mapping</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">Technical Reports</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">Content & Design</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">Company</h4>
-          <ul className="flex flex-col gap-4 font-mono text-sm text-white/70">
-            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Leadership Team</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+          <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">Company</h4>
+          <ul className="flex flex-col gap-4 font-mono text-sm text-text-secondary">
+            <li><a href="#" className="hover:text-text-primary transition-colors">About Us</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">Case Studies</a></li>
+            <li><a href="#" className="hover:text-text-primary transition-colors">Contact</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-mono text-sm uppercase tracking-widest text-brand-accent mb-6">System Status</h4>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-4 font-mono text-xs">
+          <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">System Status</h4>
+          <div className="bg-bg-primary/50 border border-border-primary rounded-xl p-4 font-mono text-xs">
             <div className="flex items-center justify-between mb-3">
               <span>Global API</span>
-              <span className="flex items-center gap-1.5 text-emerald-400">
-                <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+              <span className="flex items-center gap-1.5 text-emerald-500 dark:text-emerald-400">
+                <span className="w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse"></span>
                 Operational
               </span>
             </div>
             <div className="flex items-center justify-between">
               <span>Cloud Nodes</span>
-              <span className="flex items-center gap-1.5 text-emerald-400">
-                <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+              <span className="flex items-center gap-1.5 text-emerald-500 dark:text-emerald-400">
+                <span className="w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse"></span>
                 Operational
               </span>
             </div>
@@ -84,12 +82,12 @@ export const Footer = () => (
         </div>
       </div>
 
-      <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 font-mono text-[10px] uppercase tracking-widest">
+      <div className="pt-8 border-t border-border-primary flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary font-mono text-[10px] uppercase tracking-widest">
         <p>© 2026 ReliabilityIQ Ventures. All rights reserved.</p>
         <div className="flex gap-8">
-          <a href="#" className="hover:text-white">Privacy Policy</a>
-          <a href="#" className="hover:text-white">Terms of Service</a>
-          <a href="#" className="hover:text-white">Security</a>
+          <a href="#" className="hover:text-text-primary">Privacy Policy</a>
+          <a href="#" className="hover:text-text-primary">Terms of Service</a>
+          <a href="#" className="hover:text-text-primary">Security</a>
         </div>
       </div>
     </div>

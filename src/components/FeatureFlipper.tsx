@@ -81,28 +81,28 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="service-card group relative p-6 bg-white/10 backdrop-blur-xl rounded-[24px] border border-white/20 flex items-center gap-6 cursor-pointer overflow-hidden transition-colors hover:border-white/40"
+      className="service-card group relative p-6 bg-bg-card backdrop-blur-xl rounded-[24px] border border-border-primary flex items-center gap-6 cursor-pointer overflow-hidden transition-all duration-500 hover:border-accent/30 hover:shadow-2xl"
       style={{ transformStyle: 'preserve-3d' }}
     >
       {/* Glossy Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 dark:from-white/5 to-transparent pointer-events-none transition-colors duration-500" />
       
       {/* Interactive Glow */}
       <div 
         ref={glowRef}
-        className="absolute -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#338f82]/20 blur-[60px] rounded-full pointer-events-none opacity-0"
+        className="absolute -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/20 blur-[60px] rounded-full pointer-events-none opacity-0"
       />
 
       {/* Content */}
-      <div className="relative z-10 text-xs font-bold opacity-30 group-hover:opacity-60 transition-opacity shrink-0 font-mono" style={{ transform: 'translateZ(20px)' }}>{service.id}</div>
-      <div className="relative z-10 w-12 h-12 rounded-xl border border-[#0a3a40]/10 bg-white/20 flex items-center justify-center shrink-0 shadow-inner" style={{ transform: 'translateZ(30px)' }}>
+      <div className="relative z-10 text-xs font-bold opacity-30 group-hover:opacity-60 transition-opacity shrink-0 font-mono text-text-primary" style={{ transform: 'translateZ(20px)' }}>{service.id}</div>
+      <div className="relative z-10 w-12 h-12 rounded-xl border border-border-primary bg-bg-secondary flex items-center justify-center shrink-0 shadow-inner transition-colors duration-500 text-accent" style={{ transform: 'translateZ(30px)' }}>
         {service.icon}
       </div>
       <div className="relative z-10 flex-grow" style={{ transform: 'translateZ(25px)' }}>
-        <h4 className="text-lg font-bold mb-1 tracking-tight">{service.title}</h4>
-        <p className="text-[10px] opacity-60 leading-relaxed max-w-sm">{service.desc}</p>
+        <h4 className="text-lg font-bold mb-1 tracking-tight text-text-primary">{service.title}</h4>
+        <p className="text-[10px] text-text-secondary/70 leading-relaxed max-w-sm">{service.desc}</p>
       </div>
-      <div className="relative z-10 w-10 h-10 rounded-full border border-white/20 bg-white/10 flex justify-center items-center group-hover:bg-[#0a3a40] group-hover:text-white transition-all duration-300 shadow-lg" style={{ transform: 'translateZ(40px)' }}>
+      <div className="relative z-10 w-10 h-10 rounded-full border border-border-primary bg-bg-secondary flex justify-center items-center group-hover:bg-accent group-hover:text-bg-primary transition-colors duration-300 shadow-lg text-text-primary" style={{ transform: 'translateZ(40px)' }}>
         <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
       </div>
     </div>
@@ -178,34 +178,34 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
   }, []);
 
   return (
-    <section className="bg-[#e8f1ee] py-28 px-6 font-mono text-[#0a3a40] overflow-hidden">
+    <section className="bg-bg-primary py-28 px-6 font-mono text-text-primary transition-colors duration-500 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16 mb-20 items-start">
           {/* Left Column (Unchanged structure) */}
           <div className="lg:w-[40%] lg:sticky lg:top-32">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#15464a] mb-6">Our Engineered Services</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent transition-colors duration-500 mb-6">Our Engineered Services</div>
             
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8 text-text-primary">
               Systems. Engineered <br /> for Impact.
             </h2>
             
-            <p className="text-sm leading-relaxed opacity-70 mb-12 max-w-sm font-sans">
+            <p className="text-sm leading-relaxed text-text-secondary/70 mb-12 max-w-sm font-sans">
               We deliver end-to-end digital solutions across multiple disciplines. Each service is designed as a modular system—built to integrate, scale, and drive measurable outcomes.
             </p>
             
             <button 
-              className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-bold group"
+              className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-bold group text-text-primary"
             >
               Explore Our Capabilities
               <div className="flex">
-                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-20 group-hover:opacity-100 transition-all"></span>
-                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-40 group-hover:opacity-100 transition-all"></span>
-                <span className="w-1 h-1 bg-[#15464a] rounded-full mx-0.5 opacity-100"></span>
+                <span className="w-1 h-1 bg-accent rounded-full mx-0.5 opacity-20 group-hover:opacity-100 transition-all"></span>
+                <span className="w-1 h-1 bg-accent rounded-full mx-0.5 opacity-40 group-hover:opacity-100 transition-all"></span>
+                <span className="w-1 h-1 bg-accent rounded-full mx-0.5 opacity-100"></span>
               </div>
             </button>
 
             {/* Illustration Placeholder */}
-            <div className="mt-20 opacity-20 hidden md:block">
+            <div className="mt-20 opacity-20 hidden md:block text-text-secondary">
                <div className="relative w-full h-48">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <svg width="300" height="200" viewBox="0 0 300 200" fill="none">
@@ -227,8 +227,8 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
           {/* Right Column - Advanced GSAP Interactive Section */}
           <div ref={containerRef} className="lg:w-[60%] space-y-6 relative">
             {/* Background Accent Gradients */}
-            <div className="absolute -top-20 -right-20 w-96 h-96 bg-[#338f82]/5 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#15464a]/5 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-accent/5 blur-[100px] rounded-full pointer-events-none" />
 
             {serviceList.map((service) => (
               <ServiceCard 
@@ -241,22 +241,22 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
         </div>
 
         {/* Footer Banner */}
-        <div className="bg-[#0a3a40] rounded-[40px] p-8 md:p-16 text-white flex flex-col md:flex-row items-center gap-12 relative overflow-hidden group shadow-2xl">
+        <div className="bg-text-primary dark:bg-bg-card rounded-[40px] p-8 md:p-16 text-bg-primary dark:text-text-primary flex flex-col md:flex-row items-center gap-12 relative overflow-hidden group shadow-2xl border border-border-primary">
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
           
           <div className="md:w-1/2 relative z-10">
             <div className="text-[10px] uppercase tracking-widest opacity-50 font-bold mb-6 flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-white/30" />
+              <span className="w-8 h-[1px] bg-accent/30" />
               Built for Complexity
             </div>
             <h3 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight">
               From concept to scale — <br />
-              <span className="text-[#a7d0c3]">we engineer systems</span> that power your business forward.
+              <span className="text-accent">we engineer systems</span> that power your business forward.
             </h3>
           </div>
           
-          <div className="md:w-1/2 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 w-full relative z-10 xl:border-l border-white/10 xl:pl-12">
+          <div className="md:w-1/2 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 w-full relative z-10 xl:border-l border-border-primary xl:pl-12">
             {[
               { icon: <Clock size={20} />, value: "99.9%", label: "Reliability" },
               { icon: <Zap size={20} />, value: "4.5x", label: "Velocity" },
@@ -264,7 +264,7 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
               { icon: <Users size={20} />, value: "50+", label: "Clients" }
             ].map((stat, i) => (
               <div key={i} className="space-y-2 group/stat">
-                <div className="text-[#a7d0c3] mb-3 group-hover/stat:scale-110 transition-transform duration-300 transform-gpu">{stat.icon}</div>
+                <div className="text-accent mb-3 group-hover/stat:scale-110 transition-transform duration-300 transform-gpu">{stat.icon}</div>
                 <div className="text-2xl font-bold tracking-tight">{stat.value}</div>
                 <div className="text-[8px] uppercase tracking-widest opacity-40 font-bold">{stat.label}</div>
               </div>

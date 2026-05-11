@@ -118,7 +118,7 @@ export const SmartTypewriter = ({ texts, className }: { texts: string[], classNa
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-          className="inline-block w-[2px] h-[1.1em] bg-brand-accent ml-1 align-middle"
+          className="inline-block w-[2px] h-[1.1em] bg-accent ml-1 align-middle"
         />
       </span>
     </div>
@@ -212,7 +212,8 @@ export const PixelSnow = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0D838E'; // Use brand-accent color for better visibility
+      // Use css variable for fill style if possible, or hardcode a consistent accent
+      ctx.fillStyle = '#0D838E'; 
 
       particles.forEach((p) => {
         ctx.globalAlpha = p.opacity;
@@ -354,9 +355,9 @@ export const RealTimeCursors = () => {
               />
             </svg>
             <div 
-              className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-black shadow-xl backdrop-blur-md border border-black/10"
+              className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-text-primary shadow-xl backdrop-blur-md border border-border-primary"
               style={{ 
-                backgroundColor: cursor.color.replace('0.6', '0.15'), 
+                backgroundColor: cursor.color.replace('0.6', '0.1'), 
                 boxShadow: `0 0 15px ${cursor.color}` 
               }}
             >
@@ -373,7 +374,7 @@ export const GrainyGradient = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Base Layer */}
-      <div className="absolute inset-0 bg-[#F4F4F1]" />
+      <div className="absolute inset-0 bg-bg-primary" />
       
       {/* Animated Mesh Gradients */}
       <motion.div
@@ -383,7 +384,7 @@ export const GrainyGradient = () => {
           y: [-50, 20, 40, -50],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-[20%] -left-[20%] w-[80%] h-[80%] rounded-full bg-[#338f82]/20 blur-[120px]"
+        className="absolute -top-[20%] -left-[20%] w-[80%] h-[80%] rounded-full bg-accent/10 blur-[120px]"
       />
       <motion.div
         animate={{
@@ -392,29 +393,26 @@ export const GrainyGradient = () => {
           y: [40, -60, -20, 40],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-[20%] -right-[20%] w-[70%] h-[70%] rounded-full bg-[#0a3a40]/10 blur-[100px]"
+        className="absolute -bottom-[20%] -right-[20%] w-[70%] h-[70%] rounded-full bg-accent/5 blur-[100px]"
       />
       
       {/* Middle Accent */}
       <motion.div
         animate={{
-          opacity: [0.1, 0.3, 0.1],
+          opacity: [0.1, 0.2, 0.1],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-[#338f82]/5 via-white/0 to-[#0a3a40]/5"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-accent/5 via-transparent to-accent/5"
       />
 
-      {/* SVG Grain Overlay - Higher Contrast/Frequency for 'Premium' feel */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.35] contrast-150 brightness-100 mix-blend-overlay">
+      {/* SVG Grain Overlay */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.2] dark:opacity-[0.4] contrast-150 brightness-100 mix-blend-overlay">
         <filter id="premium-grain">
           <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
           <feColorMatrix type="saturate" values="0" />
         </filter>
         <rect width="100%" height="100%" filter="url(#premium-grain)" />
       </svg>
-
-      {/* Finishing Texture Layer */}
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
     </div>
   );
 };

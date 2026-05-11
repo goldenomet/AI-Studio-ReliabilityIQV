@@ -30,7 +30,7 @@ const services = [
 
 export const ServicesList = () => {
   return (
-    <section className="py-24 bg-brand-bg text-brand-dark px-6">
+    <section className="py-24 bg-bg-primary text-text-primary px-6 transition-colors duration-500">
       <div className="max-w-7xl mx-auto flex flex-col">
         {services.map((service, i) => (
           <ServiceItem key={i} {...service} />
@@ -45,7 +45,7 @@ const ServiceItem = ({ index, title, tag, image }: { index: string, title: strin
 
   return (
     <motion.div 
-      className="group flex flex-col sm:flex-row sm:items-center justify-between border-b border-brand-dark/10 py-8 md:py-12 cursor-pointer relative"
+      className="group flex flex-col sm:flex-row sm:items-center justify-between border-b border-border-primary py-8 md:py-12 cursor-pointer relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       initial="initial"
@@ -62,13 +62,13 @@ const ServiceItem = ({ index, title, tag, image }: { index: string, title: strin
            transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
            className="hidden md:block overflow-hidden"
         >
-           <div className="w-32 h-20 rounded-md overflow-hidden relative">
-              <img src={image} alt={title} className="w-full h-full object-cover" />
+           <div className="w-32 h-20 rounded-xl overflow-hidden relative shadow-lg">
+              <img src={image} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
            </div>
         </motion.div>
         
         <motion.h2 
-          className="text-4xl md:text-6xl lg:text-[100px] font-bold tracking-tighter leading-none"
+          className="text-4xl md:text-6xl lg:text-[100px] font-bold tracking-tighter leading-none text-text-primary group-hover:text-accent transition-colors duration-300"
           variants={{
              initial: { x: 0 },
              hover: { x: 10 }
@@ -79,7 +79,7 @@ const ServiceItem = ({ index, title, tag, image }: { index: string, title: strin
         </motion.h2>
       </div>
 
-      <div className="flex items-center space-x-12 mt-6 sm:mt-0 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="flex items-center space-x-12 mt-6 sm:mt-0 opacity-40 group-hover:opacity-100 transition-opacity duration-300 text-text-secondary">
         <p className="font-mono text-sm tracking-widest">{index}</p>
         <p className="font-mono text-sm tracking-widest uppercase">{tag}</p>
       </div>

@@ -11,7 +11,7 @@ interface ServiceDetailProps {
 export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => {
   if (id === 'service-documentation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -19,12 +19,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
@@ -33,14 +33,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             
             {/* Left Text */}
             <div className="lg:w-[35%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">06</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2">06</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
                 TECHNICAL <br /> DOCUMENTATION
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We write clear, comprehensive, and developer-friendly documentation. From API references and SDK guides to system architecture diagrams and user manuals - we bridge the gap between code and comprehension.
               </p>
 
@@ -48,33 +48,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <FileCode size={20} className="text-[#0a3a40]" />,
+                    icon: <FileCode size={20} className="text-text-primary" />,
                     title: "API References",
                     desc: "Interactive OpenAPI/Swagger docs with clear examples and endpoints."
                   },
                   {
-                    icon: <BookOpen size={20} className="text-[#0a3a40]" />,
+                    icon: <BookOpen size={20} className="text-text-primary" />,
                     title: "Developer Guides",
                     desc: "Step-by-step tutorials, quickstarts, and integration walkthroughs."
                   },
                   {
-                    icon: <Layers size={20} className="text-[#0a3a40]" />,
+                    icon: <Layers size={20} className="text-text-primary" />,
                     title: "System Architecture",
                     desc: "Clear visual diagrams and technical specifications of complex systems."
                   },
                   {
-                    icon: <CheckCircle size={20} className="text-[#0a3a40]" />,
+                    icon: <CheckCircle size={20} className="text-text-primary" />,
                     title: "Continuous Updates",
                     desc: "Docs-as-code approach ensures documentation stays in sync with releases."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -85,14 +85,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Examples <ArrowUpRight size={14} />
                 </motion.button>
@@ -107,32 +107,32 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#fafafa] rounded-[24px] overflow-hidden shadow-2xl border border-[#0a3a40]/10 relative flex flex-col min-h-[550px] font-sans"
+                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary relative flex flex-col min-h-[550px] font-sans"
               >
                  {/* Top Nav Bar */}
-                 <div className="h-14 border-b border-[#0a3a40]/10 flex items-center px-6 justify-between bg-white shrink-0">
+                 <div className="h-14 border-b border-border-primary flex items-center px-6 justify-between bg-bg-card shrink-0">
                    <div className="flex items-center gap-6">
-                     <div className="flex items-center gap-2 text-[#0a3a40] font-bold">
-                       <BookOpen size={16} className="text-[#338f82]" />
+                     <div className="flex items-center gap-2 text-text-primary font-bold">
+                       <BookOpen size={16} className="text-accent" />
                        Core Docs Platform
                      </div>
-                     <nav className="hidden md:flex items-center gap-4 text-[12px] font-bold text-[#0a3a40]/60">
-                       <span className="text-[#0a3a40]">Guides</span>
-                       <span className="hover:text-[#0a3a40] cursor-pointer">API Reference</span>
-                       <span className="hover:text-[#0a3a40] cursor-pointer">SDKs</span>
-                       <span className="hover:text-[#0a3a40] cursor-pointer">Support</span>
+                     <nav className="hidden md:flex items-center gap-4 text-[12px] font-bold text-text-secondary">
+                       <span className="text-text-primary">Guides</span>
+                       <span className="hover:text-text-primary cursor-pointer">API Reference</span>
+                       <span className="hover:text-text-primary cursor-pointer">SDKs</span>
+                       <span className="hover:text-text-primary cursor-pointer">Support</span>
                      </nav>
                    </div>
                    <div className="flex items-center gap-4">
                      <div className="relative hidden md:block">
-                       <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0a3a40]/40" />
+                       <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" />
                        <input 
                          type="text" 
                          placeholder="Search documentation..." 
-                         className="bg-[#f0f0f0] rounded-full pl-9 pr-4 py-1.5 text-[11px] outline-none border border-transparent focus:border-[#338f82] transition-colors w-48"
+                         className="bg-bg-primary/50 text-text-primary rounded-full pl-9 pr-4 py-1.5 text-[11px] outline-none border border-border-primary focus:border-accent transition-colors w-48"
                        />
                      </div>
-                     <button className="bg-[#0a3a40] text-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wide">
+                     <button className="bg-text-primary text-bg-primary px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wide">
                        Sign In
                      </button>
                    </div>
@@ -142,41 +142,41 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                  <div className="flex flex-1 overflow-hidden">
                    
                    {/* Sidebar Navigation */}
-                   <div className="w-[240px] border-r border-[#0a3a40]/10 bg-white/50 p-6 overflow-y-auto shrink-0 hidden lg:block">
+                   <div className="w-[240px] border-r border-border-primary bg-bg-card/50 p-6 overflow-y-auto shrink-0 hidden lg:block">
                      <div className="flex flex-col gap-6">
                        
                        <div>
-                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/50 mb-3">Getting Started</h5>
-                         <ul className="flex flex-col gap-2 text-[12px] text-[#0a3a40]/70 font-medium">
-                           <li className="cursor-pointer hover:text-[#338f82]">Introduction</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Quickstart</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Authentication</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Environments</li>
+                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-3">Getting Started</h5>
+                         <ul className="flex flex-col gap-2 text-[12px] text-text-secondary font-medium">
+                           <li className="cursor-pointer hover:text-accent">Introduction</li>
+                           <li className="cursor-pointer hover:text-accent">Quickstart</li>
+                           <li className="cursor-pointer hover:text-accent">Authentication</li>
+                           <li className="cursor-pointer hover:text-accent">Environments</li>
                          </ul>
                        </div>
 
                        <div>
-                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/50 mb-3">Core Concepts</h5>
-                         <ul className="flex flex-col gap-2 text-[12px] text-[#0a3a40]/70 font-medium">
-                           <li className="cursor-pointer hover:text-[#338f82]">Data Models</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Webhooks</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Rate Limits</li>
-                           <li className="cursor-pointer hover:text-[#338f82]">Error Handling</li>
+                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-3">Core Concepts</h5>
+                         <ul className="flex flex-col gap-2 text-[12px] text-text-secondary font-medium">
+                           <li className="cursor-pointer hover:text-accent">Data Models</li>
+                           <li className="cursor-pointer hover:text-accent">Webhooks</li>
+                           <li className="cursor-pointer hover:text-accent">Rate Limits</li>
+                           <li className="cursor-pointer hover:text-accent">Error Handling</li>
                          </ul>
                        </div>
 
                        <div>
-                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/50 mb-3">Endpoints</h5>
-                         <ul className="flex flex-col gap-2 text-[12px] text-[#0a3a40]/70 font-medium">
-                           <li className="text-[#338f82] font-bold flex items-center justify-between">
+                         <h5 className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-3">Endpoints</h5>
+                         <ul className="flex flex-col gap-2 text-[12px] text-text-secondary font-medium">
+                           <li className="text-accent font-bold flex items-center justify-between">
                              Users 
-                             <span className="bg-[#e6f4f1] text-[#338f82] text-[9px] px-1.5 py-0.5 rounded font-bold">GET</span>
+                             <span className="bg-accent/10 text-accent text-[9px] px-1.5 py-0.5 rounded font-bold">GET</span>
                            </li>
-                           <li className="cursor-pointer hover:text-[#338f82] pl-3">Create User</li>
-                           <li className="cursor-pointer hover:text-[#338f82] pl-3">Update User</li>
-                           <li className="cursor-pointer hover:text-[#338f82] pl-3">Delete User</li>
-                           <li className="cursor-pointer hover:text-[#338f82] mt-2 font-bold text-[#0a3a40]/80">Payments</li>
-                           <li className="cursor-pointer hover:text-[#338f82] mt-2 font-bold text-[#0a3a40]/80">Subscriptions</li>
+                           <li className="cursor-pointer hover:text-accent pl-3">Create User</li>
+                           <li className="cursor-pointer hover:text-accent pl-3">Update User</li>
+                           <li className="cursor-pointer hover:text-accent pl-3">Delete User</li>
+                           <li className="cursor-pointer hover:text-accent mt-2 font-bold text-text-primary">Payments</li>
+                           <li className="cursor-pointer hover:text-accent mt-2 font-bold text-text-primary">Subscriptions</li>
                          </ul>
                        </div>
 
@@ -184,67 +184,67 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    </div>
 
                    {/* Content */}
-                   <div className="flex-1 bg-white p-5 sm:p-8 lg:p-10 overflow-y-auto relative">
+                   <div className="flex-1 bg-bg-card p-5 sm:p-8 lg:p-10 overflow-y-auto relative">
                       
-                      <div className="flex items-center gap-2 text-[11px] text-[#0a3a40]/50 font-bold mb-6">
-                        <span>Endpoints</span> <span className="text-[#0a3a40]/30">/</span> <span>Users</span> <span className="text-[#0a3a40]/30">/</span> <span className="text-[#338f82]">Get User</span>
+                      <div className="flex items-center gap-2 text-[11px] text-text-secondary font-bold mb-6">
+                        <span>Endpoints</span> <span className="text-text-secondary/30">/</span> <span>Users</span> <span className="text-text-secondary/30">/</span> <span className="text-accent">Get User</span>
                       </div>
 
                       <div className="flex items-start justify-between gap-8 mb-6">
                         <div>
-                          <h2 className="text-2xl font-bold text-[#0a3a40] mb-2 flex items-center gap-3">
+                          <h2 className="text-2xl font-bold text-text-primary mb-2 flex items-center gap-3">
                             Retrieve a User
-                            <span className="bg-[#4ade80]/20 text-[#166534] text-[10px] uppercase tracking-widest px-2 py-1 rounded-md font-bold">GET</span>
+                            <span className="bg-emerald-500/10 text-emerald-500 text-[10px] uppercase tracking-widest px-2 py-1 rounded-md font-bold">GET</span>
                           </h2>
-                          <p className="text-sm text-[#0a3a40]/70 leading-relaxed max-w-xl">
+                          <p className="text-sm text-text-secondary leading-relaxed max-w-xl">
                             Retrieves the details of an existing user. You need only supply the unique user identifier that was returned upon user creation.
                           </p>
                         </div>
                       </div>
 
                       {/* Endpoint URL */}
-                      <div className="bg-[#fafafa] border border-[#d2d4cf] rounded-xl p-3 flex items-center gap-3 mb-8 font-mono text-sm max-w-2xl">
-                        <span className="text-[#0a3a40]/40">https://api.coreplatform.com/v1</span>
-                        <span className="text-[#0a3a40]">/users/</span>
-                        <span className="text-[#338f82]">{'{id}'}</span>
+                      <div className="bg-bg-primary/50 border border-border-primary rounded-xl p-3 flex items-center gap-3 mb-8 font-mono text-sm max-w-2xl">
+                        <span className="text-text-secondary/40 font-sans">https://api.coreplatform.com/v1</span>
+                        <span className="text-text-primary">/users/</span>
+                        <span className="text-accent">{"{id}"}</span>
                       </div>
 
                       <div className="flex flex-col xl:flex-row gap-8">
                         {/* Parameters */}
                         <div className="flex-1">
-                          <h3 className="text-sm font-bold text-[#0a3a40] mb-4">Path Parameters</h3>
-                          <div className="border border-[#d2d4cf] rounded-xl overflow-hidden mb-8">
-                            <div className="bg-[#fafafa] border-b border-[#d2d4cf] p-3 flex text-[11px] font-bold text-[#0a3a40]/60 uppercase tracking-widest">
+                          <h3 className="text-sm font-bold text-text-primary mb-4">Path Parameters</h3>
+                          <div className="border border-border-primary rounded-xl overflow-hidden mb-8">
+                            <div className="bg-bg-secondary border-b border-border-primary p-3 flex text-[11px] font-bold text-text-secondary uppercase tracking-widest">
                               <div className="w-1/3">Name</div>
                               <div className="flex-1">Description</div>
                             </div>
-                            <div className="p-4 flex flex-col gap-4 text-sm bg-white">
+                            <div className="p-4 flex flex-col gap-4 text-sm bg-bg-card">
                               <div className="flex items-start">
                                 <div className="w-1/3 flex flex-col gap-1">
-                                  <span className="font-bold text-[#0a3a40] font-mono">id</span>
+                                  <span className="font-bold text-text-primary font-mono">id</span>
                                   <span className="text-[10px] text-red-500 font-bold">required</span>
                                 </div>
-                                <div className="flex-1 text-[#0a3a40]/70 leading-relaxed">
-                                  The unique identifier of the user. <span className="font-mono text-[11px] bg-[#f0f0f0] px-1 py-0.5 rounded text-[#0a3a40]">string</span>
+                                <div className="flex-1 text-text-secondary leading-relaxed">
+                                  The unique identifier of the user. <span className="font-mono text-[11px] bg-bg-secondary px-1 py-0.5 rounded text-text-primary">string</span>
                                 </div>
                               </div>
                             </div>
                           </div>
 
-                          <h3 className="text-sm font-bold text-[#0a3a40] mb-4">Query Parameters</h3>
-                          <div className="border border-[#d2d4cf] rounded-xl overflow-hidden">
-                            <div className="bg-[#fafafa] border-b border-[#d2d4cf] p-3 flex text-[11px] font-bold text-[#0a3a40]/60 uppercase tracking-widest">
+                          <h3 className="text-sm font-bold text-text-primary mb-4">Query Parameters</h3>
+                          <div className="border border-border-primary rounded-xl overflow-hidden">
+                            <div className="bg-bg-secondary border-b border-border-primary p-3 flex text-[11px] font-bold text-text-secondary uppercase tracking-widest">
                               <div className="w-1/3">Name</div>
                               <div className="flex-1">Description</div>
                             </div>
-                            <div className="p-4 flex flex-col gap-4 text-sm bg-white">
-                              <div className="flex items-start border-b border-[#d2d4cf] pb-4">
+                            <div className="p-4 flex flex-col gap-4 text-sm bg-bg-card">
+                              <div className="flex items-start border-b border-border-primary pb-4">
                                 <div className="w-1/3 flex flex-col gap-1">
-                                  <span className="font-bold text-[#0a3a40] font-mono">expand</span>
-                                  <span className="text-[10px] text-[#0a3a40]/40 font-bold">optional</span>
+                                  <span className="font-bold text-text-primary font-mono">expand</span>
+                                  <span className="text-[10px] text-text-secondary/40 font-bold">optional</span>
                                 </div>
-                                <div className="flex-1 text-[#0a3a40]/70 leading-relaxed">
-                                  Specifies which fields in the response should be expanded. <span className="font-mono text-[11px] bg-[#f0f0f0] px-1 py-0.5 rounded text-[#0a3a40]">array</span>
+                                <div className="flex-1 text-text-secondary leading-relaxed">
+                                  Specifies which fields in the response should be expanded. <span className="font-mono text-[11px] bg-bg-secondary px-1 py-0.5 rounded text-text-primary">array</span>
                                 </div>
                               </div>
                             </div>
@@ -298,18 +298,18 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                       </div>
 
                       {/* Overlay gradient for scrolling effect */}
-                      <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+                      <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-bg-card to-transparent pointer-events-none" />
                    </div>
 
                    {/* Right Table of Contents (Desktop only) */}
-                   <div className="w-[200px] border-l border-[#0a3a40]/10 p-6 hidden 2xl:block bg-[#fafafa]/50">
-                     <h5 className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40] mb-4">On this page</h5>
-                     <ul className="flex flex-col gap-3 text-[11px] text-[#0a3a40]/60 font-medium">
-                       <li className="cursor-pointer text-[#338f82] border-l-2 border-[#338f82] -ml-6 pl-6">Retrieve a User</li>
-                       <li className="cursor-pointer hover:text-[#0a3a40]">Path Parameters</li>
-                       <li className="cursor-pointer hover:text-[#0a3a40]">Query Parameters</li>
-                       <li className="cursor-pointer hover:text-[#0a3a40]">Returns</li>
-                       <li className="cursor-pointer hover:text-[#0a3a40] mt-4">Errors</li>
+                   <div className="w-[200px] border-l border-border-primary p-6 hidden 2xl:block bg-bg-secondary/50 font-sans">
+                     <h5 className="text-[10px] uppercase font-bold tracking-widest text-text-primary mb-4">On this page</h5>
+                     <ul className="flex flex-col gap-3 text-[11px] text-text-secondary font-medium">
+                       <li className="cursor-pointer text-accent border-l-2 border-accent -ml-6 pl-6">Retrieve a User</li>
+                       <li className="cursor-pointer hover:text-text-primary">Path Parameters</li>
+                       <li className="cursor-pointer hover:text-text-primary">Query Parameters</li>
+                       <li className="cursor-pointer hover:text-text-primary">Returns</li>
+                       <li className="cursor-pointer hover:text-text-primary mt-4">Errors</li>
                      </ul>
                    </div>
                  </div>
@@ -319,17 +319,17 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               {/* Approach/Benefit bottom section */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                  {[
-                   { icon: <Terminal size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, label: "Developer Ready", desc: "Copy-paste code snippets" },
-                   { icon: <CheckCircle size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, label: "Always Accurate", desc: "Tested against real APIs" },
-                   { icon: <Share2 size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, label: "Easy to Share", desc: "Shareable deeply linked URLs" },
-                   { icon: <Palette size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, label: "Branded Portals", desc: "Docs that match your look" }
+                   { icon: <Terminal size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Developer Ready", desc: "Copy-paste code snippets" },
+                   { icon: <CheckCircle size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Always Accurate", desc: "Tested against real APIs" },
+                   { icon: <Share2 size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Easy to Share", desc: "Shareable deeply linked URLs" },
+                   { icon: <Palette size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Branded Portals", desc: "Docs that match your look" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-white/80 border border-[#0a3a40]/5 rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-white transition-colors">
-                     <div className="w-10 h-10 rounded-full bg-white border border-[#0a3a40]/10 flex justify-center items-center mb-4 text-[#338f82]">
+                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
+                     <div className="w-10 h-10 rounded-full bg-bg-secondary border border-border-primary flex justify-center items-center mb-4 text-accent">
                        {s.icon}
                      </div>
-                     <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#0a3a40] mb-2">{s.label}</h4>
-                     <p className="text-[10px] text-[#0a3a40]/50 leading-tight">{s.desc}</p>
+                     <h4 className="text-[11px] font-bold uppercase tracking-widest text-text-primary mb-2">{s.label}</h4>
+                     <p className="text-[10px] text-text-secondary leading-tight">{s.desc}</p>
                    </div>
                  ))}
               </div>
@@ -337,7 +337,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
           </div>
           
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Docs Offerings Section */}
           <div className="flex justify-between items-end mb-8">
@@ -352,11 +352,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Database size={18} strokeWidth={1.5} />, title: "Architecture Diagrams", desc: "Visual breakdowns of complex data flows, cloud infrastructure and systems." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3 font-sans">
-                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
                      {caseItem.icon}
                   </div>
-                  <h4 className="text-sm font-bold">{caseItem.title}</h4>
-                  <p className="text-[12px] opacity-60 leading-relaxed font-mono">{caseItem.desc}</p>
+                  <h4 className="text-sm font-bold text-text-primary">{caseItem.title}</h4>
+                  <p className="text-[12px] text-text-secondary leading-relaxed font-mono">{caseItem.desc}</p>
                 </div>
              ))}
           </div>
@@ -369,7 +369,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-social') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -377,28 +377,28 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
-          {/* Top Section bg-[#EBEBE6]  we can remove white backgrounds, make everything a shade. actually left text is just on the background. Right side is the layout. */}
+          {/* Top Section bg-bg-primary  we can remove white backgrounds, make everything a shade. actually left text is just on the background. Right side is the layout. */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16 items-start">
             
             {/* Left Text */}
             <div className="lg:w-[35%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">03</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2">03</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
                 SOCIAL MEDIA <br /> ADVERTISING
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We create data-driven social media ad campaigns that capture attention, drive engagement and deliver measurable results across TikTok, X (Twitter), Instagram and beyond.
               </p>
 
@@ -406,33 +406,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <Target size={20} className="text-[#0a3a40]" />,
+                    icon: <Target size={20} className="text-text-primary" />,
                     title: "Platform Expertise",
                     desc: "Campaigns optimized for TikTok, X (Twitter), Instagram, YouTube and more."
                   },
                   {
-                    icon: <BarChart size={20} className="text-[#0a3a40]" />,
+                    icon: <BarChart size={20} className="text-text-primary" />,
                     title: "Data-Driven Strategy",
                     desc: "Advanced audience targeting, creative testing and performance optimization."
                   },
                   {
-                    icon: <Megaphone size={20} className="text-[#0a3a40]" />,
+                    icon: <Megaphone size={20} className="text-text-primary" />,
                     title: "High-Impact Creatives",
                     desc: "Scroll-stopping ad creatives and AI-powered content that converts."
                   },
                   {
-                    icon: <TrendingUp size={20} className="text-[#0a3a40]" />,
+                    icon: <TrendingUp size={20} className="text-text-primary" />,
                     title: "Performance Tracking",
                     desc: "Real-time analytics and reporting to maximize ROI and scale what works."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -443,14 +443,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -469,47 +469,47 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                       {/* Metric Cards - 4 in a row or 2x2. Actually the uploaded image shows: 
                           Impressions, Clicks, CTR, Conversions, ROAS all in one top row.
                       */}
-                      <div className="bg-[#E2E4DE] border border-[#d2d4cf] rounded-2xl p-6">
-                        <div className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/60 mb-6">Campaign Overview</div>
+                      <div className="bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                        <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Campaign Overview</div>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                            <div className="flex flex-col gap-2">
-                             <Eye size={18} className="text-[#338f82]" />
+                             <Eye size={18} className="text-accent" />
                              <div>
-                               <div className="text-[10px] text-[#0a3a40]/60 uppercase font-bold tracking-widest mb-1">Impressions</div>
+                               <div className="text-[10px] text-text-secondary/60 uppercase font-bold tracking-widest mb-1">Impressions</div>
                                <div className="text-2xl font-bold">28.4M</div>
-                               <div className="text-[10px] text-[#4ade80]">+34.6%</div>
+                               <div className="text-[10px] text-emerald-500">+34.6%</div>
                              </div>
                            </div>
                            <div className="flex flex-col gap-2">
-                             <MousePointerClick size={18} className="text-[#338f82]" />
+                             <MousePointerClick size={18} className="text-accent" />
                              <div>
-                               <div className="text-[10px] text-[#0a3a40]/60 uppercase font-bold tracking-widest mb-1">Clicks</div>
+                               <div className="text-[10px] text-text-secondary/60 uppercase font-bold tracking-widest mb-1">Clicks</div>
                                <div className="text-2xl font-bold">1.62M</div>
-                               <div className="text-[10px] text-[#4ade80]">+28.1%</div>
+                               <div className="text-[10px] text-emerald-500">+28.1%</div>
                              </div>
                            </div>
                            <div className="flex flex-col gap-2">
-                             <BarChart2 size={18} className="text-[#338f82]" />
+                             <BarChart2 size={18} className="text-accent" />
                              <div>
-                               <div className="text-[10px] text-[#0a3a40]/60 uppercase font-bold tracking-widest mb-1">CTR</div>
+                               <div className="text-[10px] text-text-secondary/60 uppercase font-bold tracking-widest mb-1">CTR</div>
                                <div className="text-2xl font-bold">5.69%</div>
-                               <div className="text-[10px] text-[#4ade80]">+15.3%</div>
+                               <div className="text-[10px] text-emerald-500">+15.3%</div>
                              </div>
                            </div>
                            <div className="flex flex-col gap-2">
-                             <DollarSign size={18} className="text-[#338f82]" />
+                             <DollarSign size={18} className="text-accent" />
                              <div>
-                               <div className="text-[10px] text-[#0a3a40]/60 uppercase font-bold tracking-widest mb-1">Conversions</div>
+                               <div className="text-[10px] text-text-secondary/60 uppercase font-bold tracking-widest mb-1">Conversions</div>
                                <div className="text-2xl font-bold">38.7K</div>
-                               <div className="text-[10px] text-[#4ade80]">+42.8%</div>
+                               <div className="text-[10px] text-emerald-500">+42.8%</div>
                              </div>
                            </div>
                            <div className="flex flex-col gap-2">
-                             <PieChart size={18} className="text-[#338f82]" />
+                             <PieChart size={18} className="text-accent" />
                              <div>
-                               <div className="text-[10px] text-[#0a3a40]/60 uppercase font-bold tracking-widest mb-1">ROAS</div>
+                               <div className="text-[10px] text-text-secondary/60 uppercase font-bold tracking-widest mb-1">ROAS</div>
                                <div className="text-2xl font-bold">4.32x</div>
-                               <div className="text-[10px] text-[#4ade80]">+29.7%</div>
+                               <div className="text-[10px] text-emerald-500">+29.7%</div>
                              </div>
                            </div>
                         </div>
@@ -517,12 +517,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
                       {/* Line Chart & Platform Breakdown */}
                       <div className="flex flex-col md:flex-row gap-6">
-                        <div className="md:w-2/3 bg-[#E2E4DE] border border-[#d2d4cf] rounded-2xl p-6 relative h-[250px]">
-                           <div className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/60 mb-6">Performance Over Time</div>
+                        <div className="md:w-2/3 bg-bg-secondary border border-border-primary rounded-2xl p-6 relative h-[250px]">
+                           <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Performance Over Time</div>
                            {/* Legend */}
-                           <div className="flex items-center gap-4 text-[9px] font-bold text-[#0a3a40]/60 mb-6">
-                             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#15464a]" /> Impressions</div>
-                             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#338f82]" /> Clicks</div>
+                           <div className="flex items-center gap-4 text-[9px] font-bold text-text-secondary/60 mb-6">
+                             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-accent" /> Impressions</div>
+                             <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-accent/60" /> Clicks</div>
                              <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-red-400" /> Conversions</div>
                            </div>
                            {/* Chart Lines (SVGs) */}
@@ -531,57 +531,57 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                              <div className="w-full h-full flex flex-col justify-between">
                                {[8,6,4,2,0].map(y => (
                                  <div key={y} className="flex items-center w-full gap-2">
-                                   <span className="text-[9px] text-[#0a3a40]/40 w-3">{y}M</span>
-                                   <div className="h-[1px] bg-[#0a3a40]/5 flex-1" />
+                                   <span className="text-[9px] text-text-secondary/40 w-3">{y}M</span>
+                                   <div className="h-[1px] bg-text-primary/5 flex-1" />
                                  </div>
                                ))}
                              </div>
                              {/* Data Lines */}
                              <svg className="absolute top-0 right-0 bottom-[14px] left-6 w-[calc(100%-24px)] h-[calc(100%-14px)]" preserveAspectRatio="none">
-                               <path d="M 0 80 Q 20 60 40 70 T 80 50 T 120 60 T 160 30 T 200 40 T 240 20 T 280 10 T 320 0" fill="none" stroke="#15464a" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-                               <path d="M 0 110 Q 20 90 40 100 T 80 90 T 120 95 T 160 80 T 200 85 T 240 60 T 280 50 T 320 40" fill="none" stroke="#338f82" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                               <path d="M 0 80 Q 20 60 40 70 T 80 50 T 120 60 T 160 30 T 200 40 T 240 20 T 280 10 T 320 0" fill="none" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                               <path d="M 0 110 Q 20 90 40 100 T 80 90 T 120 95 T 160 80 T 200 85 T 240 60 T 280 50 T 320 40" fill="none" stroke="var(--color-accent)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
                                <path d="M 0 130 Q 20 120 40 125 T 80 120 T 120 120 T 160 110 T 200 115 T 240 100 T 280 90 T 320 80" fill="none" stroke="#f87171" strokeWidth="2" vectorEffect="non-scaling-stroke" />
                              </svg>
                              {/* X Axis Labels */}
-                             <div className="absolute -bottom-6 left-6 right-0 flex justify-between text-[9px] text-[#0a3a40]/40 font-mono">
+                             <div className="absolute -bottom-6 left-6 right-0 flex justify-between text-[9px] text-text-secondary/40 font-mono">
                                <span>May 01</span><span>May 07</span><span>May 13</span><span>May 19</span><span>May 25</span><span>May 31</span>
                              </div>
                            </div>
                         </div>
 
-                        <div className="md:w-1/3 bg-[#E2E4DE] border border-[#d2d4cf] rounded-2xl p-6">
-                           <div className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/60 mb-6">Platform Breakdown</div>
+                        <div className="md:w-1/3 bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                           <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Platform Breakdown</div>
                            <div className="flex flex-col gap-4 text-xs font-bold font-sans">
                              <div className="flex items-center gap-3">
                                <div className="w-4 flex justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></div>
-                               <span className="flex-1 text-[#0a3a40]/80">TikTok</span>
-                               <div className="w-16 h-1.5 bg-[#d2d4cf] rounded-full overflow-hidden shrink-0"><div className="h-full bg-[#15464a] w-[38%]" /></div>
+                               <span className="flex-1 text-text-primary/80">TikTok</span>
+                               <div className="w-16 h-1.5 bg-border-primary rounded-full overflow-hidden shrink-0"><div className="h-full bg-accent w-[38%]" /></div>
                                <span>38%</span>
                              </div>
                              <div className="flex items-center gap-3">
                                <div className="w-4 flex justify-center"><Instagram size={14} /></div>
-                               <span className="flex-1 text-[#0a3a40]/80">Instagram</span>
-                               <div className="w-16 h-1.5 bg-[#d2d4cf] rounded-full overflow-hidden shrink-0"><div className="h-full bg-[#15464a] w-[29%]" /></div>
+                               <span className="flex-1 text-text-primary/80">Instagram</span>
+                               <div className="w-16 h-1.5 bg-border-primary rounded-full overflow-hidden shrink-0"><div className="h-full bg-accent w-[29%]" /></div>
                                <span>29%</span>
                              </div>
                              <div className="flex items-center gap-3">
                                <div className="w-4 flex justify-center">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733-16z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg>
                                </div>
-                               <span className="flex-1 text-[#0a3a40]/80">X (Twitter)</span>
-                               <div className="w-16 h-1.5 bg-[#d2d4cf] rounded-full overflow-hidden shrink-0"><div className="h-full bg-[#15464a] w-[18%]" /></div>
+                               <span className="flex-1 text-text-primary/80">X (Twitter)</span>
+                               <div className="w-16 h-1.5 bg-border-primary rounded-full overflow-hidden shrink-0"><div className="h-full bg-accent w-[18%]" /></div>
                                <span>18%</span>
                              </div>
                              <div className="flex items-center gap-3">
                                <div className="w-4 flex justify-center"><Youtube size={14} /></div>
-                               <span className="flex-1 text-[#0a3a40]/80">YouTube</span>
-                               <div className="w-16 h-1.5 bg-[#d2d4cf] rounded-full overflow-hidden shrink-0"><div className="h-full bg-[#15464a] w-[10%]" /></div>
+                               <span className="flex-1 text-text-primary/80">YouTube</span>
+                               <div className="w-16 h-1.5 bg-border-primary rounded-full overflow-hidden shrink-0"><div className="h-full bg-accent w-[10%]" /></div>
                                <span>10%</span>
                              </div>
                              <div className="flex items-center gap-3">
                                <div className="w-4 flex justify-center"><Settings size={14} /></div>
-                               <span className="flex-1 text-[#0a3a40]/80">Others</span>
-                               <div className="w-16 h-1.5 bg-[#d2d4cf] rounded-full overflow-hidden shrink-0"><div className="h-full bg-[#15464a] w-[5%]" /></div>
+                               <span className="flex-1 text-text-primary/80">Others</span>
+                               <div className="w-16 h-1.5 bg-border-primary rounded-full overflow-hidden shrink-0"><div className="h-full bg-accent w-[5%]" /></div>
                                <span>5%</span>
                              </div>
                            </div>
@@ -590,45 +590,45 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    </div>
 
                    {/* Right Side: Audience Insights */}
-                   <div className="xl:w-[240px] shrink-0 bg-[#E2E4DE] border border-[#d2d4cf] rounded-2xl p-6 flex flex-col items-center">
-                      <div className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/60 w-full mb-6">Audience Insights</div>
+                   <div className="xl:w-[240px] shrink-0 bg-bg-secondary border border-border-primary rounded-2xl p-6 flex flex-col items-center">
+                      <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 w-full mb-6">Audience Insights</div>
                       
                       {/* CSS Donut Chart */}
                       <div className="relative w-32 h-32 rounded-full mb-6 flex items-center justify-center shrink-0" 
-                           style={{ background: 'conic-gradient(#15464a 0% 34%, #338f82 34% 72%, #4ade80 72% 89%, #f87171 89% 100%)' }}>
-                        <div className="w-20 h-20 bg-[#E2E4DE] rounded-full"></div>
+                           style={{ background: 'conic-gradient(var(--color-accent-dark) 0% 34%, var(--color-accent) 34% 72%, var(--color-accent-glow) 72% 89%, #f87171 89% 100%)' }}>
+                        <div className="w-20 h-20 bg-bg-secondary rounded-full"></div>
                       </div>
 
                       <div className="w-full flex-1 flex flex-col justify-end gap-2 text-[11px] font-bold font-sans">
                          <div className="flex items-center justify-between">
-                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#15464a]" /> 18-24</div>
+                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent" /> 18-24</div>
                            <span>34%</span>
                          </div>
                          <div className="flex items-center justify-between">
-                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#338f82]" /> 25-34</div>
+                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent/60" /> 25-34</div>
                            <span>38%</span>
                          </div>
                          <div className="flex items-center justify-between">
-                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#4ade80]" /> 35-44</div>
+                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-emerald-400" /> 35-44</div>
                            <span>17%</span>
                          </div>
                          <div className="flex items-center justify-between">
-                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#f87171]" /> 45+</div>
+                           <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-rose-400" /> 45+</div>
                            <span>11%</span>
                          </div>
                       </div>
                       
-                      <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-2 mt-6 pt-4 border-t border-[#d2d4cf]">
+                      <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-2 mt-6 pt-4 border-t border-border-primary">
                          <div className="flex flex-col gap-1">
-                           <span className="text-[9px] text-[#0a3a40]/50 font-bold uppercase tracking-widest">Top Loc</span>
+                           <span className="text-[9px] text-text-secondary/50 font-bold uppercase tracking-widest">Top Loc</span>
                            <span className="text-[10px] font-bold">US</span>
                          </div>
                          <div className="flex flex-col gap-1">
-                           <span className="text-[9px] text-[#0a3a40]/50 font-bold uppercase tracking-widest">Interest</span>
+                           <span className="text-[9px] text-text-secondary/50 font-bold uppercase tracking-widest">Interest</span>
                            <span className="text-[10px] font-bold">Tech</span>
                          </div>
                          <div className="flex flex-col gap-1">
-                           <span className="text-[9px] text-[#0a3a40]/50 font-bold uppercase tracking-widest">Gender</span>
+                           <span className="text-[9px] text-text-secondary/50 font-bold uppercase tracking-widest">Gender</span>
                            <span className="text-[10px] font-bold">56% M</span>
                          </div>
                       </div>
@@ -636,8 +636,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                  </div>
 
                  {/* Bottom Row: Previews */}
-                 <div className="bg-[#E2E4DE] border border-[#d2d4cf] rounded-2xl p-6">
-                   <div className="text-[10px] uppercase font-bold tracking-widest text-[#0a3a40]/60 mb-6">Creative Previews</div>
+                 <div className="bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                   <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Creative Previews</div>
                    
                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                       {[
@@ -677,8 +677,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                                <PlaySquare size={12} fill="white" className="text-white ml-0.5" />
                              </div>
                            </div>
-                           <div className="flex items-center gap-3 text-[10px] font-bold text-[#0a3a40]/70 px-1">
-                             <span className="flex items-center gap-1"><Eye size={12} className="text-[#0a3a40]/40" /> {vid.views}</span>
+                           <div className="flex items-center gap-3 text-[10px] font-bold text-text-primary/70 px-1">
+                             <span className="flex items-center gap-1"><Eye size={12} className="text-text-secondary/40" /> {vid.views}</span>
                              <span className="flex items-center gap-1"><div className="w-3 flex justify-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div> {vid.likes}</span>
                              <span className="flex items-center gap-1"><div className="w-3 flex justify-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div> {vid.comments}</span>
                            </div>
@@ -692,7 +692,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Use Cases Section -> Our Approach */}
           <div className="flex justify-between items-end mb-8">
@@ -700,7 +700,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 relative">
-             <div className="absolute top-12 lg:top-14 inset-x-12 h-[1px] bg-[#0a3a40]/10 border-t border-dashed border-[#0a3a40]/30 hidden xl:block z-0" />
+             <div className="absolute top-12 lg:top-14 inset-x-12 h-[1px] bg-border-primary border-t border-dashed border-text-secondary/30 hidden xl:block z-0" />
              {[
                { icon: <Target size={18} strokeWidth={1.5} />, title: "Research & Strategy", desc: "We analyze your audience, market and competitors to craft a winning strategy." },
                { icon: <User size={18} strokeWidth={1.5} />, title: "Audience Targeting", desc: "Advanced targeting ensures your ads reach the right people at the right time." },
@@ -709,15 +709,15 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <BarChart2 size={18} strokeWidth={1.5} />, title: "Optimize & Scale", desc: "We optimize in real-time and scale the campaigns that deliver ROI." },
                { icon: <PieChart size={18} strokeWidth={1.5} />, title: "Report & Refine", desc: "Transparent reporting and insights to keep improving performance." },
              ].map((step, i) => (
-                <div key={i} className="flex flex-col gap-3 relative z-10 bg-[#EBEBE6]">
+                <div key={i} className="flex flex-col gap-3 relative z-10 bg-bg-primary">
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold text-[#0a3a40]/40 font-mono tracking-widest bg-[#EBEBE6] pr-2">{(i+1).toString().padStart(2, '0')}</span>
-                    <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40 xl:mr-auto">
+                    <span className="text-[10px] font-bold text-text-secondary/40 font-mono tracking-widest bg-bg-primary pr-2">{(i+1).toString().padStart(2, '0')}</span>
+                    <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40 xl:mr-auto">
                        {step.icon}
                     </div>
                   </div>
-                  <h4 className="text-[11px] font-bold mt-2">{step.title}</h4>
-                  <p className="text-[10px] opacity-60 leading-relaxed max-w-[200px]">{step.desc}</p>
+                  <h4 className="text-[11px] font-bold mt-2 text-text-primary">{step.title}</h4>
+                  <p className="text-[10px] text-text-secondary leading-relaxed max-w-[200px]">{step.desc}</p>
                 </div>
              ))}
           </div>
@@ -729,7 +729,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-gis') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -737,12 +737,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
@@ -751,14 +751,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             
             {/* Left Text */}
             <div className="lg:w-[35%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">03</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2">03</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
                 GIS MAPPING
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We build intelligent geospatial solutions that turn location data into actionable insights. From interactive mapping and spatial analysis to real-time monitoring and asset management - powered by accurate data and advanced GIS technology.
               </p>
 
@@ -766,33 +766,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <Layers size={20} className="text-[#0a3a40]" />,
+                    icon: <Layers size={20} className="text-text-primary" />,
                     title: "Interactive Mapping",
                     desc: "Beautiful, responsive maps with multiple layers, filters and real-time data visualization."
                   },
                   {
-                    icon: <Crosshair size={20} className="text-[#0a3a40]" />,
+                    icon: <Crosshair size={20} className="text-text-primary" />,
                     title: "Spatial Analysis",
                     desc: "Advanced geospatial analysis tools for pattern detection, proximity, routing and optimization."
                   },
                   {
-                    icon: <Satellite size={20} className="text-[#0a3a40]" />,
+                    icon: <Satellite size={20} className="text-text-primary" />,
                     title: "Real-time Monitoring",
                     desc: "Live tracking, sensor integrations and alerts for critical spatial events."
                   },
                   {
-                    icon: <Database size={20} className="text-[#0a3a40]" />,
+                    icon: <Database size={20} className="text-text-primary" />,
                     title: "Data Management",
                     desc: "Organize, process and visualize large spatial datasets with accuracy and reliability."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -803,14 +803,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -825,17 +825,17 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#161a1d] rounded-[24px] overflow-hidden shadow-2xl border border-[#23282c] text-white relative flex flex-col xl:flex-row min-h-[400px] md:min-h-[550px]"
+                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary text-text-primary relative flex flex-col xl:flex-row min-h-[400px] md:min-h-[550px]"
               >
                  {/* Left Sidebar */}
-                 <div className="w-full h-12 xl:w-14 xl:h-auto bg-[#1e2327] border-b xl:border-b-0 xl:border-r border-[#2a3036] flex flex-row xl:flex-col items-center py-2 xl:py-6 px-4 xl:px-0 gap-6 shrink-0 z-20 relative">
-                   <Layers size={18} className="text-[#338f82]" />
-                   <BarChart2 size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
-                   <Database size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
-                   <Pencil size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
-                   <MapPin size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
-                   <Bell size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer mt-auto" />
-                   <Settings size={18} className="text-white/40 hover:text-white transition-colors cursor-pointer" />
+                 <div className="w-full h-12 xl:w-14 xl:h-auto bg-bg-card border-b xl:border-b-0 xl:border-r border-border-primary flex flex-row xl:flex-col items-center py-2 xl:py-6 px-4 xl:px-0 gap-6 shrink-0 z-20 relative">
+                   <Layers size={18} className="text-accent" />
+                   <BarChart2 size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer" />
+                   <Database size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer" />
+                   <Pencil size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer" />
+                   <MapPin size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer" />
+                   <Bell size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer mt-auto" />
+                   <Settings size={18} className="text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer" />
                  </div>
 
                  {/* Map Area */}
@@ -887,33 +887,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
                    {/* Map Controls */}
                    <div className="absolute bottom-10 right-6 flex flex-col gap-2 z-10">
-                     <div className="bg-[#1e2327]/80 backdrop-blur border border-[#2a3036] rounded-lg overflow-hidden flex flex-col">
+                     <div className="bg-bg-card/80 backdrop-blur border border-border-primary rounded-lg overflow-hidden flex flex-col">
                        <button className="p-2 hover:bg-white/10 transition-colors"><Plus size={14} /></button>
-                       <div className="h-[1px] bg-[#2a3036]" />
+                       <div className="h-[1px] bg-border-primary" />
                        <button className="p-2 hover:bg-white/10 transition-colors"><Minus size={14} /></button>
                      </div>
-                     <button className="bg-[#1e2327]/80 backdrop-blur border border-[#2a3036] rounded-lg p-2 hover:bg-white/10 transition-colors">
+                     <button className="bg-bg-card/80 backdrop-blur border border-border-primary rounded-lg p-2 hover:bg-white/10 transition-colors">
                        <Crosshair size={14} />
                      </button>
                    </div>
 
                    {/* Bottom Coord Bar */}
-                   <div className="absolute bottom-0 inset-x-0 h-8 bg-[#161a1d]/90 backdrop-blur border-t border-[#2a3036] flex items-center px-4 text-[9px] text-white/40 font-mono gap-4 z-10">
+                   <div className="absolute bottom-0 inset-x-0 h-8 bg-bg-primary/90 backdrop-blur border-t border-border-primary flex items-center px-4 text-[9px] text-text-secondary/40 font-mono gap-4 z-10">
                      <span>34.0522° N, 118.2437° W</span>
-                     <span className="w-[1px] h-3 bg-[#2a3036]" />
+                     <span className="w-[1px] h-3 bg-border-primary" />
                      <span>Zoom: 12</span>
-                     <span className="w-[1px] h-3 bg-[#2a3036]" />
+                     <span className="w-[1px] h-3 bg-border-primary" />
                      <span>EPSG:4326</span>
                    </div>
                  </div>
 
                  {/* Right Sidebar */}
-                 <div className="w-full xl:w-[280px] bg-[#161a1d] border-t xl:border-t-0 xl:border-l border-[#2a3036] flex flex-col shrink-0 z-20 overflow-hidden">
+                 <div className="w-full xl:w-[280px] bg-bg-secondary border-t xl:border-t-0 xl:border-l border-border-primary flex flex-col shrink-0 z-20 overflow-hidden">
                     <div className="p-5 flex-1 overflow-y-auto custom-scrollbar">
                       
                       {/* Layers Section */}
                       <div className="mb-6">
-                        <h4 className="text-[11px] font-bold text-white mb-4">Layers</h4>
+                        <h4 className="text-[11px] font-bold text-text-primary mb-4">Layers</h4>
                         <div className="flex flex-col gap-3">
                           {[
                             { name: "Road Network", color: "#ff6384" },
@@ -923,17 +923,17 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                             { name: "Infrastructure", color: "#f59e0b" },
                             { name: "Sensors", color: "#a78bfa" }
                           ].map((layer, i) => (
-                            <div key={i} className="flex items-center justify-between text-[11px] text-white/70">
+                            <div key={i} className="flex items-center justify-between text-[11px] text-text-secondary/70">
                               <label className="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" defaultChecked className="accent-[#338f82] bg-transparent border-white/20 rounded-sm" />
+                                <input type="checkbox" defaultChecked className="accent-accent bg-transparent border-border-primary rounded-sm" />
                                 {layer.name}
                               </label>
                               <div className="w-4 h-[2px]" style={{ backgroundColor: layer.color }} />
                             </div>
                           ))}
-                          <div className="flex items-center justify-between text-[11px] text-white/70">
+                          <div className="flex items-center justify-between text-[11px] text-text-secondary/70">
                             <label className="flex items-center gap-2 cursor-pointer">
-                              <input type="checkbox" className="accent-[#338f82] bg-transparent border-white/20 rounded-sm" />
+                              <input type="checkbox" className="accent-accent bg-transparent border-border-primary rounded-sm" />
                               Alerts
                             </label>
                             <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
@@ -941,54 +941,54 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                         </div>
                       </div>
 
-                      <div className="w-full h-[1px] bg-[#2a3036] mb-6" />
+                      <div className="w-full h-[1px] bg-border-primary mb-6" />
 
                       {/* Analysis Tools */}
                       <div className="mb-6">
-                         <h4 className="text-[11px] font-bold text-white mb-4">Analysis Tools</h4>
+                         <h4 className="text-[11px] font-bold text-text-primary mb-4">Analysis Tools</h4>
                          <div className="grid grid-cols-2 gap-2">
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <CircleDot size={12} className="text-white/40" /> Buffer
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <CircleDot size={12} className="text-text-secondary/40" /> Buffer
                            </button>
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <Plus size={12} className="text-white/40" /> Intersect
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <Plus size={12} className="text-text-secondary/40" /> Intersect
                            </button>
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <Triangle size={12} className="text-white/40" /> Heatmap
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <Triangle size={12} className="text-text-secondary/40" /> Heatmap
                            </button>
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <Crosshair size={12} className="text-white/40" /> Proximity
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <Crosshair size={12} className="text-text-secondary/40" /> Proximity
                            </button>
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <Waypoints size={12} className="text-white/40" /> Route
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <Waypoints size={12} className="text-text-secondary/40" /> Route
                            </button>
-                           <button className="bg-[#1e2327] hover:bg-[#2a3036] border border-[#2a3036] rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-white/70 transition-colors">
-                             <Layers size={12} className="text-white/40" /> Density
+                           <button className="bg-bg-card hover:bg-bg-primary border border-border-primary rounded-md py-2 px-2 flex items-center gap-2 text-[10px] text-text-secondary/70 transition-colors">
+                             <Layers size={12} className="text-text-secondary/40" /> Density
                            </button>
                          </div>
                       </div>
 
-                      <div className="w-full h-[1px] bg-[#2a3036] mb-6" />
+                      <div className="w-full h-[1px] bg-border-primary mb-6" />
 
                       {/* Live Feed */}
                       <div>
-                         <h4 className="text-[11px] font-bold text-white mb-4">Live Feed</h4>
+                         <h4 className="text-[11px] font-bold text-text-primary mb-4">Live Feed</h4>
                          <div className="flex flex-col gap-3">
                             <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-white/70">Traffic Sensor 21</span>
-                              <span className="text-[#4ade80] flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" /> Online</span>
+                              <span className="text-text-secondary/70">Traffic Sensor 21</span>
+                              <span className="text-emerald-500 flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Online</span>
                             </div>
                             <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-white/70">Air Quality Monitor 7</span>
-                              <span className="text-[#4ade80] flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" /> Online</span>
+                              <span className="text-text-secondary/70">Air Quality Monitor 7</span>
+                              <span className="text-emerald-500 flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Online</span>
                             </div>
                             <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-white/70">Water Level Gauge 3</span>
+                              <span className="text-text-secondary/70">Water Level Gauge 3</span>
                               <span className="text-yellow-400 flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" /> Warning</span>
                             </div>
                             <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-white/70">Weather Station 12</span>
-                              <span className="text-[#4ade80] flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" /> Online</span>
+                              <span className="text-text-secondary/70">Weather Station 12</span>
+                              <span className="text-emerald-500 flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Online</span>
                             </div>
                          </div>
                       </div>
@@ -1000,25 +1000,25 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               {/* Stats below graphic */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                  {[
-                   { icon: <MapPin size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "2.5M+", label: "Spatial Data Points", desc: "Processed Daily" },
-                   { icon: <Layers size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "98.7%", label: "Mapping Accuracy", desc: "Across All Layers" },
-                   { icon: <Clock size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "3.2x", label: "Faster Insights", desc: "With Spatial Analysis" },
-                   { icon: <ShieldCheck size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "99.9%", label: "System Uptime", desc: "Reliable & Secure" }
+                   { icon: <MapPin size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "2.5M+", label: "Spatial Data Points", desc: "Processed Daily" },
+                   { icon: <Layers size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "98.7%", label: "Mapping Accuracy", desc: "Across All Layers" },
+                   { icon: <Clock size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "3.2x", label: "Faster Insights", desc: "With Spatial Analysis" },
+                   { icon: <ShieldCheck size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "99.9%", label: "System Uptime", desc: "Reliable & Secure" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-white/80 border border-[#0a3a40]/5 rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-white transition-colors">
-                     <div className="w-10 h-10 rounded-full border border-[#0a3a40]/10 flex justify-center items-center mb-4">
+                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
+                     <div className="w-10 h-10 rounded-full border border-border-primary flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
-                     <h3 className="text-2xl font-bold mb-1 text-[#0a3a40]">{s.stat}</h3>
-                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#0a3a40] mb-2">{s.label}</h4>
-                     <p className="text-[10px] text-[#0a3a40]/50 leading-tight">{s.desc}</p>
+                     <h3 className="text-2xl font-bold mb-1 text-text-primary">{s.stat}</h3>
+                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-primary mb-2">{s.label}</h4>
+                     <p className="text-[10px] text-text-secondary leading-tight">{s.desc}</p>
                    </div>
                  ))}
               </div>
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Use Cases Section */}
           <div className="flex justify-between items-end mb-8">
@@ -1034,11 +1034,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Cloud size={18} strokeWidth={1.5} />, title: "Scalable & Secure", desc: "Enterprise-grade infrastructure built for performance and security." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
                      {caseItem.icon}
                   </div>
-                  <h4 className="text-[11px] font-bold">{caseItem.title}</h4>
-                  <p className="text-[10px] opacity-60 leading-relaxed">{caseItem.desc}</p>
+                  <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
+                  <p className="text-[10px] text-text-secondary leading-relaxed">{caseItem.desc}</p>
                 </div>
              ))}
           </div>
@@ -1051,7 +1051,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-animation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1059,12 +1059,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
@@ -1073,14 +1073,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             
             {/* Left Text */}
             <div className="lg:w-[35%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">03</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2">03</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
                 AI ANIMATION
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We craft cinematic AI animations and visual experiences that bring ideas to life. From product stories and commercials to social content and concept videos - powered by next-gen generative AI.
               </p>
 
@@ -1088,33 +1088,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <Wand2 size={20} className="text-[#0a3a40]" />,
+                    icon: <Wand2 size={20} className="text-text-primary" />,
                     title: "AI-Powered Creativity",
                     desc: "Leverage advanced AI models to generate stunning visuals, environments, characters and motion."
                   },
                   {
-                    icon: <Clapperboard size={20} className="text-[#0a3a40]" />,
+                    icon: <Clapperboard size={20} className="text-text-primary" />,
                     title: "Cinematic Quality",
                     desc: "Hollywood-grade lighting, composition and storytelling for every frame."
                   },
                   {
-                    icon: <Zap size={20} className="text-[#0a3a40]" />,
+                    icon: <Zap size={20} className="text-text-primary" />,
                     title: "Fast & Scalable",
                     desc: "Produce high-quality animations in a fraction of the traditional time."
                   },
                   {
-                    icon: <SlidersHorizontal size={20} className="text-[#0a3a40]" />,
+                    icon: <SlidersHorizontal size={20} className="text-text-primary" />,
                     title: "Custom for Your Brand",
                     desc: "Tailored styles, characters and scenes that match your brand identity."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -1125,14 +1125,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Showreel <PlaySquare size={14} />
                 </motion.button>
@@ -1141,18 +1141,18 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
             {/* Right Graphic area */}
             <div className="w-full lg:w-[65%] flex flex-col gap-6">
-              
-              {/* Main Video Player container */}
+                           {/* Main Video Player container */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full aspect-video bg-[#0a0a0a] rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px]"
+                className="w-full aspect-video bg-text-primary/10 dark:bg-text-primary/5 rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px] border border-border-primary"
               >
                 <img 
                   src="https://images.unsplash.com/photo-1541892079-24ecfcab0cda?q=80&w=2670&auto=format&fit=crop"
                   alt="Futuristic Car Animation"
-                  className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
+                  className="w-full h-full object-cover opacity-80 mix-blend-luminosity filter grayscale"
+                  referrerPolicy="no-referrer"
                 />
                 
                 {/* Overlay gradients for text readability */}
@@ -1181,7 +1181,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   {/* Progress Bar */}
                   <div className="flex-1 flex items-center gap-4">
                     <div className="flex-1 h-1 bg-white/20 rounded-full relative overflow-hidden">
-                      <div className="absolute inset-y-0 left-0 w-[26%] bg-red-600 rounded-full"></div>
+                      <div className="absolute inset-y-0 left-0 w-[26%] bg-accent rounded-full"></div>
                     </div>
                     <div className="text-[10px] font-mono w-20 text-center">
                       0:24 / 1:32
@@ -1200,11 +1200,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               {/* More Animations Thumbnails */}
               <div className="mt-4">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="font-bold text-lg">More Animations</h3>
+                  <h3 className="font-bold text-lg text-text-primary">More Animations</h3>
                   <motion.button 
                     whileHover={{ opacity: 0.7, x: 4 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all"
+                    className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all text-text-primary"
                   >
                     View All <ArrowRight size={12} />
                   </motion.button>
@@ -1218,8 +1218,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                     { title: "Neon Dreams", subtitle: "AI Visual Story", time: "0:52", img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2670&auto=format&fit=crop" }
                   ].map((video, idx) => (
                     <div key={idx} className="group cursor-pointer">
-                      <div className="relative aspect-video rounded-xl overflow-hidden mb-3">
-                        <img src={video.img} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 mix-blend-luminosity opacity-80" />
+                      <div className="relative aspect-video rounded-xl overflow-hidden mb-3 border border-border-primary">
+                        <img src={video.img} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 mix-blend-luminosity opacity-80 filter grayscale" referrerPolicy="no-referrer" />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                         <div className="absolute bottom-2 left-2 w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                            <PlaySquare size={10} className="text-white fill-white ml-0.5" />
@@ -1228,8 +1228,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                           {video.time}
                         </div>
                       </div>
-                      <h4 className="text-xs font-bold font-mono">{video.title}</h4>
-                      <div className="text-[10px] text-[#0a3a40]/60 mt-0.5">{video.subtitle}</div>
+                      <h4 className="text-xs font-bold font-mono text-text-primary">{video.title}</h4>
+                      <div className="text-[10px] text-text-secondary/60 mt-0.5">{video.subtitle}</div>
                     </div>
                   ))}
                 </div>
@@ -1238,11 +1238,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Use Cases Section */}
           <div className="flex justify-between items-end mb-8">
-             <h3 className="text-xl font-bold">What We Create</h3>
+             <h3 className="text-xl font-bold font-sans text-text-primary">What We Create</h3>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
@@ -1253,12 +1253,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Smartphone size={18} strokeWidth={1.5} />, title: "Social Content", desc: "Short-form videos and reels optimized for every platform." },
                { icon: <Sparkles size={18} strokeWidth={1.5} />, title: "Concept & Storytelling", desc: "Transform ideas into visual stories that inspire action." },
              ].map((caseItem, i) => (
-                <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                <div key={i} className="flex flex-col gap-3 font-sans">
+                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card shadow-sm text-accent">
                      {caseItem.icon}
                   </div>
-                  <h4 className="text-[11px] font-bold">{caseItem.title}</h4>
-                  <p className="text-[10px] opacity-60 leading-relaxed">{caseItem.desc}</p>
+                  <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
+                  <p className="text-[10px] text-text-secondary/60 leading-relaxed">{caseItem.desc}</p>
                 </div>
              ))}
           </div>
@@ -1266,11 +1266,9 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
         </div>
       </div>
     );
-  }
-
-  if (id === 'service-automation') {
+  }  if (id === 'service-automation') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1278,12 +1276,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
@@ -1292,14 +1290,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             
             {/* Left Text */}
             <div className="lg:w-[40%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">03</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2 font-mono tracking-widest">/ 03</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
                 INTELLIGENT<br />AUTOMATION
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We design AI-powered agents and workflow automation systems that eliminate manual work, orchestrate complex processes, and deliver intelligent outcomes at scale.
               </p>
 
@@ -1307,38 +1305,38 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <BrainCircuit size={20} className="text-[#0a3a40]" />,
+                    icon: <BrainCircuit size={20} className="text-accent" />,
                     title: "AI Agents",
                     desc: "Autonomous agents that understand context, make decisions, and take action."
                   },
                   {
-                    icon: <Share2 size={20} className="text-[#0a3a40]" />,
+                    icon: <Share2 size={20} className="text-accent" />,
                     title: "Workflow Orchestration",
                     desc: "End-to-end process automation with conditional logic, approvals and integrations."
                   },
                   {
-                    icon: <Database size={20} className="text-[#0a3a40]" />,
+                    icon: <Database size={20} className="text-accent" />,
                     title: "Data Intelligence",
                     desc: "Extract, transform and analyze data to drive smarter decisions in real time."
                   },
                   {
-                    icon: <Zap size={20} className="text-[#0a3a40]" />,
+                    icon: <Zap size={20} className="text-accent" />,
                     title: "System Integrations",
                     desc: "Connect with your tools, APIs, databases and third-party services seamlessly."
                   },
                   {
-                    icon: <Shield size={20} className="text-[#0a3a40]" />,
+                    icon: <Shield size={20} className="text-accent" />,
                     title: "Secure & Reliable",
                     desc: "Built with enterprise-grade security, monitoring and error handling."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary bg-bg-card flex items-center justify-center shrink-0 shadow-sm">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -1349,14 +1347,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -1371,98 +1369,98 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#0d161a] rounded-[24px] overflow-hidden shadow-2xl border border-[#1a2d33] p-6 sm:p-8 text-white relative flex flex-col min-h-[400px] md:min-h-[500px]"
+                className="w-full bg-bg-card rounded-[24px] overflow-hidden shadow-2xl border border-border-primary p-6 sm:p-8 text-text-primary relative flex flex-col min-h-[400px] md:min-h-[500px]"
               >
                  <div className="flex justify-between items-start mb-16">
                     <div>
                       <div className="flex items-center gap-2 font-mono text-sm font-bold mb-2">
                         Automation Workflow
-                        <span className="flex items-center gap-1 text-[#4ade80] text-xs"><span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" /> Live</span>
+                        <span className="flex items-center gap-1 text-emerald-500 text-xs"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" /> Live</span>
                       </div>
-                      <div className="text-[11px] text-white/50">AI agent orchestrating customer onboarding</div>
+                      <div className="text-[11px] text-text-secondary/50">AI agent orchestrating customer onboarding</div>
                     </div>
                     <motion.button 
-                      whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                      whileHover={{ scale: 1.05, backgroundColor: "var(--bg-secondary)" }}
                       whileTap={{ scale: 0.95 }}
-                      className="border border-white/20 px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2"
+                      className="border border-border-primary px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 bg-bg-primary text-text-primary shadow-sm"
                     >
-                      <span className="text-white/50">{'>_'}</span> View Logs
+                      <span className="text-accent">{'>_'}</span> View Logs
                     </motion.button>
                  </div>
 
                  {/* Flowchart (simplified representation) */}
                  <div className="flex-1 relative mb-12">
-                   <div className="absolute inset-x-0 top-1/2 -mt-[0.5px] border-t border-dashed border-[#4ade80]/30 hidden md:block" />
+                   <div className="absolute inset-x-0 top-1/2 -mt-[0.5px] border-t border-dashed border-accent/20 hidden md:block" />
                    
-                   <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 relative z-10 w-full px-4 overflow-x-auto pb-4 custom-scrollbar">
+                   <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 relative z-10 w-full px-4 overflow-x-auto pb-4 custom-scrollbar text-text-primary">
                       
                       {/* Box 1 */}
-                      <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
-                         <Zap size={16} className="text-white/40 mt-1 shrink-0" />
-                         <div>
-                           <div className="text-xs font-bold mb-1">Trigger</div>
-                           <div className="text-[9px] text-white/50">New user sign up</div>
-                         </div>
+                      <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10 shadow-sm">
+                        <Zap size={16} className="text-accent mt-1 shrink-0" />
+                        <div>
+                          <div className="text-xs font-bold mb-1">Trigger</div>
+                          <div className="text-[9px] text-text-secondary/50">New user sign up</div>
+                        </div>
                       </div>
 
                       {/* Box 2 */}
-                      <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
-                         <BrainCircuit size={16} className="text-white/40 mt-1 shrink-0" />
+                      <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
+                         <BrainCircuit size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                          <div>
                            <div className="text-xs font-bold mb-1">AI Agent</div>
-                           <div className="text-[9px] text-white/50 mb-2">Analyze user data</div>
-                           <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                           <div className="text-[9px] text-text-secondary/50 mb-2">Analyze user data</div>
+                           <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                          </div>
                       </div>
 
                       {/* Connectors & Branching representation (Vertical group for md+ screens) */}
                       <div className="flex flex-col gap-3 relative shrink-0 z-10">
                         {/* Box 3 */}
-                        <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
-                          <Database size={16} className="text-white/40 mt-1 shrink-0" />
+                        <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
+                          <Database size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                            <div>
                              <div className="text-xs font-bold mb-1">Data Enrichment</div>
-                             <div className="text-[9px] text-white/50 mb-2">Enrich user profile</div>
-                             <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                             <div className="text-[9px] text-text-secondary/50 mb-2">Enrich user profile</div>
+                             <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                            </div>
                         </div>
                         {/* Box 4 */}
-                        <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
-                           <Activity size={16} className="text-white/40 mt-1 shrink-0" />
+                        <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
+                           <Activity size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                            <div>
                              <div className="text-xs font-bold mb-1">Decision Engine</div>
-                             <div className="text-[9px] text-white/50 mb-2">Evaluate risk & rules</div>
-                             <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                             <div className="text-[9px] text-text-secondary/50 mb-2">Evaluate risk & rules</div>
+                             <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                            </div>
                         </div>
                          {/* Box 5 */}
-                        <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
-                           <FileText size={16} className="text-white/40 mt-1 shrink-0" />
+                        <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start relative shrink-0">
+                           <FileText size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                            <div>
                              <div className="text-xs font-bold mb-1">Notification</div>
-                             <div className="text-[9px] text-white/50 mb-2">Send welcome email</div>
-                             <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                             <div className="text-[9px] text-text-secondary/50 mb-2">Send welcome email</div>
+                             <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                            </div>
                         </div>
                       </div>
 
                       {/* Box 6 */}
-                      <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
-                         <PlaySquare size={16} className="text-white/40 mt-1 shrink-0" />
+                      <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
+                         <PlaySquare size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                          <div>
                            <div className="text-xs font-bold mb-1">Action</div>
-                           <div className="text-[9px] text-white/50 mb-2">Create user workspace</div>
-                           <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                           <div className="text-[9px] text-text-secondary/50 mb-2">Create user workspace</div>
+                           <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                          </div>
                       </div>
 
                       {/* Box 7 */}
-                       <div className="bg-[#132025] border border-[#1a2d33] rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
-                         <Database size={16} className="text-white/40 mt-1 shrink-0" />
+                       <div className="bg-bg-card border border-border-primary rounded-xl p-4 min-w-[160px] flex gap-3 items-start shrink-0 z-10">
+                         <Database size={16} className="text-text-secondary/40 mt-1 shrink-0" />
                          <div>
                            <div className="text-xs font-bold mb-1">Update CRM</div>
-                           <div className="text-[9px] text-white/50 mb-2">Sync user record</div>
-                           <div className="text-[9px] text-[#4ade80] flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
+                           <div className="text-[9px] text-text-secondary/50 mb-2">Sync user record</div>
+                           <div className="text-[9px] text-emerald-500 flex items-center gap-1"><CheckCircle size={8} /> Completed</div>
                          </div>
                       </div>
 
@@ -1471,18 +1469,18 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
                  {/* Bottom area of graphic */}
                  <div className="mt-auto flex justify-end">
-                   <div className="bg-[#132025] border border-[#1a2d33] rounded-xl px-4 py-3 flex flex-col gap-2 min-w-[150px]">
+                   <div className="bg-bg-card border border-border-primary rounded-xl px-4 py-3 flex flex-col gap-2 min-w-[150px]">
                       <div className="flex items-center justify-between text-[10px]">
-                        <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]"></span> Success</span>
-                        <span>98.7%</span>
+                        <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Success</span>
+                        <span className="text-text-secondary">98.7%</span>
                       </div>
                       <div className="flex items-center justify-between text-[10px]">
                         <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span> In Progress</span>
-                        <span>1.1%</span>
+                        <span className="text-text-secondary">1.1%</span>
                       </div>
                       <div className="flex items-center justify-between text-[10px]">
                         <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-red-400"></span> Failed</span>
-                        <span>0.2%</span>
+                        <span className="text-text-secondary">0.2%</span>
                       </div>
                    </div>
                  </div>
@@ -1491,25 +1489,25 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               {/* Stats below graphic */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                  {[
-                   { icon: <Activity size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "4.5x", label: "Process Velocity", desc: "Average improvement" },
-                   { icon: <Monitor size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "99.2%", label: "Automation Accuracy", desc: "Reduced manual errors" },
-                   { icon: <Clock size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "2.8x", label: "Time Saved", desc: "Per automated workflow" },
-                   { icon: <TrendingUp size={20} className="text-[#0a3a40]" strokeWidth={1.5} />, stat: "60%", label: "Cost Reduction", desc: "Operational efficiency" }
+                   { icon: <Activity size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "4.5x", label: "Process Velocity", desc: "Average improvement" },
+                   { icon: <Monitor size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "99.2%", label: "Automation Accuracy", desc: "Reduced manual errors" },
+                   { icon: <Clock size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "2.8x", label: "Time Saved", desc: "Per automated workflow" },
+                   { icon: <TrendingUp size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "60%", label: "Cost Reduction", desc: "Operational efficiency" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-white/80 border border-[#0a3a40]/5 rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-white transition-colors">
-                     <div className="w-10 h-10 rounded-full border border-[#0a3a40]/10 flex justify-center items-center mb-4">
+                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
+                     <div className="w-10 h-10 rounded-full border border-border-primary flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
-                     <h3 className="text-2xl font-bold mb-1 text-[#0a3a40]">{s.stat}</h3>
-                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#0a3a40] mb-2">{s.label}</h4>
-                     <p className="text-[10px] text-[#0a3a40]/50 leading-tight">{s.desc}</p>
+                     <h3 className="text-2xl font-bold mb-1 text-text-primary">{s.stat}</h3>
+                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-primary mb-2">{s.label}</h4>
+                     <p className="text-[10px] text-text-secondary leading-tight">{s.desc}</p>
                    </div>
                  ))}
               </div>
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Use Cases Section */}
           <div className="flex justify-between items-end mb-8">
@@ -1517,7 +1515,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
              <motion.button 
                whileHover={{ opacity: 0.7, x: 4 }}
                whileTap={{ scale: 0.95 }}
-               className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all"
+               className="text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 transition-all text-text-primary"
              >
                View All Use Cases <ArrowUpRight size={12} />
              </motion.button>
@@ -1533,11 +1531,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Monitor size={18} strokeWidth={1.5} />, title: "API Orchestration", desc: "Orchestrate APIs and services to build powerful automations." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
                      {caseItem.icon}
                   </div>
-                  <h4 className="text-[11px] font-bold">{caseItem.title}</h4>
-                  <p className="text-[10px] opacity-60 leading-relaxed">{caseItem.desc}</p>
+                  <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
+                  <p className="text-[10px] text-text-secondary/60 leading-relaxed">{caseItem.desc}</p>
                 </div>
              ))}
           </div>
@@ -1550,7 +1548,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
   // Engineering Systems & Digital Platforms
   if (id === 'service-branding' || id === 'service-development') {
     return (
-      <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1558,12 +1556,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             onClick={onBack}
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span className="relative">
               Back to Services
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
             </span>
           </motion.button>
 
@@ -1572,14 +1570,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
             
             {/* Left Text */}
             <div className="lg:w-[40%] flex flex-col pt-4">
-              <div className="text-[10px] font-bold text-[#93ACA7] mb-2">01</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+              <div className="text-[10px] font-bold text-text-secondary/50 mb-2">01</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-[#0a3a40] leading-[1.1] mb-8 font-mono text-balance">
+              <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1] mb-8 font-mono text-balance">
                 ENGINEERING<br />SYSTEMS &<br />PLATFORMS
               </h1>
               
-              <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-10 max-w-[400px]">
+              <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-10 max-w-[400px]">
                 We architect and build modular, high-performance digital ecosystems. From complex web applications to native Android platforms, we focus on scalability, maintainability, and exceptional user experiences.
               </p>
 
@@ -1587,33 +1585,33 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               <div className="flex flex-col gap-6 mb-12">
                 {[
                   {
-                    icon: <Monitor size={20} className="text-[#0a3a40]" />,
+                    icon: <Monitor size={20} className="text-text-primary" />,
                     title: "Web Applications",
                     desc: "Modern, reactive web platforms built with React, Next.js, and high-performance backends."
                   },
                   {
-                    icon: <Smartphone size={20} className="text-[#0a3a40]" />,
+                    icon: <Smartphone size={20} className="text-text-primary" />,
                     title: "Mobile Platforms",
                     desc: "Scalable Android applications engineered for reliability and smooth performance."
                   },
                   {
-                    icon: <Database size={20} className="text-[#0a3a40]" />,
+                    icon: <Database size={20} className="text-text-primary" />,
                     title: "Scalable Infrastructure",
                     desc: "Cloud-native architectures designed to grow with your user base without friction."
                   },
                   {
-                    icon: <Palette size={20} className="text-[#0a3a40]" />,
+                    icon: <Palette size={20} className="text-text-primary" />,
                     title: "System Thinking",
                     desc: "Designing cohesive design systems and modular components that ensure long-term agility."
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-[#0a3a40]/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#0a3a40] mb-1">{item.title}</h4>
-                      <p className="text-[11px] text-[#0a3a40]/60 leading-relaxed max-w-[300px]">{item.desc}</p>
+                      <h4 className="text-sm font-bold text-text-primary mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-text-secondary/60 leading-relaxed max-w-[300px]">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -1624,14 +1622,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "rgba(255,255,255,0.7)" }}
+                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-[#0a3a40]/20 bg-transparent text-[#0a3a40] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
                   Technical Specs <ArrowRight size={14} />
                 </motion.button>
@@ -1646,46 +1644,46 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-[#1a1c1e] rounded-[24px] overflow-hidden shadow-2xl border border-white/5 relative flex flex-col min-h-[400px] md:min-h-[500px]"
+                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary relative flex flex-col min-h-[400px] md:min-h-[500px]"
               >
                   {/* Laptop Mockup Header */}
-                  <div className="h-10 bg-[#121416] border-b border-white/5 flex items-center px-4 gap-1.5 shrink-0">
+                  <div className="h-10 bg-bg-primary border-b border-border-primary flex items-center px-4 gap-1.5 shrink-0">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                     <div className="flex-1 flex justify-center">
-                      <div className="bg-white/5 px-4 py-1 rounded text-[9px] text-white/30 font-mono">app.reliabilityiq.systems</div>
+                      <div className="bg-bg-secondary/50 px-4 py-1 rounded text-[9px] text-text-secondary/30 font-mono">app.reliabilityiq.systems</div>
                     </div>
                   </div>
 
                   {/* App Interface Layout */}
                   <div className="flex-1 flex overflow-hidden">
                     {/* Sidebar */}
-                    <div className="w-16 border-r border-white/5 flex flex-col items-center py-6 gap-6 bg-[#0a0a0a]">
-                      <div className="w-8 h-8 rounded-lg bg-[#338f82]/20 flex items-center justify-center text-[#338f82]">
+                    <div className="w-16 border-r border-border-primary flex flex-col items-center py-6 gap-6 bg-bg-card">
+                      <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
                         <Code size={18} />
                       </div>
-                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer">
+                      <div className="w-8 h-8 rounded-lg bg-bg-secondary/5 flex items-center justify-center text-text-secondary/20 hover:text-text-secondary/40 transition-colors cursor-pointer">
                         <Database size={18} />
                       </div>
-                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer">
+                      <div className="w-8 h-8 rounded-lg bg-bg-secondary/5 flex items-center justify-center text-text-secondary/20 hover:text-text-secondary/40 transition-colors cursor-pointer">
                         <Activity size={18} />
                       </div>
-                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20 hover:text-white/40 transition-colors cursor-pointer mt-auto">
+                      <div className="w-8 h-8 rounded-lg bg-bg-secondary/5 flex items-center justify-center text-text-secondary/20 hover:text-text-secondary/40 transition-colors cursor-pointer mt-auto">
                         <Settings size={18} />
                       </div>
                     </div>
 
                     {/* Main Content Pane */}
-                    <div className="flex-1 p-8 overflow-y-auto bg-[#0a0a0a]">
-                      <div className="flex justify-between items-center mb-10 text-white">
+                    <div className="flex-1 p-8 overflow-y-auto bg-bg-card">
+                      <div className="flex justify-between items-center mb-10 text-text-primary">
                         <div>
-                          <h3 className="text-xl font-bold mb-1 text-white">Architecture Overview</h3>
+                          <h3 className="text-xl font-bold mb-1 text-text-primary">Architecture Overview</h3>
                           <div className="text-[10px] font-mono opacity-40">Status: Operational • Version: 2.4.0</div>
                         </div>
                         <div className="flex gap-2">
-                           <div className="bg-[#338f82]/20 text-[#338f82] px-3 py-1 rounded-md text-[10px] font-bold border border-[#338f82]/30">Healthy</div>
-                           <div className="bg-white/5 text-white/60 px-3 py-1 rounded-md text-[10px] font-bold border border-white/10">v2.4.0</div>
+                           <div className="bg-accent/20 text-accent px-3 py-1 rounded-md text-[10px] font-bold border border-accent/30">Healthy</div>
+                           <div className="bg-bg-secondary/5 text-text-secondary/60 px-3 py-1 rounded-md text-[10px] font-bold border border-border-primary">v2.4.0</div>
                         </div>
                       </div>
 
@@ -1696,36 +1694,36 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                            { label: "Avg Latency", val: "42ms", trend: "-5%" },
                            { label: "Uptime", val: "99.99%", trend: "Stable" }
                          ].map((m, idx) => (
-                           <div key={idx} className="bg-white/5 p-4 rounded-xl border border-white/5">
-                             <div className="text-[9px] uppercase tracking-widest text-white/30 font-bold mb-2">{m.label}</div>
-                             <div className="text-xl font-bold text-white mb-1">{m.val}</div>
-                             <div className={`text-[9px] font-bold ${m.trend.startsWith('+') ? 'text-[#338f82]' : m.trend === 'Stable' ? 'text-white/40' : 'text-blue-400'}`}>{m.trend}</div>
+                           <div key={idx} className="bg-bg-secondary/5 p-4 rounded-xl border border-border-primary">
+                             <div className="text-[9px] uppercase tracking-widest text-text-secondary/30 font-bold mb-2">{m.label}</div>
+                             <div className="text-xl font-bold text-text-primary mb-1">{m.val}</div>
+                             <div className={`text-[9px] font-bold ${m.trend.startsWith('+') ? 'text-accent' : m.trend === 'Stable' ? 'text-text-secondary/40' : 'text-blue-500'}`}>{m.trend}</div>
                            </div>
                          ))}
                       </div>
 
                       {/* Visual Architecture Representation */}
-                      <div className="relative border border-white/5 rounded-xl bg-white/[0.02] p-6 min-h-[150px] flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #338f82 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                      <div className="relative border border-border-primary rounded-xl bg-bg-secondary/5 p-6 min-h-[150px] flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, var(--color-accent) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
                         <div className="relative flex items-center justify-center gap-12">
-                           <div className="w-12 h-12 rounded-xl border border-[#338f82]/50 bg-[#338f82]/10 flex items-center justify-center"><Monitor size={20} className="text-[#338f82]" /></div>
+                           <div className="w-12 h-12 rounded-xl border border-accent/50 bg-accent/10 flex items-center justify-center"><Monitor size={20} className="text-accent" /></div>
                            <div className="flex flex-col gap-4">
-                              <div className="w-32 h-[1px] bg-gradient-to-r from-[#338f82]/50 to-transparent relative">
+                              <div className="w-32 h-[1px] bg-gradient-to-r from-accent/50 to-transparent relative">
                                 <motion.div 
                                   animate={{ x: [0, 128] }}
                                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#338f82] blur-[2px]"
+                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent blur-[2px]"
                                 />
                               </div>
-                              <div className="w-32 h-[1px] bg-gradient-to-r from-transparent to-[#338f82]/50 relative">
+                              <div className="w-32 h-[1px] bg-gradient-to-r from-transparent to-accent/50 relative">
                                 <motion.div 
                                   animate={{ x: [128, 0] }}
                                   transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#338f82] blur-[2px]"
+                                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent blur-[2px]"
                                 />
                               </div>
                            </div>
-                           <div className="w-12 h-12 rounded-xl border border-[#338f82]/50 bg-[#338f82]/10 flex items-center justify-center"><Database size={20} className="text-[#338f82]" /></div>
+                           <div className="w-12 h-12 rounded-xl border border-accent/50 bg-accent/10 flex items-center justify-center"><Database size={20} className="text-accent" /></div>
                         </div>
                       </div>
                     </div>
@@ -1735,29 +1733,29 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               {/* Stats below graphic */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                  {[
-                   { icon: <Monitor size={18} className="text-[#0a3a40]" />, stat: "Fast", label: "Page Speed", desc: "Built for speed" },
-                   { icon: <Code size={18} className="text-[#0a3a40]" />, stat: "Clean", label: "Code Quality", desc: "Maintainable systems" },
-                   { icon: <ShieldCheck size={18} className="text-[#0a3a40]" />, stat: "Secure", label: "Architecture", desc: "Safety first" },
-                   { icon: <Layers size={18} className="text-[#0a3a40]" />, stat: "Modular", label: "Design", desc: "Ready to scale" }
+                   { icon: <Monitor size={18} className="text-text-primary" />, stat: "Fast", label: "Page Speed", desc: "Built for speed" },
+                   { icon: <Code size={18} className="text-text-primary" />, stat: "Clean", label: "Code Quality", desc: "Maintainable systems" },
+                   { icon: <ShieldCheck size={18} className="text-text-primary" />, stat: "Secure", label: "Architecture", desc: "Safety first" },
+                   { icon: <Layers size={18} className="text-text-primary" />, stat: "Modular", label: "Design", desc: "Ready to scale" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-white/80 border border-[#0a3a40]/5 rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-white transition-colors">
-                     <div className="w-8 h-8 rounded-full border border-[#0a3a40]/10 flex justify-center items-center mb-4">
+                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
+                     <div className="w-8 h-8 rounded-full border border-border-primary flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
-                     <h3 className="text-xl font-bold mb-1 text-[#0a3a40]">{s.stat}</h3>
-                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#0a3a40] mb-2">{s.label}</h4>
-                     <p className="text-[9px] text-[#0a3a40]/50 leading-tight">{s.desc}</p>
+                     <h3 className="text-xl font-bold mb-1 text-text-primary">{s.stat}</h3>
+                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-primary mb-2">{s.label}</h4>
+                     <p className="text-[9px] text-text-secondary/50 leading-tight">{s.desc}</p>
                    </div>
                  ))}
               </div>
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#0a3a40]/10 mb-12" />
+          <div className="w-full h-[1px] bg-border-primary mb-12" />
 
           {/* Core Offerings */}
           <div className="flex justify-between items-end mb-8">
-             <h3 className="text-xl font-bold">Engineering Capabilities</h3>
+             <h3 className="text-xl font-bold text-text-primary">Engineering Capabilities</h3>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1768,11 +1766,11 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Activity size={18} strokeWidth={1.5} />, title: "Performance Engineering", desc: "Rigorous optimization workflows to ensure maximum speed and efficiency." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-[#0a3a40]/10 rounded-xl bg-white/40">
+                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
                      {caseItem.icon}
                   </div>
-                  <h4 className="text-[11px] font-bold">{caseItem.title}</h4>
-                  <p className="text-[10px] opacity-60 leading-relaxed">{caseItem.desc}</p>
+                  <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
+                  <p className="text-[10px] text-text-secondary/60 leading-relaxed">{caseItem.desc}</p>
                 </div>
              ))}
           </div>
@@ -1784,7 +1782,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   // Fallback to DIGITAL CAPABILITIES for other IDs
   return (
-    <div className="bg-[#EBEBE6] min-h-screen text-[#0a3a40] font-mono pb-20 relative pt-24">
+    <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
       <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
         
         {/* Header/Nav */}
@@ -1792,12 +1790,12 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
           onClick={onBack}
           whileHover={{ x: -4 }}
           whileTap={{ scale: 0.96 }}
-          className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#93ACA7] hover:text-[#0a3a40] transition-colors group cursor-pointer mb-16 font-bold"
+          className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-text-secondary/50 hover:text-text-primary transition-colors group cursor-pointer mb-16 font-bold"
         >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           <span className="relative">
             Back to Services
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#338f82] transition-all duration-300 group-hover:w-full opacity-50" />
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full opacity-50" />
           </span>
         </motion.button>
 
@@ -1806,14 +1804,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
           
           {/* Left Text */}
           <div className="lg:w-[45%] flex flex-col">
-            <div className="text-[10px] font-bold text-[#93ACA7] mb-2">00</div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#338f82] font-bold mb-8">Service Detail</div>
+            <div className="text-[10px] font-bold text-text-secondary/50 mb-2">00</div>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-8">Service Detail</div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0a3a40] leading-[1] mb-8 font-mono">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-text-primary leading-[1] mb-8 font-mono">
               DIGITAL<br />CAPABILITIES
             </h1>
             
-            <p className="text-sm md:text-base text-[#0a3a40]/70 leading-relaxed mb-12 max-w-md">
+            <p className="text-sm md:text-base text-text-secondary/70 leading-relaxed mb-12 max-w-md">
               We design and build high-performance digital solutions tailored to your unique business goals and technical requirements.
             </p>
 
@@ -1822,7 +1820,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 onClick={onContact}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#0a3a40] text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-[#15464a] transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
               >
                 Start a Project <ArrowUpRight size={14} />
               </motion.button>
@@ -1838,13 +1836,13 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
               className="relative w-full aspect-[4/3] max-w-[800px]"
             >
                {/* Laptop Mockup placeholder */}
-               <div className="absolute inset-0 top-0 left-0 right-12 bottom-12 rounded-xl overflow-hidden shadow-2xl border-4 border-[#1a1c1e] bg-[#0a0a0a]">
+               <div className="absolute inset-0 top-0 left-0 right-12 bottom-12 rounded-xl overflow-hidden shadow-2xl border-4 border-border-primary bg-bg-card">
                  <img 
                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
                    alt="Dashboard Interface" 
                    className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
                  />
-                 <div className="absolute inset-x-0 bottom-0 h-4 bg-[#1a1c1e]" />
+                 <div className="absolute inset-x-0 bottom-0 h-4 bg-border-primary" />
                </div>
             </motion.div>
           </div>
