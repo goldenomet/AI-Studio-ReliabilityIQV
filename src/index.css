@@ -216,10 +216,11 @@
     transition: filter 0.5s ease;
     opacity: 0.8;
   }
-  .sp-final { height: 20vh; }
+  .sp-final { height: 35vh; }
 
   @media (max-width: 768px) {
     .sp-main { height: 400vh; }
+    .sp-final { height: 20vh; }
     .sp-container { 
       width: clamp(280px, 90vw, 400px);
       padding: 2rem;
