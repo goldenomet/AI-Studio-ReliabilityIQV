@@ -18,10 +18,12 @@ const RevealItem: React.FC<RevealItemProps> = ({ children, index, total, progres
   const start = index / total;
   const end = (index + 1) / total;
   
-  const opacity = useTransform(progress, [start, end], [initialOpacity, 1]);
+  const isComponent = React.isValidElement(children) || (typeof children === 'object' && children !== null);
+  
+  const opacity = useTransform(progress, [start, end], [isComponent ? Math.max(initialOpacity, 0.4) : initialOpacity, 1]);
   const scale = useTransform(progress, [start, end], [initialScale, 1]);
   const blurValue = useTransform(progress, [start, end], [initialBlur, 0]);
-  const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
+  const filter = useTransform(blurValue, (v) => isComponent ? "none" : `blur(${v}px)`);
   
   return (
     <motion.span
@@ -59,9 +61,9 @@ export const OmniReveal: React.FC<OmniRevealProps> = ({
   scrollHeight = 1000,
   stiffness = 80,
   damping = 30,
-  initialOpacity = 0.1,
-  initialBlur = 10,
-  initialScale = 0.9,
+  initialOpacity = 0.3,
+  initialBlur = 5,
+  initialScale = 0.95,
   className = "",
   ContainerTag = "p"
 }) => {

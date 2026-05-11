@@ -81,7 +81,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="service-card group relative p-6 bg-bg-card backdrop-blur-xl rounded-[24px] border border-border-primary flex items-center gap-6 cursor-pointer overflow-hidden transition-all duration-500 hover:border-accent/30 hover:shadow-2xl"
+      className="service-card group relative p-6 bg-bg-card backdrop-blur-xl rounded-[24px] border border-border-primary flex items-center gap-6 cursor-pointer overflow-hidden transition-[border,box-shadow,transform] duration-500 hover:border-accent/30 hover:shadow-2xl"
       style={{ transformStyle: 'preserve-3d' }}
     >
       {/* Glossy Overlay */}
@@ -159,19 +159,28 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".service-card", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
+      gsap.fromTo(".service-card", 
+        {
+          y: 60,
+          opacity: 0,
+          x: 20,
+          filter: "blur(10px)",
         },
-        y: 60,
-        opacity: 0,
-        x: 20,
-        filter: "blur(10px)",
-        stagger: 0.15,
-        duration: 1,
-        ease: "power3.out"
-      });
+        {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+          },
+          y: 0,
+          opacity: 1,
+          x: 0,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "all"
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();

@@ -47,7 +47,7 @@ const FounderToggle = () => {
 
   return (
     <span 
-      className="inline-block relative z-20 align-middle w-[150px] h-[100px] md:w-[220px] md:h-[145px] ml-1 pt-[103px] pb-[23px] px-0 cursor-pointer group transition-transform duration-300 ease-out hover:scale-[1.03]"
+      className="inline-block relative z-20 align-middle w-[140px] h-[90px] md:w-[200px] md:h-[130px] mx-2 cursor-pointer group transition-transform duration-300 ease-out hover:scale-[1.03]"
       onClick={handleStackClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -217,8 +217,8 @@ export default function App() {
                      <MagneticGlowButton key="4" onClick={() => setCurrentPage('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
                    ]}
                    scrollHeight={400}
-                   initialOpacity={0.05}
-                   initialBlur={12}
+                   initialOpacity={0.6}
+                   initialBlur={3}
                  />
                </div>
             </section>

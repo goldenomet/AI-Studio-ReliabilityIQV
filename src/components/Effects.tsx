@@ -63,8 +63,8 @@ export const TextScroll = ({ text, className }: { text: string, className?: stri
 };
 
 export const ScrollWord = ({ children, progress, range }: { children: string, progress: any, range: [number, number], key?: any }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]);
-  const y = useTransform(progress, range, [10, 0]);
+  const opacity = useTransform(progress, range, [0.5, 1]);
+  const y = useTransform(progress, range, [5, 0]);
   
   return (
     <span className="inline-block mr-[0.25em] last:mr-0 relative">

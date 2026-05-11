@@ -111,7 +111,7 @@ export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onE
   return (
     <section className="bg-bg-secondary text-text-primary py-32 px-6 relative overflow-hidden transition-colors duration-500 border-y border-border-primary">
       {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="flex justify-center mb-8">
@@ -123,17 +123,17 @@ export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onE
         />
         
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
-          <div className="text-center group">
-            <div className="text-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
-            <div className="text-xs font-mono tracking-widest text-text-secondary uppercase">Years Exp</div>
+          <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
+            <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Years Exp</div>
           </div>
-          <div className="text-center group">
-            <div className="text-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
-            <div className="text-xs font-mono tracking-widest text-text-secondary uppercase">Projects</div>
+          <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
+            <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Projects</div>
           </div>
-          <div className="text-center group">
-            <div className="text-accent text-4xl md:text-5xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
-            <div className="text-xs font-mono tracking-widest text-text-secondary uppercase">Data Points</div>
+          <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
+            <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Data Points</div>
           </div>
         </div>
       </div>
