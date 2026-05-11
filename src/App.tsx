@@ -184,8 +184,8 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-bg-primary overflow-hidden flex flex-col justify-end pb-8">
               <div className="absolute inset-0 z-0 flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover dark:opacity-20 contrast-125" />
-                <div className="absolute inset-0 bg-bg-primary/40 backdrop-blur-[2px]" />
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover opacity-80 dark:opacity-40 contrast-110 brightness-110" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-primary/10 to-bg-primary/60 backdrop-blur-[1px]" />
               </div>
               
               <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow" style={{ minHeight: '806px' }}>

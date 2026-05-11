@@ -31,13 +31,13 @@ export const ServicesHero = () => {
           <img 
             src={servicehero}
             alt="Modern Architecture" 
-            className="w-full h-full object-cover dark:opacity-60 dark:brightness-50 transition-all duration-500"
+            className="w-full h-full object-cover dark:opacity-90 dark:brightness-85 transition-all duration-500"
             referrerPolicy="no-referrer"
           />
         </motion.div>
         
         {/* Theme-aware Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-bg-primary/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/10 to-transparent pointer-events-none" />
       </motion.div>
 
       {/* Hero Content - Bottom Aligned */}
