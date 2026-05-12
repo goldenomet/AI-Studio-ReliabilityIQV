@@ -83,7 +83,7 @@ export const Footer = () => (
       </div>
 
       <div className="pt-8 border-t border-border-primary flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary font-mono text-[10px] uppercase tracking-widest">
-        <p>© 2026 ReliabilityIQ Ventures. All rights reserved.</p>
+        <p>© 2024 ReliabilityIQ Ventures. All rights reserved.</p>
         <div className="flex gap-8">
           <a href="#" className="hover:text-text-primary">Privacy Policy</a>
           <a href="#" className="hover:text-text-primary">Terms of Service</a>

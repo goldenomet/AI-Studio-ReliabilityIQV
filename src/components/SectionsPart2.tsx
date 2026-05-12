@@ -151,7 +151,7 @@ export const NarrativeSection = () => (
           }
         />
         <div className="absolute bottom-10 left-10 p-10 bg-bg-card/40 backdrop-blur-md border border-border-primary rounded-3xl max-w-xs pointer-events-none transition-opacity duration-300 group-hover:opacity-0 shadow-xl">
-          <h4 className="text-accent font-mono text-2xl font-bold mb-2">Founded in 2026</h4>
+          <h4 className="text-accent font-mono text-2xl font-bold mb-2">Founded in 2024</h4>
           <p className="text-text-secondary/70 font-mono text-xs leading-relaxed">
             From a small room of 3 engineers to a global powerhouse of 50+ experts.
           </p>

@@ -209,7 +209,7 @@ export default function App() {
                  <OmniReveal 
                    ContainerTag="h2"
                    className="text-2xl md:text-4xl lg:text-[40px] font-medium text-text-primary leading-[1.4] tracking-tight"
-                   text="We provide innovative [] services that combine technology, research, and operational intelligence. Founded by [] in 2026, our focus is on delivering accurate insights, structured data solutions, and digital systems that support smarter decision-making. As a growing company, we are committed to helping businesses and organizations transform information into actionable [] through modern tools, analysis, and efficient workflows. Now onboarding a limited number of early clients. Only 2/6 July spots left — []"
+                   text="We provide innovative [] services that combine technology, research, and operational intelligence. Founded by [] in 2024, our focus is on delivering accurate insights, structured data solutions, and digital systems that support smarter decision-making. As a growing company, we are committed to helping businesses and organizations transform information into actionable [] through modern tools, analysis, and efficient workflows. Now onboarding a limited number of early clients. Only 2/6 July spots left — []"
                    components={[
                      <span key="1" className="bg-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
                      <FounderToggle key="2" />,

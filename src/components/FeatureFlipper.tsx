@@ -195,7 +195,7 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
             <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent transition-colors duration-500 mb-6">Our Engineered Services</div>
             
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8 text-text-primary">
-              Systems. Engineered <br /> for Impact.
+              Systems Engineered <br /> for Impact.
             </h2>
             
             <p className="text-sm leading-relaxed text-text-secondary/70 mb-12 max-w-sm font-sans">

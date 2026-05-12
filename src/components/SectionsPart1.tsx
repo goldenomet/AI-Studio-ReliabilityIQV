@@ -43,7 +43,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           texts={[
             "ReliabilityIQ Ventures delivers global-standard web operations, AI automations, and strategic digital infrastructure for ambitious firms in Nigeria and beyond.",
             "Building resilient systems for the modern global enterprise, from Lagos-edge networks to London cloud infrastructures.",
-            "Specialized engineering that bridges Nigerian technical ingenuity with international execution standards since 2026."
+            "Specialized engineering that bridges Nigerian technical ingenuity with international execution standards since 2024."
           ]}
           className="text-lg md:text-xl text-text-secondary mb-10 max-w-md leading-relaxed font-mono min-h-[140px] md:min-h-[120px]"
         />
