@@ -190,7 +190,7 @@ export const Navbar = ({
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-[220px] max-w-[85vw] h-[calc(100vh-2rem)] my-4 mr-4 backdrop-blur-[40px] border border-border-primary bg-bg-card/90 rounded-[32px] overflow-hidden flex flex-col shadow-2xl text-[25px] font-[Arial] font-bold leading-[22px] text-text-primary dark:bg-bg-primary/95 dark:border-white/20"
+              className="relative w-[220px] max-w-[85vw] h-[calc(100vh-8rem)] my-8 mr-4 backdrop-blur-[40px] border border-border-primary bg-bg-card/90 rounded-[32px] overflow-hidden flex flex-col shadow-2xl text-[25px] font-[Arial] font-bold leading-[22px] text-text-primary dark:bg-bg-primary/95 dark:border-white/20"
             >
               <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-text-primary/5 to-transparent pointer-events-none" />
               <div className="p-4 flex flex-col h-full relative z-10">
@@ -225,10 +225,8 @@ export const Navbar = ({
 
                    <hr className="border-border-primary my-8" />
 
-                   <div className="text-[12px] mb-4 font-medium uppercase tracking-wider text-text-secondary">Other</div>
+
                    <div className="flex flex-col gap-4 mb-8">
-                       <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Privacy Policy</button>
-                       <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Terms of Service</button>
                        <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Cookie Policy</button>
                    </div>
 
