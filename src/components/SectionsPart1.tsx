@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
 import { ArrowRight, Zap, Globe, Cpu, ArrowLeft, Code, BrainCircuit, Video, Map, Megaphone, FileText, ArrowUpRight, Clock, TrendingUp, Users } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
-import { FlipCard, TiltCard } from './Cards';
+import { TiltCard } from './Cards';
 import { ScramblyText, TextEngine, RealTimeCursors, PixelSnow, SmartTypewriter, TextScroll } from './Effects';
 import fallbackLogo from '@/src/assets/images/logo.png';
 import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
@@ -140,15 +140,4 @@ export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onE
     </section>
   );
 };
-
-interface StackCardProps {
-  i: number;
-  title: string;
-  description: string;
-  icon: any;
-  image: any;
-  progress: any;
-  range: number[];
-  onAction: () => void;
-}
 

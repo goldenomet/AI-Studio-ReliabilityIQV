@@ -2,5 +2,7 @@
   "name": "ReliabilityIQ Ventures",
   "description": "ReliabilityIQ Ventures: Leading enterprise IT solutions in Nigeria and globally. We specialize in high-availability web operations, AI workflow automation, and resilient digital infrastructure for scaling businesses.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

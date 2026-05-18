@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
 import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool } from 'lucide-react';
-import { StackCard, TiltCard, FlipCard } from './Cards';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
