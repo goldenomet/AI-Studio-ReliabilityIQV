@@ -253,7 +253,7 @@ export default function App() {
           )}
         </main>
 
-        <Footer />
+        <Footer onNavigate={setCurrentPage} />
         <ScrollToTopButton />
         <WhatsAppWidget />
       </div>

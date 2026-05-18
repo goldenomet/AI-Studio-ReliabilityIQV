@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
-import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool, Zap } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
@@ -277,17 +277,28 @@ export const ContactSection = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  
+  // Spotlight effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  };
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.firstName.trim()) newErrors.firstName = "Required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Required";
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = "Invalid format";
     }
-    if (formData.details.trim().length < 10) newErrors.details = "Please provide more details (min 10 characters)";
+    if (formData.details.trim().length < 10) newErrors.details = "More details needed (min 10 chars)";
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -297,47 +308,6 @@ export const ContactSection = () => {
     return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setIsSubmitting(true);
-    
-    try {
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ 
-          "form-name": "contact", 
-          ...formData,
-          name: `${formData.firstName} ${formData.lastName}` 
-        }),
-      });
-      
-      setIsSuccess(true);
-      setFormData({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    } catch (error) {
-      console.error("Netlify Submission Error:", error);
-      // Fallback to mailto if Netlify fails or we're not on Netlify
-      const subject = encodeURIComponent(`New Contact Form Submission from ${formData.firstName} ${formData.lastName}`);
-      const body = encodeURIComponent(`You have a new inquiry from your website.
-
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Service Required: ${formData.service}
-
-Message/Details:
-${formData.details}
-`);
-      window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
-      
-      setIsSuccess(true); // Still show success as it opened mail client
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -352,142 +322,269 @@ ${formData.details}
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      if (formRef.current) {
+        const data = {
+          "form-name": "contact",
+          ...formData,
+          name: `${formData.firstName} ${formData.lastName}`
+        };
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode(data as any),
+        });
+      }
+      
+      setIsSuccess(true);
+      setFormData({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (error) {
+      console.error("Submission Error:", error);
+      const subject = encodeURIComponent(`Inquiry from ${formData.firstName} ${formData.lastName}`);
+      const body = encodeURIComponent(`Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nService: ${formData.service}\nDetails: ${formData.details}`);
+      window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
+      setIsSuccess(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const inputClasses = (name: string) => `
+    w-full bg-white/5 dark:bg-black/20 backdrop-blur-md px-4 py-4 rounded-xl 
+    outline-none border transition-all duration-300
+    text-text-primary placeholder:text-text-secondary/30 font-mono text-sm
+    ${errors[name] ? 'border-red-500/50 focus:border-red-500' : 'border-border-primary focus:border-accent'}
+    focus:ring-1 focus:ring-accent/20
+  `;
+
   return (
-    <section id="contact-section" className="pb-32 px-6 bg-bg-primary transition-colors duration-500">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-bg-card rounded-[48px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-border-primary transition-colors duration-500">
-          {/* Form */}
-          <div className="lg:w-1/2 p-6 md:p-12 lg:p-20 border-r border-border-primary relative overflow-hidden group transition-colors duration-500">
-            <GrainyGradient />
-            <div className="relative z-10">
-              <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Start a Conversation</div>
-              <h2 className="text-3xl md:text-5xl font-bold font-mono mb-12 leading-tight text-text-primary dark:text-green-800 transition-colors duration-500">
-                Ready to upgrade your infrastructure?
+    <section id="contact-section" className="pb-32 px-4 md:px-6 bg-bg-primary transition-colors duration-500 overflow-hidden relative">
+      {/* Decorative ambient background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="bg-bg-card/40 backdrop-blur-2xl rounded-[40px] md:rounded-[64px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-border-primary transition-colors duration-500 group/container"
+             onMouseMove={handleMouseMove}
+        >
+          {/* Reactive Spotlight Effect */}
+          <motion.div 
+            className="pointer-events-none absolute -inset-px opacity-0 group-hover/container:opacity-100 transition-opacity duration-300"
+            style={{
+              background: useTransform(
+                [mouseX, mouseY],
+                ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, var(--color-accent-glow), transparent 40%)`
+              )
+            }}
+          />
+
+          {/* Form Side */}
+          <div className="lg:w-[55%] p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-border-primary relative transition-colors duration-500">
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="inline-flex items-center gap-2 mb-6">
+                <div className="w-10 h-[1px] bg-accent" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent font-bold">Node Invitation</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-mono mb-12 tracking-tighter text-text-primary leading-[0.85] transition-colors duration-500">
+                Establish <br /> <span className="text-accent italic">Communication.</span>
               </h2>
 
               <form 
+                ref={formRef}
                 name="contact" 
                 data-netlify="true" 
-                className="space-y-8 font-mono text-sm" 
+                className="space-y-8 font-mono" 
                 onSubmit={handleSubmit}
               >
                 <input type="hidden" name="form-name" value="contact" />
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">First Name</label>
+                  <div className="group/field relative">
+                    <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">First Name</label>
                     <input 
                       type="text" 
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      placeholder="John" 
-                      className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.firstName ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
+                      placeholder="Protocol A" 
+                      className={inputClasses('firstName')}
                     />
-                    {errors.firstName && <p className="text-red-500 text-[10px] mt-1">{errors.firstName}</p>}
+                    <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
+                    {errors.firstName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.firstName}</motion.p>}
                   </div>
-                  <div>
-                     <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Last Name</label>
-                     <input 
+
+                  <div className="group/field relative">
+                    <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Last Name</label>
+                    <input 
                       type="text" 
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      placeholder="Doe" 
-                      className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.lastName ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
+                      placeholder="Protocol B" 
+                      className={inputClasses('lastName')}
                     />
-                    {errors.lastName && <p className="text-red-500 text-[10px] mt-1">{errors.lastName}</p>}
+                    <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
+                    {errors.lastName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.lastName}</motion.p>}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Work Email</label>
+                <div className="group/field relative">
+                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Work Email</label>
                   <input 
                     type="email" 
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@company.com" 
-                    className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.email ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all text-text-primary placeholder:text-text-secondary/40 shadow-sm`}
+                    placeholder="direct@link.network" 
+                    className={inputClasses('email')}
                   />
-                  {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
+                  {errors.email && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.email}</motion.p>}
                 </div>
 
-                <div>
-                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Service Interest</label>
-                  <select 
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none font-mono text-sm cursor-pointer border border-border-primary focus:border-accent/30 transition-all text-text-primary dark:text-green-800 shadow-sm"
-                  >
-                    <option className="dark:bg-bg-card">Web Operations</option>
-                    <option className="dark:bg-bg-card">AI Automations</option>
-                    <option className="dark:bg-bg-card">GIS Mapping</option>
-                    <option className="dark:bg-bg-card">Technical Reports</option>
-                    <option className="dark:bg-bg-card">Content & Design</option>
-                  </select>
+                <div className="group/field relative">
+                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Project Stream</label>
+                  <div className="relative">
+                    <select 
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={`${inputClasses('service')} appearance-none pr-10 cursor-pointer`}
+                    >
+                      <option className="bg-bg-card">Web Operations</option>
+                      <option className="bg-bg-card">AI Automations</option>
+                      <option className="bg-bg-card">GIS Mapping</option>
+                      <option className="bg-bg-card">Technical Reports</option>
+                      <option className="bg-bg-card">Content Studio</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-accent">
+                      <ArrowRight size={18} className="rotate-90" />
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] uppercase text-text-secondary dark:text-green-800 mb-2 font-bold tracking-tighter transition-colors duration-500">Project Details</label>
+                <div className="group/field relative">
+                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Transmission Packet</label>
                   <textarea 
                     name="details"
                     value={formData.details}
                     onChange={handleChange}
                     rows={4} 
-                    placeholder="Tell us about your technical challenges..." 
-                    className={`w-full bg-bg-secondary/40 backdrop-blur-md p-4 rounded-xl outline-none border ${errors.details ? 'border-red-500' : 'border-border-primary'} focus:border-accent/30 transition-all resize-none text-text-primary dark:text-green-800 placeholder:text-text-secondary/40 shadow-sm`}
+                    placeholder="Input detailed project requirements..." 
+                    className={`${inputClasses('details')} resize-none`}
                   ></textarea>
-                  {errors.details && <p className="text-red-500 text-[10px] mt-1">{errors.details}</p>}
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500 bottom-[6px]" />
+                  {errors.details && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.details}</motion.p>}
                 </div>
 
-                <MagneticGlowButton 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full ${isSuccess ? '!bg-green-500' : ''} py-5 text-lg font-bold disabled:opacity-50 !rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300`}
-                >
-                  {isSubmitting ? 'Processing...' : isSuccess ? 'Request Sent!' : 'Submit Request'}
-                </MagneticGlowButton>
+                <div className="pt-6">
+                  <AnimatePresence mode="wait">
+                    {isSuccess ? (
+                      <motion.div
+                        key="success"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.05 }}
+                        className="w-full bg-green-500/10 border border-green-500/50 text-green-500 p-8 rounded-3xl flex flex-col items-center justify-center text-center gap-4"
+                      >
+                        <div className="w-16 h-16 bg-green-500 text-bg-primary rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(34,197,94,0.3)]">
+                          <Zap size={32} fill="currentColor" />
+                        </div>
+                        <div>
+                          <p className="font-black text-xl uppercase tracking-tighter italic">Data Transmitted</p>
+                          <p className="text-[10px] opacity-70 tracking-widest">ENCRYPTION ACTIVE • NODE ACKNOWLEDGED</p>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div key="button" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                        <MagneticGlowButton 
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full py-6 text-xl font-black italic uppercase tracking-tighter disabled:opacity-50 !rounded-2xl shadow-3xl group/btn overflow-hidden"
+                        >
+                          <span className="relative z-10 flex items-center justify-center gap-4">
+                            {isSubmitting ? (
+                              <motion.span animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }}>
+                                <Cpu size={28} />
+                              </motion.span>
+                            ) : (
+                              <>Submit <ArrowRight size={28} className="group-hover/btn:translate-x-2 transition-transform" /></>
+                            )}
+                          </span>
+                        </MagneticGlowButton>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </form>
             </div>
           </div>
 
-          {/* Map/Info */}
-          <div className="lg:w-1/2 relative bg-bg-secondary/50 p-6 md:p-12 lg:p-20 flex flex-col justify-between overflow-hidden transition-colors duration-500">
-            {/* Map Placeholder */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
-               <img 
-                src={fallbackLogo} 
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale opacity-40 dark:opacity-20 transition-opacity duration-500" 
-                alt="map"
-              />
-            </div>
-            
-            <div className="relative z-10 flex-grow w-full rounded-2xl overflow-hidden shadow-lg mb-8 h-64 md:h-auto shrink-0 md:shrink border border-border-primary">
-               <iframe 
-                src="https://maps.google.com/maps?q=41%20Akeem%20Salami%20St,%20Idimu,%20Lagos%20102213,%20Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={true}
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 dark:brightness-75 dark:contrast-125 dark:invert-[.9] dark:hue-rotate-180 transition-all duration-500"
-              />
-            </div>
+          {/* Logistics Side */}
+          <div className="lg:w-[45%] bg-bg-secondary/20 relative flex flex-col p-8 md:p-12 lg:p-16 transition-colors duration-500 group/logistics">
+            {/* Animated Grid overlay */}
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+                 style={{ backgroundImage: 'radial-gradient(var(--color-accent) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-            <div className="relative z-10 bg-transparent border border-border-primary p-6 lg:p-8 rounded-[24px] md:mt-0 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between flex-wrap items-start sm:items-center transition-colors duration-500">
-              <div>
-                <div className="text-[10px] uppercase tracking-widest text-text-secondary/50 mb-2 font-bold transition-colors duration-500">Direct Line</div>
-                <div className="font-mono text-[13px] md:text-sm text-text-primary tracking-tighter leading-relaxed font-medium whitespace-nowrap transition-colors duration-500">
-                  +234 9075934287 <br className="sm:hidden" /> <span className="hidden sm:inline">&bull;</span> +234 906539605
+            <div className="relative z-10 flex flex-col h-full gap-12">
+              <div className="space-y-4">
+                <div className="font-mono text-[9px] uppercase tracking-[0.4em] text-accent font-bold">Host Coordinate</div>
+                <div className="relative rounded-[32px] overflow-hidden border border-border-primary bg-black/40 shadow-inner h-80 lg:flex-grow grayscale contrast-125 transition-all duration-700 hover:grayscale-0 hover:contrast-100">
+                  <iframe 
+                    src="https://maps.google.com/maps?q=41%20Akeem%20Salami%20St,%20Idimu,%20Lagos%20102213,%20Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={true}
+                    loading="lazy" 
+                    className="absolute inset-0 dark:invert-[.9] dark:hue-rotate-180 brightness-75 lg:brightness-100"
+                  />
+                  <div className="absolute inset-0 pointer-events-none bg-linear-to-t from-bg-card via-transparent to-transparent opacity-60" />
+                  <div className="absolute bottom-6 left-6 right-6 flex items-center gap-4 bg-bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-accent/20">
+                    <div className="p-3 bg-accent text-bg-primary rounded-xl shrink-0">
+                      <MapPin size={24} />
+                    </div>
+                    <div className="font-mono min-w-0">
+                      <p className="text-xs font-black text-text-primary truncate">ReliabilityIQ HQ</p>
+                      <p className="text-[9px] text-text-secondary/70 truncate uppercase tracking-widest">Lagos Sector • 102213</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-widest text-text-secondary/50 mb-2 font-bold sm:text-right transition-colors duration-500">Support Email</div>
-                <div className="font-mono text-[13px] md:text-[14px] text-text-primary tracking-tighter leading-normal font-medium break-all sm:break-normal truncate sm:text-right transition-colors duration-500">reliabilityiqventures@gmail.com</div>
+
+              <div className="space-y-10 group/terminal">
+                <div className="space-y-3">
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-text-secondary/50 font-bold flex items-center gap-2 group-hover/terminal:text-accent transition-colors">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Audio Channels
+                  </div>
+                  <div className="flex flex-col gap-2 font-mono text-base font-bold tracking-tighter text-text-primary">
+                    <a href="tel:+2349075934287" className="hover:text-accent transition-all hover:translate-x-1 inline-block w-fit">+234 907 593 4287</a>
+                    <a href="tel:+234906539605" className="hover:text-accent transition-all hover:translate-x-1 inline-block w-fit">+234 906 539 605</a>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-text-secondary/50 font-bold flex items-center gap-2 group-hover/terminal:text-accent transition-colors">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Data Up-Link
+                  </div>
+                  <div className="font-mono text-base font-bold tracking-tighter text-text-primary">
+                    <a href="mailto:reliabilityiqventures@gmail.com" className="hover:text-accent transition-all hover:translate-x-1 inline-block break-all">reliabilityiqventures@gmail.com</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-auto pt-8 border-t border-border-primary flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.2em] text-text-secondary/40">
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-1 rounded-full bg-green-500" /> Node: Lagos-Alpha
+                </div>
+                <div>Status: Primary</div>
               </div>
             </div>
           </div>
@@ -496,7 +593,6 @@ ${formData.details}
     </section>
   );
 };
-
 export const TrendingProducts = () => (
   <section className="pt-20 pb-32 px-6 bg-bg-primary transition-colors duration-500">
     <div className="max-w-7xl mx-auto">

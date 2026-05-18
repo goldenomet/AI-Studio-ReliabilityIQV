@@ -20,13 +20,16 @@ export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: an
   </div>
 );
 
-export const Footer = () => (
+export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => (
   <footer className="bg-bg-secondary text-text-primary pt-20 pb-10 transition-colors duration-500 border-t border-border-primary">
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">
-          <div className="flex items-center gap-2 mb-6 text-text-primary font-mono">
-            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain dark:brightness-0 dark:invert" />
+          <div 
+            className="flex items-center gap-2 mb-6 text-text-primary font-mono cursor-pointer group w-fit"
+            onClick={() => onNavigate?.('home')}
+          >
+            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain dark:brightness-0 dark:invert transition-transform group-hover:scale-110" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>

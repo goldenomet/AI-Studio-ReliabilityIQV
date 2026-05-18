@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
-import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User } from 'lucide-react';
+import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User, ArrowRight } from 'lucide-react';
 import { MagneticGlowButton } from '../MagneticGlowButton';
 import logo from '@/src/assets/images/logo.png';
 
@@ -20,6 +20,16 @@ export const Navbar = ({
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
+
+  const handleMobileNav = (id: string) => {
+    setNavigatingTo(id);
+    setTimeout(() => {
+      setCurrentPage(id);
+      setMobileMenuOpen(false);
+      setNavigatingTo(null);
+    }, 600); // Delay to show animation
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,9 +58,13 @@ export const Navbar = ({
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10 h-10 lg:h-12">
         {/* Mobile Logo */}
-        <div className="block lg:hidden">
+        <button 
+          onClick={() => setCurrentPage('home')}
+          className="block lg:hidden cursor-pointer transition-transform hover:scale-105 active:scale-95 outline-hidden"
+          aria-label="Home"
+        >
           <img src={logo} alt="logo" className="h-10 w-auto object-contain" />
-        </div>
+        </button>
         <div className="hidden lg:block w-10" />
 
         {/* Desktop Nav */}
@@ -235,18 +249,53 @@ export const Navbar = ({
                   <div className="flex-1 overflow-y-auto w-full max-w-full custom-scrollbar pb-10 flex flex-col gap-2">
                      <div className="text-[12px] mb-2 font-medium uppercase tracking-wider text-text-secondary pl-2">Menu</div>
                      <div className="flex flex-col gap-2 mb-8">
-                         {navItems.map((item, i) => (
-                             <motion.button 
-                               initial={{ opacity: 0, x: -20 }}
-                               animate={{ opacity: 1, x: 0 }}
-                               transition={{ delay: 0.1 + i * 0.05, type: "spring", stiffness: 300, damping: 24 }}
-                               key={item.id} 
-                               onClick={() => { setCurrentPage(item.id); setMobileMenuOpen(false); }} 
-                               className="text-2xl md:text-[28px] font-sans font-medium leading-[1.2] tracking-tight p-3 rounded-2xl text-left transition-all duration-300 text-text-primary hover:bg-text-primary/5 hover:pl-5"
-                             >
-                                 {item.name}
-                             </motion.button>
-                         ))}
+                         {navItems.map((item, i) => {
+                             const isNavigating = navigatingTo === item.id;
+                             
+                             return (
+                               <motion.button 
+                                 initial={{ opacity: 0, x: -20 }}
+                                 animate={{ 
+                                   opacity: 1, 
+                                   x: isNavigating ? 15 : 0,
+                                 }}
+                                 transition={{ 
+                                   delay: isNavigating ? 0 : 0.1 + i * 0.05, 
+                                   type: "spring", 
+                                   stiffness: 300, 
+                                   damping: 24 
+                                 }}
+                                 key={item.id} 
+                                 onClick={() => handleMobileNav(item.id)}
+                                 disabled={navigatingTo !== null && !isNavigating}
+                                 className={`flex items-center gap-4 text-3xl font-sans font-bold leading-[1.2] tracking-tighter p-4 rounded-2xl text-left transition-all duration-300 relative overflow-hidden ${isNavigating ? 'text-accent' : 'text-text-primary hover:bg-text-primary/5 hover:pl-6'}`}
+                               >
+                                   <AnimatePresence mode="wait">
+                                     {isNavigating ? (
+                                       <motion.div
+                                         key="arrow"
+                                         initial={{ opacity: 0, x: -10 }}
+                                         animate={{ opacity: 1, x: 0 }}
+                                         exit={{ opacity: 0, x: 10 }}
+                                         className="text-accent"
+                                       >
+                                         <ArrowRight size={32} strokeWidth={2.5} />
+                                       </motion.div>
+                                     ) : null}
+                                   </AnimatePresence>
+                                   <span className="relative z-10">{item.name}</span>
+                                   
+                                   {isNavigating && (
+                                     <motion.div 
+                                       layoutId="active-nav-glow"
+                                       className="absolute inset-0 bg-accent/5 -z-10"
+                                       initial={{ opacity: 0 }}
+                                       animate={{ opacity: 1 }}
+                                     />
+                                   )}
+                               </motion.button>
+                             );
+                         })}
                      </div>
 
                      <hr className="border-border-primary opacity-50 my-4" />
