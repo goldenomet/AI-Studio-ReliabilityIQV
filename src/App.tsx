@@ -18,6 +18,7 @@ import FounderToggle from './components/FounderToggle';
 import rufusImg from './assets/images/Rufus portfolio.jpg';
 import theophilusImg from './assets/images/Theo portfolio.jpg';
 import kikaImg from './assets/images/Kika portfolio.jpg';
+import section1Img from './assets/images/section1.png';
 
 const FOUNDERS = [
   {
@@ -89,7 +90,7 @@ export default function App() {
                   initial={{ scale: 1.1, opacity: 0 }}
                   animate={{ scale: 1, opacity: 0.8 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                  src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" 
+                  src={section1Img} 
                   alt="Abstract 3D Theme" 
                   className="w-full h-full object-cover dark:opacity-40 contrast-110 brightness-110" 
                 />
@@ -129,7 +130,7 @@ export default function App() {
                      animate={{ y: 0, opacity: 1 }}
                      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                    >
-                     <h1 className="text-6xl md:text-[100px] lg:text-[130px] lg:mb-[-10px] leading-[0.9] font-medium text-text-primary tracking-tight">
+                     <h1 className="text-6xl md:text-[100px] lg:text-[130px] lg:mb-[-10px] leading-[0.9] font-medium text-white tracking-tight">
                        About <span className="text-accent">Us</span>
                      </h1>
                    </motion.div>
@@ -138,7 +139,7 @@ export default function App() {
                      initial={{ y: 40, opacity: 0 }}
                      animate={{ y: 0, opacity: 1 }}
                      transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                     className="text-lg md:text-xl text-text-secondary max-w-[360px] pb-2 md:pb-6 leading-relaxed font-light"
+                     className="text-lg md:text-xl text-white/90 max-w-[360px] pb-0 leading-relaxed font-light"
                    >
                      ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.
                    </motion.p>
@@ -150,10 +151,10 @@ export default function App() {
                   transition={{ delay: 1, duration: 1 }}
                   className="flex flex-col items-center justify-center pt-8 pb-4"
                 >
-                  <div className="text-center text-sm md:text-base text-text-secondary/60 font-medium animate-pulse flex items-center gap-2">
-                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
+                  <div className="text-center text-sm md:text-base text-white/60 font-medium animate-pulse flex items-center gap-2">
+                    <span className="w-8 h-[1px] bg-white/20"></span>
                     Scroll down <span className="text-accent">↓</span>
-                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
+                    <span className="w-8 h-[1px] bg-white/20"></span>
                   </div>
                 </motion.div>
               </div>
