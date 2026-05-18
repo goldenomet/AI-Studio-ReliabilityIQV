@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import section1 from '@/src/assets/images/section1.png';
+import section4 from '@/src/assets/images/section4.jpg';
 
 export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services: any[], onAction: (s: any) => void, bgImage?: string }) => {
   const cards = services.map(s => ({
@@ -50,14 +50,14 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
 
   return (
     <div 
-      className="w-full relative shadow-2xl overflow-hidden mb-10 border border-border-primary bg-bg-card/40 backdrop-blur-md rounded-[24px]" 
+      className="w-full relative shadow-2xl overflow-hidden mb-10 border-[1px] border-solid border-gray-300 dark:border-gray-700/60 bg-bg-card/40 backdrop-blur-md rounded-[24px]" 
       ref={wrapRef} 
       onMouseLeave={handleMouseLeave}
     >
       {bgImage && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img 
-            src={section1}
+            src={section4}
             alt="Grid Background"
             className="w-full h-full object-cover opacity-[0.85] mix-blend-luminosity"
           />
@@ -107,15 +107,20 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
                 </div>
 
                 <div className="flex justify-between items-end w-full mt-auto pt-8 gap-4">
-                  <div className={`max-w-[75%] transition-opacity duration-400 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                    <p className="font-sans text-sm md:text-base leading-snug text-white/90">
+                  <div className={`max-w-[75%] transition-opacity duration-400 ${isActive ? 'opacity-100' : 'opacity-100 md:opacity-0'}`}>
+                    <p className={`font-sans text-sm md:text-base leading-snug transition-colors duration-400 ${isActive ? 'text-white/90' : 'text-text-secondary/80'}`}>
                       {card.body}
                     </p>
                   </div>
                   
-                  <span className={`font-sans text-lg md:text-xl font-bold transition-colors duration-400 ${isActive ? 'text-white' : 'text-text-primary'}`}>
-                    ({i + 1})
-                  </span>
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className={`flex items-center justify-center p-2 rounded-full transition-all duration-500 ease-out border ${isActive ? 'bg-white text-[#1d8a7d] border-transparent translate-x-1 scale-110 shadow-lg' : 'bg-transparent text-text-secondary/60 border-text-secondary/30'}`}>
+                      <ArrowRight className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-500 ${isActive ? '-rotate-45' : 'rotate-0'}`} />
+                    </div>
+                    <span className={`font-sans text-lg md:text-xl font-bold transition-colors duration-400 ${isActive ? 'text-white' : 'text-text-primary'}`}>
+                      ({i + 1})
+                    </span>
+                  </div>
                 </div>
 
               </div>

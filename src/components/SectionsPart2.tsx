@@ -15,7 +15,7 @@ import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003
 import newImage1778003945349 from '@/src/assets/images/regenerated_image_1778003945349.jpg';
 import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
 import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
-import servicesBgImage from '@/src/assets/images/section1.png';
+import servicesBgImage from '@/src/assets/images/section4.jpg';
 
 import { ServicesSlidingGrid } from './SlidingHighlightWrapper';
 
