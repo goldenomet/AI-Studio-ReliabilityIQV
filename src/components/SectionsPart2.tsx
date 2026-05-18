@@ -5,7 +5,6 @@ import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, G
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
-import { ServiceDetail } from './ServiceDetail';
 
 import fallbackLogo from '@/src/assets/images/logo.png';
 import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';

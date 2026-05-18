@@ -85,23 +85,77 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-bg-primary overflow-hidden flex flex-col justify-end pb-8">
               <div className="absolute inset-0 z-0 flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" alt="Abstract 3D Theme" className="w-full h-full object-cover opacity-80 dark:opacity-40 contrast-110 brightness-110" />
+                <motion.img 
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 0.8 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2564&auto=format&fit=crop" 
+                  alt="Abstract 3D Theme" 
+                  className="w-full h-full object-cover dark:opacity-40 contrast-110 brightness-110" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-primary/10 to-bg-primary/60 backdrop-blur-[1px]" />
+                
+                {/* Floating animated elements */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ 
+                        opacity: 0, 
+                        x: Math.random() * 100 - 50 + '%', 
+                        y: Math.random() * 100 - 50 + '%' 
+                      }}
+                      animate={{ 
+                        opacity: [0.1, 0.4, 0.1],
+                        y: ['-5%', '5%', '-5%'],
+                        x: ['-2%', '2%', '-2%'],
+                        rotate: [0, 10, -10, 0]
+                      }}
+                      transition={{ 
+                        duration: 8 + Math.random() * 7,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      className="absolute w-64 h-64 bg-accent/10 rounded-full blur-[80px]"
+                    />
+                  ))}
+                </div>
               </div>
               
               <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow" style={{ minHeight: '806px' }}>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2 max-sm:mb-[15px] max-sm:pt-0 max-sm:pb-0 mt-auto">
-                   <h1 className="text-6xl md:text-[100px] lg:text-[130px] leading-[0.9] font-medium text-text-primary tracking-tight">About Us</h1>
-                   <p className="text-lg md:text-xl text-text-secondary max-w-[360px] pb-2 md:pb-6 leading-relaxed">
+                   <motion.div
+                     initial={{ y: 80, opacity: 0 }}
+                     animate={{ y: 0, opacity: 1 }}
+                     transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                   >
+                     <h1 className="text-6xl md:text-[100px] lg:text-[130px] lg:mb-[-10px] leading-[0.9] font-medium text-text-primary tracking-tight">
+                       About <span className="text-accent">Us</span>
+                     </h1>
+                   </motion.div>
+                   
+                   <motion.p 
+                     initial={{ y: 40, opacity: 0 }}
+                     animate={{ y: 0, opacity: 1 }}
+                     transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                     className="text-lg md:text-xl text-text-secondary max-w-[360px] pb-2 md:pb-6 leading-relaxed font-light"
+                   >
                      ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.
-                   </p>
+                   </motion.p>
                 </div>
                 
-                <div className="flex flex-col items-center justify-center pt-8 pb-4">
-                  <div className="text-center text-sm md:text-base text-text-secondary/60 font-medium animate-pulse">
-                    Scroll down <span className="ml-2">↓</span>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1, duration: 1 }}
+                  className="flex flex-col items-center justify-center pt-8 pb-4"
+                >
+                  <div className="text-center text-sm md:text-base text-text-secondary/60 font-medium animate-pulse flex items-center gap-2">
+                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
+                    Scroll down <span className="text-accent">↓</span>
+                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </section>
             
@@ -194,7 +248,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             {renderPage()}
           </AnimatePresence>
-          {currentPage !== 'contact' && (
+          {currentPage !== 'contact' && currentPage !== 'about' && currentPage !== 'services' && (
             <ContactSection />
           )}
         </main>
