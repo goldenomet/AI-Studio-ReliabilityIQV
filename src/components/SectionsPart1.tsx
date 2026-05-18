@@ -11,7 +11,7 @@ import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001
 
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (
-  <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500" style={{ backgroundColor: '#e9f6f7' }}>
+  <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
     <RealTimeCursors />
     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-10 items-center relative z-10">
       <motion.div
@@ -109,7 +109,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
 
 export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onExplore?: () => void }) => {
   return (
-    <section className="bg-bg-secondary text-text-primary py-32 px-6 relative overflow-hidden transition-colors duration-500 border-y border-border-primary" style={{ backgroundColor: '#e9f6f7' }}>
+    <section className="bg-bg-secondary text-text-primary py-32 px-6 relative overflow-hidden transition-colors duration-500 border-y border-border-primary">
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
       
