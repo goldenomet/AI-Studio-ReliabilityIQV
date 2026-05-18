@@ -21,7 +21,7 @@ export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: an
 );
 
 export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => (
-  <footer className="bg-bg-secondary text-text-primary pt-20 pb-10 transition-colors duration-500 border-t border-border-primary">
+  <footer className="bg-bg-secondary text-text-primary pt-20 pb-10 transition-colors duration-500 border-t border-border-primary" style={{ backgroundColor: '#dcf6f7' }}>
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1">

@@ -161,7 +161,7 @@ export const NarrativeSection = () => {
   };
 
   return (
-    <section className="relative bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500 pb-24 md:pb-32">
+    <section className="relative bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500 pb-24 md:pb-32" style={{ backgroundColor: '#e9f6f7' }}>
       <PixelSnow />
       
       <div className="pt-32 pb-12 px-6 max-w-5xl mx-auto relative z-10 text-center">
@@ -365,7 +365,7 @@ export const ContactSection = () => {
   `;
 
   return (
-    <section id="contact-section" className="pb-32 px-4 md:px-6 bg-bg-primary transition-colors duration-500 overflow-hidden relative">
+    <section id="contact-section" className="pb-32 px-4 md:px-6 bg-bg-primary transition-colors duration-500 overflow-hidden relative" style={{ backgroundColor: '#e9fafc' }}>
       {/* Decorative ambient background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       
