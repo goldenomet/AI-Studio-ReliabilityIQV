@@ -15,6 +15,9 @@ import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003
 import newImage1778003945349 from '@/src/assets/images/regenerated_image_1778003945349.jpg';
 import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
 import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
+import servicesBgImage from '@/src/assets/images/section1.png';
+
+import { ServicesSlidingGrid } from './SlidingHighlightWrapper';
 
 export const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
   const [selectedService, setSelectedService] = useState<IServiceDetail | null>(null);
@@ -94,26 +97,27 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
   ];
 
   return (
-    <section ref={containerRef} className="relative mt-20 bg-bg-primary py-24 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center">
+    <section ref={containerRef} className="relative mt-20 bg-bg-primary py-24 transition-colors duration-500 overflow-hidden">
+      <div className="absolute inset-0 z-[0] pointer-events-none">
+        <img 
+          src={servicesBgImage}
+          alt="Grid Background"
+          className="w-full h-full object-cover opacity-90 mix-blend-luminosity"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center relative z-10">
          <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Regional & International Expertise</div>
          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary transition-colors duration-500 leading-[0.9] tracking-tighter">What We Deliver.</h2>
       </div>
 
-      <div className="px-6">
-        {servicesData.map((service, i) => (
-          <StackCard 
-            key={service.id} 
-            i={i} 
-            title={service.title}
-            description={service.description}
-            icon={service.icon}
-            image={service.image}
-            progress={scrollYProgress} 
-            range={[i * 0.2, 1]} 
-            onAction={() => setSelectedService(service)}
-          />
-        ))}
+      <div className="px-6 relative z-10 w-full max-w-7xl mx-auto">
+        <ServicesSlidingGrid 
+            services={servicesData} 
+            onAction={setSelectedService} 
+            bgImage={servicesBgImage}
+        />
       </div>
 
       <ServiceDetailModal 

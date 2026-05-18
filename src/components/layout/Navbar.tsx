@@ -225,11 +225,6 @@ export const Navbar = ({
 
                    <hr className="border-border-primary my-8" />
 
-
-                   <div className="flex flex-col gap-4 mb-8">
-                       <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Cookie Policy</button>
-                   </div>
-
                    <div className="text-[12px] mb-4 font-medium uppercase tracking-wider text-text-secondary">Social media</div>
                    <div className="flex flex-col gap-4 mb-4">
                        <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Instagram</button>
