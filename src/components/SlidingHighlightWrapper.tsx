@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import section4 from '@/src/assets/images/section4.jpg';
+import section3 from '@/src/assets/images/section3.jpg';
 
 export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services: any[], onAction: (s: any) => void, bgImage?: string }) => {
   const cards = services.map(s => ({
@@ -57,7 +57,7 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
       {bgImage && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img 
-            src={section4}
+            src={section3}
             alt="Grid Background"
             className="w-full h-full object-cover opacity-[0.85] mix-blend-luminosity"
           />
