@@ -15,6 +15,9 @@ import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003
 import newImage1778003945349 from '@/src/assets/images/regenerated_image_1778003945349.jpg';
 import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
 import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
+import iqv from '@/src/assets/images/iqv.png';
+import ai from '@/src/assets/images/ai.png';
+import solution from '@/src/assets/images/solution.jpg';
 import servicesBgImage from '@/src/assets/images/section3.jpg';
 
 import { ServicesSlidingGrid } from './SlidingHighlightWrapper';
@@ -130,68 +133,146 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
   );
 };
 
-export const NarrativeSection = () => (
-  <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500">
-    <PixelSnow />
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-12 items-center relative z-10">
-      <div className="relative rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] group border border-border-primary">
-        <FlipCard
-          className="w-full h-full absolute inset-0"
-          frontContent={
-            <img 
-              src={newImage1778003945349} 
-              alt="Office work" 
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
-            />
-          }
-          backContent={
-             <div className="w-full h-full bg-bg-secondary flex flex-col items-center justify-center p-8 text-center text-text-primary transition-colors duration-500">
-                <Star size={32} className="text-accent mb-4" />
-                <h3 className="text-xl font-mono font-bold mb-3">Our Core Philosophy</h3>
-                <p className="text-text-secondary/80 font-mono text-xs leading-relaxed max-w-[200px] mb-16">Building systems that simply perform, without compromise.</p>
-             </div>
-          }
-        />
-        <div className="absolute bottom-10 left-10 p-10 bg-bg-card/40 backdrop-blur-md border border-border-primary rounded-3xl max-w-xs pointer-events-none transition-opacity duration-300 group-hover:opacity-0 shadow-xl">
-          <h4 className="text-accent font-mono text-2xl font-bold mb-2">Founded in 2024</h4>
-          <p className="text-text-secondary/70 font-mono text-xs leading-relaxed">
-            From a small room of 3 engineers to a global powerhouse of 50+ experts.
-          </p>
-        </div>
-      </div>
+const SHOWCASE_ITEMS = [
+  {
+    num: "01",
+    title: "The Genesis",
+    description: "Born in Nigeria to address a local gap in enterprise IT, we evolved quickly by prioritizing robust execution over theory. ReliabilityIQ was established to prove that African tech could match and exceed global standards.",
+    img: iqv,
+  },
+  {
+    num: "02",
+    title: "The AI Pivot",
+    description: "As technology shifted, we integrated advanced AI to move our clients from reactive maintenance to proactive scaling, serving both growing Nigerian firms and established international entities.",
+    img: ai,
+  },
+  {
+    num: "03",
+    title: "Global Operations",
+    description: "Today, we manage web operations and spatial data from Lagos to London and beyond, maintaining an obsessive attention to detail for a diverse portfolio of global partners.",
+    img: solution,
+  }
+];
 
-      <div>
-        <div className="font-mono text-xs uppercase tracking-widest text-accent mb-6 font-bold">The Narrative</div>
+export const NarrativeSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const DURATION = 6000; // 6 seconds per tab
+
+  const handleAnimationComplete = () => {
+    setActiveIndex((prev) => (prev + 1) % SHOWCASE_ITEMS.length);
+  };
+
+  return (
+    <section className="relative bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500 pb-24 md:pb-32">
+      <PixelSnow />
+      
+      <div className="pt-32 pb-12 px-6 max-w-5xl mx-auto relative z-10 text-center">
+        <div className="font-mono text-xs uppercase tracking-widest text-[#0d838e] mb-6 font-bold">The Narrative</div>
         <TextScroll 
           text="Driven by logic, defined by results."
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-10 tracking-tight leading-tight flex flex-wrap"
+          className="text-4xl md:text-6xl font-bold text-text-primary tracking-tight leading-tight justify-center flex flex-wrap"
         />
+        <p className="mt-6 text-xl text-text-secondary max-w-2xl mx-auto font-sans">
+          A showcase of our journey, built with precision and intent.
+        </p>
+      </div>
 
-        <div className="space-y-12">
-          {[
-            { num: '01', title: 'The Genesis', text: 'Born in Nigeria to address a local gap in enterprise IT, we evolved quickly by prioritizing robust execution over theory. ReliabilityIQ was established to prove that African tech could match and exceed global standards.' },
-            { num: '02', title: 'The AI Pivot', text: 'As technology shifted, we integrated advanced AI to move our clients from reactive maintenance to proactive scaling, serving both growing Nigerian firms and established international entities.' },
-            { num: '03', title: 'Global Operations', text: 'Today, we manage web operations and spatial data from Lagos to London and beyond, maintaining an obsessive attention to detail for a diverse portfolio of global partners.' }
-          ].map((step) => (
-            <div key={step.num} className="flex gap-8 group">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-accent/20 flex items-center justify-center font-mono text-sm font-bold text-accent group-hover:bg-accent group-hover:text-bg-primary transition-all">
-                {step.num}
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full max-w-7xl mx-auto px-6 relative z-10 items-stretch">
+        <div className="w-full lg:w-5/12 flex flex-col gap-4 justify-center">
+          {SHOWCASE_ITEMS.map((item, index) => {
+            const isActive = index === activeIndex;
+            
+            return (
+              <div 
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`relative overflow-hidden transition-all duration-500 rounded-3xl cursor-pointer p-6 md:p-8 flex flex-col
+                  ${isActive ? 'bg-bg-card shadow-xl border border-border-primary' : 'bg-transparent border border-transparent hover:bg-bg-card/40'}`}
+              >
+                {/* Progress Bar Container */}
+                <div className="absolute top-0 left-0 w-full h-[3px] bg-border-primary/20">
+                  {isActive && (
+                    <motion.div
+                      key={`progress-${activeIndex}`}
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: DURATION / 1000, ease: "linear" }}
+                      onAnimationComplete={handleAnimationComplete}
+                      className="h-full bg-[#0d838e]"
+                    />
+                  )}
+                </div>
+                
+                <div className="flex items-center gap-4 mb-2 mt-2">
+                  <span className={`font-mono text-sm font-bold flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-500 ${isActive ? 'border-[#0d838e] text-[#0d838e] bg-[#0d838e]/10' : 'border-border-primary text-text-secondary/50'}`}>
+                    {item.num}
+                  </span>
+                  <h3 className={`text-2xl md:text-3xl font-bold font-sans tracking-tight transition-colors duration-500 ${isActive ? 'text-text-primary' : 'text-text-secondary/50'}`}>
+                    {item.title}
+                  </h3>
+                </div>
+
+                <motion.div
+                  initial={false}
+                  animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0 }}
+                  className="overflow-hidden"
+                >
+                   <div className="pt-2 pb-2 pl-12 text-base md:text-lg text-text-secondary leading-relaxed font-sans">
+                     {item.description}
+                     
+                     {/* Mobile Image */}
+                     <div className="lg:hidden w-full h-[220px] md:h-[300px] mt-6 rounded-[20px] overflow-hidden relative shadow-lg">
+                       <img src={item.img} alt={item.title} className="w-full h-full object-cover filter contrast-125" />
+                     </div>
+                   </div>
+                </motion.div>
               </div>
-              <div>
-                <h4 className="text-xl font-bold mb-3 font-mono text-text-primary">{step.title}</h4>
-                <p className="text-text-secondary font-mono text-sm leading-relaxed">
-                  {step.text}
-                </p>
-              </div>
-            </div>
-          ))}
+            )
+          })}
+        </div>
+        
+        {/* Desktop Image Panel */}
+        <div className="hidden lg:block w-full lg:w-7/12 h-[600px] xl:h-[700px] relative rounded-[40px] overflow-hidden border border-border-primary shadow-2xl bg-bg-card">
+           <div className="w-full h-full relative p-4">
+             <div className="w-full h-full relative rounded-[28px] overflow-hidden">
+               <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={activeIndex}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    src={SHOWCASE_ITEMS[activeIndex].img}
+                    alt={SHOWCASE_ITEMS[activeIndex].title}
+                    className="absolute inset-0 w-full h-full object-cover filter contrast-125"
+                  />
+               </AnimatePresence>
+               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
+               
+               {/* Optional Title over image */}
+               <div className="absolute bottom-10 left-10 z-20 overflow-hidden text-white drop-shadow-lg pr-10">
+                 <AnimatePresence mode="wait">
+                    <motion.div
+                       key={activeIndex}
+                       initial={{ y: 20, opacity: 0 }}
+                       animate={{ y: 0, opacity: 1 }}
+                       exit={{ y: -20, opacity: 0 }}
+                       transition={{ duration: 0.4 }}
+                    >
+                        <p className="font-mono text-xs tracking-widest text-white/70 mb-3 font-bold uppercase backdrop-blur-md px-3 py-1 rounded-full border border-white/20 inline-block bg-black/20">Phase {SHOWCASE_ITEMS[activeIndex].num}</p>
+                        <h4 className="text-4xl md:text-5xl font-bold font-sans tracking-tight leading-tight">
+                          {SHOWCASE_ITEMS[activeIndex].title}
+                        </h4>
+                    </motion.div>
+                 </AnimatePresence>
+               </div>
+             </div>
+           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });

@@ -155,91 +155,122 @@ export const Navbar = ({
         </div>
 
         {/* Mobile Toggle Pill */}
-        <div className="lg:hidden flex items-center backdrop-blur-md border border-border-primary bg-bg-card/30 rounded-full p-1.5 gap-1.5 transition-opacity duration-300 dark:bg-white/5 dark:border-white/10">
-                   <button className="flex items-center gap-2 pl-3 pr-4 py-2 rounded-full hover:bg-text-primary/5 transition-colors text-text-primary" onClick={() => setMobileMenuOpen(true)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 9h16M4 15h16" /></svg>
-              <span className="text-base font-medium">Menu</span>
-           </button>
-           
-           <button onClick={toggleTheme} className="w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10">
-              {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
-           </button>
-           
-           <div className="h-10 px-4 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center text-sm font-medium border border-border-primary text-text-primary/90">
-              {scrollProgress}%
-           </div>
+        <div className="lg:hidden flex items-center justify-end">
+          <AnimatePresence mode="wait">
+            {!mobileMenuOpen && (
+              <motion.div 
+                layoutId="morphed-mobile-menu"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                className="flex items-center backdrop-blur-xl border border-border-primary bg-bg-card/70 rounded-full p-1.5 gap-1.5 shadow-md dark:bg-white/5 dark:border-white/10"
+                style={{ borderRadius: 9999 }}
+              >
+                 <button className="flex items-center gap-2 pl-3 pr-4 py-2 rounded-full hover:bg-text-primary/5 transition-colors text-text-primary" onClick={() => setMobileMenuOpen(true)}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 9h16M4 15h16" /></svg>
+                    <span className="text-base font-medium font-sans">Menu</span>
+                 </button>
+                 
+                 <button onClick={toggleTheme} className="w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10">
+                    {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+                 </button>
+                 
+                 <div className="h-10 px-4 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center text-sm font-medium font-sans border border-border-primary text-text-primary/90">
+                    {scrollProgress}%
+                 </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
-      {/* Mobile Menu Modal */}
+      {/* Mobile Menu Modal Morphing Container */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex justify-end lg:hidden"
-          >
+          <div className="fixed inset-0 z-[100] lg:hidden flex justify-end">
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-transparent" onClick={() => setMobileMenuOpen(false)} />
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 bg-bg-primary/20 backdrop-blur-sm" 
+              onClick={() => setMobileMenuOpen(false)} 
+            />
             
-            {/* Slide-in Panel */}
-            <motion.div
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-[220px] max-w-[85vw] h-[calc(100vh-8rem)] my-8 mr-4 backdrop-blur-[40px] border border-border-primary bg-bg-card/90 rounded-[32px] overflow-hidden flex flex-col shadow-2xl text-[25px] font-[Arial] font-bold leading-[22px] text-text-primary dark:bg-bg-primary/95 dark:border-white/20"
-            >
-              <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-text-primary/5 to-transparent pointer-events-none" />
-              <div className="p-4 flex flex-col h-full relative z-10">
-                {/* Header Pill */}
-                <div className="flex items-center justify-between bg-bg-card/50 backdrop-blur-md border border-border-primary rounded-full p-1.5 mb-6 shadow-sm dark:bg-white/5 dark:border-white/10">
-                   <button className="flex items-center gap-1.5 pl-3 pr-3 py-2 rounded-full transition-colors text-text-primary hover:bg-text-primary/5" onClick={() => setMobileMenuOpen(false)}>
-                      <X size={16} strokeWidth={1.5} />
-                      <span className="text-sm font-medium">Close</span>
-                   </button>
-                   
-                   <div className="flex items-center gap-1">
-                     <button onClick={toggleTheme} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
-                        {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
+            {/* Morphing Panel */}
+            <div className="relative w-full h-[100dvh] p-4 flex justify-end pt-[1.5rem]">
+              <motion.div
+                layoutId="morphed-mobile-menu"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                className="relative w-[85vw] max-w-[320px] h-[calc(100%-1rem)] max-h-[700px] backdrop-blur-xl border border-border-primary bg-bg-card/95 rounded-[32px] overflow-hidden flex flex-col shadow-2xl dark:bg-bg-primary/95 dark:border-white/20 origin-top-right"
+                style={{ borderRadius: 32 }}
+              >
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                  className="flex flex-col h-full p-5 relative z-10"
+                >
+                  {/* Header Pill */}
+                  <div className="flex items-center justify-between bg-bg-card/50 backdrop-blur-md border border-border-primary rounded-full p-1.5 mb-8 shadow-sm dark:bg-white/5 dark:border-white/10">
+                     <button className="flex items-center gap-1.5 pl-3 pr-3 py-2 rounded-full transition-colors text-text-primary hover:bg-text-primary/10 bg-text-primary/5" onClick={() => setMobileMenuOpen(false)}>
+                        <X size={16} strokeWidth={1.5} />
+                        <span className="text-sm font-medium font-sans">Close</span>
                      </button>
-                   </div>
-                </div>
+                     
+                     <div className="flex items-center gap-1">
+                       <button onClick={toggleTheme} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
+                          {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
+                       </button>
+                     </div>
+                  </div>
 
-                {/* Links Content */}
-                <div className="flex-1 overflow-y-auto w-full max-w-full custom-scrollbar pb-10">
-                   <div className="text-[12px] mb-4 font-medium uppercase tracking-wider text-text-secondary">Menu</div>
-                   <div className="flex flex-col gap-5 mb-8">
-                       {navItems.map(item => (
-                           <button 
-                             key={item.id} 
-                             onClick={() => { setCurrentPage(item.id); setMobileMenuOpen(false); }} 
-                             className="text-[25px] font-[Arial] font-bold leading-[22px] text-left transition-all hover:translate-x-1 duration-300 text-text-primary opacity-80 hover:opacity-100"
-                           >
-                               {item.name}
-                           </button>
-                       ))}
-                   </div>
+                  {/* Links Content */}
+                  <div className="flex-1 overflow-y-auto w-full max-w-full custom-scrollbar pb-10 flex flex-col gap-2">
+                     <div className="text-[12px] mb-2 font-medium uppercase tracking-wider text-text-secondary pl-2">Menu</div>
+                     <div className="flex flex-col gap-2 mb-8">
+                         {navItems.map((item, i) => (
+                             <motion.button 
+                               initial={{ opacity: 0, x: -20 }}
+                               animate={{ opacity: 1, x: 0 }}
+                               transition={{ delay: 0.1 + i * 0.05, type: "spring", stiffness: 300, damping: 24 }}
+                               key={item.id} 
+                               onClick={() => { setCurrentPage(item.id); setMobileMenuOpen(false); }} 
+                               className="text-2xl md:text-[28px] font-sans font-medium leading-[1.2] tracking-tight p-3 rounded-2xl text-left transition-all duration-300 text-text-primary hover:bg-text-primary/5 hover:pl-5"
+                             >
+                                 {item.name}
+                             </motion.button>
+                         ))}
+                     </div>
 
-                   <hr className="border-border-primary my-8" />
+                     <hr className="border-border-primary opacity-50 my-4" />
 
-                   <div className="text-[12px] mb-4 font-medium uppercase tracking-wider text-text-secondary">Social media</div>
-                   <div className="flex flex-col gap-4 mb-4">
-                       <button className="text-[14px] font-medium text-left transition-all hover:translate-x-1 duration-300 text-text-secondary hover:text-text-primary">Instagram</button>
-                   </div>
-                </div>
+                     <div className="text-[12px] mb-2 font-medium uppercase tracking-wider text-text-secondary pl-2">Socials</div>
+                     <div className="flex flex-col gap-2 mb-4">
+                         <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Instagram</a>
+                         <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Twitter</a>
+                     </div>
+                  </div>
 
-                {/* Footer Buttons */}
-                <div className="mt-auto pt-6 pb-6 flex gap-2 mb-[15px]">
-                    <MagneticGlowButton className="flex-1 !py-3.5 text-sm shadow-xl !bg-accent" onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}>
-                        Get started
-                    </MagneticGlowButton>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+                  {/* Footer Buttons */}
+                  <div className="mt-auto pt-4 flex gap-2">
+                      <MagneticGlowButton className="flex-1 !py-4 text-base font-medium shadow-xl !bg-accent" onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}>
+                          Get started
+                      </MagneticGlowButton>
+                  </div>
+                </motion.div>
+                
+                {/* Decorative background flair */}
+                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/10 blur-[80px] rounded-full pointer-events-none z-0 translate-y-1/2 translate-x-1/2" />
+              </motion.div>
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </nav>
