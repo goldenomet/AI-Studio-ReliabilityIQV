@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowUpRight, Monitor, Smartphone, Palette, Shield, Share2, Zap, BrainCircuit, PlaySquare, FileText, Database, Activity, CheckCircle, Clock, ShoppingCart, User, TrendingUp, Wand2, Clapperboard, SlidersHorizontal, Film, Box, Sparkles, Volume2, Maximize, Settings, ClosedCaption, ArrowRight, Layers, Crosshair, Satellite, MapPin, ShieldCheck, Globe, LineChart, Cloud, BarChart2, Pencil, Bell, Plus, Minus, CircleDot, Triangle, Waypoints, Target, BarChart, Megaphone, Eye, MousePointerClick, DollarSign, PieChart, Youtube, Instagram, Twitter, Edit, Code, Terminal, BookOpen, FileCode, Search, Menu, List, Check } from 'lucide-react';
 
@@ -8,7 +8,39 @@ interface ServiceDetailProps {
   onContact: () => void;
 }
 
+const ANIMATION_VIDEOS = [
+  {
+    youtubeId: "dLOiPM_mLW8",
+    title: "AI Operational Intelligence Showcase",
+    subtitle: "AI-Powered Operations Commercial",
+    time: "1:32",
+    img: "https://img.youtube.com/vi/dLOiPM_mLW8/maxresdefault.jpg"
+  },
+  {
+    youtubeId: "sQZl3wKzIPE",
+    title: "Beyond Horizons",
+    subtitle: "Cinematic Short",
+    time: "1:08",
+    img: "https://img.youtube.com/vi/sQZl3wKzIPE/maxresdefault.jpg"
+  },
+  {
+    title: "Product Launch",
+    subtitle: "Commercial",
+    time: "0:45",
+    img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop"
+  },
+  {
+    title: "Echoes of Nature",
+    subtitle: "Concept Film",
+    time: "1:15",
+    img: "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=2574&auto=format&fit=crop"
+  }
+];
+
 export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => {
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   if (id === 'service-documentation') {
     return (
       <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
@@ -1146,55 +1178,93 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full aspect-video bg-text-primary/10 dark:bg-text-primary/5 rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px] border border-border-primary"
+                className="w-full aspect-video bg-text-primary/10 dark:bg-text-primary/5 rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px] border border-border-primary group"
               >
-                <img 
-                  src="https://images.unsplash.com/photo-1541892079-24ecfcab0cda?q=80&w=2670&auto=format&fit=crop"
-                  alt="Futuristic Car Animation"
-                  className="w-full h-full object-cover opacity-80 mix-blend-luminosity filter grayscale"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Overlay gradients for text readability */}
-                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                {(isVideoPlaying && ANIMATION_VIDEOS[selectedVideoIndex].youtubeId) ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${ANIMATION_VIDEOS[selectedVideoIndex].youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                    title={ANIMATION_VIDEOS[selectedVideoIndex].title}
+                    className="w-full h-full absolute inset-0 border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <>
+                    <img 
+                      src={ANIMATION_VIDEOS[selectedVideoIndex].img}
+                      alt={ANIMATION_VIDEOS[selectedVideoIndex].title}
+                      className="w-full h-full object-cover opacity-80 mix-blend-luminosity filter grayscale group-hover:scale-105 transition-transform duration-700 cursor-pointer"
+                      onClick={() => {
+                        if (ANIMATION_VIDEOS[selectedVideoIndex].youtubeId) {
+                          setIsVideoPlaying(true);
+                        }
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {/* Overlay gradients for text readability */}
+                    <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
-                {/* Top Info */}
-                <div className="absolute top-6 left-8 text-white">
-                  <div className="text-[10px] text-white/60 font-mono mb-1">Featured Animation</div>
-                  <div className="text-2xl font-bold font-sans mb-1">Future of Mobility</div>
-                  <div className="text-[11px] font-mono text-white/80">AI-Powered Commercial</div>
-                </div>
-
-                <div className="absolute top-6 right-8">
-                  <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md px-4 py-2 rounded-lg text-xs text-white transition-colors">
-                    <Share2 size={12} /> Share
-                  </button>
-                </div>
-
-                {/* Play Controls Bottom bar */}
-                <div className="absolute bottom-6 inset-x-8 flex items-center gap-4 text-white">
-                  <button className="hover:text-white/80 transition-colors">
-                    <PlaySquare size={20} className="fill-white" />
-                  </button>
-                  
-                  {/* Progress Bar */}
-                  <div className="flex-1 flex items-center gap-4">
-                    <div className="flex-1 h-1 bg-white/20 rounded-full relative overflow-hidden">
-                      <div className="absolute inset-y-0 left-0 w-[26%] bg-accent rounded-full"></div>
+                    {/* Top Info */}
+                    <div className="absolute top-6 left-8 text-white">
+                      <div className="text-[10px] text-white/60 font-mono mb-1">{ANIMATION_VIDEOS[selectedVideoIndex].subtitle}</div>
+                      <div className="text-2xl font-bold font-sans mb-1">{ANIMATION_VIDEOS[selectedVideoIndex].title}</div>
+                      <div className="text-[11px] font-mono text-white/85">YouTube Broadcast Hub</div>
                     </div>
-                    <div className="text-[10px] font-mono w-20 text-center">
-                      0:24 / 1:32
-                    </div>
-                  </div>
 
-                  <div className="flex items-center gap-4">
-                    <button className="hover:text-white/80 transition-colors"><Volume2 size={16} /></button>
-                    <button className="hover:text-white/80 transition-colors"><ClosedCaption size={16} /></button>
-                    <button className="hover:text-white/80 transition-colors"><Settings size={16} /></button>
-                    <button className="hover:text-white/80 transition-colors"><Maximize size={16} /></button>
-                  </div>
-                </div>
+                    <div className="absolute top-6 right-8">
+                      <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md px-4 py-2 rounded-lg text-xs text-white transition-colors">
+                        <Share2 size={12} /> Share
+                      </button>
+                    </div>
+
+                    {/* Central Play button for strong interaction feel */}
+                    {ANIMATION_VIDEOS[selectedVideoIndex].youtubeId && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <motion.button 
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={() => setIsVideoPlaying(true)}
+                          className="pointer-events-auto w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:bg-accent/80 transition-colors cursor-pointer"
+                        >
+                          <PlaySquare size={28} className="fill-current ml-1" />
+                        </motion.button>
+                      </div>
+                    )}
+
+                    {/* Play Controls Bottom bar */}
+                    <div className="absolute bottom-6 inset-x-8 flex items-center gap-4 text-white">
+                      <button 
+                        onClick={() => {
+                          if (ANIMATION_VIDEOS[selectedVideoIndex].youtubeId) {
+                            setIsVideoPlaying(true);
+                          }
+                        }}
+                        className="hover:text-white/80 transition-colors"
+                      >
+                        <PlaySquare size={20} className="fill-white" />
+                      </button>
+                      
+                      {/* Progress Bar */}
+                      <div className="flex-1 flex items-center gap-4">
+                        <div className="flex-1 h-1 bg-white/20 rounded-full relative overflow-hidden">
+                          <div className="absolute inset-y-0 left-0 w-[42%] bg-accent rounded-full transition-all duration-300"></div>
+                        </div>
+                        <div className="text-[10px] font-mono w-20 text-center">
+                          0:00 / {ANIMATION_VIDEOS[selectedVideoIndex].time}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <button className="hover:text-white/80 transition-colors"><Volume2 size={16} /></button>
+                        <button className="hover:text-white/80 transition-colors"><ClosedCaption size={16} /></button>
+                        <button className="hover:text-white/80 transition-colors"><Settings size={16} /></button>
+                        <button className="hover:text-white/80 transition-colors"><Maximize size={16} /></button>
+                      </div>
+                    </div>
+                  </>
+                )}
               </motion.div>
 
               {/* More Animations Thumbnails */}
@@ -1211,27 +1281,47 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 </div>
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { title: "Beyond Horizons", subtitle: "Cinematic Short", time: "1:08", img: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=2669&auto=format&fit=crop" },
-                    { title: "Product Launch", subtitle: "Commercial", time: "0:45", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" },
-                    { title: "Echoes of Nature", subtitle: "Concept Film", time: "1:15", img: "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=2574&auto=format&fit=crop" },
-                    { title: "Neon Dreams", subtitle: "AI Visual Story", time: "0:52", img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2670&auto=format&fit=crop" }
-                  ].map((video, idx) => (
-                    <div key={idx} className="group cursor-pointer">
-                      <div className="relative aspect-video rounded-xl overflow-hidden mb-3 border border-border-primary">
-                        <img src={video.img} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 mix-blend-luminosity opacity-80 filter grayscale" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                        <div className="absolute bottom-2 left-2 w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                           <PlaySquare size={10} className="text-white fill-white ml-0.5" />
+                  {ANIMATION_VIDEOS.map((video, idx) => {
+                    const isActive = idx === selectedVideoIndex;
+                    return (
+                      <div 
+                        key={idx} 
+                        className={`group cursor-pointer p-2 rounded-2xl border transition-all duration-300 ${
+                          isActive 
+                            ? 'border-accent bg-accent/5 shadow-lg shadow-accent/10' 
+                            : 'border-transparent hover:border-border-primary hover:bg-bg-secondary/40'
+                        }`}
+                        onClick={() => {
+                          setSelectedVideoIndex(idx);
+                          setIsVideoPlaying(true);
+                        }}
+                      >
+                        <div className="relative aspect-video rounded-xl overflow-hidden mb-3 border border-border-primary">
+                          <img 
+                            src={video.img} 
+                            alt={video.title} 
+                            className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                              isActive ? 'opacity-100 grayscale-0' : 'mix-blend-luminosity opacity-80 filter grayscale'
+                            }`}
+                            referrerPolicy="no-referrer" 
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                          <div className={`absolute bottom-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors ${
+                            isActive ? 'bg-accent text-white' : 'bg-white/20 backdrop-blur-sm text-white'
+                          } ${!video.youtubeId ? 'hidden' : ''}`}>
+                            <PlaySquare size={10} className={`${isActive ? 'fill-white text-white' : 'fill-white'} ml-0.5`} />
+                          </div>
+                          <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-mono text-white bg-black/60 backdrop-blur-sm">
+                            {video.time}
+                          </div>
                         </div>
-                        <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-mono text-white bg-black/60 backdrop-blur-sm">
-                          {video.time}
-                        </div>
+                        <h4 className={`text-xs font-bold font-mono transition-colors line-clamp-1 ${isActive ? 'text-accent' : 'text-text-primary'}`}>
+                          {video.title}
+                        </h4>
+                        <div className="text-[10px] text-text-secondary/60 mt-0.5 line-clamp-1">{video.subtitle}</div>
                       </div>
-                      <h4 className="text-xs font-bold font-mono text-text-primary">{video.title}</h4>
-                      <div className="text-[10px] text-text-secondary/60 mt-0.5">{video.subtitle}</div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 

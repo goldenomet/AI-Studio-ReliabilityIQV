@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { ArrowRight, Code, BrainCircuit, Video, Map, Megaphone, FileText, Clock, Zap, TrendingUp, Users } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -214,21 +215,99 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
             </button>
 
             {/* Illustration Placeholder */}
-            <div className="mt-20 opacity-20 hidden md:block text-text-secondary">
+            <div className="mt-20 opacity-40 hidden md:block text-text-secondary group/illustration cursor-crosshair">
                <div className="relative w-full h-48">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <svg width="300" height="200" viewBox="0 0 300 200" fill="none">
-                      <path d="M150 20L280 90L150 160L20 90L150 20Z" stroke="currentColor" strokeWidth="0.5" />
-                      <rect x="130" y="70" width="40" height="60" stroke="currentColor" strokeWidth="1" />
-                      <rect x="80" y="100" width="30" height="30" stroke="currentColor" strokeWidth="1" />
-                      <rect x="190" y="110" width="20" height="20" stroke="currentColor" strokeWidth="1" />
-                      <circle cx="240" cy="80" r="10" stroke="currentColor" strokeWidth="1" />
-                      <path d="M150 130L150 160" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                      <path d="M130 100L80 115" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                      <text x="50" y="150" fill="currentColor" fontSize="8" className="tracking-widest uppercase">Build</text>
-                      <text x="250" y="60" fill="currentColor" fontSize="8" className="tracking-widest uppercase">Analyze</text>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  >
+                    <svg width="300" height="200" viewBox="0 0 300 200" fill="none" className="overflow-visible">
+                      {/* Main Diamond Frame */}
+                      <motion.path 
+                        d="M150 20L280 90L150 160L20 90L150 20Z" 
+                        stroke="currentColor" 
+                        strokeWidth="0.5" 
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                      />
+                      
+                      {/* Central Node */}
+                      <motion.rect 
+                        x="130" y="70" width="40" height="60" 
+                        stroke="currentColor" 
+                        strokeWidth="1"
+                        whileHover={{ scale: 1.1, stroke: "var(--color-accent)" }}
+                        className="transition-colors duration-300"
+                      />
+                      
+                      {/* Floating Data Packets */}
+                      <motion.rect 
+                        x="80" y="100" width="30" height="30" 
+                        stroke="currentColor" 
+                        strokeWidth="1"
+                        animate={{ 
+                          y: [0, -10, 0],
+                          rotate: [0, 5, 0]
+                        }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        whileHover={{ stroke: "var(--color-accent)" }}
+                      />
+                      
+                      <motion.rect 
+                        x="190" y="110" width="20" height="20" 
+                        stroke="currentColor" 
+                        strokeWidth="1"
+                        animate={{ 
+                          y: [0, 10, 0],
+                          rotate: [0, -5, 0]
+                        }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                        whileHover={{ stroke: "var(--color-accent)" }}
+                      />
+                      
+                      <motion.circle 
+                        cx="240" cy="80" r="10" 
+                        stroke="currentColor" 
+                        strokeWidth="1"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                        whileHover={{ stroke: "var(--color-accent)", fill: "var(--color-accent)", fillOpacity: 0.2 }}
+                      />
+
+                      {/* Connection Lines */}
+                      <motion.path 
+                        d="M150 130L150 160" 
+                        stroke="currentColor" 
+                        strokeWidth="0.5" 
+                        strokeDasharray="2 2"
+                        animate={{ strokeDashoffset: [0, 4] }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                      <motion.path 
+                        d="M130 100L80 115" 
+                        stroke="currentColor" 
+                        strokeWidth="0.5" 
+                        strokeDasharray="2 2"
+                        animate={{ strokeDashoffset: [0, -4] }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+
+                      {/* Animated Scanning Line */}
+                      <motion.line 
+                        x1="20" y1="90" x2="280" y2="90"
+                        stroke="var(--color-accent)"
+                        strokeWidth="0.5"
+                        opacity="0.3"
+                        animate={{ y1: [30, 150, 30], y2: [30, 150, 30] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                      />
+
+                      <text x="50" y="150" fill="currentColor" fontSize="8" className="tracking-widest uppercase font-mono opacity-50">Build</text>
+                      <text x="250" y="60" fill="currentColor" fontSize="8" className="tracking-widest uppercase font-mono opacity-50">Analyze</text>
                     </svg>
-                  </div>
+                  </motion.div>
                </div>
             </div>
           </div>
