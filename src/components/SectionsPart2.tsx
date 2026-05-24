@@ -538,7 +538,7 @@ export const ContactSection = () => {
                 <div className="font-mono text-[9px] uppercase tracking-[0.4em] text-accent font-bold">Host Coordinate</div>
                 <div className="relative rounded-[32px] overflow-hidden border border-border-primary bg-black/40 shadow-inner h-80 lg:flex-grow grayscale contrast-125 transition-all duration-700 hover:grayscale-0 hover:contrast-100">
                   <iframe 
-                    src="https://maps.google.com/maps?q=41%20Akeem%20Salami%20St,%20Idimu,%20Lagos%20102213,%20Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    src="https://maps.google.com/maps?q=Ipaja,%20Lagos%20State,%20Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed"
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
@@ -553,7 +553,7 @@ export const ContactSection = () => {
                     </div>
                     <div className="font-mono min-w-0">
                       <p className="text-xs font-black text-text-primary truncate">ReliabilityIQ HQ</p>
-                      <p className="text-[9px] text-text-secondary/70 truncate uppercase tracking-widest">Lagos Sector • 102213</p>
+                      <p className="text-[9px] text-text-secondary/70 truncate uppercase tracking-widest font-bold">Ipaja Sector • Lagos State</p>
                     </div>
                   </div>
                 </div>
