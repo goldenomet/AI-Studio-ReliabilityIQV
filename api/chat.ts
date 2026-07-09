@@ -1,15 +1,4 @@
-import express from "express";
-import path from "path";
-import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
-import { createServer as createViteServer } from "vite";
-
-dotenv.config();
-
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
 
 // Lazy-loaded Gemini Client following security instructions
 let aiClient: GoogleGenAI | null = null;
@@ -58,8 +47,11 @@ Tone & Persona:
 - Keep responses concise, useful, and formatted in clear, easy-to-read Markdown. Use bullet points when listing services or founders.
 - Prompt users to reach out via the Contact Form on the website or message us directly on WhatsApp if they wish to discuss a custom project!`;
 
-// Chat endpoint
-app.post("/api/chat", async (req, res) => {
+export default async function handler(req: any, res: any) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
+
   try {
     const { messages } = req.body;
     if (!messages || !Array.isArray(messages)) {
@@ -92,34 +84,4 @@ app.post("/api/chat", async (req, res) => {
       error: error.message || "An internal error occurred while processing your request to the AI Chatbot." 
     });
   }
-});
-
-// Health check route
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
-});
-
-async function startServer() {
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
-    console.log("Starting server in development mode...");
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
-  } else {
-    console.log("Starting server in production mode...");
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
-  }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
-  });
 }
-
-startServer();
