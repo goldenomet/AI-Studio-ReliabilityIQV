@@ -29,7 +29,7 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
             className="flex items-center gap-2 mb-6 text-text-primary font-mono cursor-pointer group w-fit"
             onClick={() => onNavigate?.('home')}
           >
-            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain dark:brightness-0 dark:invert transition-transform group-hover:scale-110" />
+            <img src={logo} alt="logo" loading="lazy" referrerPolicy="no-referrer" className="h-[50px] w-[50px] object-contain transition-transform group-hover:scale-110" />
             <span className="text-xl font-bold tracking-tight">
               ReliabilityIQ
             </span>
