@@ -45,6 +45,28 @@ export default function App() {
     return 'light';
   });
 
+  const handlePageChange = (page: string) => {
+    setCurrentPage(page);
+    window.history.pushState(null, '', `#${page}`);
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash !== currentPage) {
+        setCurrentPage(hash);
+      }
+    };
+    
+    // Read initial hash
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [currentPage]);
+
   useEffect(() => {
     if (loading) {
       document.body.style.overflow = 'hidden';
@@ -75,9 +97,9 @@ export default function App() {
       case 'home':
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <HeroSection onNavigate={setCurrentPage} />
-            <MissionSection onBack={() => setCurrentPage('services')} onExplore={() => setCurrentPage('services')} />
-            <CompetenciesSection onContact={() => setCurrentPage('contact')} />
+            <HeroSection onNavigate={handlePageChange} />
+            <MissionSection onBack={() => handlePageChange('services')} onExplore={() => handlePageChange('services')} />
+            <CompetenciesSection onContact={() => handlePageChange('contact')} />
             <NarrativeSection />
           </motion.div>
         );
@@ -170,7 +192,7 @@ export default function App() {
                      <span key="1" className="bg-accent text-white px-3 py-1 md:py-0 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
                      <FounderToggle key="2" founders={FOUNDERS} />,
                      <span key="3" className="border-2 border-accent text-accent px-3 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
-                     <MagneticGlowButton key="4" onClick={() => setCurrentPage('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
+                     <MagneticGlowButton key="4" onClick={() => handlePageChange('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
                    ]}
                    scrollHeight={400}
                    initialOpacity={0.6}
@@ -181,7 +203,7 @@ export default function App() {
             
             {/* Motion Path Section */}
             <section className="w-full bg-bg-primary transition-colors duration-500 relative z-10">
-              <ScrollPath onNavigate={setCurrentPage} />
+              <ScrollPath onNavigate={handlePageChange} />
             </section>
           </motion.div>
         );
@@ -189,12 +211,12 @@ export default function App() {
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <ServicesHero />
-            <EngineeredServicesSection onNavigate={setCurrentPage} />
+            <EngineeredServicesSection onNavigate={handlePageChange} />
             <div className="bg-bg-secondary text-text-primary py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-border-primary" />
               <h2 className="text-4xl md:text-6xl font-bold font-mono mb-12">Looking for a custom solution?</h2>
               <MagneticGlowButton 
-                onClick={() => setCurrentPage('contact')}
+                onClick={() => handlePageChange('contact')}
                 className="text-xl !px-16 !py-6"
               >
                 Learn More
@@ -213,8 +235,8 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0 w-full">
             <ServiceDetail 
               id={currentPage} 
-              onBack={() => setCurrentPage('services')}
-              onContact={() => setCurrentPage('contact')}
+              onBack={() => handlePageChange('services')}
+              onContact={() => handlePageChange('contact')}
             />
           </motion.div>
         );
@@ -243,7 +265,7 @@ export default function App() {
 
       <div className={`relative min-h-screen flex flex-col font-sans transition-opacity duration-1000 ${loading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
         <CircleCursor />
-        <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} toggleTheme={toggleTheme} />
+        <Navbar currentPage={currentPage} setCurrentPage={handlePageChange} theme={theme} toggleTheme={toggleTheme} />
         
         <main className="flex-grow relative">
           <AnimatePresence mode="wait">
@@ -254,7 +276,7 @@ export default function App() {
           )}
         </main>
 
-        <Footer onNavigate={setCurrentPage} />
+        <Footer onNavigate={handlePageChange} />
         <ScrollToTopButton />
         <WhatsAppWidget />
       </div>

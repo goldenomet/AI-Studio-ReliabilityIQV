@@ -47,20 +47,20 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
         <div>
           <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">Services</h4>
           <ul className="flex flex-col gap-4 font-mono text-sm text-text-secondary">
-            <li><a href="#" className="hover:text-text-primary transition-colors">Web Operations</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">AI Automations</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">GIS Mapping</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">Technical Reports</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">Content & Design</a></li>
+            <li><button onClick={() => onNavigate?.('service-development')} className="hover:text-text-primary transition-colors text-left">Web Operations</button></li>
+            <li><button onClick={() => onNavigate?.('service-automation')} className="hover:text-text-primary transition-colors text-left">AI Automations</button></li>
+            <li><button onClick={() => onNavigate?.('service-gis')} className="hover:text-text-primary transition-colors text-left">GIS Mapping</button></li>
+            <li><button onClick={() => onNavigate?.('service-documentation')} className="hover:text-text-primary transition-colors text-left">Technical Reports</button></li>
+            <li><button onClick={() => onNavigate?.('service-branding')} className="hover:text-text-primary transition-colors text-left">Content & Design</button></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">Company</h4>
           <ul className="flex flex-col gap-4 font-mono text-sm text-text-secondary">
-            <li><a href="#" className="hover:text-text-primary transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">Case Studies</a></li>
-            <li><a href="#" className="hover:text-text-primary transition-colors">Contact</a></li>
+            <li><button onClick={() => onNavigate?.('about')} className="hover:text-text-primary transition-colors text-left">About Us</button></li>
+            <li><button onClick={() => onNavigate?.('home')} className="hover:text-text-primary transition-colors text-left">Case Studies</button></li>
+            <li><button onClick={() => onNavigate?.('contact')} className="hover:text-text-primary transition-colors text-left">Contact</button></li>
           </ul>
         </div>
 
