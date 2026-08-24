@@ -14,6 +14,8 @@ import { OmniReveal } from './components/OmniReveal';
 import { MagneticGlowButton } from './components/MagneticGlowButton';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { WelcomeVideoWidget } from './components/WelcomeVideoWidget';
+import { ChatbotWidget } from './components/ChatbotWidget';
+import { AdminPanel } from './components/AdminPanel';
 import FounderToggle from './components/FounderToggle';
 
 import rufusImg from './assets/images/Rufus portfolio.jpg';
@@ -253,6 +255,12 @@ export default function App() {
             <ContactSection />
           </motion.div>
         );
+      case 'admin':
+        return (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
+            <AdminPanel />
+          </motion.div>
+        );
       default:
         return null;
     }
@@ -272,7 +280,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             {renderPage()}
           </AnimatePresence>
-          {currentPage !== 'contact' && currentPage !== 'about' && currentPage !== 'services' && (
+          {currentPage !== 'contact' && currentPage !== 'about' && currentPage !== 'services' && currentPage !== 'admin' && (
             <ContactSection />
           )}
         </main>
@@ -280,6 +288,7 @@ export default function App() {
         <Footer onNavigate={handlePageChange} />
         <ScrollToTopButton />
         <WhatsAppWidget />
+        <ChatbotWidget />
         <WelcomeVideoWidget />
       </div>
     </>

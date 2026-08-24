@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Linkedin, Twitter, Github } from 'lucide-react';
+import { Linkedin, Twitter, Github, Lock } from 'lucide-react';
 import logo from '@/src/assets/images/logo.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
@@ -86,7 +86,16 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
       </div>
 
       <div className="pt-8 border-t border-border-primary flex flex-col md:flex-row justify-between items-center gap-4 text-text-secondary font-mono text-[10px] uppercase tracking-widest">
-        <p>© 2024 ReliabilityIQ Ventures. All rights reserved.</p>
+        <p className="flex items-center gap-2">
+          © 2024 ReliabilityIQ Ventures. All rights reserved.
+          <button 
+            onClick={() => onNavigate?.('admin')} 
+            className="hover:text-accent transition-colors ml-2 opacity-30 hover:opacity-100"
+            title="Admin Dashboard"
+          >
+            <Lock size={12} />
+          </button>
+        </p>
         <div className="flex gap-8">
           <a href="#" className="hover:text-text-primary">Privacy Policy</a>
           <a href="#" className="hover:text-text-primary">Terms of Service</a>

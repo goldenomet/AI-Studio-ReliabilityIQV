@@ -16,7 +16,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
       {/* Top Border */}
       <div 
-        className="absolute top-0 left-0 right-0 h-5 bg-text-primary opacity-25"
+        className="absolute top-0 left-5 right-5 h-5 bg-text-primary opacity-25"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -28,7 +28,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Bottom Border */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-5 bg-text-primary opacity-25"
+        className="absolute bottom-0 left-5 right-5 h-5 bg-text-primary opacity-25"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -40,7 +40,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Left Border */}
       <div 
-        className="absolute top-0 bottom-0 left-0 w-5 bg-text-primary opacity-25"
+        className="absolute top-5 bottom-5 left-0 w-5 bg-text-primary opacity-25"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -52,7 +52,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Right Border */}
       <div 
-        className="absolute top-0 bottom-0 right-0 w-5 bg-text-primary opacity-25"
+        className="absolute top-5 bottom-5 right-0 w-5 bg-text-primary opacity-25"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -60,6 +60,47 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           WebkitMaskSize: '20px 40px',
           maskRepeat: 'repeat-y',
           WebkitMaskRepeat: 'repeat-y',
+        }}
+      />
+      
+      {/* Top Left Corner */}
+      <div 
+        className="absolute top-0 left-0 w-5 h-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 20 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 20 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 20px',
+          WebkitMaskSize: '20px 20px',
+        }}
+      />
+      {/* Top Right Corner */}
+      <div 
+        className="absolute top-0 right-0 w-5 h-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 20px',
+          WebkitMaskSize: '20px 20px',
+        }}
+      />
+      {/* Bottom Left Corner */}
+      <div 
+        className="absolute bottom-0 left-0 w-5 h-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 20px',
+          WebkitMaskSize: '20px 20px',
+        }}
+      />
+      {/* Bottom Right Corner */}
+      <div 
+        className="absolute bottom-0 right-0 w-5 h-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 0' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 0' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 20px',
+          WebkitMaskSize: '20px 20px',
         }}
       />
     </div>
