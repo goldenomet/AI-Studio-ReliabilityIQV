@@ -223,14 +223,35 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                   >
                     <svg width="300" height="200" viewBox="0 0 300 200" fill="none" className="overflow-visible">
-                      {/* Main Diamond Frame */}
+                      {/* Rotating Orbital Circle Line Pattern (Clockwise Infinite) */}
+                      <motion.g 
+                        animate={{ rotate: 360 }} 
+                        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+                        style={{ transformOrigin: "150px 100px" }}
+                      >
+                        <circle 
+                          cx="150" cy="100" r="75" 
+                          stroke="currentColor" 
+                          strokeWidth="0.75" 
+                          strokeDasharray="4 6" 
+                          opacity="0.6" 
+                        />
+                        <circle 
+                          cx="225" cy="100" r="3" 
+                          fill="var(--color-accent)" 
+                          opacity="0.9" 
+                        />
+                      </motion.g>
+
+                      {/* Main Diamond Frame with Infinite Clockwise Dash Flow */}
                       <motion.path 
                         d="M150 20L280 90L150 160L20 90L150 20Z" 
                         stroke="currentColor" 
-                        strokeWidth="0.5" 
-                        initial={{ pathLength: 0 }}
-                        whileInView={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        strokeWidth="1" 
+                        strokeDasharray="6 4"
+                        opacity="0.7"
+                        animate={{ strokeDashoffset: [0, -80] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
                       />
                       
                       {/* Central Node */}
@@ -276,22 +297,22 @@ export const EngineeredServicesSection = ({ onNavigate }: { onNavigate: (page: s
                         whileHover={{ stroke: "var(--color-accent)", fill: "var(--color-accent)", fillOpacity: 0.2 }}
                       />
 
-                      {/* Connection Lines */}
+                      {/* Connection Lines with Clockwise Infinite Dash Flow */}
                       <motion.path 
                         d="M150 130L150 160" 
                         stroke="currentColor" 
                         strokeWidth="0.5" 
                         strokeDasharray="2 2"
-                        animate={{ strokeDashoffset: [0, 4] }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        animate={{ strokeDashoffset: [0, -16] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                       />
                       <motion.path 
                         d="M130 100L80 115" 
                         stroke="currentColor" 
                         strokeWidth="0.5" 
                         strokeDasharray="2 2"
-                        animate={{ strokeDashoffset: [0, -4] }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        animate={{ strokeDashoffset: [0, -16] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                       />
 
                       {/* Animated Scanning Line */}

@@ -21,11 +21,11 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
 
   return (
   <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
-    {/* Geometric Line Pattern on Four Sides */}
+    {/* Geometric Line Pattern on Four Sides - Animated Clockwise Infinite */}
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Top Border */}
+      {/* Top Border (Clockwise: Left to Right) */}
       <div 
-        className="absolute top-0 left-5 right-5 h-5 bg-black"
+        className="absolute top-0 left-5 right-5 h-5 bg-text-primary/65 dark:bg-text-primary/75 animate-line-top"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -35,9 +35,9 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           WebkitMaskRepeat: 'repeat-x',
         }}
       />
-      {/* Bottom Border */}
+      {/* Bottom Border (Clockwise: Right to Left) */}
       <div 
-        className="absolute bottom-0 left-5 right-5 h-5 bg-black"
+        className="absolute bottom-0 left-5 right-5 h-5 bg-text-primary/65 dark:bg-text-primary/75 animate-line-bottom"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -47,9 +47,9 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           WebkitMaskRepeat: 'repeat-x',
         }}
       />
-      {/* Left Border */}
+      {/* Left Border (Clockwise: Bottom to Top) */}
       <div 
-        className="absolute top-5 bottom-5 left-0 w-5 bg-black"
+        className="absolute top-5 bottom-5 left-0 w-5 bg-text-primary/65 dark:bg-text-primary/75 animate-line-left"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -59,9 +59,9 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
           WebkitMaskRepeat: 'repeat-y',
         }}
       />
-      {/* Right Border */}
+      {/* Right Border (Clockwise: Top to Bottom) */}
       <div 
-        className="absolute top-5 bottom-5 right-0 w-5 bg-black"
+        className="absolute top-5 bottom-5 right-0 w-5 bg-text-primary/65 dark:bg-text-primary/75 animate-line-right"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -74,7 +74,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       
       {/* Top Left Corner */}
       <div 
-        className="absolute top-0 left-0 w-5 h-5 bg-black"
+        className="absolute top-0 left-0 w-5 h-5 bg-text-primary/65 dark:bg-text-primary/75"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 20 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 20 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -84,7 +84,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Top Right Corner */}
       <div 
-        className="absolute top-0 right-0 w-5 h-5 bg-black"
+        className="absolute top-0 right-0 w-5 h-5 bg-text-primary/65 dark:bg-text-primary/75"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -94,7 +94,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Bottom Left Corner */}
       <div 
-        className="absolute bottom-0 left-0 w-5 h-5 bg-black"
+        className="absolute bottom-0 left-0 w-5 h-5 bg-text-primary/65 dark:bg-text-primary/75"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 20' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
@@ -104,7 +104,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       />
       {/* Bottom Right Corner */}
       <div 
-        className="absolute bottom-0 right-0 w-5 h-5 bg-black"
+        className="absolute bottom-0 right-0 w-5 h-5 bg-text-primary/65 dark:bg-text-primary/75"
         style={{
           maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 0' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
           WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 10 H 10 V 0' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,

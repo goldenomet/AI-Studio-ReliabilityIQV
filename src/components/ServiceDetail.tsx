@@ -122,7 +122,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
@@ -480,7 +480,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
@@ -840,7 +840,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
@@ -1162,7 +1162,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
@@ -1442,7 +1442,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >
@@ -1717,7 +1717,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, bg: "var(--bg-secondary)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
                 >

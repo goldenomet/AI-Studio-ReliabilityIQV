@@ -250,3 +250,66 @@
     }
   }
 }
+
+/* Clockwise Infinite Line Pattern Animations */
+@keyframes line-pattern-clockwise-top {
+  0% {
+    -webkit-mask-position: 0px 0;
+    mask-position: 0px 0;
+  }
+  100% {
+    -webkit-mask-position: 40px 0;
+    mask-position: 40px 0;
+  }
+}
+
+@keyframes line-pattern-clockwise-right {
+  0% {
+    -webkit-mask-position: 0 0px;
+    mask-position: 0 0px;
+  }
+  100% {
+    -webkit-mask-position: 0 40px;
+    mask-position: 0 40px;
+  }
+}
+
+@keyframes line-pattern-clockwise-bottom {
+  0% {
+    -webkit-mask-position: 0px 0;
+    mask-position: 0px 0;
+  }
+  100% {
+    -webkit-mask-position: -40px 0;
+    mask-position: -40px 0;
+  }
+}
+
+@keyframes line-pattern-clockwise-left {
+  0% {
+    -webkit-mask-position: 0 0px;
+    mask-position: 0 0px;
+  }
+  100% {
+    -webkit-mask-position: 0 -40px;
+    mask-position: 0 -40px;
+  }
+}
+
+.animate-line-top {
+  animation: line-pattern-clockwise-top 3s linear infinite;
+  will-change: mask-position, -webkit-mask-position;
+}
+.animate-line-right {
+  animation: line-pattern-clockwise-right 3s linear infinite;
+  will-change: mask-position, -webkit-mask-position;
+}
+.animate-line-bottom {
+  animation: line-pattern-clockwise-bottom 3s linear infinite;
+  will-change: mask-position, -webkit-mask-position;
+}
+.animate-line-left {
+  animation: line-pattern-clockwise-left 3s linear infinite;
+  will-change: mask-position, -webkit-mask-position;
+}
+

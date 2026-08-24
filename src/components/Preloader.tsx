@@ -38,7 +38,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
