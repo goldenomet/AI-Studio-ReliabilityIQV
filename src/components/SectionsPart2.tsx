@@ -3,7 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import upArrow3D from '../assets/images/up_arrow_3d_1787579872621.jpg';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
-import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool, Zap } from 'lucide-react';
+import { 
+  ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, 
+  Map as MapIcon, FileText, PenTool, Zap, ChevronDown, ChevronUp, Monitor, Wifi, Printer, 
+  Mail as MailIcon, Layers, Laptop, HardDrive, UserCheck, Headphones, Video, Sparkles, 
+  Server, ShoppingCart, Layout, Briefcase, Bot, Workflow, FileSpreadsheet, MailCheck, 
+  Share2, CalendarCheck, CheckCircle2, Code, Palette, ShieldCheck, Check, X, SlidersHorizontal
+} from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
@@ -17,8 +23,25 @@ import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001
 import newImage1778002234657 from '@/src/assets/images/regenerated_image_1778002234657.jpg';
 import iqv from '@/src/assets/images/iqv.png';
 import ai from '@/src/assets/images/ai.png';
-import solution from '@/src/assets/images/solution.jpg';
+import solutionImg from '@/src/assets/images/solution.jpg';
+const solution = solutionImg;
 import servicesBgImage from '@/src/assets/images/section3.jpg';
+
+import servicesectionImg from '@/src/assets/images/servicesection.png';
+import serviceHeroImg from '@/src/assets/images/service hero.png';
+import section1Img from '@/src/assets/images/section1.png';
+import section2Img from '@/src/assets/images/section2.png';
+import section4Img from '@/src/assets/images/section4.jpg';
+import automationImg from '@/src/assets/images/automation.png';
+import regenArtImg from '@/src/assets/images/regenerated_image_1778354245165.jpg';
+
+// Dedicated Trending Generated Visual Assets
+import trendingWebDesignImg from '@/src/assets/images/trending_web_design_1787603569100.jpg';
+import trendingAiAutoImg from '@/src/assets/images/trending_ai_auto_1787603581694.jpg';
+import trendingItDeskImg from '@/src/assets/images/trending_it_desk_1787603594996.jpg';
+import trendingStudioImg from '@/src/assets/images/trending_studio_1787603608297.jpg';
+import trendingAiAnimImg from '@/src/assets/images/trending_ai_anim_1787603621070.jpg';
+import trendingInfraImg from '@/src/assets/images/trending_infra_1787603632437.jpg';
 
 import { ServicesSlidingGrid } from './SlidingHighlightWrapper';
 
@@ -595,65 +618,531 @@ export const ContactSection = () => {
     </section>
   );
 };
-export const TrendingProducts = () => (
-  <section className="pt-20 pb-32 px-6 bg-bg-primary transition-colors duration-500">
-    <div className="max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-        <div className="max-w-2xl">
-          <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Domestic & Global Solutions</div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[0.9]">
-            Market-Leading <br /> Infrastructures.
-          </h2>
-        </div>
-        <div className="flex flex-wrap gap-3 font-mono">
-          <MagneticGlowButton className="p-3 !px-4"><Search size={18} /></MagneticGlowButton>
-          <MagneticGlowButton className="flex items-center gap-2 p-3 !px-4 border-border-primary text-text-primary text-xs sm:text-sm"><Filter size={18} /> Sort by popularity</MagneticGlowButton>
-        </div>
-      </div>
+export const TrendingProducts = () => {
+  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({
+    'web-dev': true,
+    'ai-auto': true,
+    'it-support': true,
+  });
+  const [activeTab, setActiveTab] = useState<'all' | 'web' | 'ai' | 'it' | 'creative' | 'infra'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[
-          { title: "IQ-Nodes Cluster", tag: "Hot", desc: "Edge computing for Lagos and beyond. Sub-10ms latency for regional AI processing and low-latency African app delivery.", price: "$2,400/mo", img: newImage1778001962382 },
-          { title: "Sentinel AI Firewall", tag: "New", desc: "International standard network security layer. Protecting Nigerian digital assets from sophisticated global zero-day threats.", price: "$1,850/mo", img: newImage1778002234657 },
-          { title: "Geo-Insight Dashboard", tag: "Bestseller", desc: "Master African logistics. Real-time visualization for cross-border transit, supply chain nodes, and regional traffic patterns.", price: "$900/mo", img: newImage1778002658766 },
-          { title: "Auto-Scale VPS Pro", tag: "Efficiency", desc: "Flexible cloud resources that adapt automatically to local demand cycles and global traffic spikes without downtime.", price: "Custom", img: newImage1778003940043 },
-          { title: "DataCleanse API", tag: "AI", desc: "Sanitize raw enterprise data at scale. Tailored for Nigerian data structures while maintaining global privacy compliance.", price: "$0.05/req", img: newImage1778003942890 },
-          { title: "Vortex CDN", tag: "Speed", desc: "Global asset delivery with dedicated Nigerian edge nodes. Optimize your digital reach across every continent seamlessly.", price: "$120/mo", img: newImage1778003945349 },
-        ].map((prod, i) => (
-          <motion.div 
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-bg-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-border-primary"
-          >
-            <div className="aspect-video relative overflow-hidden">
-               <img 
-                src={prod.img} 
-                alt={prod.title} 
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover filter grayscale brightness-75 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700" 
-              />
-               <div className="absolute top-4 right-4 bg-accent text-bg-primary px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest">{prod.tag}</div>
+  const toggleDropdown = (id: string) => {
+    setOpenDropdowns(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  // 1. Web Development & UI/UX Modules
+  const webDevModules = [
+    {
+      title: "E-commerce",
+      icon: ShoppingCart,
+      badge: "High Conversion",
+      desc: "Custom Shopify, WooCommerce & headless stores. Frictionless checkout flows, multi-currency payment gateways (Stripe, Paystack, PayPal), and automated inventory management."
+    },
+    {
+      title: "SaaS Website",
+      icon: Layout,
+      badge: "Product-Led",
+      desc: "High-impact SaaS landing pages, interactive live feature previews, tiered pricing calculators, customer onboarding funnels, and enterprise authentication dashboards."
+    },
+    {
+      title: "Portfolio",
+      icon: Briefcase,
+      badge: "Creative Showcase",
+      desc: "Interactive visual showcases, bespoke case study layouts, fluid motion choreography, custom typography pairings, and ultra-fast SEO-optimized gallery experiences."
+    }
+  ];
+
+  // 2. Simple AI Automation Services
+  const aiAutomationServices = [
+    {
+      title: "24/7 AI Customer Support & Chatbots",
+      icon: Bot,
+      badge: "24/7 Live",
+      desc: "Smart conversational assistants trained on your company FAQs, product catalog, and knowledge base to instantly answer questions and capture bookings on web & WhatsApp."
+    },
+    {
+      title: "Automated Lead Capture & CRM Sync",
+      icon: Workflow,
+      badge: "Zero Drop-off",
+      desc: "Instantly capture leads from web forms, ad campaigns, and emails, qualify prospects with AI scoring, and sync data into HubSpot, Notion, Airtable, or Google Sheets."
+    },
+    {
+      title: "Automated Invoicing & Receipt Processing",
+      icon: FileSpreadsheet,
+      badge: "Smart OCR",
+      desc: "AI extracts line items, totals, and vendor details from PDF invoices and receipts directly into your accounting software without manual data entry."
+    },
+    {
+      title: "Email Inbox Triage & Smart Auto-Drafts",
+      icon: MailCheck,
+      badge: "Inbox Zero",
+      desc: "Categorizes incoming emails by intent (sales inquiries, urgent support, billing) and generates context-aware draft replies ready for quick one-click approval."
+    },
+    {
+      title: "Social Media & Content Auto-Publisher",
+      icon: Share2,
+      badge: "Multi-Channel",
+      desc: "Transforms single ideas or articles into scheduled multi-platform posts, draft captions, and visual assets for LinkedIn, X/Twitter, and Instagram."
+    },
+    {
+      title: "AI Meeting Summaries & Task Delegation",
+      icon: CalendarCheck,
+      badge: "Auto Sync",
+      desc: "Transcribes calls and meetings, distills key discussion takeaways, and automatically creates assigned action items and tickets in Trello, Asana, or Slack."
+    }
+  ];
+
+  // 3. Small Business IT Support Services
+  const itSupportServices = [
+    { title: "Computer Problems", icon: Monitor, desc: "Diagnostics, hardware repairs, blue screens, crash fixes, and OS recovery." },
+    { title: "Wi-Fi & Network", icon: Wifi, desc: "Office mesh Wi-Fi setup, firewall configuration, secure router provisioning, and speed diagnosis." },
+    { title: "Printer Setup", icon: Printer, desc: "Wireless network printers, shared network scan-to-folder, and driver troubleshooting." },
+    { title: "Business Email", icon: MailIcon, desc: "Custom domain email routing, anti-spam filters, DKIM/SPF/DMARC authentication." },
+    { title: "Microsoft 365 / Google Workspace", icon: Layers, desc: "Tenant setup, license management, team migration, SharePoint & Google Drive administration." },
+    { title: "Computer Optimization", icon: Zap, desc: "Speed optimization, disk cleanup, malware purging, and hardware resource fine-tuning." },
+    { title: "Backup Setup", icon: HardDrive, desc: "Automated cloud & local NAS backup solutions with ransomware protection and rapid disaster recovery." },
+    { title: "Employee PC Setup", icon: UserCheck, desc: "Standardized imaging, productivity software pre-install, VPN, security agent, and user onboarding." },
+    { title: "Remote IT Support", icon: Headphones, desc: "Instant helpdesk ticketing, SLA-backed live remote access, and ongoing proactive maintenance." },
+  ];
+
+  const trendingItems = [
+    {
+      id: "web-dev-design",
+      title: "Website Development & UI/UX Design",
+      tag: "Top In-Demand",
+      badgeColor: "bg-accent text-bg-primary font-bold",
+      desc: "Bespoke digital experiences built with modern frontend frameworks, fluid animations, conversion-engineered layouts, and brand-defining design systems.",
+      status: "Custom Scope & Delivery",
+      img: trendingWebDesignImg,
+      category: "web",
+      rating: 5,
+      dropdownKey: "web-dev",
+      dropdownTitle: "Web & UI/UX Solutions (E-commerce, SaaS, Portfolio)",
+      dropdownItems: webDevModules,
+      dropdownType: "web"
+    },
+    {
+      id: "ai-automation",
+      title: "AI Automation Services",
+      tag: "AI Powered",
+      badgeColor: "bg-purple-600 text-white",
+      desc: "Tailored intelligent automation systems that streamline repetitive operations, automate customer touchpoints, and eliminate manual bottlenecks.",
+      status: "Turnkey Implementation",
+      img: trendingAiAutoImg,
+      category: "ai",
+      rating: 5,
+      dropdownKey: "ai-auto",
+      dropdownTitle: "Recommended AI Automation Modules",
+      dropdownItems: aiAutomationServices,
+      dropdownType: "ai"
+    },
+    {
+      id: "small-business-it",
+      title: "Small Business IT Support",
+      tag: "Essential",
+      badgeColor: "bg-emerald-500 text-white",
+      desc: "Comprehensive on-demand and fully managed IT support tailored for growing businesses, physical offices, and remote teams.",
+      status: "Dedicated IT Support",
+      img: trendingItDeskImg,
+      category: "it",
+      rating: 5,
+      dropdownKey: "it-support",
+      dropdownTitle: "Included IT Support Modules (9 Core Services)",
+      dropdownItems: itSupportServices,
+      dropdownType: "it"
+    },
+    {
+      id: "obd-studio",
+      title: "OBD Studio Setup",
+      tag: "Studio Rigging",
+      badgeColor: "bg-amber-500 text-white",
+      desc: "Turnkey broadcast and streaming studio configuration. Multi-camera switching, high-bitrate encoding, clean audio routing, overlay branding, and live streaming workflows.",
+      status: "Custom Studio Build",
+      img: trendingStudioImg,
+      category: "creative",
+      rating: 5,
+      highlights: ["Multi-Camera OBS/OBD Rigging", "Audio Mixer & Noise Gate Setup", "Custom Stream Overlays & Stinger Transitions", "Local Recording & Cloud Multi-Stream"],
+    },
+    {
+      id: "ai-animation-training",
+      title: "AI Animation Training",
+      tag: "Masterclass",
+      badgeColor: "bg-indigo-600 text-white",
+      desc: "Hands-on professional masterclass on generative AI animation, motion synthesis, frame interpolation, character consistency, and production pipeline integration.",
+      status: "Live Workshop & Mentorship",
+      img: trendingAiAnimImg,
+      category: "creative",
+      rating: 5,
+      highlights: ["Generative Video Models & ComfyUI", "Character Consistency Workflows", "Audio-Driven Lip Sync & 3D Rigging", "Commercial Animation Pipeline"],
+    },
+    {
+      id: "sentinel-cloud-infra",
+      title: "Cloud & Enterprise Infrastructure",
+      tag: "99.99% Uptime",
+      badgeColor: "bg-cyan-600 text-white",
+      desc: "Enterprise network security with Sentinel AI Firewall, DDoS shielding, global edge CDN caching, and automated high-availability server architecture.",
+      status: "Enterprise Scalability",
+      img: trendingInfraImg,
+      category: "infra",
+      rating: 5,
+      highlights: ["Sentinel AI Network Firewall", "Sub-10ms Global Edge CDN", "Automated Load Balancing & Failover", "Zero-Downtime Migration Services"],
+    },
+  ];
+
+  const query = searchQuery.trim().toLowerCase();
+
+  const filteredItems = trendingItems.filter(item => {
+    const matchesCategory = activeTab === 'all' || item.category === activeTab;
+    if (!matchesCategory) return false;
+    if (!query) return true;
+
+    // Deep search checking main title, desc, tag, status, highlights
+    const matchesMain = 
+      item.title.toLowerCase().includes(query) ||
+      item.desc.toLowerCase().includes(query) ||
+      item.tag.toLowerCase().includes(query) ||
+      item.status.toLowerCase().includes(query) ||
+      (item.highlights && item.highlights.some(h => h.toLowerCase().includes(query)));
+
+    // Deep search checking sub-dropdown items
+    const matchesSub = item.dropdownItems && item.dropdownItems.some((sub: any) => 
+      sub.title.toLowerCase().includes(query) || 
+      (sub.desc && sub.desc.toLowerCase().includes(query)) ||
+      (sub.badge && sub.badge.toLowerCase().includes(query))
+    );
+
+    return matchesMain || matchesSub;
+  });
+
+  // Auto-expand dropdowns when searching if a query matches sub-items inside that card
+  useEffect(() => {
+    if (query) {
+      const newOpen: Record<string, boolean> = { ...openDropdowns };
+      trendingItems.forEach(item => {
+        if (item.dropdownKey && item.dropdownItems) {
+          const subMatch = item.dropdownItems.some((sub: any) =>
+            sub.title.toLowerCase().includes(query) ||
+            (sub.desc && sub.desc.toLowerCase().includes(query)) ||
+            (sub.badge && sub.badge.toLowerCase().includes(query))
+          );
+          if (subMatch) {
+            newOpen[item.dropdownKey] = true;
+          }
+        }
+      });
+      setOpenDropdowns(newOpen);
+    }
+  }, [searchQuery]);
+
+  const popularSearchTags = ["E-commerce", "Chatbot", "Wi-Fi", "Printer", "SaaS", "OBS", "Email", "Backup"];
+
+  return (
+    <section className="pt-20 pb-32 px-6 bg-bg-primary transition-colors duration-500">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
+          <div className="max-w-2xl">
+            <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">In-Demand Technology & Services</div>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[0.9]">
+              Trending <br /> Capabilities.
+            </h2>
+            <p className="text-text-secondary text-sm md:text-base mt-4 max-w-xl font-mono leading-relaxed">
+              Explore our most requested website development, practical AI automations, broadcast studio setups, creative training, and small business IT support solutions.
+            </p>
+          </div>
+          
+          <div className="flex flex-col gap-3 w-full md:w-auto font-mono">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+              {/* Search Input */}
+              <div className="relative flex-1 sm:w-72">
+                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary" />
+                <input
+                  type="text"
+                  placeholder="Search services (e.g. Printer, E-commerce, Chatbot)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-9 py-2.5 bg-bg-card border border-border-primary rounded-xl text-xs text-text-primary focus:outline-none focus:border-accent transition-colors"
+                />
+                {searchQuery && (
+                  <button 
+                    onClick={() => setSearchQuery('')} 
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary p-0.5 rounded-full hover:bg-bg-primary transition-colors"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+
+              {/* Mobile Category Dropdown Select */}
+              <div className="relative sm:hidden w-full">
+                <select
+                  value={activeTab}
+                  onChange={(e) => setActiveTab(e.target.value as any)}
+                  className="w-full pl-9 pr-9 py-2.5 bg-bg-card border border-border-primary rounded-xl text-xs font-mono font-bold text-text-primary appearance-none focus:outline-none focus:border-accent transition-colors cursor-pointer"
+                >
+                  <option value="all">Category: All Trending</option>
+                  <option value="web">Category: Web & UI/UX</option>
+                  <option value="ai">Category: AI Automation</option>
+                  <option value="it">Category: IT Support</option>
+                  <option value="creative">Category: Studio & Creative</option>
+                  <option value="infra">Category: Cloud & Infra</option>
+                </select>
+                <Filter size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
+                <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+              </div>
+
+              {/* Desktop Category Filter Tabs */}
+              <div className="hidden sm:flex items-center gap-1 bg-bg-card p-1 rounded-xl border border-border-primary overflow-x-auto">
+                {[
+                  { id: 'all', label: 'All Trending' },
+                  { id: 'web', label: 'Web & UI/UX' },
+                  { id: 'ai', label: 'AI Automation' },
+                  { id: 'it', label: 'IT Support' },
+                  { id: 'creative', label: 'Studio & Creative' },
+                  { id: 'infra', label: 'Cloud & Infra' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as any)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium capitalize whitespace-nowrap transition-all ${
+                      activeTab === tab.id 
+                        ? 'bg-accent text-bg-primary font-bold shadow-sm' 
+                        : 'text-text-secondary hover:text-text-primary'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="p-6 lg:p-8">
-               <div className="flex justify-between items-start mb-4 gap-2">
-                 <h3 className="text-lg lg:text-xl font-bold font-mono tracking-tight group-hover:text-accent transition-colors text-text-primary">{prod.title}</h3>
-                 <div className="flex text-amber-400 shrink-0"><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /></div>
-               </div>
-               <p className="text-text-secondary/70 font-mono text-[11px] leading-relaxed mb-6">{prod.desc}</p>
-               <div className="flex justify-between items-center border-t border-border-primary pt-6">
-                 <div className="font-mono font-bold text-text-primary">{prod.price}</div>
-                 <MagneticGlowButton className="p-3 !px-3"><Info size={16} /></MagneticGlowButton>
-               </div>
+
+            {/* Popular Search Tag Suggestions */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 text-[11px] text-text-secondary">
+              <span className="shrink-0 text-text-secondary/70">Quick Search:</span>
+              <div className="flex items-center gap-1.5 flex-nowrap">
+                {popularSearchTags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => setSearchQuery(tag)}
+                    className={`px-2 py-0.5 rounded-md border text-[10px] whitespace-nowrap transition-all ${
+                      searchQuery.toLowerCase() === tag.toLowerCase()
+                        ? 'border-accent text-accent bg-accent/10 font-bold'
+                        : 'border-border-primary hover:border-text-secondary text-text-secondary hover:text-text-primary bg-bg-card'
+                    }`}
+                  >
+                    #{tag}
+                  </button>
+                ))}
+              </div>
             </div>
-          </motion.div>
-        ))}
+          </div>
+        </div>
+
+        {/* Search Result Status */}
+        {searchQuery && (
+          <div className="mb-6 flex items-center justify-between font-mono text-xs text-text-secondary bg-bg-card p-3 rounded-xl border border-border-primary">
+            <div>
+              Found <span className="font-bold text-accent">{filteredItems.length}</span> matching service{filteredItems.length === 1 ? '' : 's'} for "<span className="text-text-primary font-bold">{searchQuery}</span>"
+            </div>
+            <button
+              onClick={() => setSearchQuery('')}
+              className="text-xs text-accent hover:underline flex items-center gap-1 font-bold"
+            >
+              <X size={12} /> Clear search
+            </button>
+          </div>
+        )}
+
+        {/* Empty Search State */}
+        {filteredItems.length === 0 ? (
+          <div className="text-center py-20 bg-bg-card rounded-[32px] border border-border-primary font-mono px-6">
+            <div className="w-12 h-12 rounded-2xl bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4">
+              <Search size={24} />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-2">No matching services found</h3>
+            <p className="text-text-secondary text-xs max-w-md mx-auto mb-6">
+              We couldn't find any capability matching "{searchQuery}". Try searching for general terms like "WiFi", "Design", "Automation", or "Studio".
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setActiveTab('all');
+              }}
+              className="px-5 py-2.5 rounded-xl bg-accent text-bg-primary font-bold text-xs hover:opacity-90 transition-opacity"
+            >
+              Reset Search & Filters
+            </button>
+          </div>
+        ) : (
+          /* Trending Grid */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredItems.map((prod, i) => {
+            const hasDropdown = Boolean(prod.dropdownKey && prod.dropdownItems);
+            const isWide = hasDropdown;
+            const isOpen = prod.dropdownKey ? openDropdowns[prod.dropdownKey] : false;
+
+            return (
+              <motion.div 
+                key={prod.id || i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                className={`bg-bg-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-border-primary flex flex-col justify-between ${
+                  isWide ? 'md:col-span-2 lg:col-span-3 border-accent/40 ring-1 ring-accent/20' : ''
+                }`}
+              >
+                <div>
+                  <div className={`${isWide ? 'aspect-[21/9] md:aspect-[3.2/1]' : 'aspect-video'} relative overflow-hidden bg-bg-card`}>
+                    <img 
+                      src={prod.img} 
+                      alt={prod.title} 
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover filter grayscale brightness-85 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-75" />
+                    
+                    <div className={`absolute top-4 right-4 ${prod.badgeColor || 'bg-accent text-bg-primary'} px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest shadow-md`}>
+                      {prod.tag}
+                    </div>
+                    
+                    {hasDropdown && (
+                      <div className="absolute bottom-4 left-6 md:left-8">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-bg-primary/90 backdrop-blur-md border border-border-primary text-text-primary text-xs font-mono font-semibold shadow-lg">
+                          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> Interactive Service Suite
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-6 lg:p-8">
+                    <div className="flex justify-between items-start mb-4 gap-2">
+                      <h3 className="text-xl lg:text-2xl font-bold font-mono tracking-tight group-hover:text-accent transition-colors text-text-primary">
+                        {prod.title}
+                      </h3>
+                      <div className="flex text-amber-400 shrink-0">
+                        {[...Array(prod.rating || 5)].map((_, idx) => (
+                          <Star key={idx} size={13} fill="currentColor" />
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <p className="text-text-secondary font-mono text-xs md:text-sm leading-relaxed mb-6">
+                      {prod.desc}
+                    </p>
+
+                    {/* Highlights for standard cards */}
+                    {prod.highlights && (
+                      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {prod.highlights.map((hl, hlIdx) => (
+                          <div key={hlIdx} className="flex items-center gap-2 text-xs font-mono text-text-secondary">
+                            <Check size={14} className="text-accent shrink-0" />
+                            <span>{hl}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Interactive Dropdown Section */}
+                    {hasDropdown && prod.dropdownItems && prod.dropdownKey && (
+                      <div className="mt-6 pt-6 border-t border-border-primary">
+                        <button
+                          onClick={() => toggleDropdown(prod.dropdownKey!)}
+                          className="w-full flex items-center justify-between p-4 rounded-2xl bg-bg-primary hover:bg-bg-primary/80 border border-border-primary transition-all cursor-pointer group/btn"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center font-bold">
+                              {prod.dropdownType === 'web' ? <Layout size={18} /> : prod.dropdownType === 'ai' ? <Bot size={18} /> : <Layers size={18} />}
+                            </div>
+                            <div className="text-left">
+                              <span className="font-mono text-xs md:text-sm font-bold text-text-primary uppercase tracking-wide block">
+                                {prod.dropdownTitle}
+                              </span>
+                              <span className="font-mono text-[11px] text-text-secondary">
+                                Click to {isOpen ? 'collapse modules' : 'expand and explore details'}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-bg-card flex items-center justify-center text-text-primary group-hover/btn:bg-accent group-hover/btn:text-bg-primary transition-colors">
+                            {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                          </div>
+                        </button>
+
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.35, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mt-4 pt-2">
+                                {prod.dropdownItems.map((item: any, sIdx: number) => {
+                                  const IconComp = item.icon || CheckCircle2;
+                                  return (
+                                    <div 
+                                      key={sIdx}
+                                      className="p-4 rounded-2xl bg-bg-primary/70 border border-border-primary hover:border-accent/50 hover:bg-bg-primary transition-all duration-300 flex flex-col justify-between group/item"
+                                    >
+                                      <div className="flex items-start gap-3.5 mb-2">
+                                        <div className="p-2.5 rounded-xl bg-bg-card text-accent border border-border-primary group-hover/item:scale-110 group-hover/item:border-accent transition-all shrink-0">
+                                          <IconComp size={18} />
+                                        </div>
+                                        <div>
+                                          <div className="flex items-center gap-2 flex-wrap">
+                                            <h4 className="font-mono text-xs md:text-sm font-bold text-text-primary group-hover/item:text-accent transition-colors">
+                                              {item.title}
+                                            </h4>
+                                            {item.badge && (
+                                              <span className="px-2 py-0.5 rounded-md bg-accent/15 text-accent text-[9px] font-mono font-bold uppercase">
+                                                {item.badge}
+                                              </span>
+                                            )}
+                                          </div>
+                                          <p className="font-mono text-[11px] text-text-secondary/80 leading-relaxed mt-1.5">
+                                            {item.desc}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-6 lg:p-8 pt-0 mt-auto">
+                  <div className="flex justify-between items-center border-t border-border-primary pt-6">
+                    <div>
+                      <span className="text-[10px] font-mono uppercase text-text-secondary block">Engagement Status</span>
+                      <div className="font-mono font-bold text-xs md:text-sm text-text-primary flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-accent" />
+                        {prod.status}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MagneticGlowButton className="p-3 !px-4 text-xs font-mono font-bold flex items-center gap-2">
+                        <span>Inquire Now</span>
+                        <ArrowRight size={14} />
+                      </MagneticGlowButton>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+        )}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // --- Main App ---
 
