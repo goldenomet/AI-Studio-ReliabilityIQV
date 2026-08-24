@@ -120,7 +120,17 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.mp4')) {
+          res.setHeader('Content-Type', 'video/mp4');
+          res.setHeader('Accept-Ranges', 'bytes');
+        } else if (filePath.endsWith('.mp3')) {
+          res.setHeader('Content-Type', 'audio/mpeg');
+          res.setHeader('Accept-Ranges', 'bytes');
+        }
+      }
+    }));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });

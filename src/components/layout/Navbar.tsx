@@ -390,6 +390,10 @@ export const Navbar = ({
 
                      <div className="text-[12px] mb-2 font-medium uppercase tracking-wider text-text-secondary pl-2">Socials</div>
                      <div className="flex flex-col gap-2 mb-4">
+                         <a href="https://youtube.com/shorts/6W0wKw3zz6w?si=Qfu9R35C7ozK7vQh" target="_blank" rel="noopener noreferrer" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5 flex items-center justify-between">
+                           <span>YouTube Shorts</span>
+                           <span className="text-xs bg-red-500/15 text-red-500 px-2 py-0.5 rounded-full font-medium">Channel</span>
+                         </a>
                          <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Instagram</a>
                          <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Twitter</a>
                      </div>

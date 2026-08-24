@@ -1,183 +1,120 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Play, Pause, X, Volume2, VolumeX } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
+import { X, Minimize2, ExternalLink, Youtube } from 'lucide-react';
 import { bgMusic } from '../lib/backgroundMusic';
 
 export const WelcomeVideoWidget = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If browser policy blocks unmuted autoplay, mute temporarily so video starts
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            videoRef.current.play().catch(() => {});
-            setIsMuted(true);
-          }
-
-          // Automatically enable sound on first interaction
-          const unmuteOnInteraction = () => {
-            if (videoRef.current) {
-              videoRef.current.muted = false;
-              setIsMuted(false);
-            }
-          };
-
-          window.addEventListener('click', unmuteOnInteraction, { once: true });
-          window.addEventListener('keydown', unmuteOnInteraction, { once: true });
-          window.addEventListener('touchstart', unmuteOnInteraction, { once: true });
-        });
-      }
-    }
-  }, []);
-
-  const togglePlay = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    
-    if (isMinimized) {
-      setIsMinimized(false);
-      if (videoRef.current) {
-        bgMusic.pause();
-        videoRef.current.currentTime = 0;
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-      return;
-    }
-    
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        bgMusic.pause();
-        if (videoRef.current.ended) {
-          videoRef.current.currentTime = 0;
-        }
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
+  const YOUTUBE_SHORT_ID = "6W0wKw3zz6w";
+  const YOUTUBE_URL = `https://youtube.com/shorts/${YOUTUBE_SHORT_ID}?si=Qfu9R35C7ozK7vQh`;
+  const EMBED_URL = `https://www.youtube-nocookie.com/embed/${YOUTUBE_SHORT_ID}?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=${YOUTUBE_SHORT_ID}&modestbranding=1`;
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsOpen(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    // Start background music loop if not already playing
     bgMusic.play();
   };
 
-  const handleVideoEnded = () => {
-    setIsPlaying(false);
+  const handleMinimize = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsMinimized(true);
-    // Start continuous looping playlist of the 4 background songs
-    bgMusic.play();
+  };
+
+  const handleExpand = () => {
+    setIsMinimized(false);
+    bgMusic.pause();
   };
 
   if (!isOpen) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, x: 20, y: -20 }}
-      animate={isMinimized ? { opacity: 0.6, scale: 0.4, x: '40%', y: 0 } : { opacity: 1, scale: 1, x: 0, y: 0 }}
-      exit={{ opacity: 0, scale: 0.8, x: 20, y: -20 }}
-      transition={{ type: "spring", stiffness: 200, damping: 20, delay: isMinimized ? 0 : 1 }}
-      className={`fixed top-24 lg:top-24 right-4 lg:right-6 z-50 pointer-events-auto ${isMinimized ? 'cursor-pointer hover:opacity-100' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, scale: 0.9, y: -20 }}
+      animate={
+        isMinimized 
+          ? { opacity: 0.95, scale: 0.85, x: 0, y: 0 } 
+          : { opacity: 1, scale: 1, x: 0, y: 0 }
+      }
+      exit={{ opacity: 0, scale: 0.8, y: -20 }}
+      transition={{ type: "spring", stiffness: 260, damping: 24, delay: isMinimized ? 0 : 0.6 }}
+      className="fixed top-24 right-4 sm:right-6 z-50 pointer-events-auto select-none font-sans"
     >
-      <div 
-        className="relative w-40 h-56 md:w-48 md:h-64 lg:w-56 lg:h-72 mix-blend-multiply dark:mix-blend-screen [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_80%,transparent_100%)] cursor-pointer overflow-hidden rounded-2xl" 
-        onClick={(e) => {
-          if (isMinimized) {
-            togglePlay(e);
-          } else {
-            toggleMute(e);
-          }
-        }}
-      >
-        <video
-          ref={videoRef}
-          src="/intro-video.mp4"
-          className="w-full h-full object-cover"
-          autoPlay
-          muted={isMuted}
-          playsInline
-          onEnded={handleVideoEnded}
-        />
-        
-        {/* Hover Overlay Controls */}
-        <AnimatePresence>
-          {isHovered && !isMinimized && (
-            <motion.div
-              key="hover-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/20 flex items-center justify-center gap-3 backdrop-blur-[2px] rounded-2xl"
-            >
-              <button 
-                onClick={togglePlay}
-                className="w-8 h-8 rounded-full bg-white/30 hover:bg-white/50 flex items-center justify-center text-white backdrop-blur-md transition-colors"
-              >
-                {isPlaying ? <Pause size={16} /> : <Play size={16} className="ml-1" />}
-              </button>
-              
-              <button 
-                onClick={toggleMute}
-                className="w-8 h-8 rounded-full bg-white/30 hover:bg-white/50 flex items-center justify-center text-white backdrop-blur-md transition-colors"
-              >
-                {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Close Button */}
-        {!isMinimized && (
+      {/* Minimized Pill View */}
+      {isMinimized ? (
+        <motion.div
+          layout
+          onClick={handleExpand}
+          className="flex items-center gap-2 px-3.5 py-2 bg-bg-card/95 hover:bg-bg-card text-text-primary backdrop-blur-xl border border-border-primary rounded-full shadow-xl cursor-pointer hover:border-red-500/50 transition-all group"
+        >
+          <div className="w-5 h-5 rounded-full bg-red-600/20 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
+            <Youtube size={12} className="fill-red-500 text-red-500" />
+          </div>
+          <p className="text-xs font-semibold tracking-wide">Watch Intro</p>
           <button
             onClick={handleClose}
-            className="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/30 text-white flex items-center justify-center hover:bg-black/50 transition-colors z-10"
+            className="text-text-secondary hover:text-text-primary p-0.5 rounded-full hover:bg-white/10 transition-colors ml-0.5"
+            title="Close"
+            aria-label="Close widget"
           >
             <X size={12} />
           </button>
-        )}
-      </div>
-      
-      {/* Tooltip / Welcome Text */}
-      <AnimatePresence>
-        {!isHovered && isPlaying && isMuted && !isMinimized && (
-          <motion.div
-            key="tooltip"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-bg-card/80 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-medium text-text-primary border border-border-primary shadow-lg pointer-events-none"
-          >
-            Click to unmute
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+      ) : (
+        /* Full Floating YouTube Video Card */
+        <motion.div 
+          layout
+          className="relative w-52 sm:w-60 md:w-64 bg-black/95 backdrop-blur-2xl border border-border-primary rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden group/card"
+        >
+          {/* Header Bar */}
+          <div className="flex items-center justify-between px-3 py-2 bg-black/80 border-b border-white/10 text-white text-[11px] font-medium">
+            <div className="flex items-center gap-2 truncate">
+              <Youtube size={14} className="text-red-500 fill-red-500 shrink-0" />
+              <p className="truncate font-semibold tracking-tight text-white/90">Intro Video</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1 text-white/70 hover:text-white hover:bg-white/10 rounded transition-colors"
+                title="Open on YouTube"
+                aria-label="Open on YouTube"
+              >
+                <ExternalLink size={13} />
+              </a>
+              <button
+                onClick={handleMinimize}
+                className="p-1 text-white/70 hover:text-white hover:bg-white/10 rounded transition-colors"
+                title="Minimize"
+                aria-label="Minimize video"
+              >
+                <Minimize2 size={13} />
+              </button>
+              <button
+                onClick={handleClose}
+                className="p-1 text-white/70 hover:text-white hover:bg-white/10 rounded transition-colors"
+                title="Close"
+                aria-label="Close video"
+              >
+                <X size={13} />
+              </button>
+            </div>
+          </div>
+
+          {/* YouTube Shorts Embed Container (9:16 Aspect Ratio) */}
+          <div className="relative aspect-[9/16] w-full bg-black overflow-hidden">
+            <iframe
+              src={EMBED_URL}
+              title="ReliabilityIQ Introduction"
+              className="w-full h-full border-0 block"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 };

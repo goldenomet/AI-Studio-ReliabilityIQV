@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, X, Instagram, Twitter, Phone } from 'lucide-react';
+import { MessageCircle, X, Instagram, Twitter, Youtube, Phone } from 'lucide-react';
 import whatsappIcon3D from '../assets/images/whatsapp_icon_3d_1787579859009.jpg';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 
@@ -19,6 +19,13 @@ export const WhatsAppWidget = () => {
       href: 'https://wa.me/2349075934287',
       color: 'bg-[#25D366]',
       label: 'Message on WhatsApp'
+    },
+    { 
+      name: 'YouTube', 
+      icon: <Youtube size={22} />, 
+      href: 'https://youtube.com/shorts/6W0wKw3zz6w?si=Qfu9R35C7ozK7vQh',
+      color: 'bg-[#FF0000] text-white',
+      label: 'YouTube Channel'
     },
     { 
       name: 'Instagram', 

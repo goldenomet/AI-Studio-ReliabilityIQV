@@ -37,6 +37,7 @@ type AudioStateListener = (state: {
 
 class BackgroundMusicPlayer {
   private audio: HTMLAudioElement | null = null;
+  private preloadAudio: HTMLAudioElement | null = null;
   private currentTrackIndex = 0;
   private isPlaying = false;
   private volume = 0.35;
@@ -45,7 +46,6 @@ class BackgroundMusicPlayer {
   private fadeInterval: any = null;
 
   constructor() {
-    // Only init in browser
     if (typeof window !== 'undefined') {
       this.initAudio();
     }
@@ -56,27 +56,39 @@ class BackgroundMusicPlayer {
     this.hasInitialized = true;
 
     this.audio = new Audio();
-    this.audio.preload = 'metadata';
+    this.audio.preload = 'auto';
     this.audio.volume = this.volume;
 
+    // Instant seamless next track on track end (0 wait time)
     this.audio.addEventListener('ended', () => {
-      this.playNext();
+      this.playNext(true);
     });
 
     this.audio.addEventListener('error', (e) => {
-      console.warn('Background audio error, skipping to next track:', e);
-      // If a track fails, gracefully attempt next track after short pause
-      setTimeout(() => {
-        if (this.isPlaying) {
-          this.playNext();
-        }
-      }, 1000);
+      console.warn('Background audio error, skipping to next track immediately:', e);
+      if (this.isPlaying) {
+        this.playNext(true);
+      }
     });
+
+    // Hidden preload audio element to buffer next track in advance
+    this.preloadAudio = new Audio();
+    this.preloadAudio.preload = 'auto';
+    this.preloadAudio.volume = 0;
+  }
+
+  private preloadUpcomingTrack() {
+    if (!this.preloadAudio || PLAYLIST.length <= 1) return;
+    const nextIndex = (this.currentTrackIndex + 1) % PLAYLIST.length;
+    const nextTrack = PLAYLIST[nextIndex];
+    if (nextTrack) {
+      this.preloadAudio.src = encodeURI(nextTrack.src);
+      this.preloadAudio.load();
+    }
   }
 
   public subscribe(listener: AudioStateListener): () => void {
     this.listeners.add(listener);
-    // Immediately emit current state
     listener(this.getState());
     return () => {
       this.listeners.delete(listener);
@@ -97,9 +109,14 @@ class BackgroundMusicPlayer {
     };
   }
 
-  public async play(trackIndex?: number): Promise<boolean> {
+  public async play(trackIndex?: number, immediate: boolean = false): Promise<boolean> {
     this.initAudio();
     if (!this.audio) return false;
+
+    if (this.fadeInterval) {
+      clearInterval(this.fadeInterval);
+      this.fadeInterval = null;
+    }
 
     if (trackIndex !== undefined && trackIndex >= 0 && trackIndex < PLAYLIST.length) {
       this.currentTrackIndex = trackIndex;
@@ -109,19 +126,20 @@ class BackgroundMusicPlayer {
     if (!currentTrack) return false;
 
     const targetSrc = encodeURI(currentTrack.src);
-    // Check if source changed
     if (!this.audio.src.endsWith(targetSrc) && !this.audio.src.endsWith(currentTrack.src)) {
       this.audio.src = targetSrc;
       this.audio.load();
     }
 
-    this.audio.volume = 0;
+    // Set volume immediately for seamless continuous music playback
+    this.audio.volume = this.volume;
 
     try {
       await this.audio.play();
       this.isPlaying = true;
-      this.fadeIn();
       this.notify();
+      // Pre-buffer next track in the background for zero-delay transition
+      this.preloadUpcomingTrack();
       return true;
     } catch (err) {
       console.warn('Autoplay blocked or playback failed:', err);
@@ -133,13 +151,13 @@ class BackgroundMusicPlayer {
 
   public pause() {
     if (!this.audio) return;
-    this.fadeOut(() => {
-      if (this.audio) {
-        this.audio.pause();
-      }
-      this.isPlaying = false;
-      this.notify();
-    });
+    if (this.fadeInterval) {
+      clearInterval(this.fadeInterval);
+      this.fadeInterval = null;
+    }
+    this.audio.pause();
+    this.isPlaying = false;
+    this.notify();
   }
 
   public toggle(): Promise<boolean> {
@@ -147,18 +165,18 @@ class BackgroundMusicPlayer {
       this.pause();
       return Promise.resolve(false);
     } else {
-      return this.play();
+      return this.play(this.currentTrackIndex, true);
     }
   }
 
-  public playNext() {
+  public playNext(immediate: boolean = true) {
     this.currentTrackIndex = (this.currentTrackIndex + 1) % PLAYLIST.length;
-    this.play(this.currentTrackIndex);
+    this.play(this.currentTrackIndex, immediate);
   }
 
-  public playPrevious() {
+  public playPrevious(immediate: boolean = true) {
     this.currentTrackIndex = (this.currentTrackIndex - 1 + PLAYLIST.length) % PLAYLIST.length;
-    this.play(this.currentTrackIndex);
+    this.play(this.currentTrackIndex, immediate);
   }
 
   public setVolume(vol: number) {
@@ -167,55 +185,6 @@ class BackgroundMusicPlayer {
       this.audio.volume = this.volume;
     }
     this.notify();
-  }
-
-  private fadeIn(targetVolume: number = this.volume, durationMs: number = 1000) {
-    if (!this.audio) return;
-    if (this.fadeInterval) clearInterval(this.fadeInterval);
-
-    const stepMs = 50;
-    const stepGain = targetVolume / (durationMs / stepMs);
-    let currentVol = 0;
-    this.audio.volume = 0;
-
-    this.fadeInterval = setInterval(() => {
-      if (!this.audio) {
-        clearInterval(this.fadeInterval);
-        return;
-      }
-      currentVol = Math.min(targetVolume, currentVol + stepGain);
-      this.audio.volume = currentVol;
-      if (currentVol >= targetVolume) {
-        clearInterval(this.fadeInterval);
-      }
-    }, stepMs);
-  }
-
-  private fadeOut(callback?: () => void, durationMs: number = 600) {
-    if (!this.audio) {
-      if (callback) callback();
-      return;
-    }
-    if (this.fadeInterval) clearInterval(this.fadeInterval);
-
-    const startVolume = this.audio.volume;
-    const stepMs = 50;
-    const stepGain = startVolume / (durationMs / stepMs);
-    let currentVol = startVolume;
-
-    this.fadeInterval = setInterval(() => {
-      if (!this.audio) {
-        clearInterval(this.fadeInterval);
-        if (callback) callback();
-        return;
-      }
-      currentVol = Math.max(0, currentVol - stepGain);
-      this.audio.volume = currentVol;
-      if (currentVol <= 0) {
-        clearInterval(this.fadeInterval);
-        if (callback) callback();
-      }
-    }, stepMs);
   }
 }
 

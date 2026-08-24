@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Linkedin, Twitter, Github, Lock } from 'lucide-react';
+import { Linkedin, Twitter, Github, Youtube, Lock } from 'lucide-react';
 import logo from '@/src/assets/images/logo.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
   <div className="relative group">
-    <a href={href} className="hover:text-brand-accent hover:scale-125 hover:-translate-y-1 transition-all duration-300 block">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent hover:scale-125 hover:-translate-y-1 transition-all duration-300 block">
       <Icon size={20} />
     </a>
     <motion.div
@@ -37,7 +37,8 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
           <p className="text-text-secondary font-mono text-sm leading-relaxed mb-8 max-w-xs">
             Optimizing digital infrastructure from Lagos to the world. We build resilient systems for the modern global enterprise.
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
+            <SocialLink href="https://youtube.com/shorts/6W0wKw3zz6w?si=Qfu9R35C7ozK7vQh" icon={Youtube} label="YouTube" />
             <SocialLink href="#" icon={Linkedin} label="LinkedIn" />
             <SocialLink href="#" icon={Twitter} label="Twitter" />
             <SocialLink href="#" icon={Github} label="Github" />
