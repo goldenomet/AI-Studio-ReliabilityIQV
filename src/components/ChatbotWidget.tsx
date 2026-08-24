@@ -5,6 +5,8 @@ import { Send, RotateCcw, ChevronRight, MessageSquare, ExternalLink, ArrowUpRigh
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import websiteLogo from '../assets/images/logo.png';
 
+import { getGmailAccessToken } from '../lib/gmail';
+
 interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -145,10 +147,17 @@ export const ChatbotWidget = () => {
     setIsSubmittingLead(true);
 
     try {
+      const token = getGmailAccessToken();
       await fetch('/api/lead', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadForm),
+        headers: { 
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({
+          ...leadForm,
+          gmailToken: token || undefined
+        }),
       });
 
       setIsSubmittingLead(false);
@@ -502,7 +511,7 @@ export const ChatbotWidget = () => {
             {/* ----------------- ACTION BAR ----------------- */}
             <div className="bg-bg-primary/90 px-4 py-2 border-t border-border-primary flex items-center justify-between text-xs font-semibold shrink-0">
               <a
-                href="https://wa.me/2348000000000?text=Hello%20ReliabilityIQ%20Ventures%2C%20I%20would%20like%20to%20discuss%20a%20project."
+                href="https://wa.me/2349075934287?text=Hello%20ReliabilityIQ%20Ventures%2C%20I%20would%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:underline flex items-center gap-1"

@@ -18,7 +18,7 @@ export const WhatsAppWidget = () => {
       ), 
       href: 'https://wa.me/2349075934287',
       color: 'bg-[#25D366]',
-      label: 'Message on WhatsApp'
+      label: 'Message on WhatsApp (+234 907 593 4287)'
     },
     { 
       name: 'YouTube', 

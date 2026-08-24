@@ -60,40 +60,97 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
     }
   });
 
-  // API route for lead capture
+  // API route for lead capture & form submissions with optional Gmail API dispatch
   app.post("/api/lead", async (req, res) => {
     try {
-      const { name, email, message, service } = req.body;
+      const { name, email, message, details, service, gmailToken } = req.body;
+      const clientAuthToken = req.headers.authorization?.replace('Bearer ', '') || gmailToken;
 
-      if (!name || !email) {
-        return res.status(400).json({ error: "Name and email are required" });
-      }
-
-      const mailOptions = {
-        from: process.env.COMPANY_EMAIL_USER,
-        to: process.env.COMPANY_EMAIL_USER, // send to company's own email
-        subject: `New Lead from ${name} via ReliabilityIQ Chatbot`,
-        text: `You have received a new lead!\n\nName: ${name}\nEmail: ${email}\nService of Interest: ${service || 'N/A'}\nMessage: ${message || 'No specific message.'}`,
-      };
+      const contactName = name || 'Anonymous Client';
+      const contactEmail = email || 'not-provided@example.com';
+      const formDetails = details || message || 'No specific details provided.';
 
       // Store in memory for the admin preview panel
-      capturedLeads.push({
+      const newLead = {
         id: Date.now().toString(),
-        name,
-        email,
+        name: contactName,
+        email: contactEmail,
         service: service || 'N/A',
-        message: message || '',
-        date: new Date().toISOString()
-      });
+        message: formDetails,
+        date: new Date().toISOString(),
+        deliveredViaGmail: Boolean(clientAuthToken)
+      };
+      capturedLeads.push(newLead);
 
-      // Only send if configured, else just simulate success for dev environment
-      if (process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
-        await transporter.sendMail(mailOptions);
-      } else {
-        console.warn("COMPANY_EMAIL_USER or COMPANY_EMAIL_PASS not set. Simulating email send for:", mailOptions);
+      let gmailSent = false;
+      // If user/admin provided a Gmail OAuth Token, send directly via Gmail API!
+      if (clientAuthToken) {
+        try {
+          const rawEmail = [
+            `To: reliabilityiqventures@gmail.com`,
+            `Subject: [Form Submission] New Inquiry from ${contactName}`,
+            `Content-Type: text/plain; charset="UTF-8"`,
+            `Content-Transfer-Encoding: 7bit`,
+            ``,
+            `NEW FORM SUBMISSION VIA GMAIL INTEGRATION`,
+            `=========================================`,
+            `Name: ${contactName}`,
+            `Sender Email: ${contactEmail}`,
+            `Service Stream: ${service || 'General Inquiry'}`,
+            `Submission Date: ${new Date().toLocaleString()}`,
+            ``,
+            `TRANSMISSION PACKET:`,
+            `${formDetails}`,
+            ``,
+            `=========================================`,
+            `Delivered via ReliabilityIQ Gmail OAuth API.`
+          ].join('\r\n');
+
+          const base64Url = Buffer.from(rawEmail)
+            .toString('base64')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=+$/, '');
+
+          const gmailRes = await fetch('https://gmail.googleapis.com/v1/users/me/messages/send', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${clientAuthToken}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ raw: base64Url })
+          });
+
+          if (gmailRes.ok) {
+            gmailSent = true;
+          } else {
+            const errJson = await gmailRes.json();
+            console.error("Gmail API Error:", errJson);
+          }
+        } catch (gmailErr) {
+          console.error("Failed to proxy Gmail dispatch:", gmailErr);
+        }
       }
 
-      res.json({ success: true, message: "Lead captured successfully!" });
+      // Fallback Nodemailer if SMTP credentials are provided
+      if (!gmailSent && process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
+        try {
+          await transporter.sendMail({
+            from: process.env.COMPANY_EMAIL_USER,
+            to: process.env.COMPANY_EMAIL_USER,
+            subject: `New Lead from ${contactName} via ReliabilityIQ Platform`,
+            text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\nDetails: ${formDetails}`,
+          });
+        } catch (e) {
+          console.warn("SMTP email dispatch failed:", e);
+        }
+      }
+
+      res.json({ 
+        success: true, 
+        message: gmailSent ? "Form submission delivered directly to Gmail!" : "Lead captured successfully!",
+        deliveredViaGmail: gmailSent 
+      });
     } catch (error) {
       console.error("Error capturing lead:", error);
       res.status(500).json({ error: "Failed to capture lead" });
