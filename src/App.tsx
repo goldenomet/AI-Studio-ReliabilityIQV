@@ -99,7 +99,7 @@ export default function App() {
     switch (currentPage) {
       case 'home':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <HeroSection onNavigate={handlePageChange} />
             <MissionSection onBack={() => handlePageChange('services')} onExplore={() => handlePageChange('services')} />
             <CompetenciesSection onContact={() => handlePageChange('contact')} />
@@ -108,7 +108,7 @@ export default function App() {
         );
       case 'about':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
+          <motion.div key="about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <section className="w-full min-h-screen -mt-[120px] pt-[120px] relative bg-bg-primary overflow-hidden flex flex-col justify-end pb-8">
               <div className="absolute inset-0 z-0 flex items-center justify-center">
                 <motion.img 
@@ -212,7 +212,7 @@ export default function App() {
         );
       case 'services':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
+          <motion.div key="services" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0">
             <ServicesHero />
             <EngineeredServicesSection onNavigate={handlePageChange} />
             <div className="bg-bg-secondary text-text-primary py-32 px-6 text-center transition-colors duration-500 relative overflow-hidden">
@@ -235,7 +235,7 @@ export default function App() {
       case 'service-social':
       case 'service-documentation':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0 w-full">
+          <motion.div key={currentPage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-0 w-full">
             <ServiceDetail 
               id={currentPage} 
               onBack={() => handlePageChange('services')}
@@ -245,19 +245,19 @@ export default function App() {
         );
       case 'trending':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div key="trending" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <TrendingProducts />
           </motion.div>
         );
       case 'contact':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+          <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
             <ContactSection />
           </motion.div>
         );
       case 'admin':
         return (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
+          <motion.div key="admin" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
             <AdminPanel />
           </motion.div>
         );

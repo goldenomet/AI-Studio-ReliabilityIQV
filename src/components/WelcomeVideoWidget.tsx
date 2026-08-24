@@ -1,14 +1,43 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Pause, X, Volume2, VolumeX } from 'lucide-react';
 
 export const WelcomeVideoWidget = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If browser policy blocks unmuted autoplay, mute temporarily so video starts
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            videoRef.current.play().catch(() => {});
+            setIsMuted(true);
+          }
+
+          // Automatically enable sound on first interaction
+          const unmuteOnInteraction = () => {
+            if (videoRef.current) {
+              videoRef.current.muted = false;
+              setIsMuted(false);
+            }
+          };
+
+          window.addEventListener('click', unmuteOnInteraction, { once: true });
+          window.addEventListener('keydown', unmuteOnInteraction, { once: true });
+          window.addEventListener('touchstart', unmuteOnInteraction, { once: true });
+        });
+      }
+    }
+  }, []);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -68,7 +97,7 @@ export const WelcomeVideoWidget = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div 
-        className="relative w-40 h-56 md:w-48 md:h-64 lg:w-56 lg:h-72 mix-blend-multiply dark:mix-blend-screen [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] cursor-pointer" 
+        className="relative w-40 h-56 md:w-48 md:h-64 lg:w-56 lg:h-72 mix-blend-multiply dark:mix-blend-screen [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_80%,transparent_100%)] cursor-pointer overflow-hidden rounded-2xl" 
         onClick={(e) => {
           if (isMinimized) {
             togglePlay(e);
@@ -91,6 +120,7 @@ export const WelcomeVideoWidget = () => {
         <AnimatePresence>
           {isHovered && !isMinimized && (
             <motion.div
+              key="hover-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -128,6 +158,7 @@ export const WelcomeVideoWidget = () => {
       <AnimatePresence>
         {!isHovered && isPlaying && isMuted && !isMinimized && (
           <motion.div
+            key="tooltip"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}

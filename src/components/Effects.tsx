@@ -417,3 +417,61 @@ export const GrainyGradient = () => {
   );
 };
 
+export const CountingNumber = ({
+  value,
+  duration = 2,
+  decimals = 0,
+  prefix = "",
+  suffix = "",
+  className = "",
+}: {
+  value: number;
+  duration?: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  className?: string;
+}) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number | null = null;
+    let animationFrameId: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
+      
+      // Easing: easeOutExpo
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = easeProgress * value;
+      
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, value, duration]);
+
+  const formattedValue = decimals > 0 
+    ? displayValue.toFixed(decimals) 
+    : Math.floor(displayValue).toString();
+
+  return (
+    <span ref={ref} className={className}>
+      {prefix}{formattedValue}{suffix}
+    </span>
+  );
+};
+

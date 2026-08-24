@@ -4,12 +4,21 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'moti
 import { ArrowRight, Zap, Globe, Cpu, ArrowLeft, Code, BrainCircuit, Video, Map, Megaphone, FileText, ArrowUpRight, Clock, TrendingUp, Users } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
 import { TiltCard } from './Cards';
-import { ScramblyText, TextEngine, RealTimeCursors, PixelSnow, SmartTypewriter, TextScroll } from './Effects';
+import { ScramblyText, TextEngine, RealTimeCursors, PixelSnow, SmartTypewriter, TextScroll, CountingNumber } from './Effects';
 import fallbackLogo from '@/src/assets/images/logo.png';
 import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
 import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001962382.jpg';
 
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
+  const [activeCard, setActiveCard] = useState<0 | 1>(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveCard(prev => (prev === 0 ? 1 : 0));
+    }, 3800);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
   <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
     {/* Geometric Line Pattern on Four Sides */}
@@ -171,28 +180,108 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
               className="w-full h-full object-cover filter grayscale brightness-75 group-hover:grayscale-0 transition-all duration-500 rounded-3xl"
             />
           </TiltCard>
-          {/* Glass Overlays */}
-          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:top-8 md:right-12 h-fit bg-bg-card/40 backdrop-blur-md border border-border-primary p-6 rounded-2xl w-[80%] max-w-[240px] md:w-48 md:max-w-none md:animate-bounce-slow mobile-swipe-1 shadow-xl">
-             <div className="flex items-center gap-2 text-accent mb-2">
-                <Cpu size={16} />
-                <span className="font-mono text-[10px] uppercase tracking-tighter font-bold">AI Automations</span>
+          {/* Glass Overlays with Back-to-Front Layer Switching */}
+          <motion.div 
+            onClick={() => setActiveCard(0)}
+            animate={
+              activeCard === 0
+                ? {
+                    scale: 1,
+                    zIndex: 30,
+                    opacity: 1,
+                    y: 0,
+                    x: 0,
+                    rotate: 0,
+                  }
+                : {
+                    scale: 0.88,
+                    zIndex: 10,
+                    opacity: 0.6,
+                    y: 16,
+                    x: 10,
+                    rotate: 1.5,
+                  }
+            }
+            whileHover={{ scale: activeCard === 0 ? 1.03 : 0.94, opacity: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 280,
+              damping: 24,
+              mass: 0.8,
+            }}
+            className={`absolute inset-0 m-auto md:inset-auto md:m-0 md:top-8 md:right-12 h-fit backdrop-blur-xl p-6 rounded-2xl w-[80%] max-w-[240px] md:w-56 md:max-w-none cursor-pointer transition-colors duration-500 select-none ${
+              activeCard === 0
+                ? "bg-bg-card/90 border-2 border-accent/40 shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
+                : "bg-bg-card/60 border border-white/10 shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+            }`}
+          >
+             <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2 text-accent">
+                  <Cpu size={16} />
+                  <span className="font-mono text-[10px] uppercase tracking-tighter font-bold">AI Automations</span>
+                </div>
+                <span className={`w-2 h-2 rounded-full transition-colors ${activeCard === 0 ? 'bg-accent animate-pulse shadow-[0_0_8px_rgba(var(--color-accent),0.9)]' : 'bg-white/20'}`} />
              </div>
-             <div className="text-3xl font-bold font-mono text-text-primary">20+</div>
-             <div className="text-[10px] text-text-secondary font-mono">Deployed globally</div>
-          </div>
+             <div className="text-3xl font-bold font-mono text-text-primary tabular-nums">
+               <CountingNumber value={20} suffix="+" duration={1.8} />
+             </div>
+             <div className="text-[10px] text-text-secondary font-mono mt-1 flex items-center justify-between">
+               <span>Deployed globally</span>
+               {activeCard !== 0 && <span className="text-[9px] text-accent font-sans">Click to focus</span>}
+             </div>
+          </motion.div>
 
-          <div className="absolute inset-0 m-auto md:inset-auto md:m-0 md:bottom-20 md:left-12 h-fit bg-bg-card/40 backdrop-blur-md border border-border-primary p-8 rounded-2xl w-[85%] max-w-[280px] md:w-64 md:max-w-none lg:animate-none mobile-swipe-2 shadow-xl">
-             <div className="flex items-center gap-2 text-accent mb-4">
-                <Zap size={18} />
-                <span className="font-mono text-xs uppercase tracking-tighter font-bold">System Uptime</span>
+          <motion.div 
+            onClick={() => setActiveCard(1)}
+            animate={
+              activeCard === 1
+                ? {
+                    scale: 1,
+                    zIndex: 30,
+                    opacity: 1,
+                    y: 0,
+                    x: 0,
+                    rotate: 0,
+                  }
+                : {
+                    scale: 0.88,
+                    zIndex: 10,
+                    opacity: 0.6,
+                    y: 16,
+                    x: -10,
+                    rotate: -1.5,
+                  }
+            }
+            whileHover={{ scale: activeCard === 1 ? 1.03 : 0.94, opacity: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 280,
+              damping: 24,
+              mass: 0.8,
+            }}
+            className={`absolute inset-0 m-auto md:inset-auto md:m-0 md:bottom-20 md:left-12 h-fit backdrop-blur-xl p-8 rounded-2xl w-[85%] max-w-[280px] md:w-72 md:max-w-none cursor-pointer transition-colors duration-500 select-none ${
+              activeCard === 1
+                ? "bg-bg-card/90 border-2 border-accent/40 shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
+                : "bg-bg-card/60 border border-white/10 shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+            }`}
+          >
+             <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-2 text-accent">
+                  <Zap size={18} />
+                  <span className="font-mono text-xs uppercase tracking-tighter font-bold">System Uptime</span>
+                </div>
+                <span className={`w-2 h-2 rounded-full transition-colors ${activeCard === 1 ? 'bg-accent animate-pulse shadow-[0_0_8px_rgba(var(--color-accent),0.9)]' : 'bg-white/20'}`} />
              </div>
-             <div className="text-4xl font-bold font-mono flex items-end gap-1 text-text-primary">
-               99.99<span className="text-lg opacity-60">%</span>
+             <div className="text-4xl font-bold font-mono flex items-end gap-1 text-text-primary tabular-nums">
+               <CountingNumber value={99.99} decimals={2} duration={2} /><span className="text-lg opacity-60">%</span>
              </div>
-             <div className="text-xs text-accent font-mono mt-2 flex items-center gap-1">
-               <ArrowRight size={12} className="-rotate-45" /> +0.01% this quarter
+             <div className="text-xs text-accent font-mono mt-2 flex items-center justify-between">
+               <span className="flex items-center gap-1">
+                 <ArrowRight size={12} className="-rotate-45" /> +0.01% this quarter
+               </span>
+               {activeCard !== 1 && <span className="text-[10px] text-accent font-sans">Click to focus</span>}
              </div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </div>
@@ -217,15 +306,21 @@ export const MissionSection = ({ onBack, onExplore }: { onBack?: () => void, onE
         
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24">
           <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
-            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">4+</div>
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform tabular-nums">
+              <CountingNumber value={4} suffix="+" duration={1.6} />
+            </div>
             <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Years Exp</div>
           </div>
           <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
-            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform tabular-nums">
+              <CountingNumber value={20} suffix="+" duration={2} />
+            </div>
             <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Projects</div>
           </div>
           <div className="text-center group border border-transparent hover:border-accent/10 rounded-2xl p-4 transition-all">
-            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform">5m</div>
+            <div className="text-accent text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-2 group-hover:scale-110 transition-transform tabular-nums">
+              <CountingNumber value={5} suffix="m" duration={2.2} />
+            </div>
             <div className="text-[10px] font-mono tracking-[0.3em] text-text-primary uppercase opacity-60">Data Points</div>
           </div>
         </div>

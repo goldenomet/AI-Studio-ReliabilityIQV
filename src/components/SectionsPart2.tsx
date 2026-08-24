@@ -1,5 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import upArrow3D from '../assets/images/up_arrow_3d_1787579872621.jpg';
+import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
 import { ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, Map as MapIcon, FileText, PenTool, Zap } from 'lucide-react';
 import { MagneticGlowButton } from './MagneticGlowButton';
@@ -657,6 +659,7 @@ export const TrendingProducts = () => (
 
 export const ScrollToTopButton = () => {
   const [show, setShow] = useState(false);
+  const { isVisible } = useWidgetVisibility(5000);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -672,15 +675,17 @@ export const ScrollToTopButton = () => {
 
   return (
     <AnimatePresence>
-      {show && (
+      {(show && isVisible) && (
         <motion.button
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
+          key="scroll-to-top"
+          initial={{ opacity: 0, scale: 0, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-50 p-4 rounded-xl backdrop-blur-md border border-accent/20 text-bg-primary shadow-xl hover:bg-opacity-90 transition-all focus:outline-none cursor-pointer !bg-accent"
+          aria-label="Scroll to top"
+          className="fixed bottom-24 right-6 w-12 h-12 bg-bg-card/90 hover:bg-accent hover:text-white text-text-primary border border-white/10 rounded-full flex items-center justify-center z-40 shadow-xl backdrop-blur-md hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer outline-none group"
         >
-          <ArrowUp size={24} />
+          <ArrowUp size={20} className="group-hover:-translate-y-0.5 transition-transform duration-300" />
         </motion.button>
       )}
     </AnimatePresence>

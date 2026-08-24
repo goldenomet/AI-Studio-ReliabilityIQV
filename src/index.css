@@ -118,6 +118,14 @@
     @apply bg-accent/30;
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   /* ScrollPath Animations */
   .sp-spacer {
     height: 15vh;

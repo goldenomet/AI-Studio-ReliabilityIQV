@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, X, Instagram, Twitter, Phone } from 'lucide-react';
+import whatsappIcon3D from '../assets/images/whatsapp_icon_3d_1787579859009.jpg';
+import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 
 export const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isVisible } = useWidgetVisibility(5000);
 
   const socialLinks = [
     { 
@@ -34,12 +37,21 @@ export const WhatsAppWidget = () => {
   ];
 
   return (
-    <div className="fixed left-6 bottom-6 md:left-10 md:bottom-10 z-[100] flex flex-col items-start gap-4">
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: -20, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+    <AnimatePresence>
+      {(isOpen || isVisible) && (
+        <motion.div 
+          key="wa-widget-container"
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          className="fixed left-6 bottom-6 md:left-10 md:bottom-10 z-[100] flex flex-col items-start gap-4"
+        >
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                key="wa-menu"
+                initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
             className="flex flex-col gap-4 mb-2"
@@ -72,43 +84,45 @@ export const WhatsAppWidget = () => {
         )}
       </AnimatePresence>
 
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle social menu"
-        className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 relative group overflow-hidden outline-hidden ring-offset-2 focus:ring-2 focus:ring-accent ${
-          isOpen ? 'bg-bg-card border border-border-primary text-text-primary' : 'bg-accent text-white'
-        }`}
-      >
-        <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-              animate={{ rotate: 0, opacity: 1, scale: 1 }}
-              exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <X size={28} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="chat"
-              initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
-              animate={{ rotate: 0, opacity: 1, scale: 1 }}
-              exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center justify-center"
-            >
-               <MessageCircle size={32} strokeWidth={1.5} className="text-white" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
-        {!isOpen && (
-          <span className="absolute top-3 right-3 w-3 h-3 bg-white rounded-full animate-ping pointer-events-none" />
-        )}
-      </button>
-    </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle social menu"
+            className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-500 relative group outline-hidden ring-offset-2 focus:ring-2 focus:ring-accent rounded-full ${
+              isOpen ? 'bg-bg-card/95 backdrop-blur-xl border border-white/10 text-text-primary shadow-lg' : 'bg-green-500 hover:bg-green-600 shadow-[0_8px_32px_rgba(34,197,94,0.45)] border-2 border-white/20 hover:scale-110'
+            }`}
+          >
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={28} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="whatsapp"
+                  initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full h-full flex items-center justify-center"
+                >
+                  <MessageCircle size={28} className="text-white fill-white/20 drop-shadow-md" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+            {!isOpen && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+            )}
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
