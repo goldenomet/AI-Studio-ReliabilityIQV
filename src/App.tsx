@@ -13,6 +13,7 @@ import ScrollPath from './components/ScrollPath';
 import { OmniReveal } from './components/OmniReveal';
 import { MagneticGlowButton } from './components/MagneticGlowButton';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
+import { WelcomeVideoWidget } from './components/WelcomeVideoWidget';
 import FounderToggle from './components/FounderToggle';
 
 import rufusImg from './assets/images/Rufus portfolio.jpg';
@@ -279,6 +280,7 @@ export default function App() {
         <Footer onNavigate={handlePageChange} />
         <ScrollToTopButton />
         <WhatsAppWidget />
+        <WelcomeVideoWidget />
       </div>
     </>
   );

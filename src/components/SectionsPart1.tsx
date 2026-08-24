@@ -12,6 +12,23 @@ import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (
   <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
+    {/* Geometric Woven Background Pattern */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div 
+        className="absolute inset-[-10%] bg-text-primary opacity-[0.06] dark:opacity-[0.06]"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E")`,
+          maskSize: '56px 100px',
+          WebkitMaskSize: '56px 100px',
+          maskRepeat: 'repeat',
+          WebkitMaskRepeat: 'repeat',
+        }}
+      />
+      {/* Soft gradient fade at the bottom so it transitions smoothly into the next section */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-primary" />
+    </div>
+
     <RealTimeCursors />
     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-10 items-center relative z-10">
       <motion.div
