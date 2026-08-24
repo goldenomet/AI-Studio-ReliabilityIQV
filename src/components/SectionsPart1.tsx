@@ -12,21 +12,56 @@ import newImage1778001962382 from '@/src/assets/images/regenerated_image_1778001
 export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void }) => {
   return (
   <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
-    {/* Geometric Woven Background Pattern */}
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    {/* Geometric Line Pattern on Four Sides */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block z-0">
+      {/* Top Border */}
       <div 
-        className="absolute inset-[-10%] bg-text-primary opacity-[0.06] dark:opacity-[0.06]"
+        className="absolute top-0 left-0 right-0 h-5 bg-text-primary opacity-25"
         style={{
-          maskImage: `url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E")`,
-          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='black' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E")`,
-          maskSize: '56px 100px',
-          WebkitMaskSize: '56px 100px',
-          maskRepeat: 'repeat',
-          WebkitMaskRepeat: 'repeat',
+          maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '40px 20px',
+          WebkitMaskSize: '40px 20px',
+          maskRepeat: 'repeat-x',
+          WebkitMaskRepeat: 'repeat-x',
         }}
       />
-      {/* Soft gradient fade at the bottom so it transitions smoothly into the next section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-primary" />
+      {/* Bottom Border */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 H 10 V 2 H 28 V 18 H 18 V 10 H 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '40px 20px',
+          WebkitMaskSize: '40px 20px',
+          maskRepeat: 'repeat-x',
+          WebkitMaskRepeat: 'repeat-x',
+        }}
+      />
+      {/* Left Border */}
+      <div 
+        className="absolute top-0 bottom-0 left-0 w-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 40px',
+          WebkitMaskSize: '20px 40px',
+          maskRepeat: 'repeat-y',
+          WebkitMaskRepeat: 'repeat-y',
+        }}
+      />
+      {/* Right Border */}
+      <div 
+        className="absolute top-0 bottom-0 right-0 w-5 bg-text-primary opacity-25"
+        style={{
+          maskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 10 0 V 10 H 2 V 28 H 18 V 18 H 10 V 40' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")`,
+          maskSize: '20px 40px',
+          WebkitMaskSize: '20px 40px',
+          maskRepeat: 'repeat-y',
+          WebkitMaskRepeat: 'repeat-y',
+        }}
+      />
     </div>
 
     <RealTimeCursors />

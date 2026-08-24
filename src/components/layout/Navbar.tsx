@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
-import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User, ArrowRight } from 'lucide-react';
+import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import { MagneticGlowButton } from '../MagneticGlowButton';
 import logo from '@/src/assets/images/logo.png';
+import { ambientSynth } from '../../lib/audio';
 
 export const Navbar = ({ 
   currentPage, 
@@ -18,6 +19,18 @@ export const Navbar = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+  const toggleAudio = async () => {
+    await ambientSynth.playClickSound();
+    if (isAudioPlaying) {
+      ambientSynth.stop();
+      setIsAudioPlaying(false);
+    } else {
+      await ambientSynth.start();
+      setIsAudioPlaying(true);
+    }
+  };
 
   const [scrollProgress, setScrollProgress] = useState(0);
   const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
@@ -118,13 +131,22 @@ export const Navbar = ({
               >
                 <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
               </button>
-              <button
-                onClick={toggleTheme}
-                className="ml-[10px] bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary"
-                aria-label="Toggle theme"
-              >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
+              <div className="ml-[10px] flex items-center gap-1.5">
+                <button
+                  onClick={toggleAudio}
+                  className="bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary"
+                  title="Toggle Ambient Audio"
+                >
+                  {isAudioPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+                <button
+                  onClick={toggleTheme}
+                  className="bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                </button>
+              </div>
             </div>
 
             {navItems.slice(3).map((item) => {
@@ -189,6 +211,10 @@ export const Navbar = ({
                  <button onClick={toggleTheme} className="w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10">
                     {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
                  </button>
+
+                 <button onClick={toggleAudio} className="w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10">
+                    {isAudioPlaying ? <Volume2 size={18} strokeWidth={1.5} /> : <VolumeX size={18} strokeWidth={1.5} />}
+                 </button>
                  
                  <div className="h-10 px-4 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center text-sm font-medium font-sans border border-border-primary text-text-primary/90">
                     {scrollProgress}%
@@ -239,6 +265,9 @@ export const Navbar = ({
                      </button>
                      
                      <div className="flex items-center gap-1">
+                       <button onClick={toggleAudio} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
+                          {isAudioPlaying ? <Volume2 size={16} strokeWidth={1.5} /> : <VolumeX size={16} strokeWidth={1.5} />}
+                       </button>
                        <button onClick={toggleTheme} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
                           {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
                        </button>
