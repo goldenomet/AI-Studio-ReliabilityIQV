@@ -174,17 +174,128 @@
     border-radius: 50%;
   }
   .sp-box {
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     z-index: 1; /* Under the text panels */
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cpath fill='%2370ca6a' fill-opacity='0.1' d='M656.5 259.5c41.5 54.5 59 133 39 203-20 70-77.5 131.5-144.5 160-67 28.5-143.5 24-210.5-8.5-67-32.5-124.5-93-138.5-164.5C188 378 217.5 295.5 277 241c59.5-54.5 149-81 228.5-69 79.5 12 109.5 33 151 87.5z'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    transition: filter 0.5s ease;
+    transition: filter 0.5s ease, opacity 0.5s ease;
+  }
+
+  /* Liquid 3D Orb Texture & Dynamics */
+  .liquid-3d-orb {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 46% 54% 58% 42% / 44% 48% 52% 56%;
+    background: radial-gradient(circle at 35% 28%, #86efac 0%, #34d399 16%, #10b981 32%, #0d838e 56%, #064e5b 80%, #022b31 100%);
+    box-shadow: 
+      0 30px 80px rgba(13, 131, 142, 0.45),
+      0 0 120px rgba(52, 211, 153, 0.35),
+      inset 14px 16px 32px rgba(255, 255, 255, 0.7),
+      inset -18px -24px 45px rgba(2, 35, 40, 0.85),
+      inset 0 0 50px rgba(110, 231, 183, 0.5);
+    animation: liquidMorph 12s ease-in-out infinite alternate, liquidPulse 7s ease-in-out infinite alternate;
+    will-change: border-radius, transform;
+    overflow: hidden;
+  }
+
+  .dark .liquid-3d-orb {
+    background: radial-gradient(circle at 35% 28%, #a7f3d0 0%, #34d399 18%, #10b981 34%, #0d838e 58%, #043e49 82%, #011d22 100%);
+    box-shadow: 
+      0 35px 95px rgba(13, 131, 142, 0.6),
+      0 0 140px rgba(52, 211, 153, 0.45),
+      inset 14px 16px 32px rgba(255, 255, 255, 0.75),
+      inset -20px -26px 50px rgba(1, 18, 22, 0.95),
+      inset 0 0 60px rgba(110, 231, 183, 0.55);
+  }
+
+  .liquid-3d-highlight {
+    position: absolute;
+    top: 10%;
+    left: 14%;
+    width: 48%;
+    height: 38%;
+    border-radius: 50%;
+    transform: rotate(-25deg);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 38%, transparent 70%);
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .liquid-3d-glint {
+    position: absolute;
+    top: 16%;
+    left: 22%;
+    width: 14%;
+    height: 9%;
+    border-radius: 50%;
+    background: #ffffff;
+    filter: drop-shadow(0 0 10px #ffffff);
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  .liquid-3d-swirl {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    background: 
+      radial-gradient(circle at 68% 70%, rgba(20, 184, 166, 0.6) 0%, transparent 60%),
+      conic-gradient(from 0deg at 50% 50%, rgba(255, 255, 255, 0.3) 0deg, transparent 70deg, rgba(52, 211, 153, 0.5) 180deg, transparent 280deg, rgba(255, 255, 255, 0.3) 360deg);
+    mix-blend-mode: overlay;
+    animation: liquidSwirl 20s linear infinite;
     opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .liquid-3d-rim {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 
+      inset -12px -12px 28px rgba(110, 231, 183, 0.6),
+      inset 3px 3px 8px rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+  }
+
+  @keyframes liquidMorph {
+    0% {
+      border-radius: 46% 54% 58% 42% / 44% 48% 52% 56%;
+      transform: rotate(0deg) scale(1);
+    }
+    33% {
+      border-radius: 56% 44% 42% 58% / 54% 60% 40% 46%;
+      transform: rotate(120deg) scale(1.03);
+    }
+    66% {
+      border-radius: 38% 62% 52% 48% / 60% 40% 60% 40%;
+      transform: rotate(240deg) scale(0.97);
+    }
+    100% {
+      border-radius: 52% 48% 40% 60% / 42% 54% 46% 58%;
+      transform: rotate(360deg) scale(1);
+    }
+  }
+
+  @keyframes liquidPulse {
+    0% {
+      filter: brightness(1) contrast(1);
+    }
+    50% {
+      filter: brightness(1.08) contrast(1.05);
+    }
+    100% {
+      filter: brightness(0.96) contrast(0.98);
+    }
+  }
+
+  @keyframes liquidSwirl {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   .sp-final { height: 35vh; }
 

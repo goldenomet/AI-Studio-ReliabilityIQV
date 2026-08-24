@@ -94,11 +94,19 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
       <div className="sp-main">
         {/* Intro */}
         <div className="sp-container sp-initial !border-none !bg-transparent text-center !w-auto !h-auto max-w-2xl">
-          <div className="space-y-4">
+          <div className="space-y-4 relative z-20">
             <h2 className="text-4xl md:text-6xl font-bold text-text-primary tracking-tighter uppercase italic transition-colors duration-500">Why Choose Us?</h2>
             <p className="text-text-secondary text-sm md:text-base leading-relaxed transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
-          <div className="sp-box absolute -bottom-24 left-1/2 -translate-x-1/2" />
+          <div className="sp-box absolute -bottom-24 left-1/2 -translate-x-1/2 pointer-events-none">
+            {/* Liquid 3D Orb Structure */}
+            <div className="liquid-3d-orb">
+              <div className="liquid-3d-highlight" />
+              <div className="liquid-3d-glint" />
+              <div className="liquid-3d-swirl" />
+              <div className="liquid-3d-rim" />
+            </div>
+          </div>
         </div>
 
         {/* 1. Expert Team */}
