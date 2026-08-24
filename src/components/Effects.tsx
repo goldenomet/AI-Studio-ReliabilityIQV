@@ -187,60 +187,71 @@ export const PixelSnow = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
 
     const resize = () => {
+      if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       initParticles();
     };
 
     const initParticles = () => {
-      const particleCount = Math.floor((canvas.width * canvas.height) / 5000); // More particles
+      if (!canvas) return;
+      // Cap particle count for silky 60fps performance
+      const particleCount = Math.min(45, Math.floor((canvas.width * canvas.height) / 16000));
       particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.floor(Math.random() * 3) + 1, // Slightly larger
-        speed: Math.random() * 0.8 + 0.3,
-        opacity: Math.random() * 0.6 + 0.2,
+        size: Math.floor(Math.random() * 2) + 1.5,
+        speed: Math.random() * 0.6 + 0.25,
+        opacity: Math.random() * 0.4 + 0.15,
       }));
     };
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Use css variable for fill style if possible, or hardcode a consistent accent
-      ctx.fillStyle = '#0D838E'; 
+    let isVisible = true;
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
 
-      particles.forEach((p) => {
-        ctx.globalAlpha = p.opacity;
-        // Draw squares instead of blurred points for 'pixel' look
-        ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
-        
-        p.y += p.speed;
-        if (p.y > canvas.height) {
-          p.y = -p.size;
-          p.x = Math.random() * canvas.width;
+    const draw = () => {
+      if (isVisible && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0D838E'; 
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          ctx.globalAlpha = p.opacity;
+          ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
+          
+          p.y += p.speed;
+          if (p.y > canvas.height) {
+            p.y = -p.size;
+            p.x = Math.random() * canvas.width;
+          }
         }
-      });
+      }
 
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
     resize();
     draw();
 
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-80 z-0" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-70 z-0 transform-gpu" />;
 };
 
 export const RealTimeCursors = () => {
@@ -248,75 +259,51 @@ export const RealTimeCursors = () => {
 
   useEffect(() => {
     const cursorNames = ['SRE_Lead', 'DevOps_Pro', 'Sys_Architect', 'Operations_AI', 'Infrastructure_Lead'];
-    // Brand colors with lower alpha for blending
     const colors = [
-      'rgba(13, 131, 142, 0.6)', 
-      'rgba(245, 158, 11, 0.6)', 
-      'rgba(16, 185, 129, 0.6)', 
-      'rgba(99, 102, 241, 0.6)',
-      'rgba(236, 72, 153, 0.6)'
+      'rgba(13, 131, 142, 0.7)', 
+      'rgba(245, 158, 11, 0.7)', 
+      'rgba(16, 185, 129, 0.7)', 
+      'rgba(99, 102, 241, 0.7)',
+      'rgba(236, 72, 153, 0.7)'
     ];
     
-    // Key target zones in the hero section (percentage based)
     const targets = [
-      { x: 15, y: 15 }, // Menu area
-      { x: 25, y: 30 }, // Title text
-      { x: 20, y: 70 }, // Buttons area
-      { x: 75, y: 50 }, // Main image/card
-      { x: 80, y: 20 }, // Top right
+      { x: 18, y: 22 },
+      { x: 28, y: 35 },
+      { x: 22, y: 68 },
+      { x: 72, y: 48 },
+      { x: 78, y: 24 },
     ];
 
     const initialOthers = Array.from({ length: 5 }, (_, i) => {
-      const isHeroSticky = i === 4; // Fifth cursor is sticky
+      const isHeroSticky = i === 4;
+      const target = isHeroSticky ? targets[3] : targets[i % targets.length];
       return {
         id: i,
         name: cursorNames[i],
         color: colors[i],
-        x: isHeroSticky ? 75 : Math.random() * 100,
-        y: isHeroSticky ? 50 : Math.random() * 100,
-        targetX: isHeroSticky ? 75 : targets[Math.floor(Math.random() * targets.length)].x,
-        targetY: isHeroSticky ? 50 : targets[Math.floor(Math.random() * targets.length)].y,
-        speed: 0.02 + Math.random() * 0.05,
-        isHeroSticky,
-        pulseCounter: 0
+        x: target.x + (Math.random() * 8 - 4),
+        y: target.y + (Math.random() * 8 - 4),
+        duration: 3.5 + Math.random() * 2,
       };
     });
     
     setOthers(initialOthers);
 
+    // Update targets at low frequency so CSS/Framer motion interpolates smoothly with 0 CPU strain
     const interval = setInterval(() => {
-      setOthers(prev => prev.map(cursor => {
-        const dx = cursor.targetX - cursor.x;
-        const dy = cursor.targetY - cursor.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        let nx = cursor.x;
-        let ny = cursor.y;
-        let tx = cursor.targetX;
-        let ty = cursor.targetY;
-        let pulse = cursor.pulseCounter;
-
-        if (dist < 2) {
-          pulse++;
-          // Choose a new logical target
-          if (cursor.isHeroSticky) {
-            // Stay specifically around the hero image area (Target 3)
-            const heroTarget = targets[3];
-            tx = heroTarget.x + (Math.random() * 15 - 7.5);
-            ty = heroTarget.y + (Math.random() * 15 - 7.5);
-          } else {
-            const nextTarget = targets[Math.floor(Math.random() * targets.length)];
-            tx = nextTarget.x + (Math.random() * 10 - 5);
-            ty = nextTarget.y + (Math.random() * 10 - 5);
-          }
-        } else {
-          nx += dx * cursor.speed;
-          ny += dy * cursor.speed;
-        }
-
-        return { ...cursor, x: nx, y: ny, targetX: tx, targetY: ty, pulseCounter: pulse };
+      if (document.hidden) return;
+      setOthers(prev => prev.map((cursor, i) => {
+        const isSticky = i === 4;
+        const target = isSticky ? targets[3] : targets[Math.floor(Math.random() * targets.length)];
+        return {
+          ...cursor,
+          x: Math.max(10, Math.min(88, target.x + (Math.random() * 12 - 6))),
+          y: Math.max(10, Math.min(85, target.y + (Math.random() * 12 - 6))),
+          duration: 3 + Math.random() * 2,
+        };
       }));
-    }, 50);
+    }, 3200);
 
     return () => clearInterval(interval);
   }, []);
@@ -326,25 +313,19 @@ export const RealTimeCursors = () => {
       {others.map((cursor) => (
         <motion.div
           key={cursor.id}
-          className="absolute"
+          className="absolute transform-gpu will-change-transform"
           animate={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
-          transition={{ type: "spring", damping: 30, stiffness: 80 }}
+          transition={{ duration: cursor.duration, ease: "easeInOut" }}
           style={{ x: '-50%', y: '-50%' }}
         >
-          <motion.div
-            key={cursor.pulseCounter}
-            initial={{ scale: 0.8, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="flex items-center gap-1"
-          >
+          <div className="flex items-center gap-1.5">
             <svg
-              width="22"
-              height="22"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-lg"
+              className="drop-shadow-md shrink-0"
             >
               <path
                 d="M3 3L11.5 21L14.5 14L21.5 11L3 3Z"
@@ -355,15 +336,15 @@ export const RealTimeCursors = () => {
               />
             </svg>
             <div 
-              className="px-3 py-1 rounded-full text-[11px] font-mono font-bold text-text-primary shadow-xl backdrop-blur-md border border-border-primary"
+              className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-text-primary shadow-lg backdrop-blur-md border border-border-primary whitespace-nowrap"
               style={{ 
-                backgroundColor: cursor.color.replace('0.6', '0.1'), 
-                boxShadow: `0 0 15px ${cursor.color}` 
+                backgroundColor: cursor.color.replace('0.7', '0.12'), 
+                boxShadow: `0 0 10px ${cursor.color}` 
               }}
             >
               {cursor.name}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       ))}
     </div>
