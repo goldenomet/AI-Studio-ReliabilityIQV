@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
-import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User, ArrowRight, Volume2, VolumeX } from 'lucide-react';
+import { Menu, X, Home, Info, Cpu, Star, Mail, Sun, Moon, User, ArrowRight, Volume2, VolumeX, SkipForward, Music } from 'lucide-react';
 import { MagneticGlowButton } from '../MagneticGlowButton';
 import logo from '@/src/assets/images/logo.png';
 import { ambientSynth } from '../../lib/audio';
+import { useBackgroundMusic } from '../../hooks/useBackgroundMusic';
 
 export const Navbar = ({ 
   currentPage, 
@@ -19,17 +20,13 @@ export const Navbar = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [showMusicInfo, setShowMusicInfo] = useState(false);
+
+  const { isPlaying: isAudioPlaying, currentTrack, toggle: toggleBgAudio, playNext } = useBackgroundMusic();
 
   const toggleAudio = async () => {
     await ambientSynth.playClickSound();
-    if (isAudioPlaying) {
-      ambientSynth.stop();
-      setIsAudioPlaying(false);
-    } else {
-      await ambientSynth.start();
-      setIsAudioPlaying(true);
-    }
+    toggleBgAudio();
   };
 
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -131,14 +128,60 @@ export const Navbar = ({
               >
                 <img src={logo} alt="logo" referrerPolicy="no-referrer" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" />
               </button>
-              <div className="ml-[10px] flex items-center gap-1.5">
-                <button
-                  onClick={toggleAudio}
-                  className="bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary"
-                  title="Toggle Ambient Audio"
+              <div className="ml-[10px] flex items-center gap-1.5 relative">
+                <div 
+                  className="relative flex items-center"
+                  onMouseEnter={() => setShowMusicInfo(true)}
+                  onMouseLeave={() => setShowMusicInfo(false)}
                 >
-                  {isAudioPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
-                </button>
+                  <button
+                    onClick={toggleAudio}
+                    className={`bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary ${
+                      isAudioPlaying ? 'text-accent border-accent/40 shadow-[0_0_12px_rgba(var(--color-accent),0.3)]' : ''
+                    }`}
+                    title={isAudioPlaying ? `Playing: ${currentTrack?.title || 'Background Music'}` : "Play Background Music"}
+                  >
+                    {isAudioPlaying ? (
+                      <div className="flex items-end justify-center gap-[2px] h-3.5 w-3.5">
+                        <span className="w-[2.5px] bg-accent rounded-full animate-[bounce_0.8s_infinite_ease-in-out]" style={{ height: '70%' }} />
+                        <span className="w-[2.5px] bg-accent rounded-full animate-[bounce_0.6s_infinite_ease-in-out_0.2s]" style={{ height: '100%' }} />
+                        <span className="w-[2.5px] bg-accent rounded-full animate-[bounce_0.9s_infinite_ease-in-out_0.4s]" style={{ height: '50%' }} />
+                      </div>
+                    ) : (
+                      <VolumeX size={18} />
+                    )}
+                  </button>
+
+                  {/* Now Playing Tooltip Popover */}
+                  <AnimatePresence>
+                    {showMusicInfo && isAudioPlaying && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-2 bg-bg-card/95 backdrop-blur-xl border border-border-primary rounded-xl shadow-xl flex items-center gap-2.5 whitespace-nowrap z-50 pointer-events-auto text-xs"
+                      >
+                        <Music size={13} className="text-accent shrink-0 animate-pulse" />
+                        <div className="flex flex-col">
+                          <span className="text-[10px] text-text-secondary uppercase font-mono tracking-wider">Now Playing</span>
+                          <span className="font-medium text-text-primary max-w-[130px] truncate">{currentTrack?.title}</span>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            playNext();
+                          }}
+                          className="p-1 hover:bg-white/10 rounded-full text-text-secondary hover:text-text-primary transition-colors ml-1"
+                          title="Next Track"
+                        >
+                          <SkipForward size={14} />
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <button
                   onClick={toggleTheme}
                   className="bg-bg-card/20 hover:bg-bg-card/40 p-2 rounded-full transition-all active:scale-90 h-8 lg:h-10 w-8 lg:w-10 flex items-center justify-center border border-border-primary text-text-primary"
@@ -212,8 +255,16 @@ export const Navbar = ({
                     {theme === 'light' ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
                  </button>
 
-                 <button onClick={toggleAudio} className="w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10">
-                    {isAudioPlaying ? <Volume2 size={18} strokeWidth={1.5} /> : <VolumeX size={18} strokeWidth={1.5} />}
+                 <button onClick={toggleAudio} className={`w-10 h-10 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center border border-border-primary transition-colors text-text-primary hover:bg-text-primary/10 ${isAudioPlaying ? 'text-accent border-accent/40 shadow-[0_0_10px_rgba(var(--color-accent),0.3)]' : ''}`}>
+                    {isAudioPlaying ? (
+                      <div className="flex items-end justify-center gap-[2px] h-3.5 w-3.5">
+                        <span className="w-[2px] bg-accent rounded-full animate-[bounce_0.8s_infinite_ease-in-out]" style={{ height: '70%' }} />
+                        <span className="w-[2px] bg-accent rounded-full animate-[bounce_0.6s_infinite_ease-in-out_0.2s]" style={{ height: '100%' }} />
+                        <span className="w-[2px] bg-accent rounded-full animate-[bounce_0.9s_infinite_ease-in-out_0.4s]" style={{ height: '50%' }} />
+                      </div>
+                    ) : (
+                      <VolumeX size={18} strokeWidth={1.5} />
+                    )}
                  </button>
                  
                  <div className="h-10 px-4 shrink-0 bg-text-primary/5 rounded-full flex items-center justify-center text-sm font-medium font-sans border border-border-primary text-text-primary/90">
@@ -265,8 +316,16 @@ export const Navbar = ({
                      </button>
                      
                      <div className="flex items-center gap-1">
-                       <button onClick={toggleAudio} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
-                          {isAudioPlaying ? <Volume2 size={16} strokeWidth={1.5} /> : <VolumeX size={16} strokeWidth={1.5} />}
+                       <button onClick={toggleAudio} className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors ${isAudioPlaying ? 'text-accent border-accent/40 shadow-[0_0_8px_rgba(var(--color-accent),0.3)]' : ''}`}>
+                          {isAudioPlaying ? (
+                            <div className="flex items-end justify-center gap-[1.5px] h-3 w-3">
+                              <span className="w-[1.5px] bg-accent rounded-full animate-[bounce_0.8s_infinite_ease-in-out]" style={{ height: '70%' }} />
+                              <span className="w-[1.5px] bg-accent rounded-full animate-[bounce_0.6s_infinite_ease-in-out_0.2s]" style={{ height: '100%' }} />
+                              <span className="w-[1.5px] bg-accent rounded-full animate-[bounce_0.9s_infinite_ease-in-out_0.4s]" style={{ height: '50%' }} />
+                            </div>
+                          ) : (
+                            <VolumeX size={16} strokeWidth={1.5} />
+                          )}
                        </button>
                        <button onClick={toggleTheme} className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center border border-border-primary bg-text-primary/5 hover:bg-text-primary/10 text-text-primary transition-colors">
                           {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}

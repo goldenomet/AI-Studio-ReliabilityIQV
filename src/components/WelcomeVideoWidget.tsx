@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Pause, X, Volume2, VolumeX } from 'lucide-react';
+import { bgMusic } from '../lib/backgroundMusic';
 
 export const WelcomeVideoWidget = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -45,6 +46,7 @@ export const WelcomeVideoWidget = () => {
     if (isMinimized) {
       setIsMinimized(false);
       if (videoRef.current) {
+        bgMusic.pause();
         videoRef.current.currentTime = 0;
         videoRef.current.play();
         setIsPlaying(true);
@@ -57,6 +59,7 @@ export const WelcomeVideoWidget = () => {
         videoRef.current.pause();
         setIsPlaying(false);
       } else {
+        bgMusic.pause();
         if (videoRef.current.ended) {
           videoRef.current.currentTime = 0;
         }
@@ -77,11 +80,18 @@ export const WelcomeVideoWidget = () => {
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsOpen(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    // Start background music loop if not already playing
+    bgMusic.play();
   };
 
   const handleVideoEnded = () => {
     setIsPlaying(false);
     setIsMinimized(true);
+    // Start continuous looping playlist of the 4 background songs
+    bgMusic.play();
   };
 
   if (!isOpen) return null;
