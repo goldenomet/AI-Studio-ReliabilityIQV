@@ -15,15 +15,25 @@ export const WelcomeVideoWidget = () => {
     
     if (isMinimized) {
       setIsMinimized(false);
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+      return;
     }
     
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
+        setIsPlaying(false);
       } else {
+        if (videoRef.current.ended) {
+          videoRef.current.currentTime = 0;
+        }
         videoRef.current.play();
+        setIsPlaying(true);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -56,11 +66,17 @@ export const WelcomeVideoWidget = () => {
       className={`fixed top-24 lg:top-24 right-4 lg:right-6 z-50 pointer-events-auto ${isMinimized ? 'cursor-pointer hover:opacity-100' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={(e) => {
-        if (isMinimized) togglePlay(e);
-      }}
     >
-      <div className="relative w-40 h-56 md:w-48 md:h-64 lg:w-56 lg:h-72 mix-blend-multiply dark:mix-blend-screen [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] cursor-pointer" onClick={toggleMute}>
+      <div 
+        className="relative w-40 h-56 md:w-48 md:h-64 lg:w-56 lg:h-72 mix-blend-multiply dark:mix-blend-screen [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] cursor-pointer" 
+        onClick={(e) => {
+          if (isMinimized) {
+            togglePlay(e);
+          } else {
+            toggleMute(e);
+          }
+        }}
+      >
         <video
           ref={videoRef}
           src="/intro-video.mp4"

@@ -13,7 +13,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
   return (
   <section className="pt-[110px] pb-20 md:pt-32 md:pb-32 px-6 relative overflow-hidden bg-bg-primary text-text-primary transition-colors duration-500">
     {/* Geometric Line Pattern on Four Sides */}
-    <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block z-0">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
       {/* Top Border */}
       <div 
         className="absolute top-0 left-0 right-0 h-5 bg-text-primary opacity-25"
