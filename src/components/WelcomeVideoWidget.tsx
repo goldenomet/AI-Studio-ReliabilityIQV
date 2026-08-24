@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { X, Minimize2, ExternalLink, Youtube } from 'lucide-react';
+import { X, Minimize2, ExternalLink, Youtube, Volume2, VolumeX } from 'lucide-react';
 import { bgMusic } from '../lib/backgroundMusic';
 
 export const WelcomeVideoWidget = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const YOUTUBE_SHORT_ID = "6W0wKw3zz6w";
   const YOUTUBE_URL = `https://youtube.com/shorts/${YOUTUBE_SHORT_ID}?si=Qfu9R35C7ozK7vQh`;
-  const EMBED_URL = `https://www.youtube-nocookie.com/embed/${YOUTUBE_SHORT_ID}?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=${YOUTUBE_SHORT_ID}&modestbranding=1`;
+  const EMBED_URL = `https://www.youtube-nocookie.com/embed/${YOUTUBE_SHORT_ID}?autoplay=1&mute=${isMuted ? 1 : 0}&playsinline=1&controls=1&rel=0&loop=1&playlist=${YOUTUBE_SHORT_ID}&modestbranding=1`;
+
+  const handleToggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextMuteState = !isMuted;
+    setIsMuted(nextMuteState);
+    if (!nextMuteState) {
+      // Pause background music if unmuting video
+      bgMusic.pause();
+    }
+  };
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -74,6 +85,18 @@ export const WelcomeVideoWidget = () => {
               <p className="truncate font-semibold tracking-tight text-white/90">Intro Video</p>
             </div>
             <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={handleToggleMute}
+                className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono transition-colors ${
+                  isMuted ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30' : 'bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30'
+                }`}
+                title={isMuted ? "Unmute Audio" : "Mute Audio"}
+                aria-label={isMuted ? "Unmute Audio" : "Mute Audio"}
+              >
+                {isMuted ? <VolumeX size={12} /> : <Volume2 size={12} />}
+                <span>{isMuted ? "Muted" : "Audio On"}</span>
+              </button>
               <a
                 href={YOUTUBE_URL}
                 target="_blank"
@@ -112,6 +135,31 @@ export const WelcomeVideoWidget = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
+
+            {/* Floating Audio Control Overlay Button */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
+              <button
+                type="button"
+                onClick={handleToggleMute}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold shadow-xl backdrop-blur-md transition-all active:scale-95 ${
+                  isMuted 
+                    ? 'bg-black/80 hover:bg-black text-amber-300 border-amber-500/40 hover:border-amber-400' 
+                    : 'bg-black/80 hover:bg-black text-emerald-300 border-emerald-500/40 hover:border-emerald-400'
+                }`}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX size={14} className="text-amber-400 animate-pulse" />
+                    <span>Tap to Unmute</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 size={14} className="text-emerald-400" />
+                    <span>Sound Active</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </motion.div>
       )}
