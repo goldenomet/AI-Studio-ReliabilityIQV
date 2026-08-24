@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface Founder {
@@ -15,6 +15,14 @@ const FounderToggle: React.FC<FounderToggleProps> = ({ founders }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  useEffect(() => {
+    if (isHovered || founders.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % founders.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, [isHovered, founders.length]);
+
   const handleStackClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % founders.length);
@@ -25,11 +33,11 @@ const FounderToggle: React.FC<FounderToggleProps> = ({ founders }) => {
 
   return (
     <span 
-      className="inline-block relative z-20 align-middle w-[140px] h-[90px] md:w-[200px] md:h-[130px] mx-2 cursor-pointer group transition-transform duration-300 ease-out hover:scale-[1.03]"
+      className="inline-block relative z-20 align-middle w-[105px] h-[130px] md:w-[145px] md:h-[180px] mx-2 cursor-pointer group transition-transform duration-300 ease-out hover:scale-[1.03]"
       onClick={handleStackClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      title="Click to see more of us"
+      title="Click or hover to pause carousel"
     >
       <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[calc(100%+20px)] md:-translate-y-[calc(100%+32px)] z-50 pointer-events-none">
         <AnimatePresence mode="wait">
@@ -83,7 +91,7 @@ const FounderToggle: React.FC<FounderToggleProps> = ({ founders }) => {
               scale: scale, 
               zIndex: zIndex 
             }}
-            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            transition={{ type: "spring", stiffness: 350, damping: 26 }}
             className={`absolute inset-0 rounded-2xl ring-2 transition-shadow duration-300 ${
               isFront 
                 ? "bg-bg-card ring-accent/20 shadow-2xl shadow-black/10 group-hover:shadow-black/20" 
@@ -92,7 +100,7 @@ const FounderToggle: React.FC<FounderToggleProps> = ({ founders }) => {
           >
             <img 
               src={founder.image} 
-              className={`w-full h-full object-cover transition-all duration-500 ${
+              className={`w-full h-full object-cover object-top transition-all duration-500 ${
                 !isFront ? "opacity-30 grayscale blur-[1px]" : "opacity-100"
               }`} 
               alt={founder.name} 
@@ -103,6 +111,18 @@ const FounderToggle: React.FC<FounderToggleProps> = ({ founders }) => {
           </motion.div>
         );
       })}
+
+      {/* Subtle Carousel Progress Dots */}
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-40 pointer-events-none">
+        {founders.map((_, idx) => (
+          <span
+            key={idx}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              idx === currentIndex ? "w-4 bg-accent" : "w-1.5 bg-text-secondary/30"
+            }`}
+          />
+        ))}
+      </div>
     </span>
   );
 };
