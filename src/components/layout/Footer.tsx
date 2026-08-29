@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Linkedin, Twitter, Github, Youtube, Lock } from 'lucide-react';
+import { Linkedin, Twitter, Github, Youtube, Instagram, Lock } from 'lucide-react';
 import logo from '@/src/assets/images/logo.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
@@ -39,6 +39,7 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
           </p>
           <div className="flex gap-4 items-center">
             <SocialLink href="https://youtube.com/shorts/6W0wKw3zz6w?si=Qfu9R35C7ozK7vQh" icon={Youtube} label="YouTube" />
+            <SocialLink href="https://www.instagram.com/reliabilityiqventures?igsi=MWM3NngzdmF2dmtwbA==" icon={Instagram} label="Instagram" />
             <SocialLink href="#" icon={Linkedin} label="LinkedIn" />
             <SocialLink href="#" icon={Twitter} label="Twitter" />
             <SocialLink href="#" icon={Github} label="Github" />

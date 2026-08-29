@@ -30,9 +30,9 @@ export const WhatsAppWidget = () => {
     { 
       name: 'Instagram', 
       icon: <Instagram size={22} />, 
-      href: '#',
+      href: 'https://www.instagram.com/reliabilityiqventures?igsi=MWM3NngzdmF2dmtwbA==',
       color: 'bg-linear-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888]',
-      label: 'Follow Us'
+      label: 'Follow on Instagram'
     },
     { 
       name: 'Twitter', 

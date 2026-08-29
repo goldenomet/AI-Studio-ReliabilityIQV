@@ -394,7 +394,7 @@ export const Navbar = ({
                            <span>YouTube Shorts</span>
                            <span className="text-xs bg-red-500/15 text-red-500 px-2 py-0.5 rounded-full font-medium">Channel</span>
                          </a>
-                         <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Instagram</a>
+                         <a href="https://www.instagram.com/reliabilityiqventures?igsi=MWM3NngzdmF2dmtwbA==" target="_blank" rel="noopener noreferrer" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Instagram</a>
                          <a href="#" className="text-base font-sans font-medium text-left p-2 rounded-xl transition-all duration-300 text-text-secondary hover:text-text-primary hover:bg-text-primary/5">Twitter</a>
                      </div>
                   </div>
