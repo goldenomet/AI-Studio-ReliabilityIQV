@@ -7,6 +7,7 @@ import { EngineeredServicesSection } from './components/FeatureFlipper';
 import { ServicesHero } from './components/ServicesHero';
 import { ServiceDetail } from './components/ServiceDetail';
 import { HeroSection, MissionSection } from './components/SectionsPart1';
+import { LogoBlurCarousel } from './components/LogoBlurCarousel';
 import { CompetenciesSection, NarrativeSection, ContactSection, TrendingProducts, ScrollToTopButton } from './components/SectionsPart2';
 import { Preloader } from './components/Preloader';
 import ScrollPath from './components/ScrollPath';
@@ -101,6 +102,7 @@ export default function App() {
         return (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <HeroSection onNavigate={handlePageChange} />
+            <LogoBlurCarousel />
             <MissionSection onBack={() => handlePageChange('services')} onExplore={() => handlePageChange('services')} />
             <CompetenciesSection onContact={() => handlePageChange('contact')} />
             <NarrativeSection />

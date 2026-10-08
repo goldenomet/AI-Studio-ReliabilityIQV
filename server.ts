@@ -15,15 +15,6 @@ async function startServer() {
 
   app.use(express.json());
 
-  // Setup Nodemailer transporter
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.COMPANY_EMAIL_USER,
-      pass: process.env.COMPANY_EMAIL_PASS
-    }
-  });
-
   // System instructions for the bot
   const systemInstruction = `You are the official AI assistant for ReliabilityIQ Ventures, an Enterprise IT Solutions company in Nigeria.
 Your job is to assist visitors, answer questions about our services (Web Operations, AI Automations, GIS Mapping, Technical Reports, Content & Design), and capture leads.
@@ -70,6 +61,8 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
       const contactEmail = email || 'not-provided@example.com';
       const formDetails = details || message || 'No specific details provided.';
 
+      let emailSent = false;
+
       // Store in memory for the admin preview panel
       const newLead = {
         id: Date.now().toString(),
@@ -82,8 +75,7 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
       };
       capturedLeads.push(newLead);
 
-      let gmailSent = false;
-      // If user/admin provided a Gmail OAuth Token, send directly via Gmail API!
+      // 1. Direct Gmail API dispatch if OAuth token is provided
       if (clientAuthToken) {
         try {
           const rawEmail = [
@@ -122,7 +114,7 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
           });
 
           if (gmailRes.ok) {
-            gmailSent = true;
+            emailSent = true;
           } else {
             const errJson = await gmailRes.json();
             console.error("Gmail API Error:", errJson);
@@ -132,15 +124,24 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
         }
       }
 
-      // Fallback Nodemailer if SMTP credentials are provided
-      if (!gmailSent && process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
+      // 2. Fallback Nodemailer if SMTP credentials are provided
+      if (!emailSent && process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
         try {
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.COMPANY_EMAIL_USER,
+              pass: process.env.COMPANY_EMAIL_PASS
+            }
+          });
+
           await transporter.sendMail({
             from: process.env.COMPANY_EMAIL_USER,
-            to: process.env.COMPANY_EMAIL_USER,
-            subject: `New Lead from ${contactName} via ReliabilityIQ Platform`,
-            text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\nDetails: ${formDetails}`,
+            to: 'reliabilityiqventures@gmail.com',
+            subject: `[ReliabilityIQ] New Inquiry from ${contactName}`,
+            text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\n\nDetails:\n${formDetails}`,
           });
+          emailSent = true;
         } catch (e) {
           console.warn("SMTP email dispatch failed:", e);
         }
@@ -148,8 +149,10 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
 
       res.json({ 
         success: true, 
-        message: gmailSent ? "Form submission delivered directly to Gmail!" : "Lead captured successfully!",
-        deliveredViaGmail: gmailSent 
+        emailSent,
+        message: emailSent 
+          ? "Form submission delivered directly to reliabilityiqventures@gmail.com!" 
+          : "Lead captured successfully in platform database." 
       });
     } catch (error) {
       console.error("Error capturing lead:", error);

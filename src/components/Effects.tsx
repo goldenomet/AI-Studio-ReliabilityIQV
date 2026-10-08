@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useInView, useScroll, useSpring, useTransform } from 'motion/react';
 export const TextEngine = ({ text, className }: { text: string, className?: string }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
@@ -126,55 +126,70 @@ export const SmartTypewriter = ({ texts, className }: { texts: string[], classNa
 };
 
 export const ScramblyText = ({ texts, className }: { texts: string[], className?: string }) => {
-  const [index, setIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(texts[0]);
+  const [displayText, setDisplayText] = useState(texts[0] || "");
   const chars = "!<>-_\\/[]{}—=+*^?#________";
   const frameRef = useRef<number>(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const indexRef = useRef(0);
+  const textsRef = useRef(texts);
 
   useEffect(() => {
-    const triggerScramble = () => {
-      const nextIndex = (index + 1) % texts.length;
-      const targetText = texts[nextIndex];
-      let step = 0;
-      const totalSteps = 40;
+    textsRef.current = texts;
+  }, [texts]);
 
-      const animate = () => {
-        if (step <= totalSteps) {
-          const progress = step / totalSteps;
-          const decodedCount = Math.floor(progress * targetText.length);
-          
-          const scrambled = targetText
-            .split("")
-            .map((char, i) => {
-              if (i < decodedCount) return char;
-              if (char === " ") return " ";
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join("");
-          
-          setDisplayText(scrambled);
-          step++;
-          frameRef.current = requestAnimationFrame(animate);
-        } else {
-          setDisplayText(targetText);
-          setIndex(nextIndex);
-        }
-      };
+  useEffect(() => {
+    if (!texts || texts.length === 0) return;
 
-      frameRef.current = requestAnimationFrame(animate);
+    const runScrambleCycle = () => {
+      timeoutRef.current = setTimeout(() => {
+        const currentTexts = textsRef.current;
+        if (!currentTexts || currentTexts.length <= 1) return;
+
+        const nextIndex = (indexRef.current + 1) % currentTexts.length;
+        indexRef.current = nextIndex;
+        const targetText = currentTexts[nextIndex];
+        let step = 0;
+        const totalSteps = 38;
+
+        const animate = () => {
+          if (step <= totalSteps) {
+            const progress = step / totalSteps;
+            const decodedCount = Math.floor(progress * targetText.length);
+
+            const scrambled = targetText
+              .split("")
+              .map((char, i) => {
+                if (i < decodedCount) return char;
+                if (char === " ") return " ";
+                return chars[Math.floor(Math.random() * chars.length)];
+              })
+              .join("");
+
+            setDisplayText(scrambled);
+            step++;
+            frameRef.current = requestAnimationFrame(animate);
+          } else {
+            setDisplayText(targetText);
+            runScrambleCycle();
+          }
+        };
+
+        frameRef.current = requestAnimationFrame(animate);
+      }, 4000);
     };
 
-    const timeout = setTimeout(triggerScramble, 4000);
+    runScrambleCycle();
+
     return () => {
-      clearTimeout(timeout);
-      cancelAnimationFrame(frameRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
     };
-  }, [index, texts]);
+  }, []);
 
   return (
     <div className="min-h-[120px] md:min-h-[160px] lg:min-h-[220px] mb-4 md:mb-6 flex items-center">
-      <h1 className={`${className} font-mono tracking-tighter uppercase leading-[1.05] md:leading-[0.95]`}>
-        {displayText}
+      <h1 className={`${className || ''} font-mono tracking-tighter uppercase leading-[1.05] md:leading-[0.95]`}>
+        <span className="inline-block">{displayText}</span>
       </h1>
     </div>
   );

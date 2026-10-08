@@ -1,14 +1,6 @@
 import type { Request, Response } from 'express';
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.COMPANY_EMAIL_USER,
-    pass: process.env.COMPANY_EMAIL_PASS,
-  },
-});
-
 export default async function handler(req: Request, res: Response) {
   // CORS handling for Vercel
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -35,9 +27,9 @@ export default async function handler(req: Request, res: Response) {
     const contactEmail = email || 'not-provided@example.com';
     const formDetails = details || message || 'No specific details provided.';
 
-    let gmailSent = false;
+    let emailSent = false;
 
-    // Direct Gmail API dispatch if OAuth token is provided
+    // 1. Direct Gmail API dispatch if OAuth token is provided
     if (clientAuthToken) {
       try {
         const rawEmail = [
@@ -76,7 +68,7 @@ export default async function handler(req: Request, res: Response) {
         });
 
         if (gmailRes.ok) {
-          gmailSent = true;
+          emailSent = true;
         } else {
           const errJson = await gmailRes.json();
           console.error("Vercel Gmail API Error:", errJson);
@@ -86,15 +78,24 @@ export default async function handler(req: Request, res: Response) {
       }
     }
 
-    // SMTP Fallback
-    if (!gmailSent && process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
+    // 2. SMTP Fallback using Gmail App Password if configured
+    if (!emailSent && process.env.COMPANY_EMAIL_USER && process.env.COMPANY_EMAIL_PASS) {
       try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.COMPANY_EMAIL_USER,
+            pass: process.env.COMPANY_EMAIL_PASS,
+          },
+        });
+
         await transporter.sendMail({
           from: process.env.COMPANY_EMAIL_USER,
-          to: process.env.COMPANY_EMAIL_USER,
-          subject: `New Lead from ${contactName} via ReliabilityIQ Platform`,
-          text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\nDetails: ${formDetails}`,
+          to: 'reliabilityiqventures@gmail.com',
+          subject: `[ReliabilityIQ] New Inquiry from ${contactName}`,
+          text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\n\nDetails:\n${formDetails}`,
         });
+        emailSent = true;
       } catch (e) {
         console.warn("SMTP email dispatch failed on Vercel:", e);
       }
@@ -102,8 +103,11 @@ export default async function handler(req: Request, res: Response) {
 
     return res.status(200).json({
       success: true,
-      message: gmailSent ? "Form submission delivered directly to Gmail!" : "Lead captured successfully!",
-      deliveredViaGmail: gmailSent
+      emailSent,
+      message: emailSent
+        ? "Form submission delivered directly to reliabilityiqventures@gmail.com!"
+        : "Lead captured in platform. (Configure COMPANY_EMAIL_USER & COMPANY_EMAIL_PASS for instant email notifications)",
+      deliveredViaGmail: emailSent
     });
   } catch (error) {
     console.error("Error capturing lead on Vercel:", error);
