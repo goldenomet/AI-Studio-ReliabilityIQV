@@ -43,6 +43,7 @@ const FOUNDERS = [
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [loading, setLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -166,12 +167,23 @@ export default function App() {
                   transition={{ delay: 0.8, duration: 0.8 }}
                   className="flex flex-col items-center justify-center pt-8 pb-4"
                 >
-                  <div className="text-center text-sm text-text-secondary font-medium flex items-center gap-3">
-                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
-                    <span>Scroll to explore</span>
-                    <span className="text-accent">↓</span>
-                    <span className="w-8 h-[1px] bg-text-secondary/30"></span>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => window.scrollBy({ top: window.innerHeight * 0.78, behavior: 'smooth' })}
+                    aria-label="Scroll down to explore"
+                    className="group text-center text-sm text-text-secondary hover:text-text-primary font-medium flex items-center gap-3.5 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full px-3 py-1.5"
+                  >
+                    <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-text-secondary/40 group-hover:to-accent/60 transition-colors" />
+                    <span className="tracking-tight">Scroll to explore</span>
+                    <span className="relative w-5 h-8 rounded-full border-2 border-accent/70 group-hover:border-accent flex items-start justify-center pt-1.5 transition-colors">
+                      <motion.span
+                        animate={{ y: [0, 8, 0], opacity: [1, 0.35, 1] }}
+                        transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                        className="w-1 h-2 rounded-full bg-accent"
+                      />
+                    </span>
+                    <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-text-secondary/40 group-hover:to-accent/60 transition-colors" />
+                  </button>
                 </motion.div>
               </div>
             </FlowSection>
@@ -262,7 +274,7 @@ export default function App() {
         </div>
         
         <CircleCursor />
-        <Navbar currentPage={currentPage} setCurrentPage={handlePageChange} theme={theme} toggleTheme={toggleTheme} />
+        <Navbar currentPage={currentPage} setCurrentPage={handlePageChange} theme={theme} toggleTheme={toggleTheme} onMobileMenuChange={setIsMobileMenuOpen} />
         
         <main className="flex-grow relative z-10">
           <AnimatePresence mode="wait">
@@ -274,10 +286,10 @@ export default function App() {
         </main>
 
         <Footer onNavigate={handlePageChange} />
-        <ScrollToTopButton />
-        <WhatsAppWidget />
-        <ChatbotWidget />
-        <WelcomeVideoWidget />
+        <ScrollToTopButton isMenuOpen={isMobileMenuOpen} />
+        <WhatsAppWidget isMenuOpen={isMobileMenuOpen} />
+        <ChatbotWidget isMenuOpen={isMobileMenuOpen} />
+        <WelcomeVideoWidget isMenuOpen={isMobileMenuOpen} />
       </div>
     </>
   );

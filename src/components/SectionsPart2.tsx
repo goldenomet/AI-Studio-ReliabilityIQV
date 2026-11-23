@@ -4,7 +4,7 @@ import upArrow3D from '../assets/images/up_arrow_3d_1787579872621.jpg';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
 import { 
-  ArrowRight, ChevronRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, 
+  ArrowRight, ChevronRight, MapPin, Phone, Mail, Filter, Search, Info, Star, Globe, Cpu, 
   Map as MapIcon, FileText, PenTool, Zap, ChevronDown, ChevronUp, Monitor, Wifi, Printer, 
   Mail as MailIcon, Layers, Laptop, HardDrive, UserCheck, Headphones, Video, Sparkles, 
   Server, ShoppingCart, Layout, Briefcase, Bot, Workflow, FileSpreadsheet, MailCheck, 
@@ -1260,15 +1260,20 @@ export const TrendingProducts = () => {
 
 // --- Main App ---
 
-export const ScrollToTopButton = () => {
+export const ScrollToTopButton = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) => {
   const [show, setShow] = useState(false);
+  const [progress, setProgress] = useState(0);
   const { isVisible } = useWidgetVisibility(5000);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShow(window.scrollY > 300);
+      const scrollY = window.scrollY;
+      setShow(scrollY > 300);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(docHeight > 0 ? Math.min(1, Math.max(0, scrollY / docHeight)) : 0);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -1276,19 +1281,88 @@ export const ScrollToTopButton = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const radius = 20;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference * (1 - progress);
+
   return (
     <AnimatePresence>
       {(show && isVisible) && (
         <motion.button
           key="scroll-to-top"
-          initial={{ opacity: 0, scale: 0, y: 20 }}
+          initial={{ opacity: 0, scale: 0.75, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0, y: 20 }}
+          exit={{ opacity: 0, scale: 0.75, y: 20 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-24 right-6 w-12 h-12 frosted-panel-elevated hover:bg-accent hover:text-white text-text-primary rounded-full flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer outline-none group"
+          title="Back to top"
+          className={`fixed bottom-24 right-6 w-12 h-12 frosted-panel-elevated hover:border-accent/60 text-text-primary hover:text-accent rounded-full items-center justify-center z-40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent group ${
+            isMenuOpen ? 'hidden lg:flex' : 'flex'
+          }`}
         >
-          <ArrowUp size={20} className="group-hover:-translate-y-0.5 transition-transform duration-300" />
+          {/* Live Scroll Progress Ring */}
+          <svg
+            className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+            viewBox="0 0 48 48"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="riq-scroll-ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#1d6ce0" />
+                <stop offset="100%" stopColor="#0ea5e9" />
+              </linearGradient>
+            </defs>
+            <circle
+              cx="24"
+              cy="24"
+              r={radius}
+              fill="none"
+              stroke="currentColor"
+              strokeOpacity="0.12"
+              strokeWidth="2.25"
+            />
+            <circle
+              cx="24"
+              cy="24"
+              r={radius}
+              fill="none"
+              stroke="url(#riq-scroll-ring-grad)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              className="transition-[stroke-dashoffset] duration-150 ease-out"
+            />
+          </svg>
+
+          {/* Bespoke Dual-Chevron Kinetic Ascent Icon */}
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className="relative z-10 overflow-visible"
+          >
+            <path
+              d="M7 11.5L12 6.5L17 11.5"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="group-hover:-translate-y-0.5 transition-transform duration-200"
+            />
+            <path
+              d="M8.5 17L12 13.5L15.5 17"
+              stroke="currentColor"
+              strokeOpacity="0.55"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="group-hover:-translate-y-1 group-hover:opacity-100 transition-all duration-200"
+            />
+          </svg>
         </motion.button>
       )}
     </AnimatePresence>

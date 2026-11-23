@@ -1,41 +1,71 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Markdown from 'react-markdown';
-import { Send, RotateCcw, ChevronRight, MessageSquare, ExternalLink, ArrowUpRight, CheckCircle2, Loader2, X, User } from 'lucide-react';
+import { Send, RotateCcw, ChevronRight, ArrowUpRight, CheckCircle2, Loader2, X, User, AlertCircle, Calendar } from 'lucide-react';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
+import { useMovableDock } from '../hooks/useMovableDock';
+import { SideDockGuide, MinimizeEdgeHandle, DockedSideTab } from './SideDockControls';
 import websiteLogo from '../assets/images/logo.png';
 
 import { getGmailAccessToken } from '../lib/gmail';
+
+interface CapturedLeadBadge {
+  name: string;
+  email?: string;
+  phone?: string;
+  service: string;
+  summary: string;
+}
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp?: string;
+  capturedLead?: CapturedLeadBadge | null;
+  suggestBooking?: boolean;
+  isError?: boolean;
+  retryPrompt?: string;
 }
 
-export const ChatbotWidget = () => {
+const DEFAULT_SUGGESTIONS = [
+  '99.99% Web Operations',
+  'AI Agent Automation',
+  'GIS Spatial Mapping',
+  'Request a Quote',
+];
+
+export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showGreeting, setShowGreeting] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
   const { isVisible } = useWidgetVisibility(4000);
+  const dock = useMovableDock({
+    storageKey: 'riq-dock-chatbot-widget',
+    defaultSide: 'right',
+    estimatedWidth: 56,
+    estimatedHeight: 56,
+    disabled: isOpen,
+  });
 
   const initialAssistantMessage: Message = {
     id: 'msg-init',
     role: 'assistant',
-    content: "Hello! I'm ReliabilityIQ AI, your AI Operations & Infrastructure Advisor at ReliabilityIQ Ventures.\n\nHow may I assist you with your high-availability cloud architecture, AI workflows, GIS spatial mapping, or technical infrastructure today?",
+    content: "Hello! I'm **ReliabilityIQ AI**, your Technical Operations & Solution Advisor.\n\nAsk me about our **Digital Platforms**, **AI Automations**, **GIS Mapping**, **Cloud Operations**, or **Managed IT Support**—or share your project goals and contact info right here to book a consultation.",
     timestamp: 'Just now'
   };
 
   const [messages, setMessages] = useState<Message[]>([initialAssistantMessage]);
+  const [quickSuggestions, setQuickSuggestions] = useState<string[]>(DEFAULT_SUGGESTIONS);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const [leadForm, setLeadForm] = useState({ name: '', email: '', service: '', message: '' });
+  const [leadForm, setLeadForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadError, setLeadError] = useState<string | null>(null);
 
   // Auto-collapse initial greeting card after ~7 seconds if user does not interact
   useEffect(() => {
@@ -71,8 +101,10 @@ export const ChatbotWidget = () => {
 
   const handleResetChat = () => {
     setMessages([initialAssistantMessage]);
+    setQuickSuggestions(DEFAULT_SUGGESTIONS);
     setShowLeadModal(false);
     setLeadSubmitted(false);
+    setLeadError(null);
   };
 
   const handleSend = async (textToSend?: string) => {
@@ -87,45 +119,34 @@ export const ChatbotWidget = () => {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    const updated = [...messages, userMsg];
+    const updated = [...messages.filter((m) => !m.isError), userMsg];
     setMessages(updated);
     setInput('');
     setIsLoading(true);
 
     try {
+      const token = getGmailAccessToken();
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: updated }),
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          messages: updated.map((m) => ({ role: m.role, content: m.content })),
+          gmailToken: token || undefined,
+        }),
       });
 
-      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data?.error || `Request failed (${res.status})`);
+      }
 
-      const data = await res.json();
       const reply = data.text || "Thank you for reaching out. A specialist from ReliabilityIQ Ventures will review your requirements.";
-      
-      setMessages(prev => [
-        ...prev,
-        {
-          id: `ai-${Date.now()}`,
-          role: 'assistant',
-          content: reply,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
-      ]);
-    } catch (err) {
-      console.warn('Chat API offline fallback:', err);
-      let replyText = "ReliabilityIQ Ventures delivers enterprise-grade Web Operations, AI Automations, and GIS Intelligence.";
-      const lower = text.toLowerCase();
-      if (lower.includes('uptime') || lower.includes('operation') || lower.includes('cloud')) {
-        replyText = "We architect 99.99% high-availability digital infrastructure, automated failover pipelines, and zero-downtime edge deployments.";
-      } else if (lower.includes('ai') || lower.includes('agent') || lower.includes('automation')) {
-        replyText = "Our custom AI agents automate routine enterprise tasks, parsing unstructured records and reducing operational overhead by up to 40%.";
-      } else if (lower.includes('gis') || lower.includes('map') || lower.includes('spatial')) {
-        replyText = "Our GIS suite combines satellite data, custom vector overlays, and real-time geospatial analytics for urban and industrial intelligence.";
-      } else if (lower.includes('contact') || lower.includes('quote') || lower.includes('price') || lower.includes('hire')) {
-        replyText = "You can request a direct consultation using the link below, or message us on WhatsApp for an immediate response.";
-        setTimeout(() => setShowLeadModal(true), 1000);
+
+      if (Array.isArray(data.followUpSuggestions) && data.followUpSuggestions.length > 0) {
+        setQuickSuggestions(data.followUpSuggestions);
       }
 
       setMessages(prev => [
@@ -133,7 +154,22 @@ export const ChatbotWidget = () => {
         {
           id: `ai-${Date.now()}`,
           role: 'assistant',
-          content: replyText,
+          content: reply,
+          capturedLead: data.leadCaptured ? data.capturedLead : null,
+          suggestBooking: Boolean(data.suggestBookingModal && !data.leadCaptured),
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }
+      ]);
+    } catch (err: any) {
+      setMessages(prev => [
+        ...prev,
+        {
+          id: `ai-err-${Date.now()}`,
+          role: 'assistant',
+          content: err?.message || "Unable to connect to ReliabilityIQ AI right now. You can retry or submit a consultation request directly below.",
+          isError: true,
+          retryPrompt: text,
+          suggestBooking: true,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -145,10 +181,11 @@ export const ChatbotWidget = () => {
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingLead(true);
+    setLeadError(null);
 
     try {
       const token = getGmailAccessToken();
-      await fetch('/api/lead', {
+      const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -156,51 +193,64 @@ export const ChatbotWidget = () => {
         },
         body: JSON.stringify({
           ...leadForm,
+          source: 'chat',
           gmailToken: token || undefined
         }),
       });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData?.error || 'Failed to save inquiry');
+      }
+
+      const savedSnapshot: CapturedLeadBadge = {
+        name: leadForm.name || 'Client',
+        email: leadForm.email || undefined,
+        phone: leadForm.phone || undefined,
+        service: leadForm.service || 'General Consultation',
+        summary: leadForm.message || 'Consultation requested via AI Advisor.',
+      };
 
       setIsSubmittingLead(false);
       setLeadSubmitted(true);
       setTimeout(() => {
         setShowLeadModal(false);
         setLeadSubmitted(false);
-        setLeadForm({ name: '', email: '', service: '', message: '' });
+        setLeadForm({ name: '', email: '', phone: '', service: '', message: '' });
         setMessages(prev => [
           ...prev,
           {
             id: `lead-confirm-${Date.now()}`,
             role: 'assistant',
-            content: `Thank you, ${leadForm.name || 'there'}! Your inquiry has been received. Our technical team will reach out to ${leadForm.email} within 24 hours.`,
+            content: `Thank you, **${savedSnapshot.name}**! Your inquiry has been recorded. Our engineering team will reach out to **${savedSnapshot.email || savedSnapshot.phone}** within 24 hours.`,
+            capturedLead: savedSnapshot,
             timestamp: 'Just now'
           }
         ]);
-      }, 1800);
-    } catch (err) {
-      console.warn('Lead submit err:', err);
+      }, 1200);
+    } catch (err: any) {
       setIsSubmittingLead(false);
-      setLeadSubmitted(true);
-      setTimeout(() => {
-        setShowLeadModal(false);
-        setLeadSubmitted(false);
-      }, 1800);
+      setLeadError(err?.message || 'Unable to submit request. Please try again or reach us on WhatsApp.');
     }
   };
 
   return (
     <>
+      <SideDockGuide side={dock.dockPreview} />
       <AnimatePresence>
         {/* ============================================================
             1. INITIAL AUTO-GREETING INTRO CARD (Collapses after 5-8s)
             ============================================================ */}
-        {!isOpen && showGreeting && (
+        {!isOpen && showGreeting && !dock.docked && (
           <motion.div
             key="initial-greeting-card"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 right-4 sm:right-6 w-[340px] max-w-[calc(100vw-2rem)] bg-[#f8fbff]/95 dark:bg-[#0c1d3d]/95 backdrop-blur-2xl text-text-primary border border-blue-200/80 dark:border-blue-300/25 rounded-2xl shadow-[0_18px_48px_-10px_rgba(15,37,71,0.18)] z-[60] overflow-hidden cursor-pointer group"
+            className={`fixed bottom-24 right-4 sm:right-6 w-[340px] max-w-[calc(100vw-2rem)] bg-[#f8fbff]/95 dark:bg-[#0c1d3d]/95 backdrop-blur-2xl text-text-primary border border-blue-200/80 dark:border-blue-300/25 rounded-2xl shadow-[0_18px_48px_-10px_rgba(15,37,71,0.18)] z-40 overflow-hidden cursor-pointer group ${
+              isMenuOpen ? 'hidden lg:block' : ''
+            }`}
             onClick={handleOpenChat}
           >
             {/* Top Header Bar */}
@@ -251,28 +301,75 @@ export const ChatbotWidget = () => {
         )}
 
         {/* ============================================================
-            2. FLOATING COLLAPSED LAUNCHER (With Website Logo)
+            2. FLOATING COLLAPSED LAUNCHER (Movable & Dockable)
             ============================================================ */}
         {!isOpen && isVisible && (
-          <motion.button
-            key="collapsed-launcher-btn"
-            initial={{ opacity: 0, scale: 0.8, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 15 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            onClick={handleOpenChat}
-            className="fixed bottom-6 right-6 w-14 h-14 bg-white/95 dark:bg-[#11264f]/95 backdrop-blur-xl border-2 border-accent/70 rounded-full flex items-center justify-center z-50 shadow-[0_12px_32px_-6px_rgba(29,108,224,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer p-2.5 group"
-            aria-label="Open ReliabilityIQ AI Advisor"
+          <div
+            ref={dock.containerRef}
+            key="collapsed-launcher-wrapper"
+            style={dock.positionStyle}
+            onPointerDown={dock.handlePointerDown}
+            onClickCapture={dock.handleClickCapture}
+            className={`fixed z-40 transition-opacity duration-300 ${
+              !dock.isMoved && !dock.docked ? 'bottom-6 right-6' : ''
+            } ${
+              isMenuOpen
+                ? 'hidden lg:block'
+                : dock.isDragging
+                  ? 'opacity-100'
+                  : dock.docked
+                    ? 'opacity-70 hover:opacity-100 lg:opacity-90'
+                    : 'opacity-50 hover:opacity-100 focus-within:opacity-100 lg:opacity-100'
+            }`}
           >
-            <div className="w-full h-full flex items-center justify-center p-0.5">
-              <img 
-                src={websiteLogo} 
-                alt="ReliabilityIQ" 
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform" 
+            {dock.docked ? (
+              <DockedSideTab
+                side={dock.docked}
+                label="AI Advisor"
+                accentDotClass="bg-accent"
+                icon={
+                  <span className="w-6 h-6 rounded-full bg-white border border-blue-200/80 p-0.5 flex items-center justify-center shadow-xs">
+                    <img src={websiteLogo} alt="ReliabilityIQ" className="w-full h-full object-contain" />
+                  </span>
+                }
+                onRestore={dock.restoreFromSide}
               />
-            </div>
-            <span className="absolute top-0.5 right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-[#11264f] rounded-full" />
-          </motion.button>
+            ) : (
+              <div className="relative group/dock">
+                <motion.button
+                  key="collapsed-launcher-btn"
+                  initial={{ opacity: 0, scale: 0.8, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: 15 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={handleOpenChat}
+                  title="Drag to move or snap to side"
+                  className={`relative w-14 h-14 bg-white/95 dark:bg-[#11264f]/95 backdrop-blur-xl border-2 border-accent/70 rounded-full flex items-center justify-center shadow-[0_12px_32px_-6px_rgba(29,108,224,0.35)] hover:scale-105 active:scale-95 transition-all p-2.5 group touch-none select-none ${
+                    dock.isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'
+                  }`}
+                  aria-label="Open ReliabilityIQ AI Advisor"
+                >
+                  <div className="w-full h-full flex items-center justify-center p-0.5">
+                    <img 
+                      src={websiteLogo} 
+                      alt="ReliabilityIQ" 
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform pointer-events-none" 
+                    />
+                  </div>
+                  <span className="absolute top-0.5 right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-[#11264f] rounded-full" />
+                </motion.button>
+
+                <MinimizeEdgeHandle
+                  side={dock.horizontalSide}
+                  onMinimize={dock.minimizeToSide}
+                  title="Minimize AI Advisor to side of screen"
+                  className={`absolute -top-1.5 ${
+                    dock.horizontalSide === 'left' ? '-left-1.5' : '-right-1.5'
+                  } opacity-90 lg:opacity-0 lg:group-hover/dock:opacity-100 focus:opacity-100 z-10`}
+                />
+              </div>
+            )}
+          </div>
         )}
       </AnimatePresence>
 
@@ -381,6 +478,48 @@ export const ChatbotWidget = () => {
                         </Markdown>
                       </div>
                     )}
+                    {msg.capturedLead && (
+                      <div className="mt-3 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] space-y-1">
+                        <div className="flex items-center gap-1.5 font-semibold text-emerald-700 dark:text-emerald-300">
+                          <CheckCircle2 size={13} className="shrink-0" />
+                          <span>Lead Captured &amp; Saved</span>
+                        </div>
+                        <p className="text-text-secondary leading-snug">
+                          <strong className="text-text-primary">{msg.capturedLead.name}</strong>
+                          {' · '}
+                          {msg.capturedLead.email || msg.capturedLead.phone}
+                        </p>
+                        <p className="text-text-secondary leading-snug">
+                          Stream: <span className="text-accent font-medium">{msg.capturedLead.service}</span>
+                        </p>
+                      </div>
+                    )}
+
+                    {(msg.suggestBooking || msg.isError) && (
+                      <div className="mt-2.5 flex flex-wrap items-center gap-2">
+                        {msg.isError && msg.retryPrompt && (
+                          <button
+                            type="button"
+                            onClick={() => handleSend(msg.retryPrompt)}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-400/30 text-red-600 dark:text-red-300 text-[11px] font-semibold transition-colors cursor-pointer"
+                          >
+                            <AlertCircle size={12} />
+                            <span>Retry</span>
+                          </button>
+                        )}
+                        {msg.suggestBooking && (
+                          <button
+                            type="button"
+                            onClick={() => setShowLeadModal(true)}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-accent/10 hover:bg-accent/20 border border-accent/30 text-accent text-[11px] font-semibold transition-colors cursor-pointer"
+                          >
+                            <Calendar size={12} />
+                            <span>Complete Booking Form</span>
+                          </button>
+                        )}
+                      </div>
+                    )}
+
                     {msg.timestamp && (
                       <div className={`text-[10px] mt-2 font-mono ${
                         msg.role === 'user' ? 'text-white/80 text-right' : 'text-text-secondary/75'
@@ -421,6 +560,7 @@ export const ChatbotWidget = () => {
                       <button
                         onClick={() => setShowLeadModal(false)}
                         className="text-text-secondary hover:text-text-primary p-1 cursor-pointer"
+                        aria-label="Close form"
                       >
                         <X size={14} />
                       </button>
@@ -449,23 +589,38 @@ export const ChatbotWidget = () => {
                           onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
                           className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary placeholder:text-text-secondary/60"
                         />
+                        <input
+                          type="tel"
+                          placeholder="Phone / WhatsApp (optional)"
+                          value={leadForm.phone}
+                          onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
+                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary placeholder:text-text-secondary/60"
+                        />
                         <select
                           value={leadForm.service}
                           onChange={(e) => setLeadForm({ ...leadForm, service: e.target.value })}
                           className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary"
                         >
-                          <option className="bg-white dark:bg-[#0c1f40]" value="">Select Domain Area</option>
-                          <option className="bg-white dark:bg-[#0c1f40]" value="Web Operations">Web Operations &amp; 99.99% Uptime</option>
-                          <option className="bg-white dark:bg-[#0c1f40]" value="AI Automations">AI Automations &amp; LLM Agents</option>
-                          <option className="bg-white dark:bg-[#0c1f40]" value="GIS Intelligence">GIS &amp; Geospatial Analysis</option>
-                          <option className="bg-white dark:bg-[#0c1f40]" value="Custom Infrastructure">Custom Enterprise IT Infrastructure</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="">Select Service Stream</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Digital Platforms & Web Systems">Digital Platforms &amp; Web Systems</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Web Operations & 99.99% Uptime">Web Operations &amp; 99.99% Uptime</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="AI Automations & LLM Agents">AI Automations &amp; LLM Agents</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Geospatial GIS Mapping">Geospatial GIS Mapping</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Technical Documentation">Technical Documentation</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="AI Animation & Motion Studio">AI Animation &amp; Motion Studio</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Social Media Advertising">Social Media Advertising</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Small Business IT Support">Small Business IT Support</option>
+                          <option className="bg-white dark:bg-[#0c1f40]" value="Custom Enterprise Advisory">Custom Enterprise Advisory</option>
                         </select>
                         <textarea
-                          placeholder="Briefly describe your systems or goals..."
+                          placeholder="Briefly describe your systems, timeline, or goals..."
                           value={leadForm.message}
                           onChange={(e) => setLeadForm({ ...leadForm, message: e.target.value })}
                           className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent resize-none h-16 text-text-primary placeholder:text-text-secondary/60"
                         />
+                        {leadError && (
+                          <p className="text-[11px] text-red-500 font-medium">{leadError}</p>
+                        )}
                         <button
                           type="submit"
                           disabled={isSubmittingLead}
@@ -482,26 +637,18 @@ export const ChatbotWidget = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* ----------------- QUICK SUGGESTION PILLS ----------------- */}
+            {/* ----------------- DYNAMIC QUICK SUGGESTIONS ----------------- */}
             <div className="bg-[#f8fbff]/95 dark:bg-[#0c1d3d]/95 px-3 py-2.5 border-t border-blue-200/60 dark:border-blue-300/15 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
-              <button
-                onClick={() => handleSend("Tell me about your Web Operations and 99.99% uptime services.")}
-                className="whitespace-nowrap px-3 py-1.5 bg-white dark:bg-[#142a56] hover:bg-accent/10 border border-blue-200/80 dark:border-blue-300/20 hover:border-accent text-text-primary text-[11px] font-semibold uppercase tracking-wide rounded-lg transition-colors shrink-0 cursor-pointer"
-              >
-                WEB OPERATIONS
-              </button>
-              <button
-                onClick={() => handleSend("How can AI Automations and custom agents help our workflow?")}
-                className="whitespace-nowrap px-3 py-1.5 bg-white dark:bg-[#142a56] hover:bg-accent/10 border border-blue-200/80 dark:border-blue-300/20 hover:border-accent text-text-primary text-[11px] font-semibold uppercase tracking-wide rounded-lg transition-colors shrink-0 cursor-pointer"
-              >
-                AI AUTOMATIONS
-              </button>
-              <button
-                onClick={() => handleSend("What GIS geospatial mapping capabilities do you provide?")}
-                className="whitespace-nowrap px-3 py-1.5 bg-white dark:bg-[#142a56] hover:bg-accent/10 border border-blue-200/80 dark:border-blue-300/20 hover:border-accent text-text-primary text-[11px] font-semibold uppercase tracking-wide rounded-lg transition-colors shrink-0 cursor-pointer"
-              >
-                GIS MAPPING
-              </button>
+              {quickSuggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  onClick={() => handleSend(suggestion)}
+                  disabled={isLoading}
+                  className="whitespace-nowrap px-3 py-1.5 bg-white dark:bg-[#142a56] hover:bg-accent/10 border border-blue-200/80 dark:border-blue-300/20 hover:border-accent text-text-primary text-[11px] font-semibold tracking-wide rounded-lg transition-colors shrink-0 cursor-pointer disabled:opacity-50"
+                >
+                  {suggestion}
+                </button>
+              ))}
             </div>
 
             {/* ----------------- ACTION BAR ----------------- */}

@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, X, Instagram, Twitter, Youtube, Phone } from 'lucide-react';
-import whatsappIcon3D from '../assets/images/whatsapp_icon_3d_1787579859009.jpg';
+import { MessageCircle, X, Instagram, Twitter, Youtube } from 'lucide-react';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
+import { useMovableDock } from '../hooks/useMovableDock';
+import { SideDockGuide, MinimizeEdgeHandle, DockedSideTab } from './SideDockControls';
 
-export const WhatsAppWidget = () => {
+export const WhatsAppWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isVisible } = useWidgetVisibility(5000);
+
+  const dock = useMovableDock({
+    storageKey: 'riq-dock-social-widget',
+    defaultSide: 'left',
+    estimatedWidth: 64,
+    estimatedHeight: 64,
+  });
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsOpen(false);
+    }
+  }, [isMenuOpen]);
+
+  const openUpward = (() => {
+    if (typeof window === 'undefined' || !dock.isMoved || !dock.positionStyle?.top) return true;
+    return Number(dock.positionStyle.top) > window.innerHeight * 0.45;
+  })();
 
   const socialLinks = [
     { 
@@ -44,92 +63,161 @@ export const WhatsAppWidget = () => {
   ];
 
   return (
-    <AnimatePresence>
-      {(isOpen || isVisible) && (
-        <motion.div 
-          key="wa-widget-container"
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed left-6 bottom-6 md:left-10 md:bottom-10 z-[100] flex flex-col items-start gap-4"
-        >
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                key="wa-menu"
-                initial={{ opacity: 0, x: -20, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -20, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="flex flex-col gap-4 mb-2"
+    <>
+      <SideDockGuide side={dock.dockPreview} />
+      <AnimatePresence>
+        {(isOpen || isVisible) && (
+          <motion.div
+            ref={dock.containerRef}
+            key="wa-widget-container"
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            style={dock.positionStyle}
+            onPointerDown={dock.handlePointerDown}
+            onClickCapture={dock.handleClickCapture}
+            className={`fixed z-40 ${
+              !dock.isMoved && !dock.docked
+                ? 'left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-10 lg:bottom-10'
+                : ''
+            } ${isMenuOpen ? 'hidden lg:block' : 'block'}`}
           >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -25 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 25
-                }}
-                className="group flex items-center gap-3 no-underline outline-hidden"
-              >
-                <div className={`w-12 h-12 md:w-14 md:h-14 ${link.color} text-white rounded-2xl flex items-center justify-center shadow-[0_10px_20px_-5px_rgba(0,0,0,0.3)] group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300`}>
-                  {link.icon}
-                </div>
-                <div className="bg-bg-card/90 backdrop-blur-md border border-border-primary px-4 py-2 rounded-xl text-sm font-semibold text-text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shadow-xl pointer-events-none whitespace-nowrap ring-1 ring-white/10">
-                  {link.label}
-                </div>
-              </motion.a>
-            ))}
+            <div
+              className={`relative flex flex-col items-start gap-4 transition-opacity duration-300 ${
+                isOpen || dock.isDragging
+                  ? 'opacity-100'
+                  : dock.docked
+                    ? 'opacity-70 hover:opacity-100 lg:opacity-90'
+                    : 'opacity-40 hover:opacity-100 focus-within:opacity-100 lg:opacity-100'
+              }`}
+            >
+              {dock.docked ? (
+                <DockedSideTab
+                  side={dock.docked}
+                  label="Social Menu"
+                  accentDotClass="bg-emerald-500"
+                  icon={
+                    <span className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center shadow-xs">
+                      <MessageCircle size={13} className="fill-white/20" />
+                    </span>
+                  }
+                  onRestore={dock.restoreFromSide}
+                />
+              ) : (
+                <>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        key="wa-menu"
+                        initial={{ opacity: 0, x: dock.horizontalSide === 'left' ? -16 : 16, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: dock.horizontalSide === 'left' ? -16 : 16, scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        className={`absolute ${
+                          openUpward ? 'bottom-full mb-3' : 'top-full mt-3'
+                        } ${
+                          dock.horizontalSide === 'left' ? 'left-0 items-start' : 'right-0 items-end'
+                        } flex flex-col gap-3 z-50`}
+                      >
+                        {socialLinks.map((link, index) => (
+                          <motion.a
+                            key={link.name}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-no-drag="true"
+                            initial={{ opacity: 0, x: dock.horizontalSide === 'left' ? -20 : 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
+                              delay: index * 0.08,
+                              type: "spring",
+                              stiffness: 500,
+                              damping: 25
+                            }}
+                            className={`group flex items-center gap-3 no-underline outline-hidden ${
+                              dock.horizontalSide === 'right' ? 'flex-row-reverse' : ''
+                            }`}
+                          >
+                            <div className={`w-12 h-12 md:w-14 md:h-14 ${link.color} text-white rounded-2xl flex items-center justify-center shadow-[0_10px_20px_-5px_rgba(0,0,0,0.3)] group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shrink-0`}>
+                              {link.icon}
+                            </div>
+                            <div className={`bg-bg-card/90 backdrop-blur-md border border-border-primary px-4 py-2 rounded-xl text-sm font-semibold text-text-primary opacity-0 transition-all duration-300 shadow-xl pointer-events-none whitespace-nowrap ring-1 ring-white/10 ${
+                              dock.horizontalSide === 'left'
+                                ? '-translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
+                                : 'translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
+                            }`}>
+                              {link.label}
+                            </div>
+                          </motion.a>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="relative group/dock">
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      aria-label="Toggle social menu"
+                      title="Drag to move or snap to side"
+                      className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-500 relative group outline-hidden ring-offset-2 focus:ring-2 focus:ring-accent rounded-full touch-none select-none ${
+                        dock.isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'
+                      } ${
+                        isOpen
+                          ? 'bg-bg-card/95 backdrop-blur-xl border border-white/10 text-text-primary shadow-lg'
+                          : 'bg-green-500 hover:bg-green-600 shadow-[0_8px_32px_rgba(34,197,94,0.45)] border-2 border-white/20 hover:scale-105'
+                      }`}
+                    >
+                      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+                      <AnimatePresence mode="wait">
+                        {isOpen ? (
+                          <motion.div
+                            key="close"
+                            initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                            exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <X size={28} />
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="whatsapp"
+                            initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                            exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-full h-full flex items-center justify-center"
+                          >
+                            <MessageCircle size={28} className="text-white fill-white/20 drop-shadow-md" />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {!isOpen && (
+                        <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+                      )}
+                    </button>
+
+                    {!isOpen && (
+                      <MinimizeEdgeHandle
+                        side={dock.horizontalSide}
+                        onMinimize={(e) => {
+                          setIsOpen(false);
+                          dock.minimizeToSide(e);
+                        }}
+                        title="Minimize social menu to side of screen"
+                        className={`absolute -top-1.5 ${
+                          dock.horizontalSide === 'left' ? '-left-1.5' : '-right-1.5'
+                        } opacity-90 lg:opacity-0 lg:group-hover/dock:opacity-100 focus:opacity-100 z-10`}
+                      />
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle social menu"
-            className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-500 relative group outline-hidden ring-offset-2 focus:ring-2 focus:ring-accent rounded-full ${
-              isOpen ? 'bg-bg-card/95 backdrop-blur-xl border border-white/10 text-text-primary shadow-lg' : 'bg-green-500 hover:bg-green-600 shadow-[0_8px_32px_rgba(34,197,94,0.45)] border-2 border-white/20 hover:scale-110'
-            }`}
-          >
-            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X size={28} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="whatsapp"
-                  initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  <MessageCircle size={28} className="text-white fill-white/20 drop-shadow-md" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            
-            {!isOpen && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
-            )}
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </>
   );
 };
