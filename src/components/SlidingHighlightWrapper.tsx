@@ -1,18 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import section3 from '@/src/assets/images/section3.jpg';
+import sereneGlassLayers from '@/src/assets/images/serene_glass_layers_1795460787074.jpg';
 
-export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services: any[], onAction: (s: any) => void, bgImage?: string }) => {
-  const cards = services.map(s => ({
-    category: "SERVICE",
+export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], onAction: (s: any) => void, bgImage?: string }) => {
+  const cards = services.map((s, idx) => ({
+    indexLabel: `0${idx + 1}`,
     title: s.title,
     body: s.description,
-    link: "#",
-    linkLabel: "View Details",
     originalService: s
   }));
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -25,8 +23,6 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
   const wrapRef = useRef<HTMLDivElement>(null);
   const [highlight, setHighlight] = useState<{ top: number, left: number, width: number, height: number } | null>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [arrowVisible, setArrowVisible] = useState(false);
-  const ARROW_SIZE = 64;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
     if (!wrapRef.current) return;
@@ -39,44 +35,41 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
       height: cardRect.height
     });
     setActiveIndex(index);
-    setArrowVisible(true);
   };
 
   const handleMouseLeave = () => {
     setHighlight(null);
     setActiveIndex(null);
-    setArrowVisible(false);
   };
 
   return (
     <div 
-      className="w-full relative shadow-2xl overflow-hidden mb-10 border-[1px] border-solid border-gray-300 dark:border-gray-700/60 bg-bg-card/40 backdrop-blur-md rounded-[24px]" 
+      className="w-full relative overflow-hidden mb-8 frosted-panel-elevated rounded-[28px]" 
       ref={wrapRef} 
       onMouseLeave={handleMouseLeave}
     >
-      {bgImage && (
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src={section3}
-            alt="Grid Background"
-            className="w-full h-full object-cover opacity-[0.85] mix-blend-luminosity"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-card/90 via-transparent to-bg-card/40" />
-          <div className="absolute inset-0 bg-bg-primary/40" />
-        </div>
-      )}
+      {/* Serene Subtle Frosted Backdrop */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-35 dark:opacity-15">
+        <img 
+          src={sereneGlassLayers}
+          alt="Frosted Architectural Layers"
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/75 via-white/45 to-white/65 dark:from-[#08162e]/85 dark:via-[#0b1f42]/65 dark:to-[#08162e]/85" />
+      </div>
 
+      {/* Sliding Azure Frosted Glass Highlight */}
       <div 
-        className="absolute pointer-events-none z-[1] shadow-2xl"
+        className="absolute pointer-events-none z-[1] rounded-2xl backdrop-blur-xl border border-white/40 shadow-[0_14px_34px_-8px_rgba(29,108,224,0.35)]"
         style={{
-          backgroundColor: '#1d8a7d',
+          background: 'linear-gradient(135deg, rgba(29, 108, 224, 0.94) 0%, rgba(59, 130, 246, 0.88) 100%)',
           top: highlight ? highlight.top : 0,
           left: highlight ? highlight.left : 0,
           width: highlight ? highlight.width : 0,
           height: highlight ? highlight.height : 0,
           opacity: highlight ? 1 : 0,
-          transform: highlight ? "scale(1.02)" : "scale(1)",
-          transition: "all 0.4s ease"
+          transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)"
         }}
       />
       
@@ -86,43 +79,35 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
       >
         {cards.map((card, i) => {
           const isActive = activeIndex === i;
-          const isAnyActive = activeIndex !== null;
           return (
             <div 
               key={i}
-              className={`p-6 md:p-8 border-[0.5px] border-border-primary/50 flex flex-col justify-between cursor-pointer min-h-[300px] md:min-h-[350px] transition-all duration-400 ease-out relative ${isActive ? 'z-20' : 'z-10'} ${isAnyActive && !isActive ? 'opacity-55' : 'opacity-100'}`}
+              className={`p-7 md:p-9 border border-border-subtle flex flex-col justify-between cursor-pointer min-h-[260px] md:min-h-[300px] transition-all duration-300 relative ${isActive ? 'z-20' : 'z-10'}`}
               onMouseEnter={(e) => handleMouseEnter(e, i)}
               onClick={() => onAction(card.originalService)}
             >
-              <div className={`flex flex-col h-full justify-between transition-transform duration-400 ease-out ${isActive ? 'scale-[1.02]' : 'scale-100'} origin-center`}>
-                
+              <div className="flex flex-col h-full justify-between">
                 <div className="flex justify-between items-start w-full gap-4">
-                  <h3 className={`font-sans text-xl md:text-[26px] font-medium leading-[1.1] max-w-[70%] transition-colors duration-400 ${isActive ? 'text-white' : 'text-text-primary'}`}>
+                  <h3 className={`font-sans text-xl md:text-2xl font-bold leading-snug max-w-[75%] transition-colors duration-300 ${isActive ? 'text-white' : 'text-text-primary'}`}>
                     {card.title}
                   </h3>
                   
-                  <div className={`px-4 py-1 rounded-full border transition-all duration-400 whitespace-nowrap ${isActive ? 'border-white/50 text-white opacity-100' : 'opacity-0'}`}>
-                    <span className="font-sans text-xs mb-0">{card.category}</span>
-                  </div>
+                  <span className={`font-mono text-sm font-semibold tabular-nums transition-colors duration-300 ${isActive ? 'text-white/90' : 'text-accent'}`}>
+                    {card.indexLabel}
+                  </span>
                 </div>
 
                 <div className="flex justify-between items-end w-full mt-auto pt-8 gap-4">
-                  <div className={`max-w-[75%] transition-opacity duration-400 ${isActive ? 'opacity-100' : 'opacity-100 md:opacity-0'}`}>
-                    <p className={`font-sans text-sm md:text-base leading-snug transition-colors duration-400 ${isActive ? 'text-white/90' : 'text-text-secondary/80'}`}>
+                  <div className="max-w-[78%]">
+                    <p className={`font-sans text-sm md:text-[15px] leading-relaxed transition-colors duration-300 ${isActive ? 'text-white/90' : 'text-text-secondary'}`}>
                       {card.body}
                     </p>
                   </div>
                   
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className={`flex items-center justify-center p-2 rounded-full transition-all duration-500 ease-out border ${isActive ? 'bg-white text-[#1d8a7d] border-transparent translate-x-1 scale-110 shadow-lg' : 'bg-transparent text-text-secondary/60 border-text-secondary/30'}`}>
-                      <ArrowRight className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-500 ${isActive ? '-rotate-45' : 'rotate-0'}`} />
-                    </div>
-                    <span className={`font-sans text-lg md:text-xl font-bold transition-colors duration-400 ${isActive ? 'text-white' : 'text-text-primary'}`}>
-                      ({i + 1})
-                    </span>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 border ${isActive ? 'bg-white text-[#1d6ce0] border-white shadow-md scale-105' : 'bg-white/60 dark:bg-white/10 text-accent border-border-primary'}`}>
+                    <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${isActive ? '-rotate-45' : 'rotate-0'}`} />
                   </div>
                 </div>
-
               </div>
             </div>
           );
@@ -131,4 +116,3 @@ export const ServicesSlidingGrid = ({ services, onAction, bgImage }: { services:
     </div>
   );
 };
-

@@ -89,16 +89,16 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
   }, []);
 
   return (
-    <div ref={rootRef} className="overflow-hidden font-mono bg-bg-primary transition-colors duration-500">
+    <div ref={rootRef} className="overflow-hidden font-mono bg-bg-primary pb-12 md:pb-16 transition-colors duration-500">
       <div className="sp-spacer" />
       <div className="sp-main">
         {/* Intro */}
-        <div className="sp-container sp-initial !border-none !bg-transparent text-center !w-auto !h-auto max-w-2xl">
-          <div className="space-y-4 relative z-20">
-            <h2 className="text-4xl md:text-6xl font-bold text-text-primary tracking-tighter uppercase italic transition-colors duration-500">Why Choose Us?</h2>
-            <p className="text-text-secondary text-sm md:text-base leading-relaxed transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
+        <div className="sp-container sp-initial !border-none !bg-transparent text-center !w-full max-w-[520px] min-h-[340px] md:min-h-[500px] !p-6 flex items-center justify-center">
+          <div className="space-y-3 relative z-20 max-w-sm md:max-w-md mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary tracking-tighter uppercase italic transition-colors duration-500 drop-shadow-[0_2px_12px_rgba(255,255,255,0.7)] dark:drop-shadow-[0_2px_12px_rgba(7,20,43,0.7)]">Why Choose Us?</h2>
+            <p className="text-text-primary/85 dark:text-white/90 text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500 drop-shadow-[0_1px_8px_rgba(255,255,255,0.65)] dark:drop-shadow-[0_1px_8px_rgba(7,20,43,0.75)]">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
-          <div className="sp-box absolute -bottom-24 left-1/2 -translate-x-1/2 pointer-events-none">
+          <div className="sp-box absolute inset-0 m-auto pointer-events-none">
             {/* Liquid 3D Orb Structure */}
             <div className="liquid-3d-orb">
               <div className="liquid-3d-highlight" />

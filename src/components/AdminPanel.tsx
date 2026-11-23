@@ -43,10 +43,16 @@ export const AdminPanel = () => {
     setTestStatus(null);
     try {
       const res = await signInWithGmail();
+      if (!res) {
+        // User closed or dismissed the sign-in modal
+        return;
+      }
       setGmailUser(res.user);
       setGmailToken(res.accessToken);
     } catch (err: any) {
-      setTestStatus(`Gmail OAuth Error: ${err.message || 'Failed to authenticate'}`);
+      if (err?.code !== 'auth/popup-closed-by-user' && err?.code !== 'auth/cancelled-popup-request') {
+        setTestStatus(`Gmail OAuth Error: ${err.message || 'Failed to authenticate'}`);
+      }
     } finally {
       setIsConnecting(false);
     }
@@ -129,7 +135,7 @@ export const AdminPanel = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password (hint: admin123)"
+                placeholder="Password (hint: RIQV03)"
                 className="w-full bg-bg-primary border border-border-primary rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent transition-colors"
                 autoFocus
               />

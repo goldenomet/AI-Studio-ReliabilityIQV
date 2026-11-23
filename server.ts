@@ -165,7 +165,7 @@ Be professional, concise, and helpful. If a user wants a quote or consultation, 
     // In a real app, verify admin session/token here.
     // For this preview, we'll just return the in-memory leads.
     const password = req.headers.authorization;
-    if (password !== 'admin123') {
+    if (password !== 'RIQV03') {
       return res.status(401).json({ error: "Unauthorized" });
     }
     res.json({ leads: capturedLeads });

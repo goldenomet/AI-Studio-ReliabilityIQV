@@ -4,7 +4,7 @@ import upArrow3D from '../assets/images/up_arrow_3d_1787579872621.jpg';
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'motion/react';
 import { 
-  ArrowRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, 
+  ArrowRight, ChevronRight, MapPin, Phone, Mail, Filter, Search, Info, ArrowUp, Star, Globe, Cpu, 
   Map as MapIcon, FileText, PenTool, Zap, ChevronDown, ChevronUp, Monitor, Wifi, Printer, 
   Mail as MailIcon, Layers, Laptop, HardDrive, UserCheck, Headphones, Video, Sparkles, 
   Server, ShoppingCart, Layout, Briefcase, Bot, Workflow, FileSpreadsheet, MailCheck, 
@@ -52,15 +52,11 @@ import trendingAiAnimImg from '@/src/assets/images/trending_ai_anim_178760362107
 import trendingInfraImg from '@/src/assets/images/trending_infra_1787603632437.jpg';
 
 import { ServicesSlidingGrid } from './SlidingHighlightWrapper';
+import { useSectionFlow } from './SectionFlow';
 
 export const CompetenciesSection = ({ onContact }: { onContact: () => void }) => {
   const [selectedService, setSelectedService] = useState<IServiceDetail | null>(null);
-  const containerRef = useRef<HTMLElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end']
-  });
+  const { ref: flowRef, style: flowStyle } = useSectionFlow();
 
   const servicesData: IServiceDetail[] = [
     {
@@ -131,19 +127,18 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
   ];
 
   return (
-    <section ref={containerRef} className="relative mt-20 bg-bg-primary py-24 transition-colors duration-500 overflow-hidden">
-      <div className="absolute inset-0 z-[0] pointer-events-none">
-        <img 
-          src={servicesBgImage}
-          alt="Grid Background"
-          className="w-full h-full object-cover opacity-90 mix-blend-luminosity"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary" />
-      </div>
+    <motion.section ref={flowRef} style={flowStyle} className="relative mt-0 bg-transparent py-24 text-text-primary transition-colors duration-500 overflow-hidden border-t border-border-subtle">
+      {/* Diffused Serene Light Pools */}
+      <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[480px] h-[480px] bg-white/70 dark:bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-8 right-1/4 w-[440px] h-[440px] bg-sky-200/45 dark:bg-sky-400/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 mb-12 pointer-events-none text-center flex flex-col items-center relative z-10">
-         <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">Regional & International Expertise</div>
-         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary transition-colors duration-500 leading-[0.9] tracking-tighter">What We Deliver.</h2>
+         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-3 font-semibold">
+           Regional &amp; International Expertise
+         </p>
+         <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-text-primary leading-tight tracking-tight" style={{ textWrap: 'balance' }}>
+           What We Deliver.
+         </h2>
       </div>
 
       <div className="px-6 relative z-10 w-full max-w-7xl mx-auto">
@@ -160,7 +155,7 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
         onClose={() => setSelectedService(null)}
         onContact={onContact}
       />
-    </section>
+    </motion.section>
   );
 };
 
@@ -188,27 +183,29 @@ const SHOWCASE_ITEMS = [
 export const NarrativeSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const DURATION = 6000; // 6 seconds per tab
+  const { ref: narrativeFlowRef, style: narrativeFlowStyle } = useSectionFlow();
 
   const handleAnimationComplete = () => {
     setActiveIndex((prev) => (prev + 1) % SHOWCASE_ITEMS.length);
   };
 
   return (
-    <section className="relative bg-bg-primary z-20 border-t border-border-primary transition-colors duration-500 pb-24 md:pb-32">
-      <PixelSnow />
+    <motion.section ref={narrativeFlowRef} style={narrativeFlowStyle} className="relative bg-transparent text-text-primary z-20 border-t border-border-subtle transition-colors duration-500 pb-24 md:pb-32 overflow-hidden">
+      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-sky-200/40 dark:bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
       
-      <div className="pt-32 pb-12 px-6 max-w-5xl mx-auto relative z-10 text-center">
-        <div className="font-mono text-xs uppercase tracking-widest text-[#0d838e] mb-6 font-bold">The Narrative</div>
-        <TextScroll 
-          text="Driven by logic, defined by results."
-          className="text-4xl md:text-6xl font-bold text-text-primary tracking-tight leading-tight justify-center flex flex-wrap"
-        />
-        <p className="mt-6 text-xl text-text-secondary max-w-2xl mx-auto font-sans">
+      <div className="pt-28 pb-12 px-6 max-w-5xl mx-auto relative z-10 text-center">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-4 font-semibold">
+          The Narrative
+        </p>
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-tight justify-center flex flex-wrap" style={{ textWrap: 'balance' }}>
+          Driven by logic, defined by results.
+        </h2>
+        <p className="mt-5 text-base sm:text-lg text-text-secondary max-w-2xl mx-auto font-sans leading-relaxed">
           A showcase of our journey, built with precision and intent.
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full max-w-7xl mx-auto px-6 relative z-10 items-stretch">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 w-full max-w-7xl mx-auto px-6 relative z-10 items-stretch">
         <div className="w-full lg:w-5/12 flex flex-col gap-4 justify-center">
           {SHOWCASE_ITEMS.map((item, index) => {
             const isActive = index === activeIndex;
@@ -217,11 +214,13 @@ export const NarrativeSection = () => {
               <div 
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`relative overflow-hidden transition-all duration-500 rounded-3xl cursor-pointer p-6 md:p-8 flex flex-col
-                  ${isActive ? 'bg-bg-card shadow-xl border border-border-primary' : 'bg-transparent border border-transparent hover:bg-bg-card/40'}`}
+                className={`relative overflow-hidden transition-all duration-500 rounded-[28px] cursor-pointer p-6 md:p-7 flex flex-col
+                  ${isActive
+                    ? 'frosted-panel-elevated border-accent/40 text-text-primary'
+                    : 'frosted-panel opacity-75 hover:opacity-100 text-text-secondary'}`}
               >
                 {/* Progress Bar Container */}
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-border-primary/20">
+                <div className="absolute top-0 left-0 w-full h-[3px] bg-accent/15">
                   {isActive && (
                     <motion.div
                       key={`progress-${activeIndex}`}
@@ -229,16 +228,16 @@ export const NarrativeSection = () => {
                       animate={{ width: "100%" }}
                       transition={{ duration: DURATION / 1000, ease: "linear" }}
                       onAnimationComplete={handleAnimationComplete}
-                      className="h-full bg-[#0d838e]"
+                      className="h-full bg-accent"
                     />
                   )}
                 </div>
                 
-                <div className="flex items-center gap-4 mb-2 mt-2">
-                  <span className={`font-mono text-sm font-bold flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-500 ${isActive ? 'border-[#0d838e] text-[#0d838e] bg-[#0d838e]/10' : 'border-border-primary text-text-secondary/50'}`}>
+                <div className="flex items-center gap-4 mb-2 mt-1">
+                  <span className={`font-mono text-xs font-bold flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-500 tabular-nums ${isActive ? 'border-accent/40 text-accent bg-accent/10' : 'border-border-subtle text-text-secondary bg-white/40 dark:bg-white/5'}`}>
                     {item.num}
                   </span>
-                  <h3 className={`text-2xl md:text-3xl font-bold font-sans tracking-tight transition-colors duration-500 ${isActive ? 'text-text-primary' : 'text-text-secondary/50'}`}>
+                  <h3 className={`text-xl md:text-2xl font-bold font-sans tracking-tight transition-colors duration-500 ${isActive ? 'text-text-primary' : 'text-text-secondary'}`}>
                     {item.title}
                   </h3>
                 </div>
@@ -248,12 +247,12 @@ export const NarrativeSection = () => {
                   animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0 }}
                   className="overflow-hidden"
                 >
-                   <div className="pt-2 pb-2 pl-12 text-base md:text-lg text-text-secondary leading-relaxed font-sans">
+                   <div className="pt-2 pb-1 pl-12 text-sm md:text-base text-text-secondary leading-relaxed font-sans">
                      {item.description}
                      
                      {/* Mobile Image */}
-                     <div className="lg:hidden w-full h-[220px] md:h-[300px] mt-6 rounded-[20px] overflow-hidden relative shadow-lg">
-                       <img src={item.img} alt={item.title} className="w-full h-full object-cover filter contrast-125" />
+                     <div className="lg:hidden w-full h-[220px] md:h-[280px] mt-5 rounded-2xl overflow-hidden relative shadow-md border border-border-primary">
+                       <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
                      </div>
                    </div>
                 </motion.div>
@@ -263,49 +262,49 @@ export const NarrativeSection = () => {
         </div>
         
         {/* Desktop Image Panel */}
-        <div className="hidden lg:block w-full lg:w-7/12 h-[600px] xl:h-[700px] relative rounded-[40px] overflow-hidden border border-border-primary shadow-2xl bg-bg-card">
-           <div className="w-full h-full relative p-4">
-             <div className="w-full h-full relative rounded-[28px] overflow-hidden">
+        <div className="hidden lg:block w-full lg:w-7/12 h-[580px] xl:h-[640px] relative rounded-[36px] overflow-hidden frosted-panel-elevated p-3.5">
+           <div className="w-full h-full relative rounded-[26px] overflow-hidden">
+             <AnimatePresence mode="wait">
+                <motion.img 
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  src={SHOWCASE_ITEMS[activeIndex].img}
+                  alt={SHOWCASE_ITEMS[activeIndex].title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+             </AnimatePresence>
+             <div className="absolute inset-0 glass-reflection z-10" />
+             <div className="absolute inset-0 bg-gradient-to-t from-[#07142b]/85 via-[#07142b]/20 to-transparent z-10 pointer-events-none" />
+             
+             {/* Title over image */}
+             <div className="absolute bottom-8 left-8 z-20 overflow-hidden text-white pr-10">
                <AnimatePresence mode="wait">
-                  <motion.img 
-                    key={activeIndex}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    src={SHOWCASE_ITEMS[activeIndex].img}
-                    alt={SHOWCASE_ITEMS[activeIndex].title}
-                    className="absolute inset-0 w-full h-full object-cover filter contrast-125"
-                  />
+                  <motion.div
+                     key={activeIndex}
+                     initial={{ y: 18, opacity: 0 }}
+                     animate={{ y: 0, opacity: 1 }}
+                     exit={{ y: -18, opacity: 0 }}
+                     transition={{ duration: 0.4 }}
+                  >
+                      <p className="font-mono text-xs tracking-widest text-sky-200 mb-2 font-semibold uppercase">Phase {SHOWCASE_ITEMS[activeIndex].num}</p>
+                      <h4 className="text-3xl md:text-4xl font-bold font-sans tracking-tight leading-tight text-white">
+                        {SHOWCASE_ITEMS[activeIndex].title}
+                      </h4>
+                  </motion.div>
                </AnimatePresence>
-               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
-               
-               {/* Optional Title over image */}
-               <div className="absolute bottom-10 left-10 z-20 overflow-hidden text-white drop-shadow-lg pr-10">
-                 <AnimatePresence mode="wait">
-                    <motion.div
-                       key={activeIndex}
-                       initial={{ y: 20, opacity: 0 }}
-                       animate={{ y: 0, opacity: 1 }}
-                       exit={{ y: -20, opacity: 0 }}
-                       transition={{ duration: 0.4 }}
-                    >
-                        <p className="font-mono text-xs tracking-widest text-white/70 mb-3 font-bold uppercase backdrop-blur-md px-3 py-1 rounded-full border border-white/20 inline-block bg-black/20">Phase {SHOWCASE_ITEMS[activeIndex].num}</p>
-                        <h4 className="text-4xl md:text-5xl font-bold font-sans tracking-tight leading-tight">
-                          {SHOWCASE_ITEMS[activeIndex].title}
-                        </h4>
-                    </motion.div>
-                 </AnimatePresence>
-               </div>
              </div>
            </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 export const ContactSection = () => {
+  const { ref: contactFlowRef, style: contactFlowStyle } = useSectionFlow();
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', service: 'Web Operations', details: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -341,6 +340,10 @@ export const ContactSection = () => {
     setIsGmailConnecting(true);
     try {
       const res = await signInWithGmail();
+      if (!res) {
+        // User closed or dismissed the sign-in modal
+        return;
+      }
       setGmailUser(res.user);
       setGmailTokenState(res.accessToken);
       if (res.user.email) {
@@ -352,7 +355,9 @@ export const ContactSection = () => {
         }));
       }
     } catch (err: any) {
-      console.error("Gmail OAuth connect error:", err);
+      if (err?.code !== 'auth/popup-closed-by-user' && err?.code !== 'auth/cancelled-popup-request') {
+        console.warn("Gmail OAuth connection notice:", err?.message || err);
+      }
     } finally {
       setIsGmailConnecting(false);
     }
@@ -468,20 +473,21 @@ export const ContactSection = () => {
   };
 
   const inputClasses = (name: string) => `
-    w-full bg-white/5 dark:bg-black/20 backdrop-blur-md px-4 py-4 rounded-xl 
+    w-full bg-white/80 dark:bg-[#0b1c3b]/75 backdrop-blur-md px-4 py-3.5 rounded-xl 
     outline-none border transition-all duration-300
-    text-text-primary placeholder:text-text-secondary/30 font-mono text-sm
-    ${errors[name] ? 'border-red-500/50 focus:border-red-500' : 'border-border-primary focus:border-accent'}
-    focus:ring-1 focus:ring-accent/20
+    text-text-primary placeholder:text-text-secondary/50 font-sans text-sm
+    ${errors[name] ? 'border-red-500/60 focus:border-red-500' : 'border-border-subtle focus:border-accent'}
+    focus:ring-2 focus:ring-accent/15
   `;
 
   return (
-    <section id="contact-section" className="pb-32 px-4 md:px-6 bg-bg-primary transition-colors duration-500 overflow-hidden relative">
-      {/* Decorative ambient background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+    <motion.section ref={contactFlowRef} style={contactFlowStyle} id="contact-section" className="pb-28 px-4 md:px-6 bg-transparent text-text-primary transition-colors duration-500 overflow-hidden relative border-t border-border-subtle pt-20">
+      {/* Diffused serene ambient light pools */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[780px] bg-white/60 dark:bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[460px] h-[460px] bg-sky-200/45 dark:bg-sky-400/10 rounded-full blur-[140px] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="bg-bg-card/40 backdrop-blur-2xl rounded-[40px] md:rounded-[64px] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-border-primary transition-colors duration-500 group/container"
+        <div className="frosted-panel-elevated rounded-[36px] md:rounded-[44px] overflow-hidden flex flex-col lg:flex-row text-text-primary transition-colors duration-500 group/container relative"
              onMouseMove={handleMouseMove}
         >
           {/* Reactive Spotlight Effect */}
@@ -490,80 +496,97 @@ export const ContactSection = () => {
             style={{
               background: useTransform(
                 [mouseX, mouseY],
-                ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, var(--color-accent-glow), transparent 40%)`
+                ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(59, 130, 246, 0.14), transparent 45%)`
               )
             }}
           />
 
           {/* Form Side */}
-          <div className="lg:w-[55%] p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-border-primary relative transition-colors duration-500">
+          <div className="lg:w-[55%] p-8 md:p-12 lg:p-14 border-b lg:border-b-0 lg:border-r border-border-subtle relative transition-colors duration-500">
             <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center justify-between gap-2 mb-6 flex-wrap">
-                <div className="inline-flex items-center gap-2">
-                  <div className="w-10 h-[1px] bg-accent" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent font-bold">Node Invitation</span>
-                </div>
+              <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent font-semibold">
+                  Client Inquiries
+                </p>
+                {gmailUser ? (
+                  <button
+                    type="button"
+                    onClick={handleDisconnectGmail}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/75 dark:bg-white/10 border border-border-primary text-[11px] font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                    title="Disconnect Google Account"
+                  >
+                    <CheckCircle2 size={12} className="text-emerald-600 dark:text-emerald-400" />
+                    <span className="truncate max-w-[160px]">{gmailUser.email}</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleConnectGmail}
+                    disabled={isGmailConnecting}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/75 dark:bg-white/10 border border-border-primary text-[11px] font-medium text-text-secondary hover:text-accent transition-colors cursor-pointer disabled:opacity-50"
+                  >
+                    <Mail size={12} className="text-accent" />
+                    <span>{isGmailConnecting ? 'Connecting...' : 'Autofill with Gmail'}</span>
+                  </button>
+                )}
               </div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-mono mb-12 tracking-tighter text-text-primary leading-[0.85] transition-colors duration-500">
-                Establish <br /> <span className="text-accent italic">Communication.</span>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-10 tracking-tight text-text-primary leading-[1.08]" style={{ textWrap: 'balance' }}>
+                Establish <br /> <span className="text-accent">Communication.</span>
               </h2>
 
               <form 
                 ref={formRef}
                 name="contact" 
                 data-netlify="true" 
-                className="space-y-8 font-mono" 
+                className="space-y-6 font-sans" 
                 onSubmit={handleSubmit}
               >
                 <input type="hidden" name="form-name" value="contact" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="group/field relative">
-                    <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">First Name</label>
+                    <label className="block text-xs uppercase text-text-secondary mb-2 font-semibold tracking-wider transition-colors duration-300 group-focus-within/field:text-accent">First Name</label>
                     <input 
                       type="text" 
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      placeholder="Protocol A" 
+                      placeholder="Jane" 
                       className={inputClasses('firstName')}
                     />
-                    <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
-                    {errors.firstName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.firstName}</motion.p>}
+                    {errors.firstName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-xs mt-1 font-medium">{errors.firstName}</motion.p>}
                   </div>
 
                   <div className="group/field relative">
-                    <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Last Name</label>
+                    <label className="block text-xs uppercase text-text-secondary mb-2 font-semibold tracking-wider transition-colors duration-300 group-focus-within/field:text-accent">Last Name</label>
                     <input 
                       type="text" 
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      placeholder="Protocol B" 
+                      placeholder="Doe" 
                       className={inputClasses('lastName')}
                     />
-                    <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
-                    {errors.lastName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.lastName}</motion.p>}
+                    {errors.lastName && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-xs mt-1 font-medium">{errors.lastName}</motion.p>}
                   </div>
                 </div>
 
                 <div className="group/field relative">
-                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Work Email</label>
+                  <label className="block text-xs uppercase text-text-secondary mb-2 font-semibold tracking-wider transition-colors duration-300 group-focus-within/field:text-accent">Work Email</label>
                   <input 
                     type="email" 
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="direct@link.network" 
+                    placeholder="name@company.com" 
                     className={inputClasses('email')}
                   />
-                  <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500" />
-                  {errors.email && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.email}</motion.p>}
+                  {errors.email && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-xs mt-1 font-medium">{errors.email}</motion.p>}
                 </div>
 
                 <div className="group/field relative">
-                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Project Stream</label>
+                  <label className="block text-xs uppercase text-text-secondary mb-2 font-semibold tracking-wider transition-colors duration-300 group-focus-within/field:text-accent">Project Stream</label>
                   <div className="relative">
                     <select 
                       name="service"
@@ -571,67 +594,67 @@ export const ContactSection = () => {
                       onChange={handleChange}
                       className={`${inputClasses('service')} appearance-none pr-10 cursor-pointer`}
                     >
-                      <option className="bg-bg-card">Web Operations</option>
-                      <option className="bg-bg-card">AI Automations</option>
-                      <option className="bg-bg-card">GIS Mapping</option>
-                      <option className="bg-bg-card">Technical Reports</option>
-                      <option className="bg-bg-card">Content Studio</option>
+                      <option className="bg-white dark:bg-[#0c1f40] text-[#0f2547] dark:text-[#f1f6ff]">Web Operations</option>
+                      <option className="bg-white dark:bg-[#0c1f40] text-[#0f2547] dark:text-[#f1f6ff]">AI Automations</option>
+                      <option className="bg-white dark:bg-[#0c1f40] text-[#0f2547] dark:text-[#f1f6ff]">GIS Mapping</option>
+                      <option className="bg-white dark:bg-[#0c1f40] text-[#0f2547] dark:text-[#f1f6ff]">Technical Reports</option>
+                      <option className="bg-white dark:bg-[#0c1f40] text-[#0f2547] dark:text-[#f1f6ff]">Content Studio</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-accent">
-                      <ArrowRight size={18} className="rotate-90" />
+                      <ChevronDown size={18} />
                     </div>
                   </div>
                 </div>
 
                 <div className="group/field relative">
-                  <label className="block text-[9px] uppercase text-text-secondary/60 mb-2 font-bold tracking-widest transition-colors duration-500 group-focus-within/field:text-accent">Transmission Packet</label>
+                  <label className="block text-xs uppercase text-text-secondary mb-2 font-semibold tracking-wider transition-colors duration-300 group-focus-within/field:text-accent">Project Brief</label>
                   <textarea 
                     name="details"
                     value={formData.details}
                     onChange={handleChange}
                     rows={4} 
-                    placeholder="Input detailed project requirements..." 
+                    placeholder="Tell us about your objectives, timeline, or technical goals..." 
                     className={`${inputClasses('details')} resize-none`}
                   ></textarea>
-                  <div className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-focus-within/field:w-full transition-all duration-500 bottom-[6px]" />
-                  {errors.details && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-[10px] mt-1 absolute font-bold">{errors.details}</motion.p>}
+                  {errors.details && <motion.p initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-red-500 text-xs mt-1 font-medium">{errors.details}</motion.p>}
                 </div>
 
-                <div className="pt-6">
+                <div className="pt-4">
                   <AnimatePresence mode="wait">
                     {isSuccess ? (
                       <motion.div
                         key="success"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.05 }}
-                        className="w-full bg-green-500/10 border border-green-500/50 text-green-500 p-8 rounded-3xl flex flex-col items-center justify-center text-center gap-4"
+                        exit={{ opacity: 0, scale: 1.02 }}
+                        className="w-full frosted-panel border border-emerald-400/50 text-emerald-700 dark:text-emerald-300 p-7 rounded-3xl flex flex-col items-center justify-center text-center gap-3"
                       >
-                        <div className="w-16 h-16 bg-green-500 text-bg-primary rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(34,197,94,0.3)]">
-                          <Zap size={32} fill="currentColor" />
+                        <div className="w-14 h-14 bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 rounded-full flex items-center justify-center">
+                          <CheckCircle2 size={28} />
                         </div>
                         <div>
-                          <p className="font-black text-xl uppercase tracking-tighter italic">{successMessage}</p>
-                          <p className="text-[10px] opacity-70 tracking-widest">GMAIL OAUTH ACTIVE • SUBMISSION RECORDED</p>
+                          <p className="font-bold text-lg tracking-tight">{successMessage}</p>
+                          <p className="text-xs text-text-secondary mt-1">Our engineering advisory team will respond within 24 hours.</p>
                         </div>
                       </motion.div>
                     ) : (
                       <motion.div key="button" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <MagneticGlowButton 
+                        <button 
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full py-6 text-xl font-black italic uppercase tracking-tighter disabled:opacity-50 !rounded-2xl shadow-3xl group/btn overflow-hidden"
+                          className="w-full swimtopia-pill-btn justify-center !py-4 text-base sm:text-lg disabled:opacity-50 group cursor-pointer"
                         >
-                          <span className="relative z-10 flex items-center justify-center gap-4">
+                          <span className="swimtopia-pill-badge">
                             {isSubmitting ? (
                               <motion.span animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }}>
-                                <Cpu size={28} />
+                                <Cpu size={14} />
                               </motion.span>
                             ) : (
-                              <>Submit <ArrowRight size={28} className="group-hover/btn:translate-x-2 transition-transform" /></>
+                              <ChevronRight size={14} strokeWidth={3} />
                             )}
                           </span>
-                        </MagneticGlowButton>
+                          <span>{isSubmitting ? 'Submitting Request...' : 'Submit Consultation Request'}</span>
+                        </button>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -641,15 +664,11 @@ export const ContactSection = () => {
           </div>
 
           {/* Logistics Side */}
-          <div className="lg:w-[45%] bg-bg-secondary/20 relative flex flex-col p-8 md:p-12 lg:p-16 transition-colors duration-500 group/logistics">
-            {/* Animated Grid overlay */}
-            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-                 style={{ backgroundImage: 'radial-gradient(var(--color-accent) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-
-            <div className="relative z-10 flex flex-col h-full gap-12">
+          <div className="lg:w-[45%] bg-white/40 dark:bg-white/[0.04] backdrop-blur-xl relative flex flex-col p-8 md:p-12 lg:p-14 transition-colors duration-500 group/logistics">
+            <div className="relative z-10 flex flex-col h-full gap-10">
               <div className="space-y-4">
-                <div className="font-mono text-[9px] uppercase tracking-[0.4em] text-accent font-bold">Host Coordinate</div>
-                <div className="relative rounded-[32px] overflow-hidden border border-border-primary bg-black/40 shadow-inner h-80 lg:flex-grow grayscale contrast-125 transition-all duration-700 hover:grayscale-0 hover:contrast-100">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent font-semibold">Studio Headquarters</p>
+                <div className="relative rounded-[28px] overflow-hidden border border-border-primary bg-sky-50 dark:bg-[#08152e] shadow-sm h-72 lg:h-80 transition-all duration-500">
                   <iframe 
                     src="https://maps.google.com/maps?q=Ipaja,%20Lagos%20State,%20Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed"
                     width="100%" 
@@ -657,56 +676,54 @@ export const ContactSection = () => {
                     style={{ border: 0 }} 
                     allowFullScreen={true}
                     loading="lazy" 
-                    className="absolute inset-0 dark:invert-[.9] dark:hue-rotate-180 brightness-75 lg:brightness-100"
+                    className="absolute inset-0 dark:invert-[.9] dark:hue-rotate-180 opacity-90 hover:opacity-100 transition-opacity"
                   />
-                  <div className="absolute inset-0 pointer-events-none bg-linear-to-t from-bg-card via-transparent to-transparent opacity-60" />
-                  <div className="absolute bottom-6 left-6 right-6 flex items-center gap-4 bg-bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-accent/20">
-                    <div className="p-3 bg-accent text-bg-primary rounded-xl shrink-0">
-                      <MapPin size={24} />
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3.5 frosted-panel-elevated p-3.5 rounded-2xl">
+                    <div className="p-2.5 bg-accent text-white rounded-xl shrink-0 shadow-sm">
+                      <MapPin size={20} />
                     </div>
-                    <div className="font-mono min-w-0">
-                      <p className="text-xs font-black text-text-primary truncate">ReliabilityIQ HQ</p>
-                      <p className="text-[9px] text-text-secondary/70 truncate uppercase tracking-widest font-bold">Ipaja Sector • Lagos State</p>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-text-primary truncate">ReliabilityIQ Headquarters</p>
+                      <p className="text-xs text-text-secondary truncate">Ipaja District, Lagos State, Nigeria</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-10 group/terminal">
-                <div className="space-y-3">
-                  <div className="font-mono text-[9px] uppercase tracking-widest text-text-secondary/50 font-bold flex items-center gap-2 group-hover/terminal:text-accent transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Audio Channels
+              <div className="space-y-8">
+                <div className="space-y-2.5">
+                  <div className="font-mono text-xs uppercase tracking-wider text-text-secondary font-semibold flex items-center gap-2">
+                    <Phone size={13} className="text-accent" /> Direct Telephone
                   </div>
-                  <div className="flex flex-col gap-2 font-mono text-base font-bold tracking-tighter text-text-primary">
+                  <div className="flex flex-col gap-1.5 font-mono text-sm sm:text-base font-semibold text-text-primary tabular-nums">
                     <a href="tel:+2349075934287" className="hover:text-accent transition-all hover:translate-x-1 inline-block w-fit">+234 907 593 4287</a>
                     <a href="tel:+2349065394605" className="hover:text-accent transition-all hover:translate-x-1 inline-block w-fit">+234 906 539 4605</a>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="font-mono text-[9px] uppercase tracking-widest text-text-secondary/50 font-bold flex items-center gap-2 group-hover/terminal:text-accent transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Data Up-Link
+                <div className="space-y-2.5">
+                  <div className="font-mono text-xs uppercase tracking-wider text-text-secondary font-semibold flex items-center gap-2">
+                    <Mail size={13} className="text-accent" /> Electronic Mail
                   </div>
-                  <div className="font-mono text-base font-bold tracking-tighter text-text-primary">
+                  <div className="font-mono text-sm sm:text-base font-semibold text-text-primary">
                     <a href="mailto:reliabilityiqventures@gmail.com" className="hover:text-accent transition-all hover:translate-x-1 inline-block break-all">reliabilityiqventures@gmail.com</a>
                   </div>
                 </div>
               </div>
               
-              <div className="mt-auto pt-8 border-t border-border-primary flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.2em] text-text-secondary/40">
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-green-500" /> Node: Lagos-Alpha
-                </div>
-                <div>Status: Primary</div>
+              <div className="mt-auto pt-6 border-t border-border-subtle flex items-center justify-between font-mono text-xs text-text-secondary">
+                <span>Lagos, Nigeria</span>
+                <span className="text-accent font-semibold">Global Operations</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 export const TrendingProducts = () => {
+  const { ref: trendingFlowRef, style: trendingFlowStyle } = useSectionFlow({ isHero: true });
   const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({
     'web-dev': true,
     'ai-auto': true,
@@ -926,35 +943,40 @@ export const TrendingProducts = () => {
   const popularSearchTags = ["E-commerce", "Chatbot", "Wi-Fi", "Printer", "SaaS", "OBS", "Email", "Backup"];
 
   return (
-    <section className="pt-20 pb-32 px-6 bg-bg-primary transition-colors duration-500">
-      <div className="max-w-7xl mx-auto">
+    <motion.section ref={trendingFlowRef} style={trendingFlowStyle} className="pt-24 pb-28 px-6 bg-transparent text-text-primary transition-colors duration-500 relative overflow-hidden border-t border-border-subtle">
+      <div className="absolute top-1/4 left-1/4 w-[480px] h-[480px] bg-white/60 dark:bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[440px] h-[440px] bg-sky-200/45 dark:bg-sky-400/10 blur-[130px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
           <div className="max-w-2xl">
-            <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4 font-bold">In-Demand Technology & Services</div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-[0.9]">
-              Trending <br /> Capabilities.
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-3 font-semibold">
+              In-Demand Technology &amp; Services
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary leading-tight tracking-tight" style={{ textWrap: 'balance' }}>
+              Trending Capabilities.
             </h2>
-            <p className="text-text-secondary text-sm md:text-base mt-4 max-w-xl font-mono leading-relaxed">
-              Explore our most requested website development, practical AI automations, broadcast studio setups, creative training, and small business IT support solutions.
+            <p className="text-text-secondary text-sm md:text-base mt-4 max-w-xl font-sans leading-relaxed">
+              Explore our most requested website development, practical AI automations, broadcast studio setups, creative training, and enterprise IT support solutions.
             </p>
           </div>
           
-          <div className="flex flex-col gap-3 w-full md:w-auto font-mono">
+          <div className="flex flex-col gap-3 w-full md:w-auto font-sans">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
               {/* Search Input */}
               <div className="relative flex-1 sm:w-72">
                 <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary" />
                 <input
                   type="text"
-                  placeholder="Search services (e.g. Printer, E-commerce, Chatbot)..."
+                  placeholder="Search services (e.g. Printer, E-commerce)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-9 py-2.5 bg-bg-card border border-border-primary rounded-xl text-xs text-text-primary focus:outline-none focus:border-accent transition-colors"
+                  className="w-full pl-10 pr-9 py-2.5 frosted-panel rounded-xl text-xs text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent transition-colors"
                 />
                 {searchQuery && (
                   <button 
                     onClick={() => setSearchQuery('')} 
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary p-0.5 rounded-full hover:bg-bg-primary transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary p-0.5 rounded-full hover:bg-white/60 dark:hover:bg-white/10 transition-colors cursor-pointer"
                   >
                     <X size={14} />
                   </button>
@@ -966,21 +988,21 @@ export const TrendingProducts = () => {
                 <select
                   value={activeTab}
                   onChange={(e) => setActiveTab(e.target.value as any)}
-                  className="w-full pl-9 pr-9 py-2.5 bg-bg-card border border-border-primary rounded-xl text-xs font-mono font-bold text-text-primary appearance-none focus:outline-none focus:border-accent transition-colors cursor-pointer"
+                  className="w-full pl-9 pr-9 py-2.5 frosted-panel rounded-xl text-xs font-semibold text-text-primary appearance-none focus:outline-none focus:border-accent transition-colors cursor-pointer"
                 >
-                  <option value="all">Category: All Trending</option>
-                  <option value="web">Category: Web & UI/UX</option>
-                  <option value="ai">Category: AI Automation</option>
-                  <option value="it">Category: IT Support</option>
-                  <option value="creative">Category: Studio & Creative</option>
-                  <option value="infra">Category: Cloud & Infra</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="all">Category: All Trending</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="web">Category: Web & UI/UX</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="ai">Category: AI Automation</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="it">Category: IT Support</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="creative">Category: Studio & Creative</option>
+                  <option className="bg-white dark:bg-[#0c1f40]" value="infra">Category: Cloud & Infra</option>
                 </select>
                 <Filter size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
                 <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
               </div>
 
               {/* Desktop Category Filter Tabs */}
-              <div className="hidden sm:flex items-center gap-1 bg-bg-card p-1 rounded-xl border border-border-primary overflow-x-auto">
+              <div className="hidden sm:flex items-center gap-1 frosted-panel p-1.5 rounded-xl overflow-x-auto">
                 {[
                   { id: 'all', label: 'All Trending' },
                   { id: 'web', label: 'Web & UI/UX' },
@@ -992,10 +1014,10 @@ export const TrendingProducts = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as any)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium capitalize whitespace-nowrap transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                       activeTab === tab.id 
-                        ? 'bg-accent text-bg-primary font-bold shadow-sm' 
-                        : 'text-text-secondary hover:text-text-primary'
+                        ? 'bg-accent text-white font-semibold shadow-sm' 
+                        : 'text-text-secondary hover:text-text-primary hover:bg-white/50 dark:hover:bg-white/10'
                     }`}
                   >
                     {tab.label}
@@ -1006,16 +1028,16 @@ export const TrendingProducts = () => {
 
             {/* Popular Search Tag Suggestions */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 text-[11px] text-text-secondary">
-              <span className="shrink-0 text-text-secondary/70">Quick Search:</span>
+              <span className="shrink-0 font-medium">Quick Search:</span>
               <div className="flex items-center gap-1.5 flex-nowrap">
                 {popularSearchTags.map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setSearchQuery(tag)}
-                    className={`px-2 py-0.5 rounded-md border text-[10px] whitespace-nowrap transition-all ${
+                    className={`px-2.5 py-0.5 rounded-md border text-[11px] whitespace-nowrap transition-all cursor-pointer ${
                       searchQuery.toLowerCase() === tag.toLowerCase()
-                        ? 'border-accent text-accent bg-accent/10 font-bold'
-                        : 'border-border-primary hover:border-text-secondary text-text-secondary hover:text-text-primary bg-bg-card'
+                        ? 'border-accent text-accent bg-accent/10 font-semibold'
+                        : 'border-border-subtle hover:border-accent/40 text-text-secondary hover:text-text-primary bg-white/60 dark:bg-white/5'
                     }`}
                   >
                     #{tag}
@@ -1028,13 +1050,13 @@ export const TrendingProducts = () => {
 
         {/* Search Result Status */}
         {searchQuery && (
-          <div className="mb-6 flex items-center justify-between font-mono text-xs text-text-secondary bg-bg-card p-3 rounded-xl border border-border-primary">
+          <div className="mb-6 flex items-center justify-between font-sans text-xs text-text-secondary frosted-panel p-3.5 rounded-xl">
             <div>
-              Found <span className="font-bold text-accent">{filteredItems.length}</span> matching service{filteredItems.length === 1 ? '' : 's'} for "<span className="text-text-primary font-bold">{searchQuery}</span>"
+              Found <span className="font-bold text-accent tabular-nums">{filteredItems.length}</span> matching service{filteredItems.length === 1 ? '' : 's'} for "<span className="text-text-primary font-bold">{searchQuery}</span>"
             </div>
             <button
               onClick={() => setSearchQuery('')}
-              className="text-xs text-accent hover:underline flex items-center gap-1 font-bold"
+              className="text-xs text-accent hover:underline flex items-center gap-1 font-semibold cursor-pointer"
             >
               <X size={12} /> Clear search
             </button>
@@ -1043,27 +1065,27 @@ export const TrendingProducts = () => {
 
         {/* Empty Search State */}
         {filteredItems.length === 0 ? (
-          <div className="text-center py-20 bg-bg-card rounded-[32px] border border-border-primary font-mono px-6">
+          <div className="text-center py-20 frosted-panel-elevated rounded-[32px] font-sans px-6">
             <div className="w-12 h-12 rounded-2xl bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4">
               <Search size={24} />
             </div>
             <h3 className="text-lg font-bold text-text-primary mb-2">No matching services found</h3>
-            <p className="text-text-secondary text-xs max-w-md mx-auto mb-6">
-              We couldn't find any capability matching "{searchQuery}". Try searching for general terms like "WiFi", "Design", "Automation", or "Studio".
+            <p className="text-text-secondary text-sm max-w-md mx-auto mb-6">
+              We couldn't find any capability matching "{searchQuery}". Try searching for general terms like "Wi-Fi", "Design", "Automation", or "Studio".
             </p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setActiveTab('all');
               }}
-              className="px-5 py-2.5 rounded-xl bg-accent text-bg-primary font-bold text-xs hover:opacity-90 transition-opacity"
+              className="px-5 py-2.5 rounded-xl bg-accent text-white font-semibold text-xs hover:brightness-110 transition-all cursor-pointer"
             >
-              Reset Search & Filters
+              Reset Search &amp; Filters
             </button>
           </div>
         ) : (
           /* Trending Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filteredItems.map((prod, i) => {
             const hasDropdown = Boolean(prod.dropdownKey && prod.dropdownItems);
             const isWide = hasDropdown;
@@ -1074,48 +1096,49 @@ export const TrendingProducts = () => {
                 key={prod.id || i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className={`bg-bg-card rounded-[32px] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-500 border border-border-primary flex flex-col justify-between ${
-                  isWide ? 'md:col-span-2 lg:col-span-3 border-accent/40 ring-1 ring-accent/20' : ''
+                transition={{ delay: i * 0.06 }}
+                className={`frosted-panel-elevated rounded-[32px] overflow-hidden group hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between relative ${
+                  isWide ? 'md:col-span-2 lg:col-span-3' : ''
                 }`}
               >
-                <div>
-                  <div className={`${isWide ? 'aspect-[21/9] md:aspect-[3.2/1]' : 'aspect-video'} relative overflow-hidden bg-bg-card`}>
+                <div className="relative z-10">
+                  <div className={`${isWide ? 'aspect-[21/9] md:aspect-[3.2/1]' : 'aspect-video'} relative overflow-hidden bg-sky-50 dark:bg-[#08152e]`}>
                     <img 
                       src={prod.img} 
                       alt={prod.title} 
                       loading="lazy"
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover filter grayscale brightness-85 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-75" />
+                    <div className="absolute inset-0 glass-reflection" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/85 dark:from-[#0e2044]/85 via-transparent to-transparent opacity-65" />
                     
-                    <div className={`absolute top-4 right-4 ${prod.badgeColor || 'bg-accent text-bg-primary'} px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest shadow-md`}>
+                    <div className="absolute top-4 right-4 bg-white/90 dark:bg-[#0b1c3d]/90 text-accent border border-white/80 dark:border-blue-300/25 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider shadow-sm">
                       {prod.tag}
                     </div>
                     
                     {hasDropdown && (
                       <div className="absolute bottom-4 left-6 md:left-8">
-                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-bg-primary/90 backdrop-blur-md border border-border-primary text-text-primary text-xs font-mono font-semibold shadow-lg">
-                          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> Interactive Service Suite
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-[#0b1c3d]/90 backdrop-blur-md border border-white/80 dark:border-blue-300/25 text-text-primary text-xs font-mono font-semibold shadow-sm">
+                          <Layers size={13} className="text-accent" /> Interactive Service Suite
                         </span>
                       </div>
                     )}
                   </div>
 
                   <div className="p-6 lg:p-8">
-                    <div className="flex justify-between items-start mb-4 gap-2">
-                      <h3 className="text-xl lg:text-2xl font-bold font-mono tracking-tight group-hover:text-accent transition-colors text-text-primary">
+                    <div className="flex justify-between items-start mb-3 gap-2">
+                      <h3 className="text-xl lg:text-2xl font-bold font-sans tracking-tight group-hover:text-accent transition-colors text-text-primary">
                         {prod.title}
                       </h3>
-                      <div className="flex text-amber-400 shrink-0">
+                      <div className="flex text-amber-400 shrink-0 mt-1">
                         {[...Array(prod.rating || 5)].map((_, idx) => (
                           <Star key={idx} size={13} fill="currentColor" />
                         ))}
                       </div>
                     </div>
                     
-                    <p className="text-text-secondary font-mono text-xs md:text-sm leading-relaxed mb-6">
+                    <p className="text-text-secondary font-sans text-sm leading-relaxed mb-6">
                       {prod.desc}
                     </p>
 
@@ -1123,7 +1146,7 @@ export const TrendingProducts = () => {
                     {prod.highlights && (
                       <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {prod.highlights.map((hl, hlIdx) => (
-                          <div key={hlIdx} className="flex items-center gap-2 text-xs font-mono text-text-secondary">
+                          <div key={hlIdx} className="flex items-center gap-2 text-xs font-sans text-text-secondary">
                             <Check size={14} className="text-accent shrink-0" />
                             <span>{hl}</span>
                           </div>
@@ -1133,25 +1156,25 @@ export const TrendingProducts = () => {
 
                     {/* Interactive Dropdown Section */}
                     {hasDropdown && prod.dropdownItems && prod.dropdownKey && (
-                      <div className="mt-6 pt-6 border-t border-border-primary">
+                      <div className="mt-6 pt-6 border-t border-border-subtle">
                         <button
                           onClick={() => toggleDropdown(prod.dropdownKey!)}
-                          className="w-full flex items-center justify-between p-4 rounded-2xl bg-bg-primary hover:bg-bg-primary/80 border border-border-primary transition-all cursor-pointer group/btn"
+                          className="w-full flex items-center justify-between p-4 rounded-2xl bg-white/70 dark:bg-white/[0.06] hover:bg-white/95 dark:hover:bg-white/10 border border-border-primary transition-all cursor-pointer group/btn"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center font-bold">
+                            <div className="w-9 h-9 rounded-xl bg-accent/10 border border-accent/25 text-accent flex items-center justify-center font-bold">
                               {prod.dropdownType === 'web' ? <Layout size={18} /> : prod.dropdownType === 'ai' ? <Bot size={18} /> : <Layers size={18} />}
                             </div>
                             <div className="text-left">
-                              <span className="font-mono text-xs md:text-sm font-bold text-text-primary uppercase tracking-wide block">
+                              <span className="font-sans text-xs md:text-sm font-bold text-text-primary block">
                                 {prod.dropdownTitle}
                               </span>
-                              <span className="font-mono text-[11px] text-text-secondary">
+                              <span className="font-sans text-xs text-text-secondary">
                                 Click to {isOpen ? 'collapse modules' : 'expand and explore details'}
                               </span>
                             </div>
                           </div>
-                          <div className="w-8 h-8 rounded-full bg-bg-card flex items-center justify-center text-text-primary group-hover/btn:bg-accent group-hover/btn:text-bg-primary transition-colors">
+                          <div className="w-8 h-8 rounded-full bg-white/80 dark:bg-white/10 border border-border-subtle flex items-center justify-center text-text-primary group-hover/btn:bg-accent group-hover/btn:text-white transition-colors">
                             {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                           </div>
                         </button>
@@ -1171,24 +1194,24 @@ export const TrendingProducts = () => {
                                   return (
                                     <div 
                                       key={sIdx}
-                                      className="p-4 rounded-2xl bg-bg-primary/70 border border-border-primary hover:border-accent/50 hover:bg-bg-primary transition-all duration-300 flex flex-col justify-between group/item"
+                                      className="p-4 rounded-2xl bg-white/65 dark:bg-white/[0.05] border border-border-primary hover:border-accent/40 hover:bg-white/90 dark:hover:bg-white/[0.08] transition-all duration-300 flex flex-col justify-between group/item"
                                     >
                                       <div className="flex items-start gap-3.5 mb-2">
-                                        <div className="p-2.5 rounded-xl bg-bg-card text-accent border border-border-primary group-hover/item:scale-110 group-hover/item:border-accent transition-all shrink-0">
+                                        <div className="p-2.5 rounded-xl bg-white/90 dark:bg-white/10 text-accent border border-border-subtle group-hover/item:scale-105 group-hover/item:border-accent/40 transition-all shrink-0">
                                           <IconComp size={18} />
                                         </div>
                                         <div>
                                           <div className="flex items-center gap-2 flex-wrap">
-                                            <h4 className="font-mono text-xs md:text-sm font-bold text-text-primary group-hover/item:text-accent transition-colors">
+                                            <h4 className="font-sans text-xs md:text-sm font-bold text-text-primary group-hover/item:text-accent transition-colors">
                                               {item.title}
                                             </h4>
                                             {item.badge && (
-                                              <span className="px-2 py-0.5 rounded-md bg-accent/15 text-accent text-[9px] font-mono font-bold uppercase">
+                                              <span className="px-2 py-0.5 rounded-md bg-accent/10 text-accent text-[10px] font-mono font-semibold uppercase">
                                                 {item.badge}
                                               </span>
                                             )}
                                           </div>
-                                          <p className="font-mono text-[11px] text-text-secondary/80 leading-relaxed mt-1.5">
+                                          <p className="font-sans text-xs text-text-secondary leading-relaxed mt-1.5">
                                             {item.desc}
                                           </p>
                                         </div>
@@ -1205,17 +1228,20 @@ export const TrendingProducts = () => {
                   </div>
                 </div>
 
-                <div className="p-6 lg:p-8 pt-0 mt-auto">
-                  <div className="flex justify-between items-center border-t border-border-primary pt-6">
+                <div className="p-6 lg:p-8 pt-0 mt-auto relative z-10">
+                  <div className="flex justify-between items-center border-t border-border-subtle pt-5">
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-text-secondary block">Engagement Status</span>
-                      <div className="font-mono font-bold text-xs md:text-sm text-text-primary flex items-center gap-2">
+                      <span className="text-[11px] font-mono uppercase text-text-secondary block">Engagement Model</span>
+                      <div className="font-sans font-semibold text-xs md:text-sm text-text-primary flex items-center gap-2 mt-0.5">
                         <span className="w-2 h-2 rounded-full bg-accent" />
                         {prod.status}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MagneticGlowButton className="p-3 !px-4 text-xs font-mono font-bold flex items-center gap-2">
+                      <MagneticGlowButton
+                        onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="!py-2.5 !px-5 text-xs font-sans font-semibold flex items-center gap-2"
+                      >
                         <span>Inquire Now</span>
                         <ArrowRight size={14} />
                       </MagneticGlowButton>
@@ -1228,7 +1254,7 @@ export const TrendingProducts = () => {
         </div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -1260,7 +1286,7 @@ export const ScrollToTopButton = () => {
           exit={{ opacity: 0, scale: 0, y: 20 }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-24 right-6 w-12 h-12 bg-bg-card/90 hover:bg-accent hover:text-white text-text-primary border border-white/10 rounded-full flex items-center justify-center z-40 shadow-xl backdrop-blur-md hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer outline-none group"
+          className="fixed bottom-24 right-6 w-12 h-12 frosted-panel-elevated hover:bg-accent hover:text-white text-text-primary rounded-full flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer outline-none group"
         >
           <ArrowUp size={20} className="group-hover:-translate-y-0.5 transition-transform duration-300" />
         </motion.button>

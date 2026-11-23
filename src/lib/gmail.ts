@@ -53,7 +53,7 @@ export const initGmailAuth = (
 /**
  * Sign in with Google Popup to obtain Gmail OAuth Access Token
  */
-export const signInWithGmail = async (): Promise<{ user: User; accessToken: string }> => {
+export const signInWithGmail = async (): Promise<{ user: User; accessToken: string } | null> => {
   try {
     isSigningIn = true;
     const result = await signInWithPopup(auth, provider);
@@ -66,7 +66,16 @@ export const signInWithGmail = async (): Promise<{ user: User; accessToken: stri
     cachedAccessToken = credential.accessToken;
     return { user: result.user, accessToken: cachedAccessToken };
   } catch (error: any) {
-    console.error('Gmail OAuth Sign-in error:', error);
+    // If the user closed or dismissed the popup, handle gracefully without logging an error
+    if (
+      error?.code === 'auth/popup-closed-by-user' ||
+      error?.code === 'auth/cancelled-popup-request' ||
+      error?.message?.includes('popup-closed-by-user')
+    ) {
+      // User closed the popup window before finishing sign-in
+      return null;
+    }
+    console.warn('Gmail OAuth Sign-in notice:', error?.message || error);
     throw error;
   } finally {
     isSigningIn = false;

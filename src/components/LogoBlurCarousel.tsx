@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { useSectionFlow } from './SectionFlow';
 
 interface Company {
   id: string;
@@ -16,7 +17,7 @@ const companies: Company[] = [
         <img
           src="/Google%20AI%20Studio%20Gradient%20Wordmark.png"
           alt="Google AI Studio"
-          className="h-7 md:h-8 w-auto object-contain block"
+          className="h-7 md:h-8 w-auto object-contain block drop-shadow-xs"
           loading="eager"
         />
       </div>
@@ -27,7 +28,7 @@ const companies: Company[] = [
     name: 'Cloudflare',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded bg-white shadow-xs shrink-0 border border-border-primary/20">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded-lg bg-white shadow-xs shrink-0 border border-white/30">
           <img
             src="/cloudflare.png"
             alt="Cloudflare"
@@ -43,7 +44,7 @@ const companies: Company[] = [
     name: 'InVideo',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded bg-white shadow-xs shrink-0 border border-border-primary/20">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded-lg bg-white shadow-xs shrink-0 border border-white/30">
           <img
             src="/invideo-logo.png"
             alt="InVideo"
@@ -59,7 +60,7 @@ const companies: Company[] = [
     name: 'LinkedIn',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded bg-white shadow-xs shrink-0 border border-border-primary/20">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center px-2 py-1 rounded-lg bg-white shadow-xs shrink-0 border border-white/30">
           <img
             src="/Linkedin.png"
             alt="LinkedIn"
@@ -75,7 +76,7 @@ const companies: Company[] = [
     name: 'Chify Nigeria',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center p-0.5 rounded bg-white/95 shadow-xs shrink-0 border border-border-primary/20">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center p-1 rounded-lg bg-white shadow-xs shrink-0 border border-white/30">
           <img
             src="/chify-nigeria-logo.png"
             alt="Chify Nigeria"
@@ -91,7 +92,7 @@ const companies: Company[] = [
     name: 'Bytes Ahead Limited',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center rounded overflow-hidden shadow-xs shrink-0 border border-border-primary/20 bg-[#54676b]">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center rounded-lg overflow-hidden shadow-xs shrink-0 border border-white/30 bg-[#54676b]">
           <img
             src="/Bytes%20Ahead.jpg"
             alt="Bytes Ahead Limited"
@@ -107,7 +108,7 @@ const companies: Company[] = [
     name: 'Christmaths Digital Network Services',
     renderLogo: () => (
       <div className="flex items-center">
-        <div className="h-8 md:h-9 w-auto flex items-center justify-center rounded overflow-hidden shadow-xs shrink-0 border border-border-primary/20 bg-[#05182d]">
+        <div className="h-8 md:h-9 w-auto flex items-center justify-center rounded-lg overflow-hidden shadow-xs shrink-0 border border-white/30 bg-[#05182d]">
           <img
             src="/Christmaths%20Digital%20Network%20Logo.png"
             alt="Christmaths Digital Network Services"
@@ -122,42 +123,40 @@ const companies: Company[] = [
 
 export const LogoBlurCarousel: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { ref: carouselFlowRef, style: carouselFlowStyle } = useSectionFlow();
 
-  // Duplicating the 5 logos to create a seamless infinite marquee
+  // Duplicating the logos to create a seamless infinite marquee
   const tickerItems = [...companies, ...companies, ...companies, ...companies];
 
   return (
-    <section className="py-12 md:py-16 relative bg-bg-primary overflow-hidden border-y border-border-primary/40 transition-colors duration-500">
-      {/* Subtle Background Glows */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-80 h-28 bg-accent/10 blur-[90px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 right-1/3 -translate-y-1/2 w-80 h-28 bg-blue-500/10 blur-[90px] rounded-full pointer-events-none" />
-
-      {/* Clean Centered Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-8 md:mb-10 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-            Trusted Ecosystem
-          </span>
+    <motion.section
+      ref={carouselFlowRef}
+      style={carouselFlowStyle}
+      className="py-14 md:py-18 relative bg-white/40 dark:bg-white/5 backdrop-blur-xl overflow-hidden border-y border-border-primary"
+    >
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 mb-8 text-center relative z-10">
+        <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-2">
+          Trusted Ecosystem
         </div>
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold font-mono tracking-tight text-text-primary">
+        <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-text-primary">
           Companies We Work With
         </h2>
       </div>
 
-      {/* Main Carousel Wrapper with Blur Edge Masking */}
+      {/* Carousel Wrapper with Soft Atmospheric Edge Masking */}
       <div 
-        className="relative w-full overflow-hidden py-2"
+        className="relative w-full overflow-hidden py-3"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Left Edge Blur & Gradient Mask */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-44 z-20 pointer-events-none bg-gradient-to-r from-bg-primary via-bg-primary/90 to-transparent backdrop-blur-[2px]" />
+        {/* Left Fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 z-20 pointer-events-none bg-gradient-to-r from-[#eef5ff] via-[#eef5ff]/85 to-transparent dark:from-[#08152e] dark:via-[#08152e]/85" />
         
-        {/* Right Edge Blur & Gradient Mask */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-44 z-20 pointer-events-none bg-gradient-to-l from-bg-primary via-bg-primary/90 to-transparent backdrop-blur-[2px]" />
+        {/* Right Fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 z-20 pointer-events-none bg-gradient-to-l from-[#eef5ff] via-[#eef5ff]/85 to-transparent dark:from-[#08152e] dark:via-[#08152e]/85" />
 
-        {/* Ticker Track */}
+        {/* Marquee Track */}
         <div className="flex items-center gap-6 md:gap-8 w-max">
           <motion.div
             className="flex items-center gap-6 md:gap-8"
@@ -168,7 +167,7 @@ export const LogoBlurCarousel: React.FC = () => {
               x: {
                 repeat: Infinity,
                 repeatType: 'loop',
-                duration: 25,
+                duration: 28,
                 ease: 'linear',
               },
             }}
@@ -176,9 +175,9 @@ export const LogoBlurCarousel: React.FC = () => {
             {tickerItems.map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                className="shrink-0 px-7 py-3.5 rounded-xl bg-bg-secondary/40 hover:bg-bg-secondary/80 border border-border-primary/40 hover:border-accent/50 transition-all duration-300 hover:scale-105 group backdrop-blur-md shadow-xs flex items-center justify-center cursor-default"
+                className="shrink-0 px-6 py-3.5 rounded-2xl bg-white/85 dark:bg-white/95 hover:bg-white border border-white/95 hover:border-blue-300 transition-all duration-300 hover:-translate-y-0.5 group shadow-[0_6px_22px_rgba(30,64,175,0.06)] flex items-center justify-center cursor-default"
               >
-                <div className="transition-transform duration-300 group-hover:scale-102">
+                <div className="transition-transform duration-300 group-hover:scale-105">
                   {item.renderLogo()}
                 </div>
               </div>
@@ -186,6 +185,6 @@ export const LogoBlurCarousel: React.FC = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

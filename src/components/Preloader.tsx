@@ -53,7 +53,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-bg-primary"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center serene-glass-bg"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 0.8, ease: "easeInOut" } }}
     >

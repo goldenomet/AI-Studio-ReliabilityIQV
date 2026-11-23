@@ -51,20 +51,21 @@ export const ServiceDetailModal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-text-primary/80 backdrop-blur-md"
+            className="absolute inset-0 bg-[#0f2547]/45 dark:bg-[#040b1a]/75 backdrop-blur-md"
           />
           <motion.div
             layoutId={`service-card-${service.id}`}
-            className="bg-bg-card w-full max-w-4xl h-full max-h-[800px] rounded-[40px] overflow-hidden relative z-10 flex flex-col shadow-2xl border border-border-primary"
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            className="frosted-panel-elevated w-full max-w-4xl h-full max-h-[800px] rounded-[36px] overflow-hidden relative z-10 flex flex-col"
+            initial={{ scale: 0.94, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            exit={{ scale: 0.94, opacity: 0, y: 20 }}
           >
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-8 md:right-8 z-20 p-4 crystal-button text-bg-primary shadow-xl"
+              aria-label="Close modal"
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-3 frosted-panel rounded-full text-text-primary hover:bg-accent hover:text-white transition-colors shadow-sm cursor-pointer"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
 
             <div className="flex-grow overflow-y-auto custom-scrollbar">

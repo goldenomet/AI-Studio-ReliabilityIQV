@@ -114,7 +114,6 @@ export const OmniReveal: React.FC<OmniRevealProps> = ({
     <ContainerTag
       ref={containerRef}
       className={`relative flex flex-wrap items-baseline ${className}`}
-      style={{ paddingBottom: scrollHeight }}
     >
       <span
         style={{

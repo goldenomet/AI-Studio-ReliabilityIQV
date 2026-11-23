@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import servicehero from '@/src/assets/images/service hero.png';
+import { useSectionFlow } from './SectionFlow';
 
 
 export const ServicesHero = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const { style: heroFlowStyle } = useSectionFlow({ isHero: true, externalRef: containerRef });
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -15,7 +17,7 @@ export const ServicesHero = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen z-0 overflow-hidden bg-bg-primary pt-[110px] transition-colors duration-500">
+    <motion.section ref={containerRef} style={heroFlowStyle} className="relative w-full h-screen z-0 overflow-hidden bg-bg-primary pt-[110px] transition-colors duration-500">
       
       {/* Background Image Container */}
       <motion.div 
@@ -31,13 +33,13 @@ export const ServicesHero = () => {
           <img 
             src={servicehero}
             alt="Modern Architecture" 
-            className="w-full h-full object-cover dark:opacity-90 dark:brightness-85 transition-all duration-500"
             referrerPolicy="no-referrer"
+            className="w-full h-full object-cover opacity-55 dark:opacity-35 transition-all duration-500"
           />
         </motion.div>
         
-        {/* Theme-aware Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/10 to-transparent pointer-events-none" />
+        {/* Theme-aware Serene Glass Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#eef5ff] via-[#eef5ff]/70 to-[#eef5ff]/20 dark:from-[#07142b] dark:via-[#07142b]/70 dark:to-transparent pointer-events-none" />
       </motion.div>
 
       {/* Hero Content - Bottom Aligned */}
@@ -52,7 +54,7 @@ export const ServicesHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-serif text-text-primary tracking-normal leading-tight mb-4 text-3xl sm:text-4xl md:text-[38px] transition-colors duration-500 font-bold"
+            className="font-sans text-text-primary tracking-tight leading-tight mb-4 text-3xl sm:text-4xl md:text-[44px] transition-colors duration-500 font-extrabold"
             style={{ 
               maxWidth: '600px',
               minHeight: '50px',
@@ -100,6 +102,6 @@ export const ServicesHero = () => {
       </motion.div>
 
       {/* Scroll Indicator or additional aesthetics can go here if needed */}
-    </section>
+    </motion.section>
   );
 };

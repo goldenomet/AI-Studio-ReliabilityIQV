@@ -3,21 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/logo.png" />
-    <title>ReliabilityIQ Ventures | Enterprise IT Solutions Nigeria & Global</title>
-    <meta name="description" content="ReliabilityIQ Ventures delivers comprehensive Enterprise IT Solutions in Nigeria and globally, specializing in Web Operations, AI Automations, GIS Mapping, and Technical Reports." />
-    
-    <!-- Open Graph / Facebook -->
+    <title>ReliabilityIQ Ventures | Web Operations, AI Automations & Managed IT</title>
+    <meta name="description" content="Powering modern enterprises with mission-critical web operations, AI workflow automations, GIS mapping & managed IT infrastructure from Lagos to the world." />
+    <meta name="keywords" content="Enterprise IT Solutions Nigeria, Web Operations, AI Automations, GIS Mapping, Managed IT Support Lagos, Cloud Infrastructure, Sentinel AI Firewall, System Architecture" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook & LinkedIn -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="ReliabilityIQ Ventures | Enterprise IT Solutions Nigeria & Global" />
-    <meta property="og:description" content="ReliabilityIQ Ventures delivers comprehensive Enterprise IT Solutions in Nigeria and globally, specializing in Web Operations, AI Automations, GIS Mapping, and Technical Reports." />
+    <meta property="og:site_name" content="ReliabilityIQ Ventures" />
+    <meta property="og:title" content="ReliabilityIQ Ventures | Web Operations, AI Automations & Managed IT" />
+    <meta property="og:description" content="Powering modern enterprises with mission-critical web operations, AI workflow automations, GIS mapping & managed IT infrastructure from Lagos to the world." />
     <meta property="og:image" content="/logo.png" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ReliabilityIQ Ventures | Enterprise IT Solutions Nigeria & Global" />
-    <meta name="twitter:description" content="ReliabilityIQ Ventures delivers comprehensive Enterprise IT Solutions in Nigeria and globally, specializing in Web Operations, AI Automations, GIS Mapping, and Technical Reports." />
+    <meta name="twitter:title" content="ReliabilityIQ Ventures | Web Operations, AI Automations & Managed IT" />
+    <meta name="twitter:description" content="Powering modern enterprises with mission-critical web operations, AI workflow automations, GIS mapping & managed IT infrastructure from Lagos to the world." />
     <meta name="twitter:image" content="/logo.png" />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ReliabilityIQ Ventures",
+      "url": "https://reliabilityiq.com",
+      "logo": "/logo.png",
+      "image": "/logo.png",
+      "description": "Powering modern enterprises with mission-critical web operations, AI workflow automations, GIS mapping & managed IT infrastructure from Lagos to the world.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ipaja, Lagos State",
+        "addressCountry": "NG"
+      },
+      "telephone": "+2349075934287",
+      "email": "reliabilityiqventures@gmail.com",
+      "areaServed": ["Nigeria", "Global"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Enterprise IT Solutions",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Operations & Full-Stack Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Enterprise AI Workflow Automations" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GIS Mapping & Spatial Intelligence" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Managed IT Support & Cloud Infrastructure" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Reports & Compliance Auditing" } }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
