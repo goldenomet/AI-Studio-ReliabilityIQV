@@ -16,8 +16,8 @@ const SERVICE_NODES = [
   {
     num: '01',
     label: 'DEVELOP',
-    title: 'Web Operations & Cloud',
-    summary: 'High-availability web architecture, automated failover pipelines, CMS engineering, and 99.99% uptime cloud delivery.',
+    title: 'Custom Software & Application Development',
+    summary: 'Scalable web platforms, enterprise software engineering, and resilient cloud systems built for speed, security, and measurable business growth.',
     thumb: webOpsThumb,
     heroImage: heroGlassBackdrop,
     page: 'service-development',
@@ -25,8 +25,8 @@ const SERVICE_NODES = [
   {
     num: '02',
     label: 'TRAIN',
-    title: 'AI Workflow Intelligence',
-    summary: 'Custom AI agents and automated data pipelines that streamline enterprise reporting, document triage, and decision support.',
+    title: 'Enterprise AI Training & Data Readiness',
+    summary: 'Hands-on AI training, domain-tuned models, and practical technical upskilling that equip organizations to adopt intelligent tools with confidence.',
     thumb: aiAutoThumb,
     heroImage: heroAutomationGlass,
     page: 'service-automation',
@@ -34,8 +34,8 @@ const SERVICE_NODES = [
   {
     num: '03',
     label: 'AUTOMATE',
-    title: 'Geospatial & Data Mapping',
-    summary: 'Precision GIS mapping, spatial analytics, and structured technical documentation across African and global corridors.',
+    title: 'Workflow Automation & Data Analytics',
+    summary: 'End-to-end workflow automation, real-time data analysis pipelines, and operational intelligence that eliminate manual bottlenecks and guide decisions.',
     thumb: gisMapThumb,
     heroImage: heroSpatialGlass,
     page: 'service-gis',
