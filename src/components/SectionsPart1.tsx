@@ -7,9 +7,6 @@ import heroGlassBackdrop from '@/src/assets/images/hero_glass_backdrop_179546078
 import heroAutomationGlass from '@/src/assets/images/hero_automation_glass_1795462668369.jpg';
 import heroSpatialGlass from '@/src/assets/images/hero_spatial_glass_1795462668998.jpg';
 import sereneGlassLayers from '@/src/assets/images/serene_glass_layers_1795460787074.jpg';
-import webOpsThumb from '@/src/assets/images/node_develop_minimalist_1795555742353.jpg';
-import aiAutoThumb from '@/src/assets/images/node_train_minimalist_1795555742977.jpg';
-import gisMapThumb from '@/src/assets/images/node_automate_minimalist_1795555744366.jpg';
 import heroComputerTelecomSketch from '@/src/assets/images/hero_computer_telecom_sketch_1795552311548.jpg';
 
 const SERVICE_NODES = [
@@ -18,7 +15,7 @@ const SERVICE_NODES = [
     label: 'DEVELOP',
     title: 'Custom Software & Application Development',
     summary: 'Scalable web platforms, enterprise software engineering, and resilient cloud systems built for speed, security, and measurable business growth.',
-    thumb: webOpsThumb,
+    thumb: '/assets/aistudio/13097_b15c39b9.jpg',
     heroImage: heroGlassBackdrop,
     page: 'service-development',
   },
@@ -27,7 +24,7 @@ const SERVICE_NODES = [
     label: 'TRAIN',
     title: 'Enterprise AI Training & Data Readiness',
     summary: 'Hands-on AI training, domain-tuned models, and practical technical upskilling that equip organizations to adopt intelligent tools with confidence.',
-    thumb: aiAutoThumb,
+    thumb: '/assets/aistudio/2149001149_94f84c99.jpg',
     heroImage: heroAutomationGlass,
     page: 'service-automation',
   },
@@ -36,7 +33,7 @@ const SERVICE_NODES = [
     label: 'AUTOMATE',
     title: 'Workflow Automation & Data Analytics',
     summary: 'End-to-end workflow automation, real-time data analysis pipelines, and operational intelligence that eliminate manual bottlenecks and guide decisions.',
-    thumb: gisMapThumb,
+    thumb: '/assets/aistudio/1795560970040_c60b505c.jpg',
     heroImage: heroSpatialGlass,
     page: 'service-gis',
   },
@@ -462,6 +459,8 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                           alt={node.title}
                           referrerPolicy="no-referrer"
                           className={`w-full h-full rounded-full object-cover transition-all duration-300 ${
+                            node.num === '03' ? 'object-right' : 'object-center'
+                          } ${
                             isActive ? 'grayscale-0' : 'grayscale opacity-85'
                           }`}
                         />
@@ -729,6 +728,8 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                         alt={node.title}
                         referrerPolicy="no-referrer"
                         className={`w-full h-full rounded-full object-cover transition-all duration-300 ${
+                          node.num === '03' ? 'object-right' : 'object-center'
+                        } ${
                           isActive ? 'grayscale-0' : 'grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100'
                         }`}
                       />
