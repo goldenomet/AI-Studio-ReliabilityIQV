@@ -23,7 +23,7 @@ import { FlowSection, PAGE_TRANSITION_PROPS } from './components/SectionFlow';
 import rufusImg from './assets/images/Rufus portfolio.jpg';
 import theophilusImg from './assets/images/Theo portfolio.jpg';
 import kikaImg from './assets/images/Kika portfolio.jpg';
-import section1Img from './assets/images/section1.png';
+import section3Img from './assets/images/section3.jpg';
 
 const FOUNDERS = [
   {
@@ -128,13 +128,13 @@ export default function App() {
               <div className="absolute inset-0 z-0 flex items-center justify-center">
                 <motion.img 
                   initial={{ scale: 1.06, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 0.5 }}
+                  animate={{ scale: 1, opacity: 0.65 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                  src={section1Img} 
-                  alt="Modern Architectural Glassmorphism Infrastructure" 
-                  className="w-full h-full object-cover dark:opacity-30" 
+                  src={section3Img} 
+                  alt="ReliabilityIQ Ventures Architectural Backdrop" 
+                  className="w-full h-full object-cover object-center dark:opacity-45" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#eff5ff]/70 via-[#e2eeff]/75 to-[#eef5ff] dark:from-[#07142b]/80 dark:via-[#0b1c3b]/80 dark:to-[#07142b] backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#eff5ff]/55 via-[#e2eeff]/65 to-[#eef5ff] dark:from-[#07142b]/70 dark:via-[#0b1c3b]/75 dark:to-[#07142b] backdrop-blur-[1px]" />
               </div>
               
               <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 flex flex-col gap-6 md:gap-10 pb-4 h-full justify-end flex-grow" style={{ minHeight: '760px' }}>
