@@ -5,9 +5,10 @@ import {
   VolumeX, SkipForward, Music, ChevronRight, ChevronDown,
   Code, BrainCircuit, Video, Map, Megaphone, FileText, ArrowRight
 } from 'lucide-react';
-import logo from '@/src/assets/images/logo.png';
 import { ambientSynth } from '../../lib/audio';
 import { useBackgroundMusic } from '../../hooks/useBackgroundMusic';
+
+const logo = '/assets/aistudio/Glossy_Teal_Growth_Arrow_Emblem_587c276c.png';
 
 const SERVICE_DETAIL_LINKS = [
   { id: 'service-branding', title: 'Digital Platforms', subtitle: 'Websites, Apps & Systems', icon: Code },

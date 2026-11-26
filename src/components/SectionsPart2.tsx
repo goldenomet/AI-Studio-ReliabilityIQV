@@ -22,7 +22,6 @@ import { MagneticGlowButton } from './MagneticGlowButton';
 import { SmartTypewriter, TextEngine, PixelSnow, TextScroll, GrainyGradient } from './Effects';
 import { ServiceDetailModal, ServiceDetail as IServiceDetail } from './ServiceDetailModal';
 
-import fallbackLogo from '@/src/assets/images/logo.png';
 import newImage1778002658766 from '@/src/assets/images/regenerated_image_1778002658766.jpg';
 import newImage1778003940043 from '@/src/assets/images/regenerated_image_1778003940043.jpg';
 import newImage1778003942890 from '@/src/assets/images/regenerated_image_1778003942890.jpg';

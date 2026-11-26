@@ -321,83 +321,97 @@
     transition: filter 0.5s ease, opacity 0.5s ease;
   }
 
-  /* Serene Soft Blue Translucent Glass Orb */
+  /* Smooth High-Gloss Iridescent Glass Bubble Orb */
   .liquid-3d-orb {
     width: 100%;
     height: 100%;
     position: relative;
-    border-radius: 46% 54% 58% 42% / 44% 48% 52% 56%;
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #dbeafe 18%, #93c5fd 42%, #3b82f6 72%, #1d4ed8 100%);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 32% 28%,
+      rgba(224, 242, 254, 0.32) 0%,
+      rgba(56, 189, 248, 0.16) 28%,
+      rgba(129, 140, 248, 0.18) 54%,
+      rgba(217, 70, 239, 0.14) 76%,
+      rgba(6, 20, 46, 0.85) 100%
+    );
     box-shadow:
-      0 30px 70px rgba(59, 130, 246, 0.22),
-      0 0 100px rgba(147, 197, 253, 0.35),
-      inset 14px 16px 32px rgba(255, 255, 255, 0.9),
-      inset -18px -24px 45px rgba(29, 78, 216, 0.35);
-    animation: liquidMorph 14s ease-in-out infinite alternate, liquidPulse 8s ease-in-out infinite alternate;
-    will-change: border-radius, transform;
+      0 24px 80px rgba(37, 99, 235, 0.28),
+      0 0 110px rgba(139, 92, 246, 0.22),
+      inset 10px 12px 30px rgba(255, 255, 255, 0.32),
+      inset -14px -18px 42px rgba(56, 189, 248, 0.22);
+    animation: liquidMorph 12s ease-in-out infinite alternate, liquidPulse 8s ease-in-out infinite alternate;
+    will-change: transform, filter;
     overflow: hidden;
   }
 
   .liquid-3d-highlight {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 14%;
-    width: 48%;
-    height: 38%;
+    width: 46%;
+    height: 32%;
     border-radius: 50%;
-    transform: rotate(-25deg);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.4) 38%, transparent 70%);
-    filter: blur(4px);
+    transform: rotate(-22deg);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(186, 230, 253, 0.25) 45%, transparent 72%);
+    filter: blur(5px);
     pointer-events: none;
   }
 
   .liquid-3d-glint {
     position: absolute;
-    top: 16%;
-    left: 22%;
-    width: 14%;
-    height: 9%;
+    top: 15%;
+    left: 23%;
+    width: 12%;
+    height: 7%;
     border-radius: 50%;
-    background: #ffffff;
-    filter: drop-shadow(0 0 10px #ffffff);
-    opacity: 0.95;
+    background: rgba(255, 255, 255, 0.92);
+    filter: drop-shadow(0 0 12px rgba(224, 242, 254, 0.95));
+    opacity: 0.9;
     pointer-events: none;
   }
 
   .liquid-3d-swirl {
     position: absolute;
-    inset: 4%;
+    inset: 3%;
     border-radius: 50%;
     background:
-      radial-gradient(circle at 68% 70%, rgba(147, 197, 253, 0.5) 0%, transparent 60%),
-      conic-gradient(from 0deg at 50% 50%, rgba(255, 255, 255, 0.45) 0deg, transparent 70deg, rgba(191, 219, 254, 0.5) 180deg, transparent 280deg, rgba(255, 255, 255, 0.35) 360deg);
-    mix-blend-mode: overlay;
-    animation: liquidSwirl 22s linear infinite;
-    opacity: 0.8;
+      radial-gradient(circle at 70% 72%, rgba(244, 114, 182, 0.28) 0%, transparent 56%),
+      conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(56, 189, 248, 0.32) 0deg,
+        transparent 75deg,
+        rgba(192, 132, 252, 0.35) 165deg,
+        rgba(251, 191, 36, 0.24) 245deg,
+        transparent 310deg,
+        rgba(56, 189, 248, 0.32) 360deg
+      );
+    mix-blend-mode: screen;
+    animation: liquidSwirl 20s linear infinite;
+    opacity: 0.72;
     pointer-events: none;
   }
 
   .liquid-3d-rim {
     position: absolute;
     inset: 0;
-    border-radius: inherit;
+    border-radius: 50%;
     box-shadow:
-      inset -12px -12px 28px rgba(191, 219, 254, 0.6),
-      inset 3px 3px 8px rgba(255, 255, 255, 0.9);
+      inset -10px -10px 26px rgba(192, 132, 252, 0.34),
+      inset 3px 3px 10px rgba(255, 255, 255, 0.45);
     pointer-events: none;
   }
 
   @keyframes liquidMorph {
-    0% { border-radius: 46% 54% 58% 42% / 44% 48% 52% 56%; transform: rotate(0deg) scale(1); }
-    33% { border-radius: 56% 44% 42% 58% / 54% 60% 40% 46%; transform: rotate(120deg) scale(1.02); }
-    66% { border-radius: 38% 62% 52% 48% / 60% 40% 60% 40%; transform: rotate(240deg) scale(0.98); }
-    100% { border-radius: 52% 48% 40% 60% / 42% 54% 46% 58%; transform: rotate(360deg) scale(1); }
+    0% { transform: scale(0.985) translateY(0px); }
+    50% { transform: scale(1.015) translateY(-6px); }
+    100% { transform: scale(0.99) translateY(4px); }
   }
 
   @keyframes liquidPulse {
-    0% { filter: brightness(1) contrast(1); }
-    50% { filter: brightness(1.04) contrast(1.02); }
-    100% { filter: brightness(0.98) contrast(0.99); }
+    0% { filter: brightness(1) saturate(1.02); }
+    50% { filter: brightness(1.06) saturate(1.12); }
+    100% { filter: brightness(0.99) saturate(1.04); }
   }
 
   @keyframes liquidSwirl {
@@ -541,3 +555,84 @@
     animation: none;
   }
 }
+
+/* ==========================================================================
+   Warm Champagne & Smoked Taupe Glassmorphism Primitives (News Room)
+   ========================================================================== */
+.champagne-glass-panel {
+  background: linear-gradient(
+    144deg,
+    rgba(104, 82, 66, 0.72) 0%,
+    rgba(82, 63, 50, 0.68) 52%,
+    rgba(64, 48, 38, 0.76) 100%
+  );
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 24px 60px -16px rgba(84, 38, 62, 0.22),
+    0 8px 22px -8px rgba(34, 22, 14, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.champagne-glass-card {
+  background: linear-gradient(
+    150deg,
+    rgba(96, 76, 61, 0.76) 0%,
+    rgba(74, 57, 45, 0.72) 54%,
+    rgba(56, 43, 34, 0.8) 100%
+  );
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  box-shadow:
+    0 18px 44px -14px rgba(84, 38, 62, 0.22),
+    0 6px 16px -6px rgba(28, 18, 12, 0.22),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.54),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.14);
+}
+
+.champagne-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.68);
+  box-shadow:
+    0 24px 54px -14px rgba(84, 38, 62, 0.28),
+    0 10px 24px -8px rgba(28, 18, 12, 0.26),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.champagne-glass-sidebar {
+  background: linear-gradient(
+    180deg,
+    rgba(154, 130, 110, 0.32) 0%,
+    rgba(116, 93, 75, 0.28) 52%,
+    rgba(86, 67, 52, 0.38) 100%
+  );
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 16px 38px -12px rgba(22, 14, 9, 0.32),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.44),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.champagne-glass-input {
+  background: rgba(46, 35, 27, 0.34);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(20, 12, 8, 0.22);
+}
+
+.champagne-glass-specular {
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 245, 232, 0.08) 28%,
+    transparent 56%
+  );
+  pointer-events: none;
+}
+

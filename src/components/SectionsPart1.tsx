@@ -17,7 +17,7 @@ const SERVICE_NODES = [
     summary: 'Scalable web platforms, enterprise software engineering, and resilient cloud systems built for speed, security, and measurable business growth.',
     thumb: '/assets/aistudio/13097_b15c39b9.jpg',
     heroImage: heroGlassBackdrop,
-    page: 'service-development',
+    page: 'blog-develop',
   },
   {
     num: '02',
@@ -26,7 +26,7 @@ const SERVICE_NODES = [
     summary: 'Hands-on AI training, domain-tuned models, and practical technical upskilling that equip organizations to adopt intelligent tools with confidence.',
     thumb: '/assets/aistudio/2149001149_94f84c99.jpg',
     heroImage: heroAutomationGlass,
-    page: 'service-automation',
+    page: 'blog-train',
   },
   {
     num: '03',
@@ -35,7 +35,7 @@ const SERVICE_NODES = [
     summary: 'End-to-end workflow automation, real-time data analysis pipelines, and operational intelligence that eliminate manual bottlenecks and guide decisions.',
     thumb: '/assets/aistudio/1795560970040_c60b505c.jpg',
     heroImage: heroSpatialGlass,
-    page: 'service-gis',
+    page: 'blog-automate',
   },
 ];
 
@@ -343,7 +343,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                 <span className="swimtopia-pill-badge">
                   <ChevronRight size={14} strokeWidth={2.5} />
                 </span>
-                <span>Explore {currentService.label.charAt(0) + currentService.label.slice(1).toLowerCase()}</span>
+                <span>News Room</span>
               </button>
 
               <button

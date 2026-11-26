@@ -1,6 +1,7 @@
 import React from 'react';
 import { Linkedin, Twitter, Github, Youtube, Instagram, Lock, ArrowUpRight, Globe } from 'lucide-react';
-import logo from '@/src/assets/images/logo.png';
+
+const logo = '/assets/aistudio/Glossy_Teal_Growth_Arrow_Emblem_587c276c.png';
 
 export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
   <a 

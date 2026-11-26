@@ -19,6 +19,7 @@ import { ChatbotWidget } from './components/ChatbotWidget';
 import { AdminPanel } from './components/AdminPanel';
 import FounderToggle from './components/FounderToggle';
 import { FlowSection, PAGE_TRANSITION_PROPS } from './components/SectionFlow';
+import { BlogPage } from './components/BlogPage';
 
 import rufusImg from './assets/images/Rufus portfolio.jpg';
 import theophilusImg from './assets/images/Theo portfolio.jpg';
@@ -254,6 +255,23 @@ export default function App() {
             <AdminPanel />
           </motion.div>
         );
+      case 'blog':
+      case 'blog-develop':
+      case 'blog-train':
+      case 'blog-automate': {
+        const trackMap = {
+          blog: 'all',
+          'blog-develop': 'develop',
+          'blog-train': 'train',
+          'blog-automate': 'automate',
+        } as const;
+        const initialTrack = trackMap[currentPage as keyof typeof trackMap] ?? 'all';
+        return (
+          <motion.div key={currentPage} {...PAGE_TRANSITION_PROPS} className="w-full">
+            <BlogPage initialTrack={initialTrack} onNavigate={handlePageChange} />
+          </motion.div>
+        );
+      }
       default:
         return null;
     }

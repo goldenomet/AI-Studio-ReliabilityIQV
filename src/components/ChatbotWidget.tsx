@@ -5,7 +5,8 @@ import { Send, RotateCcw, ChevronRight, ArrowUpRight, CheckCircle2, Loader2, X, 
 import { useWidgetVisibility } from '../hooks/useWidgetVisibility';
 import { useMovableDock } from '../hooks/useMovableDock';
 import { SideDockGuide, MinimizeEdgeHandle, DockedSideTab } from './SideDockControls';
-import websiteLogo from '../assets/images/logo.png';
+
+const websiteLogo = '/assets/aistudio/Glossy_Teal_Growth_Arrow_Emblem_587c276c.png';
 
 import { getGmailAccessToken } from '../lib/gmail';
 
