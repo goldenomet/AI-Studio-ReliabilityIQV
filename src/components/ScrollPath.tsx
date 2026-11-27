@@ -25,7 +25,10 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
       ctx && ctx.revert();
       ctx = gsap.context(() => {
         const box = root.querySelector<HTMLElement>(".sp-box");
-        if (!box) return;
+        const pivot = root.querySelector<HTMLElement>(".laptop-3d-pivot");
+        if (!box || !pivot) return;
+
+        pivot.style.transform = "translate3d(0, 0, 0) rotateY(0deg)";
         const boxStartRect = box.getBoundingClientRect();
 
         const containers = gsap.utils.toArray<HTMLElement>(
@@ -45,6 +48,81 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
               (boxStartRect.top + boxStartRect.height / 2),
           };
         });
+
+        // Precompute exact arc-length milestone progresses for each card waypoint
+        // so rotateY peaks smoothly mid-glide (±45deg) and resets cleanly to 0deg upon arrival.
+        const waypoints = [{ x: 0, y: 0 }, ...points];
+        const rawPath = MotionPathPlugin.arrayToRawPath(waypoints, {
+          curviness: 1.5,
+        });
+        MotionPathPlugin.cacheRawPathMeasurements(rawPath);
+
+        const SAMPLES = 600;
+        const milestoneProgress: number[] = [0];
+        let searchStartIdx = 0;
+
+        for (let k = 1; k < waypoints.length - 1; k++) {
+          const target = waypoints[k];
+          let bestIdx = searchStartIdx + 1;
+          let bestDistSq = Infinity;
+          const maxIdx = SAMPLES - (waypoints.length - 1 - k);
+          for (let i = searchStartIdx + 1; i <= maxIdx; i++) {
+            const pos = MotionPathPlugin.getPositionOnPath(
+              rawPath,
+              i / SAMPLES,
+              false
+            );
+            const dx = pos.x - target.x;
+            const dy = pos.y - target.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < bestDistSq) {
+              bestDistSq = distSq;
+              bestIdx = i;
+            }
+          }
+          milestoneProgress.push(bestIdx / SAMPLES);
+          searchStartIdx = bestIdx;
+        }
+        milestoneProgress.push(1);
+
+        const updateLaptopYaw = (progress: number) => {
+          const clamped = Math.max(0, Math.min(1, progress));
+          if (clamped <= 0.0005 || clamped >= 0.9995) {
+            pivot.style.transform = "translate3d(0, 0, 0) rotateY(0deg)";
+            return;
+          }
+
+          let segIdx = 0;
+          for (let k = 0; k < milestoneProgress.length - 1; k++) {
+            if (clamped >= milestoneProgress[k] && clamped <= milestoneProgress[k + 1]) {
+              segIdx = k;
+              break;
+            }
+          }
+
+          const tStart = milestoneProgress[segIdx];
+          const tEnd = milestoneProgress[segIdx + 1];
+          const u = (clamped - tStart) / Math.max(0.0001, tEnd - tStart);
+
+          const dx = waypoints[segIdx + 1].x - waypoints[segIdx].x;
+          // Moving center->left or right->left turns toward -45deg; left->right turns toward +45deg.
+          // Falls back to a gentler alternating swivel on single-column mobile viewports.
+          const peakYaw =
+            Math.abs(dx) > 30
+              ? dx < 0
+                ? -45
+                : 45
+              : segIdx % 2 === 0
+                ? -24
+                : 24;
+
+          // Raised-sine bell envelope: 0 at u=0 (card departure) and u=1 (card lock), peak at u=0.5
+          const s = Math.sin(Math.PI * u);
+          const bell = s * s;
+          const yaw = peakYaw * bell;
+
+          pivot.style.transform = `translate3d(0, 0, 0) rotateY(${yaw.toFixed(3)}deg)`;
+        };
 
         containers.forEach((container) => {
           gsap.fromTo(
@@ -73,6 +151,9 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
             end: "clamp(top center)",
             scrub: 0.6,
           },
+          onUpdate: () => {
+            updateLaptopYaw(tl.progress());
+          },
         });
 
         tl.to(box, {
@@ -81,6 +162,8 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
           force3D: true,
           motionPath: { path: points, curviness: 1.5 },
         });
+
+        updateLaptopYaw(tl.progress());
       }, root);
     };
 
@@ -111,14 +194,13 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
             <p className="text-text-secondary text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
           <div className="sp-box absolute inset-0 m-auto pointer-events-none">
-            <div className="liquid-3d-float w-full h-full">
-              <div className="liquid-3d-orb">
-                <div className="liquid-3d-swirl" />
-                <div className="liquid-3d-wave" />
-                <div className="liquid-3d-highlight" />
-                <div className="liquid-3d-glint" />
-                <div className="liquid-3d-rim" />
-              </div>
+            <div className="laptop-3d-pivot w-full h-full flex items-center justify-center">
+              <img
+                src="/assets/aistudio/file_0000000029508210b45aa0b4a15231b2_675d1a5d.png"
+                alt="ReliabilityIQ 3D Laptop"
+                draggable={false}
+                className="w-full h-full object-contain translate-y-[9%] select-none pointer-events-none drop-shadow-[0_22px_38px_rgba(15,37,71,0.24)]"
+              />
             </div>
           </div>
         </div>
@@ -203,4 +285,3 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
     </div>
   );
 }
-
