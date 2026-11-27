@@ -424,7 +424,7 @@ export const ContactSection = () => {
               details: formData.details,
               subject: `[ReliabilityIQ] Inquiry from ${fullName}`
             },
-            'reliabilityiqventures@gmail.com'
+            'info@reliabilityiqventures.com'
           );
           sentToGmailDirectly = true;
         } catch (gErr) {
@@ -463,7 +463,7 @@ export const ContactSection = () => {
       console.error("Submission Error:", error);
       const subject = encodeURIComponent(`Inquiry from ${fullName}`);
       const body = encodeURIComponent(`Name: ${fullName}\nEmail: ${formData.email}\nService: ${formData.service}\nDetails: ${formData.details}`);
-      window.location.href = `mailto:reliabilityiqventures@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@reliabilityiqventures.com?subject=${subject}&body=${body}`;
       setSuccessMessage("Opening Mail Client");
       setIsSuccess(true);
     } finally {
@@ -705,7 +705,7 @@ export const ContactSection = () => {
                     <Mail size={13} className="text-accent" /> Electronic Mail
                   </div>
                   <div className="font-mono text-sm sm:text-base font-semibold text-text-primary">
-                    <a href="mailto:reliabilityiqventures@gmail.com" className="hover:text-accent transition-all hover:translate-x-1 inline-block break-all">reliabilityiqventures@gmail.com</a>
+                    <a href="mailto:info@reliabilityiqventures.com" className="hover:text-accent transition-all hover:translate-x-1 inline-block break-all">info@reliabilityiqventures.com</a>
                   </div>
                 </div>
               </div>

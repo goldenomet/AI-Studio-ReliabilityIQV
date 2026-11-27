@@ -112,7 +112,7 @@ export const sendFormSubmissionViaGmail = async (
   submission: FormSubmissionPayload,
   recipientEmail?: string
 ) => {
-  const targetRecipient = recipientEmail || 'reliabilityiqventures@gmail.com';
+  const targetRecipient = recipientEmail || 'info@reliabilityiqventures.com';
   const emailSubject = submission.subject || `[ReliabilityIQ] New Form Submission: ${submission.service || 'General Inquiry'}`;
   
   const bodyText = [

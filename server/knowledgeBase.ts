@@ -6,7 +6,7 @@ export const RELIABILITY_IQ_KNOWLEDGE_BASE = `
 - Founded: 2024 by Rufus, Theophilus, and Kika.
 - Headquarters: Ipaja District, Lagos State, Nigeria (West Africa Operations Hub, serving clients globally).
 - Direct Contact Details:
-  * Email: reliabilityiqventures@gmail.com
+  * Email: info@reliabilityiqventures.com
   * Primary WhatsApp / Phone: +234 907 593 4287
   * Secondary Phone: +234 906 539 4605
   * WhatsApp Direct Link: https://wa.me/2349075934287

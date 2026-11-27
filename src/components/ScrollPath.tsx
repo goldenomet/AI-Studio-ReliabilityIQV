@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ArrowRight, MessageSquare } from "lucide-react";
-import iridescentBubbleOrb from "@/src/assets/images/iridescent_bubble_orb_1795564234905.jpg";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -13,7 +12,6 @@ interface ScrollPathProps {
 
 export default function ScrollPath({ onNavigate }: ScrollPathProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const [orbImgFailed, setOrbImgFailed] = useState(false);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -91,45 +89,22 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
   }, []);
 
   return (
-    <div ref={rootRef} className="overflow-hidden font-mono bg-[#06142e] pb-12 md:pb-16 transition-colors duration-500 relative">
-      {/* Subtle Ethereal Navy Atmosphere */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 30% at 50% 10%, rgba(30, 64, 175, 0.24) 0%, transparent 70%), radial-gradient(ellipse 70% 35% at 25% 50%, rgba(56, 189, 248, 0.12) 0%, transparent 70%), radial-gradient(ellipse 70% 35% at 75% 75%, rgba(139, 92, 246, 0.14) 0%, transparent 70%)",
-        }}
-      />
+    <div ref={rootRef} className="overflow-hidden font-mono bg-transparent pb-12 md:pb-16 transition-colors duration-500 relative">
       <div className="sp-spacer" />
       <div className="sp-main">
         {/* Intro */}
         <div className="sp-container sp-initial !border-none !bg-transparent text-center !w-full max-w-[540px] min-h-[380px] md:min-h-[520px] !p-6 flex items-center justify-center">
           <div className="space-y-3 relative z-20 max-w-sm md:max-w-md mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tighter uppercase italic transition-colors duration-500 drop-shadow-[0_3px_18px_rgba(3,10,28,0.85)]">Why Choose Us?</h2>
-            <p className="text-blue-100/90 text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500 drop-shadow-[0_2px_12px_rgba(3,10,28,0.88)]">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary tracking-tighter uppercase italic transition-colors duration-500">Why Choose Us?</h2>
+            <p className="text-text-secondary text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
           <div className="sp-box absolute inset-0 m-auto pointer-events-none">
-            {/* Iridescent Glass Bubble Orb */}
+            <div className="liquid-3d-aura" />
             <div className="liquid-3d-orb">
-              {!orbImgFailed && (
-                <img
-                  src={iridescentBubbleOrb}
-                  alt=""
-                  referrerPolicy="no-referrer"
-                  onError={() => setOrbImgFailed(true)}
-                  className="absolute inset-0 w-full h-full object-cover scale-[1.12] pointer-events-none select-none"
-                  style={{
-                    maskImage:
-                      "radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0.82) 66%, rgba(0,0,0,0) 94%)",
-                    WebkitMaskImage:
-                      "radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0.82) 66%, rgba(0,0,0,0) 94%)",
-                  }}
-                />
-              )}
+              <div className="liquid-3d-swirl" />
+              <div className="liquid-3d-wave" />
               <div className="liquid-3d-highlight" />
               <div className="liquid-3d-glint" />
-              <div className="liquid-3d-swirl" />
               <div className="liquid-3d-rim" />
             </div>
           </div>

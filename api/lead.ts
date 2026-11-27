@@ -33,7 +33,7 @@ export default async function handler(req: Request, res: Response) {
     if (clientAuthToken) {
       try {
         const rawEmail = [
-          `To: reliabilityiqventures@gmail.com`,
+          `To: info@reliabilityiqventures.com`,
           `Subject: [Form Submission] New Inquiry from ${contactName}`,
           `Content-Type: text/plain; charset="UTF-8"`,
           `Content-Transfer-Encoding: 7bit`,
@@ -91,7 +91,7 @@ export default async function handler(req: Request, res: Response) {
 
         await transporter.sendMail({
           from: process.env.COMPANY_EMAIL_USER,
-          to: 'reliabilityiqventures@gmail.com',
+          to: 'info@reliabilityiqventures.com',
           subject: `[ReliabilityIQ] New Inquiry from ${contactName}`,
           text: `You have received a new form submission!\n\nName: ${contactName}\nEmail: ${contactEmail}\nService: ${service || 'N/A'}\n\nDetails:\n${formDetails}`,
         });
@@ -105,7 +105,7 @@ export default async function handler(req: Request, res: Response) {
       success: true,
       emailSent,
       message: emailSent
-        ? "Form submission delivered directly to reliabilityiqventures@gmail.com!"
+        ? "Form submission delivered directly to info@reliabilityiqventures.com!"
         : "Lead captured in platform. (Configure COMPANY_EMAIL_USER & COMPANY_EMAIL_PASS for instant email notifications)",
       deliveredViaGmail: emailSent
     });

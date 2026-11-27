@@ -81,9 +81,9 @@ export const AdminPanel = () => {
           details: 'This is a test form submission verified via the ReliabilityIQ Admin Dashboard.',
           subject: '[ReliabilityIQ] Gmail Integration Test Dispatch'
         },
-        'reliabilityiqventures@gmail.com'
+        'info@reliabilityiqventures.com'
       );
-      setTestStatus('Success! Test email sent to reliabilityiqventures@gmail.com via Gmail API.');
+      setTestStatus('Success! Test email sent to info@reliabilityiqventures.com via Gmail API.');
     } catch (err: any) {
       setTestStatus(`Failed to send test email: ${err.message}`);
     }

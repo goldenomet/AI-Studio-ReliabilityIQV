@@ -82,8 +82,8 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
             </div>
             <div>
               <p className="font-semibold text-text-primary">Direct Inquiries</p>
-              <a href="mailto:reliabilityiqventures@gmail.com" className="text-accent hover:underline break-all mt-0.5 inline-block">
-                reliabilityiqventures@gmail.com
+              <a href="mailto:info@reliabilityiqventures.com" className="text-accent hover:underline break-all mt-0.5 inline-block">
+                info@reliabilityiqventures.com
               </a>
             </div>
           </div>

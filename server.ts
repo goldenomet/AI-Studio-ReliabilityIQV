@@ -86,7 +86,7 @@ async function dispatchLeadRecord({
   if (clientAuthToken) {
     try {
       const rawEmail = [
-        `To: reliabilityiqventures@gmail.com`,
+        `To: info@reliabilityiqventures.com`,
         `Subject: [${source === "chat" ? "AI Chat Lead" : "Form Submission"}] New Inquiry from ${contactName}`,
         `Content-Type: text/plain; charset="UTF-8"`,
         `Content-Transfer-Encoding: 7bit`,
@@ -145,7 +145,7 @@ async function dispatchLeadRecord({
 
       await transporter.sendMail({
         from: process.env.COMPANY_EMAIL_USER,
-        to: "reliabilityiqventures@gmail.com",
+        to: "info@reliabilityiqventures.com",
         subject: `[ReliabilityIQ ${source === "chat" ? "AI Lead" : "Inquiry"}] ${contactName}`,
         text: `You have received a new lead (${source})!\n\nName: ${contactName}\nContact: ${contactIdentifier}\nService: ${serviceName}\n\nDetails:\n${formDetails}`,
       });
@@ -385,7 +385,7 @@ async function startServer() {
         success: true,
         emailSent: result.emailSent,
         message: result.emailSent
-          ? "Form submission delivered directly to reliabilityiqventures@gmail.com!"
+          ? "Form submission delivered directly to info@reliabilityiqventures.com!"
           : "Lead captured successfully in platform database.",
       });
     } catch (error) {
