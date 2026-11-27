@@ -99,7 +99,6 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
             <p className="text-text-secondary text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
           <div className="sp-box absolute inset-0 m-auto pointer-events-none">
-            <div className="liquid-3d-aura" />
             <div className="liquid-3d-orb">
               <div className="liquid-3d-swirl" />
               <div className="liquid-3d-wave" />
