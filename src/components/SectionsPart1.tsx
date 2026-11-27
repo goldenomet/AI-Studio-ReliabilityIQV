@@ -771,7 +771,7 @@ export const MissionSection = ({ onExplore }: { onBack?: () => void, onExplore?:
     <motion.section
       ref={missionFlowRef}
       style={missionFlowStyle}
-      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden text-text-primary border-t border-border-subtle"
+      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden text-text-primary"
     >
       {/* Subtle 16:9 Layered Glass Refraction Backdrop */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-45 dark:opacity-20">

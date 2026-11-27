@@ -20,6 +20,7 @@ import { AdminPanel } from './components/AdminPanel';
 import FounderToggle from './components/FounderToggle';
 import { FlowSection, PAGE_TRANSITION_PROPS } from './components/SectionFlow';
 import { BlogPage } from './components/BlogPage';
+import { FluidGradientSeparator } from './components/FluidGradientSeparator';
 
 import rufusImg from './assets/images/Rufus portfolio.jpg';
 import theophilusImg from './assets/images/Theo portfolio.jpg';
@@ -117,8 +118,11 @@ export default function App() {
           <motion.div key="home" {...PAGE_TRANSITION_PROPS}>
             <HeroSection onNavigate={handlePageChange} />
             <LogoBlurCarousel />
+            <FluidGradientSeparator variant="horizon" />
             <MissionSection onBack={() => handlePageChange('services')} onExplore={() => handlePageChange('services')} />
+            <FluidGradientSeparator variant="aurora" />
             <CompetenciesSection onContact={() => handlePageChange('contact')} />
+            <FluidGradientSeparator variant="prism" flipped />
             <NarrativeSection />
           </motion.div>
         );
@@ -190,6 +194,7 @@ export default function App() {
               </div>
             </FlowSection>
             
+            <FluidGradientSeparator variant="horizon" />
             <FlowSection className="w-full pt-20 pb-12 md:pt-28 md:pb-16 px-6 bg-transparent relative z-10 flex flex-col items-center transition-colors duration-500">
                <div className="max-w-5xl mx-auto frosted-panel-elevated rounded-[36px] p-8 md:p-12 relative overflow-hidden">
                  <div className="absolute inset-0 glass-reflection" />
@@ -212,6 +217,7 @@ export default function App() {
                </div>
             </FlowSection>
             
+            <FluidGradientSeparator variant="aurora" intensity="medium" />
             {/* Motion Path Section */}
             <FlowSection mode="fade" className="w-full bg-transparent transition-colors duration-500 relative z-10">
               <ScrollPath onNavigate={handlePageChange} />
@@ -222,6 +228,7 @@ export default function App() {
         return (
           <motion.div key="services" {...PAGE_TRANSITION_PROPS} className="pt-0">
             <ServicesHero />
+            <FluidGradientSeparator variant="prism" />
             <EngineeredServicesSection onNavigate={handlePageChange} />
           </motion.div>
         );
@@ -304,7 +311,10 @@ export default function App() {
             {renderPage()}
           </AnimatePresence>
           {currentPage !== 'contact' && currentPage !== 'about' && currentPage !== 'services' && currentPage !== 'admin' && (
-            <ContactSection />
+            <>
+              <FluidGradientSeparator variant="aurora" />
+              <ContactSection />
+            </>
           )}
         </main>
 

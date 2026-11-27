@@ -126,7 +126,7 @@ export const CompetenciesSection = ({ onContact }: { onContact: () => void }) =>
   ];
 
   return (
-    <motion.section ref={flowRef} style={flowStyle} className="relative mt-0 bg-transparent py-24 text-text-primary transition-colors duration-500 overflow-hidden border-t border-border-subtle">
+    <motion.section ref={flowRef} style={flowStyle} className="relative mt-0 bg-transparent py-24 text-text-primary transition-colors duration-500 overflow-hidden">
       {/* Diffused Serene Light Pools */}
       <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[480px] h-[480px] bg-white/70 dark:bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
       <div className="absolute bottom-8 right-1/4 w-[440px] h-[440px] bg-sky-200/45 dark:bg-sky-400/10 blur-[130px] rounded-full pointer-events-none" />
@@ -189,7 +189,7 @@ export const NarrativeSection = () => {
   };
 
   return (
-    <motion.section ref={narrativeFlowRef} style={narrativeFlowStyle} className="relative bg-transparent text-text-primary z-20 border-t border-border-subtle transition-colors duration-500 pb-24 md:pb-32 overflow-hidden">
+    <motion.section ref={narrativeFlowRef} style={narrativeFlowStyle} className="relative bg-transparent text-text-primary z-20 transition-colors duration-500 pb-24 md:pb-32 overflow-hidden">
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-sky-200/40 dark:bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
       
       <div className="pt-28 pb-12 px-6 max-w-5xl mx-auto relative z-10 text-center">
@@ -480,7 +480,7 @@ export const ContactSection = () => {
   `;
 
   return (
-    <motion.section ref={contactFlowRef} style={contactFlowStyle} id="contact-section" className="pb-28 px-4 md:px-6 bg-transparent text-text-primary transition-colors duration-500 overflow-hidden relative border-t border-border-subtle pt-20">
+    <motion.section ref={contactFlowRef} style={contactFlowStyle} id="contact-section" className="pb-28 px-4 md:px-6 bg-transparent text-text-primary transition-colors duration-500 overflow-hidden relative pt-20">
       {/* Diffused serene ambient light pools */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[780px] bg-white/60 dark:bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[460px] h-[460px] bg-sky-200/45 dark:bg-sky-400/10 rounded-full blur-[140px] pointer-events-none" />

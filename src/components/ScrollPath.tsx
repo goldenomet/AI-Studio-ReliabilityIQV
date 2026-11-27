@@ -184,7 +184,55 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
   }, []);
 
   return (
-    <div ref={rootRef} className="overflow-hidden font-mono bg-transparent pb-12 md:pb-16 transition-colors duration-500 relative">
+    <div ref={rootRef} className="overflow-hidden font-mono bg-transparent pb-6 md:pb-10 transition-colors duration-500 relative">
+      {/* Dynamic Drifting Aurora Light Sweep Overlay for Prismatic Glass Refraction */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+        style={{
+          maskImage:
+            'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 7%, rgba(0,0,0,1) 92%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 7%, rgba(0,0,0,1) 92%, transparent 100%)',
+        }}
+      >
+        {/* Upper Aurora Curtain (Why Choose Us -> Expert Team -> Affordable Prices) */}
+        <div
+          className="aurora-sweep-ribbon-1 absolute top-[6%] -left-[20%] w-[140%] h-[460px] rounded-full blur-[95px]"
+          style={{
+            background:
+              'linear-gradient(95deg, rgba(56,189,248,0.28) 0%, rgba(37,99,235,0.22) 34%, rgba(167,139,250,0.20) 64%, rgba(45,212,191,0.24) 100%)',
+          }}
+        />
+
+        {/* Mid Aurora Curtain (Affordable Prices -> Custom Solutions) */}
+        <div
+          className="aurora-sweep-ribbon-2 absolute top-[38%] -left-[25%] w-[150%] h-[520px] rounded-full blur-[110px]"
+          style={{
+            background:
+              'linear-gradient(105deg, rgba(45,212,191,0.22) 0%, rgba(56,189,248,0.28) 38%, rgba(99,102,241,0.24) 72%, rgba(236,72,153,0.14) 100%)',
+          }}
+        />
+
+        {/* Lower Aurora Curtain (Custom Solutions -> Fast Delivery -> Contact Us) */}
+        <div
+          className="aurora-sweep-ribbon-1 absolute top-[70%] -left-[20%] w-[140%] h-[480px] rounded-full blur-[100px]"
+          style={{
+            background:
+              'linear-gradient(88deg, rgba(99,102,241,0.20) 0%, rgba(14,165,233,0.28) 42%, rgba(34,211,238,0.24) 75%, rgba(192,132,252,0.18) 100%)',
+          }}
+        />
+
+        {/* Travelling Diagonal Prismatic Light Sweep Beam */}
+        <div
+          className="aurora-sweep-beam absolute -inset-y-12 left-[10%] w-[75%] blur-[72px]"
+          style={{
+            background:
+              'linear-gradient(112deg, transparent 10%, rgba(255,255,255,0.42) 34%, rgba(125,211,252,0.34) 48%, rgba(196,181,253,0.26) 62%, rgba(94,234,212,0.24) 74%, transparent 90%)',
+          }}
+        />
+      </div>
+
       <div className="sp-spacer" />
       <div className="sp-main">
         {/* Intro */}
