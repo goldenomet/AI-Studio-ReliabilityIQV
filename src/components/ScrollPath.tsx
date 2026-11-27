@@ -18,6 +18,8 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
     if (!root) return;
 
     let ctx: gsap.Context | undefined;
+    let lastWidth = window.innerWidth;
+    let resizeTimer: number | undefined;
 
     const createTimeline = () => {
       ctx && ctx.revert();
@@ -29,24 +31,6 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
         const containers = gsap.utils.toArray<HTMLElement>(
           root.querySelectorAll(".sp-container:not(.sp-initial)")
         );
-
-        containers.forEach((container) => {
-          gsap.fromTo(
-            container,
-            { opacity: 0, y: 100 },
-            {
-              opacity: 1,
-              y: 0,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: container,
-                start: "top 85%",
-                end: "top 45%",
-                scrub: 1,
-              },
-            }
-          );
-        });
 
         const points = containers.map((container) => {
           const marker =
@@ -62,28 +46,56 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
           };
         });
 
+        containers.forEach((container) => {
+          gsap.fromTo(
+            container,
+            { opacity: 0, y: 80, force3D: true },
+            {
+              opacity: 1,
+              y: 0,
+              force3D: true,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: container,
+                start: "top 85%",
+                end: "top 45%",
+                scrub: 0.6,
+              },
+            }
+          );
+        });
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: root.querySelector(".sp-container.sp-initial"),
             start: "clamp(top center)",
             endTrigger: root.querySelector(".sp-final"),
             end: "clamp(top center)",
-            scrub: 1,
+            scrub: 0.6,
           },
         });
 
         tl.to(box, {
           duration: 1,
           ease: "none",
+          force3D: true,
           motionPath: { path: points, curviness: 1.5 },
         });
       }, root);
     };
 
     createTimeline();
-    window.addEventListener("resize", createTimeline);
+    const handleResize = () => {
+      const nextWidth = window.innerWidth;
+      if (nextWidth === lastWidth) return;
+      lastWidth = nextWidth;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(createTimeline, 150);
+    };
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", createTimeline);
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
       ctx && ctx.revert();
     };
   }, []);
@@ -99,12 +111,14 @@ export default function ScrollPath({ onNavigate }: ScrollPathProps) {
             <p className="text-text-secondary text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-sm mx-auto transition-colors duration-500">Innovative solutions, relentless support, and stunning designs for every tech need.</p>
           </div>
           <div className="sp-box absolute inset-0 m-auto pointer-events-none">
-            <div className="liquid-3d-orb">
-              <div className="liquid-3d-swirl" />
-              <div className="liquid-3d-wave" />
-              <div className="liquid-3d-highlight" />
-              <div className="liquid-3d-glint" />
-              <div className="liquid-3d-rim" />
+            <div className="liquid-3d-float w-full h-full">
+              <div className="liquid-3d-orb">
+                <div className="liquid-3d-swirl" />
+                <div className="liquid-3d-wave" />
+                <div className="liquid-3d-highlight" />
+                <div className="liquid-3d-glint" />
+                <div className="liquid-3d-rim" />
+              </div>
             </div>
           </div>
         </div>

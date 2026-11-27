@@ -94,11 +94,11 @@ export const WelcomeVideoWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolea
                   exit={{ opacity: 0, scale: 0.85 }}
                   onClick={() => setIsMinimized(false)}
                   title="Drag to move or snap to side"
-                  className={`flex items-center gap-2.5 px-4 py-2 rounded-full frosted-panel-elevated text-text-primary group hover:-translate-y-0.5 transition-all touch-none select-none ${
+                  className={`flex items-center gap-2.5 px-4 py-2 rounded-full frosted-panel-elevated liquid-hover-sheen text-text-primary group hover:-translate-y-0.5 transition-all touch-none select-none ${
                     dock.isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'
                   }`}
                 >
-                  <span className="w-6 h-6 rounded-full bg-[#1d6ce0] flex items-center justify-center text-white shadow-sm shrink-0 group-hover:scale-105 transition-transform">
+                  <span className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2563eb] to-[#0ea5e9] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(29,108,224,0.35),inset_0_1px_0_rgba(255,255,255,0.45)] shrink-0 group-hover:scale-105 transition-transform">
                     <Play size={11} className="fill-white translate-x-0.5" />
                   </span>
                   <div className="flex flex-col text-left">
@@ -126,7 +126,7 @@ export const WelcomeVideoWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolea
                 {/* Header Bar (Draggable handle when expanded) */}
                 <div
                   onPointerDown={dock.handlePointerDown}
-                  className={`relative z-10 flex items-center justify-between px-3.5 py-2.5 bg-white/60 dark:bg-white/10 backdrop-blur-xl border-b border-border-subtle text-text-primary touch-none ${
+                  className={`relative z-10 flex items-center justify-between px-3.5 py-2.5 bg-white/55 dark:bg-[#0d1f44]/55 backdrop-blur-2xl backdrop-saturate-180 border-b border-white/40 dark:border-white/10 text-text-primary touch-none ${
                     dock.isDragging ? 'cursor-grabbing' : 'cursor-grab'
                   }`}
                 >
@@ -210,7 +210,7 @@ export const WelcomeVideoWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolea
                 </div>
 
                 {/* Inset Footer Pill */}
-                <div className="relative z-10 px-3 py-2 bg-white/70 dark:bg-white/10 backdrop-blur-md border-t border-border-subtle flex items-center justify-between text-[10px] text-text-secondary">
+                <div className="relative z-10 px-3 py-2 bg-white/55 dark:bg-[#0d1f44]/55 backdrop-blur-2xl backdrop-saturate-180 border-t border-white/40 dark:border-white/10 flex items-center justify-between text-[10px] text-text-secondary">
                   <span className="flex items-center gap-1 font-mono text-[10px] text-accent font-medium">
                     <Sparkles size={11} className="text-accent" />
                     Spotlight

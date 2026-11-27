@@ -43,7 +43,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-documentation') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -101,7 +101,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -117,14 +117,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   View Examples <ArrowUpRight size={14} />
                 </motion.button>
@@ -139,7 +139,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary relative flex flex-col min-h-[550px] font-sans"
+                className="w-full frosted-panel-elevated rounded-[24px] overflow-hidden relative flex flex-col min-h-[550px] font-sans"
               >
                  {/* Top Nav Bar */}
                  <div className="h-14 border-b border-border-primary flex items-center px-6 justify-between bg-bg-card shrink-0">
@@ -356,8 +356,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    { icon: <Share2 size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Easy to Share", desc: "Shareable deeply linked URLs" },
                    { icon: <Palette size={20} className="text-text-primary" strokeWidth={1.5} />, label: "Branded Portals", desc: "Docs that match your look" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
-                     <div className="w-10 h-10 rounded-full bg-bg-secondary border border-border-primary flex justify-center items-center mb-4 text-accent">
+                   <div key={i} className="frosted-panel liquid-hover-sheen rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group transition-all">
+                     <div className="w-10 h-10 rounded-full frosted-panel flex justify-center items-center mb-4 text-accent">
                        {s.icon}
                      </div>
                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-text-primary mb-2">{s.label}</h4>
@@ -384,7 +384,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Database size={18} strokeWidth={1.5} />, title: "Architecture Diagrams", desc: "Visual breakdowns of complex data flows, cloud infrastructure and systems." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3 font-sans">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
+                  <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl">
                      {caseItem.icon}
                   </div>
                   <h4 className="text-sm font-bold text-text-primary">{caseItem.title}</h4>
@@ -401,7 +401,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-social') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -459,7 +459,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -475,14 +475,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -501,7 +501,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                       {/* Metric Cards - 4 in a row or 2x2. Actually the uploaded image shows: 
                           Impressions, Clicks, CTR, Conversions, ROAS all in one top row.
                       */}
-                      <div className="bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                      <div className="frosted-panel-elevated rounded-2xl p-6">
                         <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Campaign Overview</div>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                            <div className="flex flex-col gap-2">
@@ -549,7 +549,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
                       {/* Line Chart & Platform Breakdown */}
                       <div className="flex flex-col md:flex-row gap-6">
-                        <div className="md:w-2/3 bg-bg-secondary border border-border-primary rounded-2xl p-6 relative h-[250px]">
+                        <div className="md:w-2/3 frosted-panel-elevated rounded-2xl p-6 relative h-[250px]">
                            <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Performance Over Time</div>
                            {/* Legend */}
                            <div className="flex items-center gap-4 text-[9px] font-bold text-text-secondary/60 mb-6">
@@ -581,7 +581,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                            </div>
                         </div>
 
-                        <div className="md:w-1/3 bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                        <div className="md:w-1/3 frosted-panel-elevated rounded-2xl p-6">
                            <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Platform Breakdown</div>
                            <div className="flex flex-col gap-4 text-xs font-bold font-sans">
                              <div className="flex items-center gap-3">
@@ -622,7 +622,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    </div>
 
                    {/* Right Side: Audience Insights */}
-                   <div className="xl:w-[240px] shrink-0 bg-bg-secondary border border-border-primary rounded-2xl p-6 flex flex-col items-center">
+                   <div className="xl:w-[240px] shrink-0 frosted-panel-elevated rounded-2xl p-6 flex flex-col items-center">
                       <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 w-full mb-6">Audience Insights</div>
                       
                       {/* CSS Donut Chart */}
@@ -668,7 +668,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                  </div>
 
                  {/* Bottom Row: Previews */}
-                 <div className="bg-bg-secondary border border-border-primary rounded-2xl p-6">
+                 <div className="frosted-panel-elevated rounded-2xl p-6">
                    <div className="text-[10px] uppercase font-bold tracking-widest text-text-secondary/60 mb-6">Creative Previews</div>
                    
                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -741,10 +741,10 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <BarChart2 size={18} strokeWidth={1.5} />, title: "Optimize & Scale", desc: "We optimize in real-time and scale the campaigns that deliver ROI." },
                { icon: <PieChart size={18} strokeWidth={1.5} />, title: "Report & Refine", desc: "Transparent reporting and insights to keep improving performance." },
              ].map((step, i) => (
-                <div key={i} className="flex flex-col gap-3 relative z-10 bg-bg-primary">
+                <div key={i} className="flex flex-col gap-3 relative z-10">
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold text-text-secondary/40 font-mono tracking-widest bg-bg-primary pr-2">{(i+1).toString().padStart(2, '0')}</span>
-                    <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40 xl:mr-auto">
+                    <span className="text-[10px] font-bold text-text-secondary/50 font-mono tracking-widest pr-2">{(i+1).toString().padStart(2, '0')}</span>
+                    <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl xl:mr-auto">
                        {step.icon}
                     </div>
                   </div>
@@ -761,7 +761,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-gis') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -819,7 +819,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -835,14 +835,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -857,7 +857,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary text-text-primary relative flex flex-col xl:flex-row min-h-[400px] md:min-h-[550px]"
+                className="w-full frosted-panel-elevated rounded-[24px] overflow-hidden text-text-primary relative flex flex-col xl:flex-row min-h-[400px] md:min-h-[550px]"
               >
                  {/* Left Sidebar */}
                  <div className="w-full h-12 xl:w-14 xl:h-auto bg-bg-card border-b xl:border-b-0 xl:border-r border-border-primary flex flex-row xl:flex-col items-center py-2 xl:py-6 px-4 xl:px-0 gap-6 shrink-0 z-20 relative">
@@ -1037,8 +1037,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    { icon: <Clock size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "3.2x", label: "Faster Insights", desc: "With Spatial Analysis" },
                    { icon: <ShieldCheck size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "99.9%", label: "System Uptime", desc: "Reliable & Secure" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
-                     <div className="w-10 h-10 rounded-full border border-border-primary flex justify-center items-center mb-4">
+                   <div key={i} className="frosted-panel liquid-hover-sheen rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group transition-all">
+                     <div className="w-10 h-10 rounded-full frosted-panel flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
                      <h3 className="text-2xl font-bold mb-1 text-text-primary">{s.stat}</h3>
@@ -1066,7 +1066,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Cloud size={18} strokeWidth={1.5} />, title: "Scalable & Secure", desc: "Enterprise-grade infrastructure built for performance and security." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
+                  <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl">
                      {caseItem.icon}
                   </div>
                   <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
@@ -1083,7 +1083,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   if (id === 'service-animation') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1141,7 +1141,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -1157,14 +1157,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   View Showreel <PlaySquare size={14} />
                 </motion.button>
@@ -1178,7 +1178,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full aspect-video bg-text-primary/10 dark:bg-text-primary/5 rounded-2xl overflow-hidden shadow-2xl relative min-h-[240px] border border-border-primary group"
+                className="w-full aspect-video frosted-panel-elevated rounded-2xl overflow-hidden relative min-h-[240px] group"
               >
                 {(isVideoPlaying && ANIMATION_VIDEOS[selectedVideoIndex].youtubeId) ? (
                   <iframe
@@ -1344,7 +1344,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Sparkles size={18} strokeWidth={1.5} />, title: "Concept & Storytelling", desc: "Transform ideas into visual stories that inspire action." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3 font-sans">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card shadow-sm text-accent">
+                  <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl text-accent">
                      {caseItem.icon}
                   </div>
                   <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
@@ -1358,7 +1358,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
     );
   }  if (id === 'service-automation') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1421,7 +1421,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary bg-bg-card flex items-center justify-center shrink-0 shadow-sm">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -1437,14 +1437,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   View Case Studies <ArrowUpRight size={14} />
                 </motion.button>
@@ -1459,7 +1459,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-bg-card rounded-[24px] overflow-hidden shadow-2xl border border-border-primary p-6 sm:p-8 text-text-primary relative flex flex-col min-h-[400px] md:min-h-[500px]"
+                className="w-full frosted-panel-elevated rounded-[24px] overflow-hidden p-6 sm:p-8 text-text-primary relative flex flex-col min-h-[400px] md:min-h-[500px]"
               >
                  <div className="flex justify-between items-start mb-16">
                     <div>
@@ -1584,8 +1584,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    { icon: <Clock size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "2.8x", label: "Time Saved", desc: "Per automated workflow" },
                    { icon: <TrendingUp size={20} className="text-text-primary" strokeWidth={1.5} />, stat: "60%", label: "Cost Reduction", desc: "Operational efficiency" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
-                     <div className="w-10 h-10 rounded-full border border-border-primary flex justify-center items-center mb-4">
+                   <div key={i} className="frosted-panel liquid-hover-sheen rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group transition-all">
+                     <div className="w-10 h-10 rounded-full frosted-panel flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
                      <h3 className="text-2xl font-bold mb-1 text-text-primary">{s.stat}</h3>
@@ -1621,7 +1621,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Monitor size={18} strokeWidth={1.5} />, title: "API Orchestration", desc: "Orchestrate APIs and services to build powerful automations." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
+                  <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl">
                      {caseItem.icon}
                   </div>
                   <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
@@ -1638,7 +1638,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
   // Engineering Systems & Digital Platforms
   if (id === 'service-branding' || id === 'service-development') {
     return (
-      <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+      <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
         <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
           
           {/* Header/Nav */}
@@ -1696,7 +1696,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg border border-border-primary flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-lg frosted-panel flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -1712,14 +1712,14 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                   onClick={onContact}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                  className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
                 >
                   Start a Project <ArrowUpRight size={14} />
                 </motion.button>
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border border-border-primary bg-transparent text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-colors"
+                  className="frosted-panel liquid-hover-sheen text-text-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   Technical Specs <ArrowRight size={14} />
                 </motion.button>
@@ -1734,7 +1734,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="w-full bg-bg-secondary rounded-[24px] overflow-hidden shadow-2xl border border-border-primary relative flex flex-col min-h-[400px] md:min-h-[500px]"
+                className="w-full frosted-panel-elevated rounded-[24px] overflow-hidden relative flex flex-col min-h-[400px] md:min-h-[500px]"
               >
                   {/* Laptop Mockup Header */}
                   <div className="h-10 bg-bg-primary border-b border-border-primary flex items-center px-4 gap-1.5 shrink-0">
@@ -1828,8 +1828,8 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                    { icon: <ShieldCheck size={18} className="text-text-primary" />, stat: "Secure", label: "Architecture", desc: "Safety first" },
                    { icon: <Layers size={18} className="text-text-primary" />, stat: "Modular", label: "Design", desc: "Ready to scale" }
                  ].map((s, i) => (
-                   <div key={i} className="bg-bg-card/80 border border-border-primary rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group hover:bg-bg-card transition-colors">
-                     <div className="w-8 h-8 rounded-full border border-border-primary flex justify-center items-center mb-4">
+                   <div key={i} className="frosted-panel liquid-hover-sheen rounded-[16px] p-6 text-center md:text-left flex flex-col items-center md:items-start group transition-all">
+                     <div className="w-8 h-8 rounded-full frosted-panel flex justify-center items-center mb-4">
                        {s.icon}
                      </div>
                      <h3 className="text-xl font-bold mb-1 text-text-primary">{s.stat}</h3>
@@ -1856,7 +1856,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                { icon: <Activity size={18} strokeWidth={1.5} />, title: "Performance Engineering", desc: "Rigorous optimization workflows to ensure maximum speed and efficiency." },
              ].map((caseItem, i) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border-primary rounded-xl bg-bg-card/40">
+                  <div className="w-10 h-10 flex items-center justify-center frosted-panel rounded-xl">
                      {caseItem.icon}
                   </div>
                   <h4 className="text-[11px] font-bold text-text-primary">{caseItem.title}</h4>
@@ -1872,7 +1872,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
 
   // Fallback to DIGITAL CAPABILITIES for other IDs
   return (
-    <div className="bg-bg-primary min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
+    <div className="serene-glass-bg min-h-screen text-text-primary transition-colors duration-500 font-mono pb-20 relative pt-24">
       <div className="w-full px-6 md:px-12 lg:px-20 py-12 md:py-16">
         
         {/* Header/Nav */}
@@ -1910,7 +1910,7 @@ export const ServiceDetail = ({ id, onBack, onContact }: ServiceDetailProps) => 
                 onClick={onContact}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-text-primary text-bg-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-accent transition-all shadow-lg hover:shadow-xl active:shadow-md"
+                className="crystal-button liquid-hover-sheen px-8 py-3 text-xs uppercase tracking-widest font-bold flex items-center gap-2 cursor-pointer"
               >
                 Start a Project <ArrowUpRight size={14} />
               </motion.button>

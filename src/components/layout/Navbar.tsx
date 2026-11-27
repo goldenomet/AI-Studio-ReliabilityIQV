@@ -167,7 +167,7 @@ export const Navbar = ({
                         {isActive && (
                           <motion.div
                             layoutId="active-nav-glow-pill"
-                            className="absolute inset-0 rounded-full bg-white/95 dark:bg-white/15 border border-white dark:border-white/20 shadow-[0_4px_14px_rgba(29,108,224,0.10)] pointer-events-none"
+                            className="absolute inset-0 rounded-full bg-gradient-to-b from-white/95 to-sky-50/75 dark:from-white/25 dark:to-white/10 backdrop-blur-md border border-white dark:border-white/30 shadow-[0_6px_18px_rgba(29,108,224,0.16),inset_0_1px_0_rgba(255,255,255,0.95)] pointer-events-none"
                             transition={{ type: "spring", stiffness: 400, damping: 32 }}
                           />
                         )}
@@ -221,8 +221,9 @@ export const Navbar = ({
                             className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50"
                             role="menu"
                           >
-                            <div className="w-[310px] bg-white/96 dark:bg-[#0b1c3d]/96 backdrop-blur-2xl border border-blue-100/90 dark:border-blue-300/25 rounded-2xl p-2 shadow-[0_24px_60px_-12px_rgba(15,37,71,0.24)] dark:shadow-[0_24px_60px_-12px_rgba(2,8,23,0.82)] text-text-primary">
-                              <div className="px-3 py-1.5 flex items-center justify-between">
+                            <div className="w-[316px] frosted-panel-elevated rounded-2xl p-2 text-text-primary relative overflow-hidden">
+                              <div className="absolute inset-0 glass-reflection" />
+                              <div className="relative z-10 px-3 py-1.5 flex items-center justify-between">
                                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] font-semibold text-accent">
                                   Service Capabilities
                                 </span>
@@ -325,7 +326,7 @@ export const Navbar = ({
                     {isActive && (
                       <motion.div
                         layoutId="active-nav-glow-pill"
-                        className="absolute inset-0 rounded-full bg-white/95 dark:bg-white/15 border border-white dark:border-white/20 shadow-[0_4px_14px_rgba(29,108,224,0.10)]"
+                        className="absolute inset-0 rounded-full bg-gradient-to-b from-white/95 to-sky-50/75 dark:from-white/25 dark:to-white/10 backdrop-blur-md border border-white dark:border-white/30 shadow-[0_6px_18px_rgba(29,108,224,0.16),inset_0_1px_0_rgba(255,255,255,0.95)]"
                         transition={{ type: "spring", stiffness: 400, damping: 32 }}
                       />
                     )}
@@ -338,9 +339,9 @@ export const Navbar = ({
             <div className="pl-1">
               <button
                 onClick={() => setCurrentPage('contact')}
-                className="group flex items-center gap-2 bg-[#1d6ce0] hover:bg-[#1659be] text-white text-sm font-semibold px-4 py-2 rounded-full shadow-[0_6px_18px_-4px_rgba(29,108,224,0.36)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer whitespace-nowrap shrink-0"
+                className="group crystal-button liquid-hover-sheen flex items-center gap-2 text-white text-sm font-semibold px-4 py-2 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer whitespace-nowrap shrink-0"
               >
-                <span className="w-5 h-5 rounded-full bg-white/20 text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                <span className="w-5 h-5 rounded-full bg-white/25 border border-white/40 text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
                   <ChevronRight size={13} strokeWidth={2.5} />
                 </span>
                 <span>Contact Us</span>
@@ -441,7 +442,7 @@ export const Navbar = ({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 260 }}
-              className="relative w-full max-w-xs h-full serene-glass-bg text-text-primary p-6 shadow-2xl flex flex-col justify-between border-l border-white/80 dark:border-white/15"
+              className="relative w-full max-w-xs h-full frosted-panel-elevated text-text-primary p-6 shadow-2xl flex flex-col justify-between border-l border-white/85 dark:border-white/20"
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-border-subtle mb-6">

@@ -17,7 +17,8 @@ export const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: an
 );
 
 export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => (
-  <footer className="bg-white/60 dark:bg-[#07142b]/85 backdrop-blur-2xl text-text-primary pt-20 pb-12 transition-colors duration-500 border-t border-border-primary relative overflow-hidden">
+  <footer className="bg-white/45 dark:bg-[#07142b]/58 backdrop-blur-3xl backdrop-saturate-180 text-text-primary pt-20 pb-12 transition-colors duration-500 border-t border-white/80 dark:border-blue-200/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[inset_0_1px_0_rgba(224,242,254,0.16)] relative overflow-hidden">
+    <div className="absolute -top-24 left-1/4 w-[420px] h-[220px] rounded-full bg-sky-200/35 dark:bg-sky-400/10 blur-[100px] pointer-events-none" />
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         
@@ -27,7 +28,7 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
             className="flex items-center gap-3 mb-5 cursor-pointer group w-fit"
             onClick={() => onNavigate?.('home')}
           >
-            <div className="w-10 h-10 rounded-full frosted-panel flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-full frosted-panel liquid-hover-sheen flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform">
               <img src={logo} alt="ReliabilityIQ" className="w-full h-full object-contain" />
             </div>
             <span className="text-xl font-extrabold tracking-tight text-text-primary font-sans">
@@ -72,15 +73,16 @@ export const Footer = ({ onNavigate }: { onNavigate?: (p: string) => void }) => 
         {/* Regional Presence */}
         <div>
           <h4 className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-5">Headquarters</h4>
-          <div className="frosted-panel rounded-2xl p-5 font-sans text-xs space-y-3">
-            <div className="flex items-start gap-2.5 pb-3 border-b border-border-subtle">
+          <div className="frosted-panel-elevated liquid-hover-sheen rounded-2xl p-5 font-sans text-xs space-y-3 relative overflow-hidden">
+            <div className="absolute inset-0 glass-reflection" />
+            <div className="relative z-10 flex items-start gap-2.5 pb-3 border-b border-border-subtle">
               <Globe size={16} className="text-accent shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold text-text-primary">Lagos, Nigeria</p>
                 <p className="text-text-secondary mt-0.5">Ipaja Operations Hub · West Africa</p>
               </div>
             </div>
-            <div>
+            <div className="relative z-10">
               <p className="font-semibold text-text-primary">Direct Inquiries</p>
               <a href="mailto:info@reliabilityiqventures.com" className="text-accent hover:underline break-all mt-0.5 inline-block">
                 info@reliabilityiqventures.com

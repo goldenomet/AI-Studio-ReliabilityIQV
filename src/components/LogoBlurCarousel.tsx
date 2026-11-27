@@ -132,7 +132,7 @@ export const LogoBlurCarousel: React.FC = () => {
     <motion.section
       ref={carouselFlowRef}
       style={carouselFlowStyle}
-      className="py-14 md:py-18 relative bg-white/40 dark:bg-white/5 backdrop-blur-xl overflow-hidden border-y border-border-primary"
+      className="py-14 md:py-18 relative bg-white/30 dark:bg-white/[0.03] backdrop-blur-2xl backdrop-saturate-150 overflow-hidden border-y border-white/75 dark:border-blue-200/15"
     >
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 mb-8 text-center relative z-10">
@@ -175,7 +175,7 @@ export const LogoBlurCarousel: React.FC = () => {
             {tickerItems.map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                className="shrink-0 px-6 py-3.5 rounded-2xl bg-white/85 dark:bg-white/95 hover:bg-white border border-white/95 hover:border-blue-300 transition-all duration-300 hover:-translate-y-0.5 group shadow-[0_6px_22px_rgba(30,64,175,0.06)] flex items-center justify-center cursor-default"
+                className="shrink-0 px-6 py-3.5 rounded-2xl frosted-panel-elevated liquid-hover-sheen dark:bg-white/90 hover:border-blue-300 transition-all duration-300 hover:-translate-y-0.5 group flex items-center justify-center cursor-default"
               >
                 <div className="transition-transform duration-300 group-hover:scale-105">
                   {item.renderLogo()}

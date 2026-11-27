@@ -42,7 +42,7 @@ export const MinimizeEdgeHandle = ({
       onClick={onMinimize}
       title={title}
       aria-label={title}
-      className={`w-5 h-5 rounded-full bg-white/95 dark:bg-[#11264f]/95 border border-blue-200/90 dark:border-blue-300/30 text-text-secondary hover:text-accent hover:border-accent shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 ${className}`}
+      className={`w-5 h-5 rounded-full frosted-panel-elevated text-text-secondary hover:text-accent hover:border-accent flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 ${className}`}
     >
       {side === 'left' ? (
         <ChevronLeft size={12} strokeWidth={2.5} />
@@ -80,7 +80,7 @@ export const DockedSideTab = ({
       onClick={onRestore}
       aria-label={`Restore ${label}`}
       title={`Restore ${label} (or drag to move)`}
-      className={`group flex items-center gap-1 py-2.5 backdrop-blur-2xl bg-white/85 dark:bg-[#0e2044]/85 border border-blue-200/80 dark:border-blue-300/25 shadow-[0_8px_24px_-4px_rgba(15,37,71,0.22)] text-text-primary hover:bg-white dark:hover:bg-[#132b5a] hover:border-accent/60 transition-all duration-200 cursor-grab active:cursor-grabbing select-none touch-none ${
+      className={`group flex items-center gap-1 py-2.5 frosted-panel-elevated text-text-primary hover:border-accent/60 transition-all duration-200 cursor-grab active:cursor-grabbing select-none touch-none ${
         isLeft
           ? 'pl-1.5 pr-2 rounded-r-2xl border-l-0 flex-row'
           : 'pr-1.5 pl-2 rounded-l-2xl border-r-0 flex-row-reverse'

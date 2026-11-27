@@ -3,39 +3,49 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Serene Soft Blue & Frosted White Glassmorphism Palette */
-  --bg-primary: #eef5ff;
-  --bg-secondary: #e2eeff;
-  --bg-card: rgba(255, 255, 255, 0.72);
-  --bg-card-strong: rgba(255, 255, 255, 0.88);
+  /* Liquid Glass & Serene Frosted Blue Palette */
+  --bg-primary: #e7f1ff;
+  --bg-secondary: #dceaff;
+  --bg-card: rgba(255, 255, 255, 0.56);
+  --bg-card-strong: rgba(255, 255, 255, 0.78);
   --text-primary: #0f2547;
-  --text-secondary: #3b557e;
+  --text-secondary: #344e78;
   --text-accent: #1d6ce0;
-  --border-primary: rgba(255, 255, 255, 0.9);
-  --border-subtle: rgba(147, 197, 253, 0.38);
+  --border-primary: rgba(255, 255, 255, 0.85);
+  --border-subtle: rgba(147, 197, 253, 0.42);
   --accent: #1d6ce0;
   --accent-soft: #60a5fa;
-  --accent-glow: rgba(96, 165, 250, 0.24);
-  --glass-shadow: 0 14px 38px -10px rgba(30, 64, 175, 0.08), 0 4px 14px -4px rgba(30, 64, 175, 0.04);
-  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+  --accent-glow: rgba(56, 189, 248, 0.34);
+  --glass-shadow:
+    0 18px 42px -12px rgba(29, 78, 216, 0.14),
+    0 6px 18px -6px rgba(15, 37, 71, 0.08);
+  --glass-highlight:
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.96),
+    inset 1px 0 0 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 0 rgba(147, 197, 253, 0.32);
 }
 
 .dark {
-  /* Serene Twilight Sapphire & Translucent Frost */
-  --bg-primary: #07142b;
-  --bg-secondary: #0c1f40;
-  --bg-card: rgba(16, 36, 74, 0.64);
-  --bg-card-strong: rgba(14, 32, 66, 0.88);
+  /* Liquid Glass Twilight Sapphire & Translucent Frost */
+  --bg-primary: #050f24;
+  --bg-secondary: #0a1b3b;
+  --bg-card: rgba(18, 40, 84, 0.48);
+  --bg-card-strong: rgba(14, 33, 72, 0.76);
   --text-primary: #f1f6ff;
-  --text-secondary: #b4c8e8;
+  --text-secondary: #b8ccf0;
   --text-accent: #60a5fa;
-  --border-primary: rgba(191, 219, 254, 0.22);
-  --border-subtle: rgba(147, 197, 253, 0.12);
+  --border-primary: rgba(191, 219, 254, 0.26);
+  --border-subtle: rgba(147, 197, 253, 0.16);
   --accent: #3b82f6;
   --accent-soft: #93c5fd;
-  --accent-glow: rgba(59, 130, 246, 0.28);
-  --glass-shadow: 0 18px 44px -12px rgba(2, 10, 28, 0.45), 0 4px 16px -4px rgba(2, 10, 28, 0.25);
-  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  --accent-glow: rgba(56, 189, 248, 0.38);
+  --glass-shadow:
+    0 22px 52px -14px rgba(2, 8, 24, 0.62),
+    0 6px 20px -6px rgba(14, 165, 233, 0.12);
+  --glass-highlight:
+    inset 0 1.5px 0 0 rgba(224, 242, 254, 0.30),
+    inset 1px 0 0 0 rgba(191, 219, 254, 0.16),
+    inset 0 -1px 0 0 rgba(56, 189, 248, 0.14);
 }
 
 @theme {
@@ -80,41 +90,44 @@
 }
 
 @layer utilities {
-  /* Atmospheric Serene Soft Blue & White Canvas */
+  /* Atmospheric Refractable Canvas Behind Liquid Glass Surfaces */
   .serene-glass-bg,
   .fluted-gradient-bg {
-    background-color: #eef5ff;
+    background-color: #e7f1ff;
     background-image:
-      radial-gradient(ellipse 900px 650px at 12% 10%, rgba(255, 255, 255, 0.92) 0%, transparent 65%),
-      radial-gradient(ellipse 850px 600px at 88% 18%, rgba(147, 197, 253, 0.36) 0%, transparent 65%),
-      radial-gradient(ellipse 750px 550px at 26% 78%, rgba(191, 219, 254, 0.42) 0%, transparent 70%),
-      radial-gradient(ellipse 700px 500px at 82% 85%, rgba(224, 242, 254, 0.55) 0%, transparent 65%),
-      linear-gradient(180deg, #f5f9ff 0%, #eaf2ff 45%, #e3efff 100%);
+      radial-gradient(ellipse 920px 660px at 10% 8%, rgba(255, 255, 255, 0.94) 0%, transparent 62%),
+      radial-gradient(ellipse 840px 620px at 88% 14%, rgba(125, 211, 252, 0.42) 0%, transparent 64%),
+      radial-gradient(ellipse 760px 580px at 22% 72%, rgba(147, 197, 253, 0.45) 0%, transparent 68%),
+      radial-gradient(ellipse 740px 540px at 82% 84%, rgba(196, 181, 253, 0.24) 0%, transparent 65%),
+      linear-gradient(180deg, #f3f8ff 0%, #e4efff 48%, #dcebff 100%);
   }
 
   .dark .serene-glass-bg,
   .dark .fluted-gradient-bg {
-    background-color: #07142b;
+    background-color: #050f24;
     background-image:
-      radial-gradient(ellipse 900px 650px at 12% 10%, rgba(59, 130, 246, 0.14) 0%, transparent 65%),
-      radial-gradient(ellipse 850px 600px at 88% 18%, rgba(96, 165, 250, 0.16) 0%, transparent 65%),
-      radial-gradient(ellipse 750px 550px at 26% 78%, rgba(37, 99, 235, 0.12) 0%, transparent 70%),
-      linear-gradient(180deg, #07142b 0%, #0b1c3b 50%, #091834 100%);
+      radial-gradient(ellipse 920px 660px at 10% 8%, rgba(56, 189, 248, 0.18) 0%, transparent 64%),
+      radial-gradient(ellipse 840px 620px at 88% 14%, rgba(59, 130, 246, 0.22) 0%, transparent 64%),
+      radial-gradient(ellipse 760px 580px at 22% 72%, rgba(99, 102, 241, 0.16) 0%, transparent 68%),
+      radial-gradient(ellipse 740px 540px at 82% 84%, rgba(14, 165, 233, 0.15) 0%, transparent 66%),
+      linear-gradient(180deg, #050f24 0%, #091836 52%, #07142c 100%);
   }
 
-  /* Primary Frosted Glass Surface with Subtle Specular Reflection */
+  /* Primary Liquid Frosted Glass Surface with Optical Bevel & Specular Refraction */
   .frosted-panel,
   .glass,
   .glass-dark,
   .frosted-stat-capsule {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.82) 0%,
-      rgba(241, 247, 255, 0.62) 100%
-    );
-    backdrop-filter: blur(24px) saturate(145%);
-    -webkit-backdrop-filter: blur(24px) saturate(145%);
-    border: 1px solid rgba(255, 255, 255, 0.88);
+    background:
+      linear-gradient(
+        126deg,
+        rgba(255, 255, 255, 0.66) 0%,
+        rgba(244, 249, 255, 0.42) 48%,
+        rgba(224, 240, 255, 0.56) 100%
+      );
+    backdrop-filter: blur(26px) saturate(185%) brightness(1.03);
+    -webkit-backdrop-filter: blur(26px) saturate(185%) brightness(1.03);
+    border: 1px solid rgba(255, 255, 255, 0.84);
     box-shadow: var(--glass-shadow), var(--glass-highlight);
     color: var(--text-primary);
   }
@@ -123,36 +136,42 @@
   .dark .glass,
   .dark .glass-dark,
   .dark .frosted-stat-capsule {
-    background: linear-gradient(
-      135deg,
-      rgba(23, 47, 94, 0.72) 0%,
-      rgba(13, 30, 62, 0.56) 100%
-    );
-    backdrop-filter: blur(24px) saturate(140%);
-    -webkit-backdrop-filter: blur(24px) saturate(140%);
-    border: 1px solid rgba(191, 219, 254, 0.2);
+    background:
+      linear-gradient(
+        130deg,
+        rgba(32, 66, 132, 0.46) 0%,
+        rgba(14, 32, 70, 0.34) 52%,
+        rgba(22, 50, 104, 0.44) 100%
+      );
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    border: 1px solid rgba(191, 219, 254, 0.24);
     box-shadow: var(--glass-shadow), var(--glass-highlight);
     color: var(--text-primary);
   }
 
-  /* Elevated Second-Layer Frosted Glass Card */
+  /* Elevated Optical Liquid Glass Card / Modal Layer */
   .frosted-panel-elevated,
   .crystal-glass,
   .frosted-quote-card,
   .sp-container,
   .sp-sixth {
-    background: linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.90) 0%,
-      rgba(239, 246, 255, 0.76) 100%
-    );
-    backdrop-filter: blur(32px) saturate(160%);
-    -webkit-backdrop-filter: blur(32px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.95);
+    background:
+      linear-gradient(
+        138deg,
+        rgba(255, 255, 255, 0.74) 0%,
+        rgba(240, 248, 255, 0.52) 46%,
+        rgba(226, 241, 255, 0.66) 100%
+      );
+    backdrop-filter: blur(34px) saturate(195%) brightness(1.04);
+    -webkit-backdrop-filter: blur(34px) saturate(195%) brightness(1.04);
+    border: 1px solid rgba(255, 255, 255, 0.92);
     box-shadow:
-      0 20px 48px -12px rgba(30, 64, 175, 0.10),
-      0 4px 12px -2px rgba(30, 64, 175, 0.05),
-      inset 0 1px 0 0 rgba(255, 255, 255, 1);
+      0 24px 58px -14px rgba(29, 78, 216, 0.16),
+      0 8px 20px -6px rgba(15, 37, 71, 0.08),
+      inset 0 1.5px 0 0 rgba(255, 255, 255, 1),
+      inset 1.5px 0 0 0 rgba(255, 255, 255, 0.68),
+      inset 0 -1.5px 0 0 rgba(125, 211, 252, 0.38);
     color: var(--text-primary);
   }
 
@@ -161,38 +180,92 @@
   .dark .frosted-quote-card,
   .dark .sp-container,
   .dark .sp-sixth {
-    background: linear-gradient(
-      145deg,
-      rgba(26, 54, 108, 0.84) 0%,
-      rgba(14, 32, 68, 0.74) 100%
-    );
-    backdrop-filter: blur(32px) saturate(150%);
-    -webkit-backdrop-filter: blur(32px) saturate(150%);
-    border: 1px solid rgba(191, 219, 254, 0.26);
+    background:
+      linear-gradient(
+        138deg,
+        rgba(34, 70, 140, 0.54) 0%,
+        rgba(12, 28, 62, 0.44) 50%,
+        rgba(24, 54, 112, 0.52) 100%
+      );
+    backdrop-filter: blur(34px) saturate(190%);
+    -webkit-backdrop-filter: blur(34px) saturate(190%);
+    border: 1px solid rgba(191, 219, 254, 0.30);
     box-shadow:
-      0 24px 54px -14px rgba(2, 8, 23, 0.55),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+      0 28px 64px -16px rgba(2, 8, 23, 0.68),
+      0 8px 24px -6px rgba(56, 189, 248, 0.14),
+      inset 0 1.5px 0 0 rgba(224, 242, 254, 0.34),
+      inset 1.5px 0 0 0 rgba(191, 219, 254, 0.18),
+      inset 0 -1px 0 0 rgba(56, 189, 248, 0.16);
+    color: var(--text-primary);
+  }
+
+  /* Recessed Translucent Liquid Input Well */
+  .liquid-input {
+    background: rgba(255, 255, 255, 0.56);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(147, 197, 253, 0.45);
+    box-shadow:
+      inset 0 1.5px 3px rgba(15, 37, 71, 0.06),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.78);
+    color: var(--text-primary);
+  }
+
+  .dark .liquid-input {
+    background: rgba(8, 20, 48, 0.52);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(191, 219, 254, 0.2);
+    box-shadow:
+      inset 0 1.5px 4px rgba(2, 8, 23, 0.35),
+      inset 0 -1px 0 rgba(191, 219, 254, 0.12);
     color: var(--text-primary);
   }
 
   /* Soft Specular Light Reflection Overlay for Glass Panels */
   .glass-reflection {
     background: linear-gradient(
-      115deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(255, 255, 255, 0.12) 28%,
-      transparent 55%
+      118deg,
+      rgba(255, 255, 255, 0.52) 0%,
+      rgba(255, 255, 255, 0.16) 24%,
+      rgba(186, 230, 253, 0.06) 44%,
+      transparent 60%
     );
     pointer-events: none;
   }
 
   .dark .glass-reflection {
     background: linear-gradient(
-      115deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      rgba(255, 255, 255, 0.02) 28%,
-      transparent 55%
+      118deg,
+      rgba(224, 242, 254, 0.16) 0%,
+      rgba(125, 211, 252, 0.05) 26%,
+      transparent 56%
     );
+  }
+
+  /* Interactive Specular Glint Sweep on Cards / Buttons */
+  .liquid-hover-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-hover-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.34) 48%,
+      rgba(186, 230, 253, 0.18) 54%,
+      transparent 78%
+    );
+    transform: translateX(-115%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 15;
+  }
+  .liquid-hover-sheen:hover::after {
+    transform: translateX(115%);
   }
 
   .fluted-ribs {
@@ -213,13 +286,29 @@
     );
   }
 
-  /* Primary Serene Azure Pill CTA */
+  /* Primary Liquid Azure Glass Pill CTA */
   .swimtopia-pill-btn {
-    @apply inline-flex items-center gap-3 bg-[#1d6ce0] hover:bg-[#1659be] text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-[0_10px_28px_-6px_rgba(29,108,224,0.38)] hover:shadow-[0_14px_32px_-6px_rgba(29,108,224,0.48)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0;
+    @apply inline-flex items-center gap-3 text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.92) 0%, rgba(29, 108, 224, 0.90) 55%, rgba(14, 165, 233, 0.88) 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    box-shadow:
+      0 12px 30px -6px rgba(29, 108, 224, 0.46),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.56),
+      inset 0 -2px 4px rgba(15, 37, 71, 0.25);
+  }
+  .swimtopia-pill-btn:hover {
+    background: linear-gradient(135deg, rgba(29, 108, 224, 0.96) 0%, rgba(37, 99, 235, 0.94) 50%, rgba(14, 165, 233, 0.92) 100%);
+    box-shadow:
+      0 16px 36px -6px rgba(29, 108, 224, 0.56),
+      inset 0 1.5px 1.5px rgba(255, 255, 255, 0.68),
+      inset 0 -2px 4px rgba(15, 37, 71, 0.25);
   }
 
   .swimtopia-pill-badge {
-    @apply w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-200 group-hover:translate-x-0.5;
+    @apply w-6 h-6 rounded-full bg-white/25 border border-white/40 text-white flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-200 group-hover:translate-x-0.5;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
   }
 
   /* Frosted Quote & Stat Cards */
@@ -232,7 +321,21 @@
   }
 
   .crystal-button {
-    @apply rounded-full transition-all duration-200 bg-accent text-white border border-white/20 shadow-[0_8px_24px_-6px_rgba(29,108,224,0.3)] hover:brightness-105 active:scale-95;
+    @apply rounded-full transition-all duration-200 text-white active:scale-95;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.92) 0%, rgba(29, 108, 224, 0.9) 55%, rgba(14, 165, 233, 0.86) 100%);
+    backdrop-filter: blur(16px) saturate(175%);
+    -webkit-backdrop-filter: blur(16px) saturate(175%);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow:
+      0 10px 26px -6px rgba(29, 108, 224, 0.40),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.52),
+      inset 0 -2px 4px rgba(15, 37, 71, 0.22);
+  }
+  .crystal-button:hover {
+    filter: brightness(1.06);
+    box-shadow:
+      0 14px 32px -6px rgba(29, 108, 224, 0.52),
+      inset 0 1.5px 1.5px rgba(255, 255, 255, 0.65);
   }
 
   .text-glow {

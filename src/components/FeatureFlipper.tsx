@@ -316,8 +316,8 @@ export const EngineeredServicesSection = ({
                     }}
                     className={`rounded-xl px-5 py-4 flex items-center justify-between gap-4 cursor-pointer transition-all duration-200 select-none ${
                       isSelected
-                        ? 'bg-accent text-white shadow-[0_14px_30px_-8px_rgba(29,108,224,0.48)] border border-accent'
-                        : 'frosted-panel hover:border-accent/40 hover:-translate-y-0.5 text-text-primary'
+                        ? 'text-white border border-white/55 backdrop-blur-xl shadow-[0_16px_34px_-8px_rgba(29,108,224,0.48),inset_0_1.5px_1px_rgba(255,255,255,0.55)] bg-gradient-to-br from-[#2563eb]/90 via-[#1d6ce0]/88 to-[#0ea5e9]/86'
+                        : 'frosted-panel liquid-hover-sheen hover:border-accent/45 hover:-translate-y-0.5 text-text-primary'
                     }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -481,8 +481,8 @@ export const EngineeredServicesSection = ({
                         }}
                         className={`py-2.5 px-2 rounded-lg text-xs font-semibold tabular-nums transition-all cursor-pointer ${
                           active
-                            ? 'bg-accent text-white shadow-[0_10px_22px_-6px_rgba(29,108,224,0.45)]'
-                            : 'bg-sky-50/90 dark:bg-white/[0.06] hover:bg-sky-100/90 dark:hover:bg-white/12 text-accent dark:text-sky-300 border border-border-subtle/70'
+                            ? 'crystal-button !rounded-lg text-white'
+                            : 'liquid-input hover:border-accent/50 text-accent dark:text-sky-300'
                         }`}
                       >
                         {slot}
@@ -492,7 +492,7 @@ export const EngineeredServicesSection = ({
                 </div>
 
                 {/* Timezone Selector Bar */}
-                <div className="relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-sky-50/90 dark:bg-white/[0.06] border border-border-subtle/70 text-xs">
+                <div className="relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl liquid-input text-xs">
                   <Info size={14} className="text-accent shrink-0" />
                   <span className="text-text-secondary whitespace-nowrap shrink-0">
                     All times are in
@@ -532,7 +532,7 @@ export const EngineeredServicesSection = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
                 {/* Left Stacked Inputs */}
                 <div className="flex flex-col gap-3">
-                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-sky-50/80 dark:bg-white/[0.06] border border-border-subtle/70 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 transition-all">
+                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl liquid-input focus-within:!border-accent focus-within:ring-2 focus-within:ring-accent/20 transition-all">
                     <span className="w-14 shrink-0 text-xs font-medium text-text-secondary">
                       Name
                     </span>
@@ -547,7 +547,7 @@ export const EngineeredServicesSection = ({
                     />
                   </label>
 
-                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-sky-50/80 dark:bg-white/[0.06] border border-border-subtle/70 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 transition-all">
+                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl liquid-input focus-within:!border-accent focus-within:ring-2 focus-within:ring-accent/20 transition-all">
                     <span className="w-14 shrink-0 text-xs font-medium text-text-secondary">
                       Email
                     </span>
@@ -562,7 +562,7 @@ export const EngineeredServicesSection = ({
                     />
                   </label>
 
-                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-sky-50/80 dark:bg-white/[0.06] border border-border-subtle/70 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 transition-all">
+                  <label className="flex items-center gap-3 px-4 py-2.5 rounded-xl liquid-input focus-within:!border-accent focus-within:ring-2 focus-within:ring-accent/20 transition-all">
                     <span className="w-14 shrink-0 text-xs font-medium text-text-secondary">
                       Phone
                     </span>
@@ -580,7 +580,7 @@ export const EngineeredServicesSection = ({
 
                 {/* Right Special Requests Notice + Notes */}
                 <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-sky-100/80 dark:bg-accent/15 border border-sky-200/80 dark:border-accent/25 text-xs font-medium text-accent dark:text-sky-300">
+                  <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl frosted-panel text-xs font-medium text-accent dark:text-sky-300">
                     <HelpCircle size={15} className="shrink-0" />
                     <span>Please let us know if you have any special requests.</span>
                   </div>
@@ -592,7 +592,7 @@ export const EngineeredServicesSection = ({
                     }
                     placeholder="Notes (optional)"
                     rows={3}
-                    className="flex-1 w-full px-4 py-3 rounded-xl bg-sky-50/80 dark:bg-white/[0.06] border border-border-subtle/70 focus:border-accent focus:ring-2 focus:ring-accent/15 text-sm font-medium text-text-primary placeholder:text-text-secondary/50 outline-none resize-none transition-all"
+                    className="flex-1 w-full px-4 py-3 rounded-xl liquid-input focus:!border-accent focus:ring-2 focus:ring-accent/20 text-sm font-medium text-text-primary placeholder:text-text-secondary/50 outline-none resize-none transition-all"
                   />
                 </div>
               </div>
@@ -679,7 +679,7 @@ export const EngineeredServicesSection = ({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto sm:min-w-[260px] px-10 py-3.5 rounded-xl bg-accent hover:bg-[#1659be] text-white font-semibold text-sm sm:text-base shadow-[0_14px_32px_-8px_rgba(29,108,224,0.48)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer disabled:opacity-60"
+              className="w-full sm:w-auto sm:min-w-[260px] px-10 py-3.5 crystal-button !rounded-xl liquid-hover-sheen text-white font-semibold text-sm sm:text-base hover:-translate-y-0.5 active:translate-y-0 cursor-pointer disabled:opacity-60"
             >
               {isSubmitting ? 'Scheduling...' : 'Book Now'}
             </button>

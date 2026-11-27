@@ -125,7 +125,7 @@ export const ServiceDetailModal = ({
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 }}
-                          className="bg-bg-secondary p-8 rounded-3xl border border-border-primary shadow-sm"
+                          className="frosted-panel p-8 rounded-3xl"
                         >
                           <h4 className="text-xs uppercase tracking-[0.2em] font-mono text-accent mb-6 font-bold">Primary Use-Cases</h4>
                           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -142,10 +142,10 @@ export const ServiceDetailModal = ({
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
-                          className="border-l-4 border-accent pl-8"
+                          className="frosted-panel rounded-3xl p-7"
                         >
                           <h4 className="text-xs uppercase tracking-[0.2em] font-mono text-accent mb-4 font-bold">Case Study: {service.caseStudy.title}</h4>
-                          <p className="text-xl font-medium text-text-primary italic mb-4">
+                          <p className="text-xl font-medium text-text-primary italic mb-1">
                             "{service.caseStudy.result}"
                           </p>
                         </motion.section>
@@ -156,7 +156,7 @@ export const ServiceDetailModal = ({
               </div>
             </div>
 
-            <div className="p-6 md:p-8 bg-bg-secondary border-t border-border-primary flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="p-6 md:p-8 bg-white/40 dark:bg-white/[0.04] backdrop-blur-xl border-t border-white/75 dark:border-blue-200/20 flex flex-col sm:flex-row justify-between items-center gap-4">
               <span className="text-[10px] font-mono text-text-secondary/60 uppercase tracking-widest text-center sm:text-left">ReliabilityIQ Ventures – Specialized Services</span>
               <MagneticGlowButton 
                 onClick={() => {

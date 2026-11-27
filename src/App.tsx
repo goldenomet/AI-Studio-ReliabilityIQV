@@ -154,9 +154,10 @@ export default function App() {
                      initial={{ y: 30, opacity: 0 }}
                      animate={{ y: 0, opacity: 1 }}
                      transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                     className="frosted-panel rounded-2xl p-5 max-w-[380px]"
+                     className="frosted-panel-elevated liquid-hover-sheen rounded-2xl p-5 max-w-[380px] relative overflow-hidden"
                    >
-                     <p className="text-base md:text-lg text-text-primary leading-relaxed font-medium">
+                     <div className="absolute inset-0 glass-reflection" />
+                     <p className="relative z-10 text-base md:text-lg text-text-primary leading-relaxed font-medium">
                        ReliabilityIQ Ventures is an information service company headquartered in Lagos, Nigeria.
                      </p>
                    </motion.div>
@@ -172,7 +173,7 @@ export default function App() {
                     type="button"
                     onClick={() => window.scrollBy({ top: window.innerHeight * 0.78, behavior: 'smooth' })}
                     aria-label="Scroll down to explore"
-                    className="group text-center text-sm text-text-secondary hover:text-text-primary font-medium flex items-center gap-3.5 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full px-3 py-1.5"
+                    className="group text-center text-sm text-text-secondary hover:text-text-primary font-medium flex items-center gap-3.5 transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full px-5 py-2 frosted-panel liquid-hover-sheen"
                   >
                     <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-text-secondary/40 group-hover:to-accent/60 transition-colors" />
                     <span className="tracking-tight">Scroll to explore</span>
@@ -190,21 +191,24 @@ export default function App() {
             </FlowSection>
             
             <FlowSection className="w-full pt-20 pb-12 md:pt-28 md:pb-16 px-6 bg-transparent relative z-10 flex flex-col items-center transition-colors duration-500">
-               <div className="max-w-5xl mx-auto frosted-panel-elevated rounded-[36px] p-8 md:p-12">
+               <div className="max-w-5xl mx-auto frosted-panel-elevated rounded-[36px] p-8 md:p-12 relative overflow-hidden">
+                 <div className="absolute inset-0 glass-reflection" />
+                 <div className="relative z-10">
                  <OmniReveal 
                    ContainerTag="h2"
                    className="text-2xl md:text-4xl lg:text-[40px] font-semibold text-text-primary leading-[1.4] tracking-tight"
                    text="We provide innovative [] services that combine technology, research, and operational intelligence. Founded by [] in 2024, our focus is on delivering accurate insights, structured data solutions, and digital systems that support smarter decision-making. As a growing company, we are committed to helping businesses and organizations transform information into actionable [] through modern tools, analysis, and efficient workflows. Now onboarding a limited number of early clients. Only 2/6 July spots left — []"
                    components={[
-                     <span key="1" className="bg-accent text-white px-3.5 py-0.5 rounded-full inline-flex translate-y-[-0.05em]">information</span>,
+                     <span key="1" className="crystal-button px-4 py-0.5 inline-flex translate-y-[-0.05em]">information</span>,
                      <FounderToggle key="2" founders={FOUNDERS} />,
-                     <span key="3" className="border-2 border-accent text-accent px-3.5 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
+                     <span key="3" className="frosted-panel border border-accent/45 text-accent px-4 py-0 rounded-full inline-flex translate-y-[-0.05em]">value</span>,
                      <MagneticGlowButton key="4" onClick={() => handlePageChange('contact')} className="mt-2 text-xl md:text-3xl font-mono !px-10">Claim Your Spot.</MagneticGlowButton>
                    ]}
                    scrollHeight={400}
                    initialOpacity={0.6}
                    initialBlur={3}
                  />
+                 </div>
                </div>
             </FlowSection>
             
@@ -284,11 +288,12 @@ export default function App() {
       </AnimatePresence>
 
       <div className={`relative min-h-screen flex flex-col font-sans serene-glass-bg text-text-primary transition-opacity duration-700 ${loading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
-        {/* Soft Diffused Ambient Light Layer */}
+        {/* Soft Diffused Liquid Light Layer for Glass Refraction */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-          <div className="absolute -top-32 -left-24 w-[620px] h-[620px] rounded-full bg-white/70 dark:bg-blue-500/10 blur-[130px]" />
-          <div className="absolute top-1/3 -right-32 w-[560px] h-[560px] rounded-full bg-blue-200/45 dark:bg-sky-400/10 blur-[140px]" />
-          <div className="absolute bottom-0 left-1/4 w-[640px] h-[420px] rounded-full bg-sky-100/60 dark:bg-indigo-500/10 blur-[150px]" />
+          <div className="absolute -top-36 -left-28 w-[680px] h-[680px] rounded-full bg-white/80 dark:bg-sky-400/18 blur-[120px]" />
+          <div className="absolute top-[28%] -right-32 w-[620px] h-[620px] rounded-full bg-sky-300/45 dark:bg-blue-500/20 blur-[135px]" />
+          <div className="absolute -bottom-24 left-[18%] w-[680px] h-[480px] rounded-full bg-blue-300/40 dark:bg-indigo-500/18 blur-[145px]" />
+          <div className="absolute top-[60%] left-[-8%] w-[440px] h-[440px] rounded-full bg-cyan-200/35 dark:bg-cyan-400/12 blur-[120px]" />
         </div>
         
         <CircleCursor />

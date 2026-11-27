@@ -59,11 +59,12 @@ export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], o
         <div className="absolute inset-0 bg-gradient-to-t from-white/75 via-white/45 to-white/65 dark:from-[#08162e]/85 dark:via-[#0b1f42]/65 dark:to-[#08162e]/85" />
       </div>
 
-      {/* Sliding Azure Frosted Glass Highlight */}
+      {/* Sliding Liquid Prism Glass Lens */}
       <div 
-        className="absolute pointer-events-none z-[1] rounded-2xl backdrop-blur-xl border border-white/40 shadow-[0_14px_34px_-8px_rgba(29,108,224,0.35)]"
+        className="absolute pointer-events-none z-[1] rounded-2xl backdrop-blur-2xl backdrop-saturate-180 border border-white/55 overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, rgba(29, 108, 224, 0.94) 0%, rgba(59, 130, 246, 0.88) 100%)',
+          background: 'linear-gradient(135deg, rgba(29, 108, 224, 0.78) 0%, rgba(37, 99, 235, 0.72) 48%, rgba(14, 165, 233, 0.76) 100%)',
+          boxShadow: '0 18px 42px -10px rgba(29, 108, 224, 0.48), inset 0 1.5px 1px rgba(255, 255, 255, 0.62), inset 0 -2px 6px rgba(15, 37, 71, 0.25)',
           top: highlight ? highlight.top : 0,
           left: highlight ? highlight.left : 0,
           width: highlight ? highlight.width : 0,
@@ -71,7 +72,9 @@ export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], o
           opacity: highlight ? 1 : 0,
           transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)"
         }}
-      />
+      >
+        <div className="absolute inset-0 glass-reflection" />
+      </div>
       
       <div 
         className="grid w-full h-full relative z-[2] bg-transparent" 
@@ -82,7 +85,7 @@ export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], o
           return (
             <div 
               key={i}
-              className={`p-7 md:p-9 border border-border-subtle flex flex-col justify-between cursor-pointer min-h-[260px] md:min-h-[300px] transition-all duration-300 relative ${isActive ? 'z-20' : 'z-10'}`}
+              className={`p-7 md:p-9 border border-border-subtle/80 flex flex-col justify-between cursor-pointer min-h-[260px] md:min-h-[300px] transition-all duration-300 relative ${isActive ? 'z-20' : 'z-10'}`}
               onMouseEnter={(e) => handleMouseEnter(e, i)}
               onClick={() => onAction(card.originalService)}
             >
@@ -92,7 +95,7 @@ export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], o
                     {card.title}
                   </h3>
                   
-                  <span className={`font-mono text-sm font-semibold tabular-nums transition-colors duration-300 ${isActive ? 'text-white/90' : 'text-accent'}`}>
+                  <span className={`font-mono text-sm font-semibold tabular-nums transition-colors duration-300 ${isActive ? 'text-white/95' : 'text-accent'}`}>
                     {card.indexLabel}
                   </span>
                 </div>
@@ -104,7 +107,7 @@ export const ServicesSlidingGrid = ({ services, onAction }: { services: any[], o
                     </p>
                   </div>
                   
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 border ${isActive ? 'bg-white text-[#1d6ce0] border-white shadow-md scale-105' : 'bg-white/60 dark:bg-white/10 text-accent border-border-primary'}`}>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 border backdrop-blur-md ${isActive ? 'bg-white/95 text-[#1d6ce0] border-white shadow-[0_6px_16px_rgba(255,255,255,0.35)] scale-105' : 'bg-white/55 dark:bg-white/10 text-accent border-white/80 dark:border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]'}`}>
                     <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${isActive ? '-rotate-45' : 'rotate-0'}`} />
                   </div>
                 </div>

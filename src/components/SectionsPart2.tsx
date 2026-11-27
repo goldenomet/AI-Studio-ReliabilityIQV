@@ -213,12 +213,12 @@ export const NarrativeSection = () => {
               <div 
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`relative overflow-hidden transition-all duration-500 rounded-[28px] cursor-pointer p-6 md:p-7 flex flex-col
+                className={`relative overflow-hidden transition-all duration-500 rounded-[28px] cursor-pointer p-6 md:p-7 flex flex-col liquid-hover-sheen
                   ${isActive
                     ? 'frosted-panel-elevated border-accent/40 text-text-primary'
-                    : 'frosted-panel opacity-75 hover:opacity-100 text-text-secondary'}`}
+                    : 'frosted-panel opacity-80 hover:opacity-100 text-text-secondary'}`}
               >
-                {/* Progress Bar Container */}
+                {/* Luminous Liquid Progress Bar */}
                 <div className="absolute top-0 left-0 w-full h-[3px] bg-accent/15">
                   {isActive && (
                     <motion.div
@@ -227,7 +227,7 @@ export const NarrativeSection = () => {
                       animate={{ width: "100%" }}
                       transition={{ duration: DURATION / 1000, ease: "linear" }}
                       onAnimationComplete={handleAnimationComplete}
-                      className="h-full bg-accent"
+                      className="h-full bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-300 shadow-[0_0_12px_rgba(56,189,248,0.65)]"
                     />
                   )}
                 </div>
@@ -472,11 +472,11 @@ export const ContactSection = () => {
   };
 
   const inputClasses = (name: string) => `
-    w-full bg-white/80 dark:bg-[#0b1c3b]/75 backdrop-blur-md px-4 py-3.5 rounded-xl 
-    outline-none border transition-all duration-300
+    w-full liquid-input px-4 py-3.5 rounded-xl 
+    outline-none transition-all duration-300
     text-text-primary placeholder:text-text-secondary/50 font-sans text-sm
-    ${errors[name] ? 'border-red-500/60 focus:border-red-500' : 'border-border-subtle focus:border-accent'}
-    focus:ring-2 focus:ring-accent/15
+    ${errors[name] ? '!border-red-500/60 focus:!border-red-500' : 'focus:!border-accent'}
+    focus:ring-2 focus:ring-accent/20
   `;
 
   return (
@@ -663,7 +663,7 @@ export const ContactSection = () => {
           </div>
 
           {/* Logistics Side */}
-          <div className="lg:w-[45%] bg-white/40 dark:bg-white/[0.04] backdrop-blur-xl relative flex flex-col p-8 md:p-12 lg:p-14 transition-colors duration-500 group/logistics">
+          <div className="lg:w-[45%] bg-white/30 dark:bg-white/[0.03] backdrop-blur-2xl relative flex flex-col p-8 md:p-12 lg:p-14 transition-colors duration-500 group/logistics">
             <div className="relative z-10 flex flex-col h-full gap-10">
               <div className="space-y-4">
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent font-semibold">Studio Headquarters</p>
@@ -1015,7 +1015,7 @@ export const TrendingProducts = () => {
                     onClick={() => setActiveTab(tab.id as any)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                       activeTab === tab.id 
-                        ? 'bg-accent text-white font-semibold shadow-sm' 
+                        ? 'crystal-button !rounded-lg font-semibold' 
                         : 'text-text-secondary hover:text-text-primary hover:bg-white/50 dark:hover:bg-white/10'
                     }`}
                   >
@@ -1096,7 +1096,7 @@ export const TrendingProducts = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
-                className={`frosted-panel-elevated rounded-[32px] overflow-hidden group hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between relative ${
+                className={`frosted-panel-elevated liquid-hover-sheen rounded-[32px] overflow-hidden group hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between relative ${
                   isWide ? 'md:col-span-2 lg:col-span-3' : ''
                 }`}
               >
@@ -1110,15 +1110,15 @@ export const TrendingProducts = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 glass-reflection" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/85 dark:from-[#0e2044]/85 via-transparent to-transparent opacity-65" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/75 dark:from-[#0e2044]/75 via-transparent to-transparent opacity-60" />
                     
-                    <div className="absolute top-4 right-4 bg-white/90 dark:bg-[#0b1c3d]/90 text-accent border border-white/80 dark:border-blue-300/25 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider shadow-sm">
+                    <div className="absolute top-4 right-4 frosted-panel text-accent px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider">
                       {prod.tag}
                     </div>
                     
                     {hasDropdown && (
                       <div className="absolute bottom-4 left-6 md:left-8">
-                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-[#0b1c3d]/90 backdrop-blur-md border border-white/80 dark:border-blue-300/25 text-text-primary text-xs font-mono font-semibold shadow-sm">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full frosted-panel text-text-primary text-xs font-mono font-semibold">
                           <Layers size={13} className="text-accent" /> Interactive Service Suite
                         </span>
                       </div>
@@ -1158,7 +1158,7 @@ export const TrendingProducts = () => {
                       <div className="mt-6 pt-6 border-t border-border-subtle">
                         <button
                           onClick={() => toggleDropdown(prod.dropdownKey!)}
-                          className="w-full flex items-center justify-between p-4 rounded-2xl bg-white/70 dark:bg-white/[0.06] hover:bg-white/95 dark:hover:bg-white/10 border border-border-primary transition-all cursor-pointer group/btn"
+                          className="w-full flex items-center justify-between p-4 rounded-2xl frosted-panel liquid-hover-sheen hover:brightness-105 transition-all cursor-pointer group/btn"
                         >
                           <div className="flex items-center gap-3">
                             <div className="w-9 h-9 rounded-xl bg-accent/10 border border-accent/25 text-accent flex items-center justify-center font-bold">
@@ -1173,7 +1173,7 @@ export const TrendingProducts = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="w-8 h-8 rounded-full bg-white/80 dark:bg-white/10 border border-border-subtle flex items-center justify-center text-text-primary group-hover/btn:bg-accent group-hover/btn:text-white transition-colors">
+                          <div className="w-8 h-8 rounded-full frosted-panel flex items-center justify-center text-text-primary group-hover/btn:bg-accent group-hover/btn:text-white transition-colors">
                             {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                           </div>
                         </button>
@@ -1193,10 +1193,10 @@ export const TrendingProducts = () => {
                                   return (
                                     <div 
                                       key={sIdx}
-                                      className="p-4 rounded-2xl bg-white/65 dark:bg-white/[0.05] border border-border-primary hover:border-accent/40 hover:bg-white/90 dark:hover:bg-white/[0.08] transition-all duration-300 flex flex-col justify-between group/item"
+                                      className="p-4 rounded-2xl frosted-panel liquid-hover-sheen hover:border-accent/45 transition-all duration-300 flex flex-col justify-between group/item"
                                     >
                                       <div className="flex items-start gap-3.5 mb-2">
-                                        <div className="p-2.5 rounded-xl bg-white/90 dark:bg-white/10 text-accent border border-border-subtle group-hover/item:scale-105 group-hover/item:border-accent/40 transition-all shrink-0">
+                                        <div className="p-2.5 rounded-xl bg-white/75 dark:bg-white/10 text-accent border border-white/80 dark:border-white/20 group-hover/item:scale-105 group-hover/item:border-accent/40 transition-all shrink-0 shadow-xs">
                                           <IconComp size={18} />
                                         </div>
                                         <div>

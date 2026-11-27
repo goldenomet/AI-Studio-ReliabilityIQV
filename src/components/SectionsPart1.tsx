@@ -68,13 +68,14 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
       <div className="absolute top-12 left-1/4 w-[480px] h-[360px] bg-white/75 dark:bg-blue-400/10 rounded-full blur-[120px] pointer-events-none z-0" />
       <div className="absolute bottom-8 right-12 w-[520px] h-[400px] bg-blue-200/45 dark:bg-sky-400/12 rounded-full blur-[130px] pointer-events-none z-0" />
 
-      {/* Main Framed Editorial 16:9 Glass Canvas (Echoing Reference Layout) */}
+      {/* Main Framed Editorial 16:9 Liquid Glass Canvas */}
       <motion.div
         initial={{ opacity: 0, y: 18, scale: 0.985 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-[1320px] rounded-[28px] sm:rounded-[36px] frosted-panel-elevated overflow-hidden shadow-[0_32px_90px_-20px_rgba(15,37,71,0.22)] dark:shadow-[0_32px_90px_-20px_rgba(2,8,23,0.75)] min-h-[580px] lg:min-h-[650px] flex flex-col justify-between"
       >
+        <div className="absolute inset-0 glass-reflection z-[5]" />
         {/* SVG Soft Feathered Geographic Coastline Mask (blends image landmass into background color) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
           <defs>
@@ -348,7 +349,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
 
               <button
                 onClick={() => onNavigate('contact')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full frosted-panel hover:bg-white/90 dark:hover:bg-white/15 text-text-primary font-semibold text-sm transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full frosted-panel-elevated liquid-hover-sheen hover:brightness-105 text-text-primary font-semibold text-sm transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0"
               >
                 <span>Request Consultation</span>
                 <ArrowRight size={15} className="text-accent" />
@@ -360,11 +361,11 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
         {/* Bottom Interactive Row: Play Track Bar (Left) + Curved Orbital Arc with 01/02/03 Nodes (Right) */}
         <div className="relative z-20 flex flex-col lg:flex-row items-stretch lg:items-end justify-between px-6 sm:px-10 pb-6 sm:pb-8 gap-8">
           {/* Bottom-Left PLAY Showcase Progress Control */}
-          <div className="flex items-center gap-3.5 lg:mb-3">
+          <div className="flex items-center gap-3 lg:mb-3 px-2.5 py-2 rounded-full bg-white/35 dark:bg-white/10 lg:bg-white/15 backdrop-blur-xl border border-white/55 dark:border-white/20 shadow-[0_10px_28px_-8px_rgba(15,37,71,0.25),inset_0_1px_0_rgba(255,255,255,0.55)] w-fit">
             <button
               onClick={() => setIsPlaying((prev) => !prev)}
               aria-label={isPlaying ? 'Pause showcase tour' : 'Play showcase tour'}
-              className="w-11 h-11 rounded-full bg-white text-[#0f2547] shadow-lg ring-4 ring-white/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform cursor-pointer shrink-0"
+              className="w-10 h-10 rounded-full bg-white/95 text-[#0f2547] shadow-lg ring-2 ring-white/45 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform cursor-pointer shrink-0"
             >
               {isPlaying ? (
                 <Pause size={14} className="fill-[#0f2547]" />
@@ -373,7 +374,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
               )}
             </button>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pr-2.5">
               <button
                 onClick={() => setIsPlaying((prev) => !prev)}
                 className="font-mono text-xs font-bold tracking-[0.2em] uppercase text-text-primary lg:text-white cursor-pointer whitespace-nowrap"
@@ -382,7 +383,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
               </button>
 
               {/* Horizontal Track Line */}
-              <div className="w-28 sm:w-40 h-[2px] bg-text-secondary/25 lg:bg-white/30 rounded-full overflow-hidden relative">
+              <div className="w-24 sm:w-36 h-[3px] bg-text-secondary/25 lg:bg-white/30 rounded-full overflow-hidden relative">
                 <motion.div
                   key={`${activeNode}-${isPlaying}`}
                   initial={{ scaleX: 0 }}
@@ -393,7 +394,7 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                 />
               </div>
 
-              <span className="font-mono text-[11px] font-semibold text-text-secondary lg:text-white/85 tabular-nums">
+              <span className="font-mono text-[11px] font-semibold text-text-secondary lg:text-white/90 tabular-nums">
                 {currentService.num} / 03
               </span>
             </div>
@@ -448,10 +449,10 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                       className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center group cursor-pointer z-10 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full"
                     >
                       <div
-                        className={`relative rounded-full p-1 transition-all duration-300 ${
+                        className={`relative rounded-full p-1 backdrop-blur-xl transition-all duration-300 ${
                           isActive
-                            ? 'w-14 h-14 bg-white dark:bg-[#132954] ring-2 ring-accent shadow-[0_10px_24px_-6px_rgba(29,108,224,0.42)] scale-105'
-                            : 'w-11 h-11 bg-white/90 dark:bg-[#0e2044] ring-1 ring-border-primary hover:ring-accent/60 shadow-md'
+                            ? 'w-14 h-14 bg-white/85 dark:bg-[#132954]/85 ring-2 ring-accent shadow-[0_12px_28px_-6px_rgba(29,108,224,0.48),inset_0_1.5px_0_rgba(255,255,255,0.9)] scale-105'
+                            : 'w-11 h-11 bg-white/65 dark:bg-[#0e2044]/75 ring-1 ring-white/80 dark:ring-white/25 hover:ring-accent/60 shadow-md'
                         }`}
                       >
                         <img
@@ -717,10 +718,10 @@ export const HeroSection = ({ onNavigate }: { onNavigate: (p: string) => void })
                     className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center group cursor-pointer z-10 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full"
                   >
                     <div
-                      className={`relative rounded-full p-1 transition-all duration-300 ${
+                      className={`relative rounded-full p-1.5 backdrop-blur-xl transition-all duration-300 ${
                         isActive
-                          ? 'w-[76px] h-[76px] bg-white dark:bg-[#132954] ring-2 ring-accent shadow-[0_12px_28px_-6px_rgba(29,108,224,0.42)] scale-105'
-                          : 'w-[58px] h-[58px] bg-white/90 dark:bg-[#0e2044] ring-1 ring-border-primary hover:ring-accent/60 hover:scale-105 shadow-md'
+                          ? 'w-[76px] h-[76px] bg-white/85 dark:bg-[#132954]/85 ring-2 ring-accent shadow-[0_14px_32px_-6px_rgba(29,108,224,0.48),inset_0_1.5px_0_rgba(255,255,255,0.9)] scale-105'
+                          : 'w-[58px] h-[58px] bg-white/65 dark:bg-[#0e2044]/75 ring-1 ring-white/80 dark:ring-white/25 hover:ring-accent/60 hover:scale-105 shadow-md'
                       }`}
                     >
                       <img
@@ -796,34 +797,38 @@ export const MissionSection = ({ onExplore }: { onBack?: () => void, onExplore?:
           ReliabilityIQ designs calm, scalable digital infrastructure — from intelligent automation and AI media systems to geospatial intelligence and web operations.
         </h2>
 
-        {/* 4 Layered Frosted Glass Stat Capsules */}
+        {/* 4 Layered Liquid Glass Stat Capsules */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 mt-12">
-          <div className="frosted-panel-elevated rounded-2xl text-center p-6 hover:-translate-y-0.5 transition-transform duration-200">
-            <div className="text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
+          <div className="frosted-panel-elevated liquid-hover-sheen rounded-2xl text-center p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute inset-0 glass-reflection" />
+            <div className="relative z-10 text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
               <CountingNumber value={4} suffix="+" duration={1.6} />
             </div>
-            <div className="text-xs text-text-secondary font-medium">Years Engineering</div>
+            <div className="relative z-10 text-xs text-text-secondary font-medium">Years Engineering</div>
           </div>
 
-          <div className="frosted-panel-elevated rounded-2xl text-center p-6 hover:-translate-y-0.5 transition-transform duration-200">
-            <div className="text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
+          <div className="frosted-panel-elevated liquid-hover-sheen rounded-2xl text-center p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute inset-0 glass-reflection" />
+            <div className="relative z-10 text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
               <CountingNumber value={20} suffix="+" duration={1.8} />
             </div>
-            <div className="text-xs text-text-secondary font-medium">Enterprise Clients</div>
+            <div className="relative z-10 text-xs text-text-secondary font-medium">Enterprise Clients</div>
           </div>
 
-          <div className="frosted-panel-elevated rounded-2xl text-center p-6 hover:-translate-y-0.5 transition-transform duration-200">
-            <div className="text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
+          <div className="frosted-panel-elevated liquid-hover-sheen rounded-2xl text-center p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute inset-0 glass-reflection" />
+            <div className="relative z-10 text-3xl sm:text-4xl font-extrabold text-text-primary mb-1.5 tabular-nums font-mono">
               <CountingNumber value={5} suffix="M+" duration={2} />
             </div>
-            <div className="text-xs text-text-secondary font-medium">Data Points Mapped</div>
+            <div className="relative z-10 text-xs text-text-secondary font-medium">Data Points Mapped</div>
           </div>
 
-          <div className="frosted-panel-elevated rounded-2xl text-center p-6 hover:-translate-y-0.5 transition-transform duration-200">
-            <div className="text-3xl sm:text-4xl font-extrabold text-accent mb-1.5 tabular-nums font-mono">
+          <div className="frosted-panel-elevated liquid-hover-sheen rounded-2xl text-center p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute inset-0 glass-reflection" />
+            <div className="relative z-10 text-3xl sm:text-4xl font-extrabold text-accent mb-1.5 tabular-nums font-mono">
               <CountingNumber value={99.99} suffix="%" decimals={2} duration={2.2} />
             </div>
-            <div className="text-xs text-text-secondary font-medium">Target Uptime SLA</div>
+            <div className="relative z-10 text-xs text-text-secondary font-medium">Target Uptime SLA</div>
           </div>
         </div>
 

@@ -249,13 +249,13 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed bottom-24 right-4 sm:right-6 w-[340px] max-w-[calc(100vw-2rem)] bg-[#f8fbff]/95 dark:bg-[#0c1d3d]/95 backdrop-blur-2xl text-text-primary border border-blue-200/80 dark:border-blue-300/25 rounded-2xl shadow-[0_18px_48px_-10px_rgba(15,37,71,0.18)] z-40 overflow-hidden cursor-pointer group ${
+            className={`fixed bottom-24 right-4 sm:right-6 w-[340px] max-w-[calc(100vw-2rem)] frosted-panel-elevated text-text-primary rounded-2xl shadow-[0_24px_56px_-12px_rgba(15,37,71,0.22)] z-40 overflow-hidden cursor-pointer group ${
               isMenuOpen ? 'hidden lg:block' : ''
             }`}
             onClick={handleOpenChat}
           >
             {/* Top Header Bar */}
-            <div className="bg-accent px-3.5 py-2.5 flex items-center justify-between text-white">
+            <div className="bg-gradient-to-r from-[#1d6ce0]/92 via-[#2563eb]/90 to-[#0ea5e9]/90 backdrop-blur-xl px-3.5 py-2.5 flex items-center justify-between text-white border-b border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-white p-0.5 flex items-center justify-center shrink-0 shadow-xs">
                   <img src={websiteLogo} alt="ReliabilityIQ" className="w-full h-full object-contain" />
@@ -345,7 +345,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   onClick={handleOpenChat}
                   title="Drag to move or snap to side"
-                  className={`relative w-14 h-14 bg-white/95 dark:bg-[#11264f]/95 backdrop-blur-xl border-2 border-accent/70 rounded-full flex items-center justify-center shadow-[0_12px_32px_-6px_rgba(29,108,224,0.35)] hover:scale-105 active:scale-95 transition-all p-2.5 group touch-none select-none ${
+                  className={`relative w-14 h-14 frosted-panel-elevated border-2 border-accent/65 rounded-full flex items-center justify-center shadow-[0_14px_34px_-6px_rgba(29,108,224,0.38)] hover:scale-105 active:scale-95 transition-all p-2.5 group touch-none select-none ${
                     dock.isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'
                   }`}
                   aria-label="Open ReliabilityIQ AI Advisor"
@@ -385,10 +385,10 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-            className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 w-full sm:w-[420px] h-[100dvh] sm:h-[640px] sm:max-h-[88vh] bg-[#f8fbff]/96 dark:bg-[#0b1c3d]/96 border border-blue-200/80 dark:border-blue-300/25 sm:rounded-3xl shadow-[0_24px_64px_-12px_rgba(15,37,71,0.28)] backdrop-blur-3xl overflow-hidden flex flex-col z-[75] font-sans text-text-primary"
+            className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 w-full sm:w-[420px] h-[100dvh] sm:h-[640px] sm:max-h-[88vh] frosted-panel-elevated !bg-white/75 dark:!bg-[#0b1c3d]/78 backdrop-blur-3xl backdrop-saturate-180 border border-white/60 dark:border-blue-300/25 sm:rounded-3xl shadow-[0_32px_72px_-16px_rgba(15,37,71,0.32)] overflow-hidden flex flex-col z-[75] font-sans text-text-primary"
           >
             {/* ----------------- CHATBOT HEADER ----------------- */}
-            <div className="bg-accent px-4 py-3 text-white flex items-center justify-between shrink-0 border-b border-white/15 select-none shadow-xs">
+            <div className="bg-gradient-to-r from-[#1d6ce0]/92 via-[#2563eb]/90 to-[#0ea5e9]/90 backdrop-blur-xl px-4 py-3 text-white flex items-center justify-between shrink-0 border-b border-white/25 select-none shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-white p-1 flex items-center justify-center shrink-0 shadow-xs">
                   <img src={websiteLogo} alt="ReliabilityIQ" className="w-full h-full object-contain" />
@@ -428,7 +428,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             </div>
 
             {/* ----------------- MESSAGES CONTAINER ----------------- */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#eef5ff]/95 dark:bg-[#08152e]/95 scroll-smooth custom-scrollbar">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-sky-50/45 dark:bg-[#08152e]/55 backdrop-blur-xl scroll-smooth custom-scrollbar">
               {messages.map((msg) => (
                 <div 
                   key={msg.id}
@@ -446,10 +446,10 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                   )}
 
                   {/* Message Bubble Box */}
-                  <div className={`max-w-[85%] p-3.5 rounded-2xl border text-xs sm:text-[13px] leading-relaxed shadow-xs ${
+                  <div className={`max-w-[85%] p-3.5 rounded-2xl text-xs sm:text-[13px] leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-accent text-white border-accent'
-                      : 'bg-white/95 dark:bg-[#132954]/95 text-[#0f2547] dark:text-[#f1f6ff] border-blue-200/70 dark:border-blue-300/20'
+                      ? 'bg-gradient-to-br from-[#2563eb]/95 via-[#1d6ce0]/92 to-[#0ea5e9]/90 text-white border border-white/30 shadow-[0_8px_20px_-6px_rgba(29,108,224,0.4),inset_0_1px_0_rgba(255,255,255,0.4)]'
+                      : 'frosted-panel text-[#0f2547] dark:text-[#f1f6ff]'
                   }`}>
                     {msg.role === 'user' ? (
                       <div className="whitespace-pre-wrap font-sans">{msg.content}</div>
@@ -538,7 +538,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                   <div className="w-7 h-7 rounded-full bg-white border border-blue-200/70 p-0.5 shrink-0 flex items-center justify-center self-start shadow-xs">
                     <img src={websiteLogo} alt="ReliabilityIQ" className="w-full h-full object-contain" />
                   </div>
-                  <div className="px-3.5 py-2.5 bg-white/95 dark:bg-[#132954]/95 border border-blue-200/70 dark:border-blue-300/20 text-text-primary rounded-2xl flex items-center gap-2 text-xs shadow-xs">
+                  <div className="px-3.5 py-2.5 frosted-panel text-text-primary rounded-2xl flex items-center gap-2 text-xs">
                     <Loader2 size={13} className="animate-spin text-accent" />
                     <span>Analyzing infrastructure requirements...</span>
                   </div>
@@ -552,7 +552,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="p-4 bg-white/98 dark:bg-[#11254d]/98 border border-accent/40 rounded-2xl shadow-xl"
+                    className="p-4 frosted-panel-elevated rounded-2xl shadow-2xl"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <h4 className="text-xs font-bold text-text-primary uppercase tracking-wide">
@@ -580,7 +580,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                           placeholder="Your Name *"
                           value={leadForm.name}
                           onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
-                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary placeholder:text-text-secondary/60"
+                          className="w-full liquid-input px-3 py-2 rounded-lg text-text-primary placeholder:text-text-secondary/60"
                         />
                         <input
                           type="email"
@@ -588,19 +588,19 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                           placeholder="Business Email *"
                           value={leadForm.email}
                           onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
-                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary placeholder:text-text-secondary/60"
+                          className="w-full liquid-input px-3 py-2 rounded-lg text-text-primary placeholder:text-text-secondary/60"
                         />
                         <input
                           type="tel"
                           placeholder="Phone / WhatsApp (optional)"
                           value={leadForm.phone}
                           onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
-                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary placeholder:text-text-secondary/60"
+                          className="w-full liquid-input px-3 py-2 rounded-lg text-text-primary placeholder:text-text-secondary/60"
                         />
                         <select
                           value={leadForm.service}
                           onChange={(e) => setLeadForm({ ...leadForm, service: e.target.value })}
-                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent text-text-primary"
+                          className="w-full liquid-input px-3 py-2 rounded-lg text-text-primary"
                         >
                           <option className="bg-white dark:bg-[#0c1f40]" value="">Select Service Stream</option>
                           <option className="bg-white dark:bg-[#0c1f40]" value="Digital Platforms & Web Systems">Digital Platforms &amp; Web Systems</option>
@@ -617,7 +617,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                           placeholder="Briefly describe your systems, timeline, or goals..."
                           value={leadForm.message}
                           onChange={(e) => setLeadForm({ ...leadForm, message: e.target.value })}
-                          className="w-full bg-[#eef5ff] dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3 py-2 rounded-lg focus:outline-none focus:border-accent resize-none h-16 text-text-primary placeholder:text-text-secondary/60"
+                          className="w-full liquid-input px-3 py-2 rounded-lg resize-none h-16 text-text-primary placeholder:text-text-secondary/60"
                         />
                         {leadError && (
                           <p className="text-[11px] text-red-500 font-medium">{leadError}</p>
@@ -625,7 +625,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                         <button
                           type="submit"
                           disabled={isSubmittingLead}
-                          className="w-full bg-accent hover:brightness-110 text-white font-semibold py-2.5 rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                          className="w-full crystal-button liquid-hover-sheen !rounded-lg !py-2.5 flex items-center justify-center gap-2 cursor-pointer"
                         >
                           {isSubmittingLead ? <Loader2 size={14} className="animate-spin" /> : 'Send Consultation Request'}
                         </button>
@@ -639,13 +639,13 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             </div>
 
             {/* ----------------- DYNAMIC QUICK SUGGESTIONS ----------------- */}
-            <div className="bg-[#f8fbff]/95 dark:bg-[#0c1d3d]/95 px-3 py-2.5 border-t border-blue-200/60 dark:border-blue-300/15 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
+            <div className="bg-white/45 dark:bg-[#0c1d3d]/55 backdrop-blur-xl px-3 py-2.5 border-t border-white/45 dark:border-blue-300/15 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
               {quickSuggestions.map((suggestion) => (
                 <button
                   key={suggestion}
                   onClick={() => handleSend(suggestion)}
                   disabled={isLoading}
-                  className="whitespace-nowrap px-3 py-1.5 bg-white dark:bg-[#142a56] hover:bg-accent/10 border border-blue-200/80 dark:border-blue-300/20 hover:border-accent text-text-primary text-[11px] font-semibold tracking-wide rounded-lg transition-colors shrink-0 cursor-pointer disabled:opacity-50"
+                  className="whitespace-nowrap px-3 py-1.5 frosted-panel liquid-hover-sheen hover:border-accent text-text-primary text-[11px] font-semibold tracking-wide rounded-lg transition-all shrink-0 cursor-pointer disabled:opacity-50"
                 >
                   {suggestion}
                 </button>
@@ -653,7 +653,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             </div>
 
             {/* ----------------- ACTION BAR ----------------- */}
-            <div className="bg-[#eff6ff]/95 dark:bg-[#091834]/95 px-4 py-2 border-t border-blue-200/60 dark:border-blue-300/15 flex items-center justify-between text-xs font-semibold shrink-0">
+            <div className="bg-sky-50/55 dark:bg-[#091834]/60 backdrop-blur-xl px-4 py-2 border-t border-white/45 dark:border-blue-300/15 flex items-center justify-between text-xs font-semibold shrink-0">
               <a
                 href="https://wa.me/2349075934287?text=Hello%20ReliabilityIQ%20Ventures%2C%20I%20would%20like%20to%20discuss%20a%20project."
                 target="_blank"
@@ -672,7 +672,7 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
             </div>
 
             {/* ----------------- INPUT ROW ----------------- */}
-            <div className="bg-[#f8fbff]/98 dark:bg-[#0c1d3d]/98 p-3 border-t border-blue-200/60 dark:border-blue-300/15 shrink-0">
+            <div className="bg-white/60 dark:bg-[#0c1d3d]/70 backdrop-blur-2xl p-3 border-t border-white/50 dark:border-blue-300/15 shrink-0">
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -685,12 +685,12 @@ export const ChatbotWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean }) 
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about operations, AI agents, cloud setup..."
-                  className="flex-1 bg-white dark:bg-[#08152e] border border-blue-200/80 dark:border-blue-300/20 px-3.5 py-2.5 text-xs sm:text-sm text-text-primary rounded-xl focus:outline-none focus:border-accent placeholder:text-text-secondary/60"
+                  className="flex-1 liquid-input px-3.5 py-2.5 text-xs sm:text-sm text-text-primary rounded-xl placeholder:text-text-secondary/60"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="w-10 h-10 bg-accent text-white rounded-xl flex items-center justify-center shrink-0 disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-110 transition-all shadow-xs cursor-pointer"
+                  className="w-10 h-10 crystal-button !rounded-xl !p-0 flex items-center justify-center shrink-0 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   aria-label="Send message"
                 >
                   <Send size={15} />

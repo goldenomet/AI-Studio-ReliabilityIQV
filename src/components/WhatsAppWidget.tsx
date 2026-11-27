@@ -141,7 +141,7 @@ export const WhatsAppWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean })
                             <div className={`w-12 h-12 md:w-14 md:h-14 ${link.color} text-white rounded-2xl flex items-center justify-center shadow-[0_10px_20px_-5px_rgba(0,0,0,0.3)] group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shrink-0`}>
                               {link.icon}
                             </div>
-                            <div className={`bg-bg-card/90 backdrop-blur-md border border-border-primary px-4 py-2 rounded-xl text-sm font-semibold text-text-primary opacity-0 transition-all duration-300 shadow-xl pointer-events-none whitespace-nowrap ring-1 ring-white/10 ${
+                            <div className={`frosted-panel-elevated px-4 py-2 rounded-xl text-sm font-semibold text-text-primary opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap ${
                               dock.horizontalSide === 'left'
                                 ? '-translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
                                 : 'translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
@@ -163,8 +163,8 @@ export const WhatsAppWidget = ({ isMenuOpen = false }: { isMenuOpen?: boolean })
                         dock.isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'
                       } ${
                         isOpen
-                          ? 'bg-bg-card/95 backdrop-blur-xl border border-white/10 text-text-primary shadow-lg'
-                          : 'bg-green-500 hover:bg-green-600 shadow-[0_8px_32px_rgba(34,197,94,0.45)] border-2 border-white/20 hover:scale-105'
+                          ? 'frosted-panel-elevated text-text-primary'
+                          : 'bg-gradient-to-br from-[#25D366] to-[#128C7E] hover:brightness-105 shadow-[0_10px_32px_rgba(34,197,94,0.45),inset_0_1px_1px_rgba(255,255,255,0.55)] border border-white/45 hover:scale-105'
                       }`}
                     >
                       <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
